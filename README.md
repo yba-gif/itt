@@ -17,20 +17,30 @@ docs/            PRD, architecture, API
 
 ## Local dev quickstart
 
-Requires Docker Desktop, Node 20+, Python 3.11+, Xcode 15+, [XcodeGen](https://github.com/yonki/XcodeGen) (`brew install xcodegen`).
+Requires Docker Desktop, Node 20+, Python 3.11–3.13, Xcode 15+, [XcodeGen](https://github.com/yonki/XcodeGen) (`brew install xcodegen`).
 
 ```bash
-cp .env.example .env             # adjust if needed
-docker compose up -d             # postgres, minio, backend (:8000), admin (:5173)
-curl http://localhost:8000/healthz
-
-# iOS
-cd apps/ios && xcodegen generate && open ITTRehber.xcodeproj
-
-# Admin
-open http://localhost:5173
-# Seeded admin: bek@itt-rehber.ch / changeme (set via ADMIN_SEED_PASSWORD)
+make verify   # opens Docker Desktop if needed, brings up stack, runs e2e tests
 ```
+
+Or step-by-step:
+
+```bash
+make up         # postgres, minio, backend (:8000), admin (:5173) — auto-launches Docker Desktop
+make health     # curl /healthz
+make test       # full pytest suite against the running stack
+make ios        # xcodegen + open Xcode project
+make admin      # npm install + Vite dev server (host-side, no Docker)
+make down       # stop the stack
+```
+
+**Seeded admin login:** `bek@itt-rehber.ch` / `changeme` (set via `ADMIN_SEED_PASSWORD`).
+
+### Troubleshooting
+
+- **`docker: command not found`** — Docker Desktop's symlink at `/usr/local/bin/docker` is stale on machines that did the legacy DMG install. The Makefile resolves this by calling `/Applications/Docker.app/Contents/Resources/bin/docker` directly, and runs `open -a Docker` to start the daemon if it's not running.
+- **`pytest: command not found`** — `make test` creates a venv at `apps/backend/.venv` and uses it. To run pytest manually: `source apps/backend/.venv/bin/activate`.
+- **Python version** — Defaults to `python3.13`. Override with `make test PY=python3.12` if needed. Python 3.14 is bleeding-edge; some wheels may not be ready yet.
 
 ## Phase 1 acceptance loop
 
