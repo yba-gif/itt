@@ -1,0 +1,85 @@
+# Production docker-compose for Hetzner Cloud VPS.
+# Usage:
+#   1) DNS A-record: api.itt-rehber.ch -> VPS IP
+#   2) Copy .env.prod to /etc/itt/.env (with strong APP_SECRET, real Postgres password,
+#      Cloudflare R2 credentials in S3_*, real ADMIN_SEED_PASSWORD).
+#   3) docker compose -f docker-compose.prod.yml --env-file /etc/itt/.env up -d
+#
+# Notes:
+#  - Object storage: Cloudflare R2 (set S3_ENDPOINT_URL to the R2 endpoint).
+#  - Postgres backups: enable pgbackrest or `pg_dump | gpg | rsync` cron — out of scope here.
+#  - TLS: Traefik issues Let's Encrypt certs automatically on first request.
+
+services:
+  traefik:
+    image: traefik:v3.0
+    restart: unless-stopped
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.le.acme.tlschallenge=true"
+      - "--certificatesresolvers.le.acme.email=${LETSENCRYPT_EMAIL}"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-letsencrypt:/letsencrypt
+
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ../../apps/backend/alembic/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+
+  backend:
+    image: ghcr.io/itt-rehber/backend:latest # set up CI to publish; for now build locally
+    build: ../../apps/backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      APP_ENV: production
+      APP_SECRET: ${APP_SECRET}
+      JWT_TTL_SECONDS: ${JWT_TTL_SECONDS:-2592000}
+      APPLE_BUNDLE_ID: ${APPLE_BUNDLE_ID}
+      APPLE_TEAM_ID: ${APPLE_TEAM_ID}
+      SENTRY_DSN: ${SENTRY_DSN}
+      ADMIN_SEED_EMAIL: ${ADMIN_SEED_EMAIL}
+      ADMIN_SEED_PASSWORD: ${ADMIN_SEED_PASSWORD}
+      CORS_ORIGINS: https://itt-rehber.ch,https://admin.itt-rehber.ch,https://api.itt-rehber.ch
+      S3_ENDPOINT_URL: ${S3_ENDPOINT_URL} # https://<account>.r2.cloudflarestorage.com
+      S3_REGION: auto
+      S3_BUCKET: ${S3_BUCKET}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY}
+      S3_SECRET_KEY: ${S3_SECRET_KEY}
+      S3_PUBLIC_URL: ${S3_PUBLIC_URL} # cloudflare custom domain or r2 public URL
+    command: >
+      sh -c "alembic upgrade head &&
+             python -m app.seed.run &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`api.itt-rehber.ch`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls.certresolver=le"
+      - "traefik.http.services.api.loadbalancer.server.port=8000"
+
+volumes:
+  postgres-data:
+  traefik-letsencrypt:

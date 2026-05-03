@@ -1,0 +1,61 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Node
+node_modules/
+.vite/
+.turbo/
+.parcel-cache/
+*.tsbuildinfo
+.eslintcache
+
+# Swift / Xcode
+*.xcodeproj/
+!apps/ios/project.yml
+xcuserdata/
+*.xcuserstate
+DerivedData/
+.build/
+.swiftpm/
+Package.resolved
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Local Docker volumes
+.docker-data/
+postgres-data/
+minio-data/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Generated docs
+docs/api.md

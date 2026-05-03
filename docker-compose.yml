@@ -1,0 +1,103 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-itt}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-itt_dev}
+      POSTGRES_DB: ${POSTGRES_DB:-itt}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./apps/backend/alembic/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-itt} -d ${POSTGRES_DB:-itt}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY:-ittminio}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:-ittminio_dev}
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 $${S3_ACCESS_KEY:-ittminio} $${S3_SECRET_KEY:-ittminio_dev} &&
+      (mc mb -p local/$${S3_BUCKET:-itt-media} || true) &&
+      mc anonymous set download local/$${S3_BUCKET:-itt-media} &&
+      echo 'minio bucket ready'
+      "
+    environment:
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-ittminio}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-ittminio_dev}
+      S3_BUCKET: ${S3_BUCKET:-itt-media}
+
+  backend:
+    build: ./apps/backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://itt:itt_dev@postgres:5432/itt}
+      APP_ENV: ${APP_ENV:-development}
+      APP_SECRET: ${APP_SECRET:-dev-secret-change-me-32-bytes-or-more-please}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      JWT_TTL_SECONDS: ${JWT_TTL_SECONDS:-2592000}
+      APPLE_BUNDLE_ID: ${APPLE_BUNDLE_ID:-ch.itt-rehber.app}
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      ADMIN_SEED_EMAIL: ${ADMIN_SEED_EMAIL:-bek@itt-rehber.ch}
+      ADMIN_SEED_PASSWORD: ${ADMIN_SEED_PASSWORD:-changeme}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:8000}
+      S3_ENDPOINT_URL: ${S3_ENDPOINT_URL:-http://minio:9000}
+      S3_REGION: ${S3_REGION:-eu-central-1}
+      S3_BUCKET: ${S3_BUCKET:-itt-media}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-ittminio}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-ittminio_dev}
+      S3_PUBLIC_URL: ${S3_PUBLIC_URL:-http://localhost:9000/itt-media}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/backend:/app
+    command: >
+      sh -c "alembic upgrade head &&
+             python -m app.seed.run &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  admin:
+    image: node:20-alpine
+    working_dir: /app
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:8000}
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./apps/admin:/app
+      - admin-node-modules:/app/node_modules
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+
+volumes:
+  postgres-data:
+  minio-data:
+  admin-node-modules:

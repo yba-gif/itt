@@ -1,0 +1,25 @@
+/* ITT-Rehber Turkish strings.
+ * Phase 1: most strings inlined in views; this file holds names that may be
+ * referenced from .strings file at runtime later (e.g. accessibility, errors).
+ */
+
+"app.name" = "ITT-Rehber";
+"tab.rehber" = "Rehber";
+"tab.events" = "Etkinlikler";
+"tab.info" = "Bilgi";
+"tab.profile" = "Profil";
+
+"submit.cta" = "Hizmetinizi Ekleyin";
+"submit.success" = "İlanınız incelemeye alındı.";
+
+"empty.no_results" = "Aradığınız kriterlere uygun veri bulunamadı";
+"reset_filters" = "Filtreleri temizle";
+
+"action.call" = "Ara";
+"action.email" = "E-posta";
+"action.map" = "Harita";
+"action.web" = "Web";
+"action.share" = "Paylaş";
+"action.delete_account" = "Hesabımı Sil";
+
+"siwa.coming_soon" = "Apple ile Giriş yakında.";
