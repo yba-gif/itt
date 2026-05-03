@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct BilgiTab: View {
+    @State private var pages: [ContentPage] = []
+    @State private var loading = false
+
     var body: some View {
         NavigationStack {
             List {
@@ -13,14 +16,28 @@ struct BilgiTab: View {
                 }
 
                 Section("Rehber") {
-                    NavigationLink("Hoş Geldiniz Rehberi") { ComingSoonInfoView(title: "Hoş Geldiniz") }
-                    NavigationLink("Türk Konsoloslukları") { ComingSoonInfoView(title: "Konsolosluk Bilgileri") }
-                    NavigationLink("Gizlilik Politikası") { ComingSoonInfoView(title: "Gizlilik") }
-                    NavigationLink("Kullanım Koşulları") { ComingSoonInfoView(title: "Koşullar") }
-                    NavigationLink("Hakkında") { AboutView() }
+                    if loading && pages.isEmpty {
+                        HStack { ProgressView(); Text("Yükleniyor…").foregroundStyle(.secondary) }
+                    } else {
+                        ForEach(pages.filter { $0.slug != "emergency" }) { page in
+                            NavigationLink(page.title) { ContentPageView(slug: page.slug) }
+                        }
+                    }
                 }
             }
             .navigationTitle("Bilgi")
+            .refreshable { await load() }
+            .task { await load() }
+        }
+    }
+
+    private func load() async {
+        loading = true
+        defer { loading = false }
+        do {
+            pages = try await APIClient.shared.contentPages()
+        } catch {
+            // Offline-friendly: keep whatever we already loaded.
         }
     }
 }
@@ -43,48 +60,56 @@ struct EmergencyRow: View {
                     .foregroundStyle(.tint)
             }
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityHint("Aramak için dokunun")
     }
 }
 
-struct ComingSoonInfoView: View {
-    let title: String
+struct ContentPageView: View {
+    let slug: String
+
+    @State private var page: ContentPage?
+    @State private var error: String?
 
     var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "doc.text")
-                .font(.system(size: 44))
-                .foregroundStyle(.tertiary)
-            Text("İçerik yakında")
-                .font(.title3.bold())
-            Text("Bu sayfa Faz 2 kapsamında dolacak.")
-                .foregroundStyle(.secondary)
+        ScrollView {
+            if let page {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(page.bodyMarkdown).font(.body)
+                    Text("Son güncelleme: \(formatted(page.updatedAt))")
+                        .font(.caption).foregroundStyle(.tertiary)
+                        .padding(.top, 8)
+                }
+                .padding(16)
+            } else if let error {
+                VStack(spacing: 12) {
+                    Image(systemName: "exclamationmark.triangle")
+                        .foregroundStyle(.orange)
+                    Text(error).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                }
+                .padding(.top, 60)
+            } else {
+                ProgressView().padding(.top, 60)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemGroupedBackground))
-        .navigationTitle(title)
+        .navigationTitle(page?.title ?? "")
         .navigationBarTitleDisplayMode(.inline)
+        .task { await load() }
     }
-}
 
-struct AboutView: View {
-    var body: some View {
-        List {
-            Section {
-                Text("ITT-Rehber 2.0")
-                    .font(.headline)
-                Text("İsviçre’deki Türk topluluğu için rehber.")
-                    .foregroundStyle(.secondary)
-            }
-            Section("Künye") {
-                Text("İşleten: Roar (Yusuf Berkan Altun)")
-                Text("Sürüm: 0.1.0 (Faz 1)")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
+    private func load() async {
+        do {
+            page = try await APIClient.shared.contentPage(slug: slug)
+        } catch let api as APIError {
+            error = api.errorDescription
+        } catch {
+            self.error = error.localizedDescription
         }
-        .navigationTitle("Hakkında")
-        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func formatted(_ d: Date) -> String {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "tr_CH")
+        f.dateStyle = .medium
+        f.timeStyle = .short
+        return f.string(from: d)
     }
 }

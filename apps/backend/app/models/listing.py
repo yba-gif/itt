@@ -7,7 +7,7 @@ from datetime import datetime
 from uuid import UUID, uuid4
 
 from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text, func
-from sqlalchemy.dialects.postgresql import ARRAY, ENUM, UUID as PG_UUID
+from sqlalchemy.dialects.postgresql import ARRAY, ENUM, TSVECTOR, UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import Base
@@ -98,6 +98,10 @@ class Listing(Base):
         onupdate=func.now(),
         nullable=False,
     )
+
+    # Phase 2: full-text search vector. Maintained server-side via trigger
+    # (see Alembic 0002). Read-only from the app's perspective.
+    search_tsv: Mapped[str | None] = mapped_column(TSVECTOR)
 
     # ---- State machine -------------------------------------------------
 

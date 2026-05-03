@@ -36,6 +36,27 @@ export type LoginResponse = {
   is_admin: boolean;
 };
 
+export type Event = {
+  id: string;
+  title: string;
+  description: string | null;
+  starts_at: string;
+  ends_at: string | null;
+  kanton: string;
+  venue: string | null;
+  address: string | null;
+  image_url: string | null;
+  status: "pending" | "active" | "rejected";
+  created_at: string;
+};
+
+export type ContentPage = {
+  slug: string;
+  title: string;
+  body_markdown: string;
+  updated_at: string;
+};
+
 export const REJECTION_REASONS = [
   { code: "incomplete", label: "Eksik bilgi" },
   { code: "fraud", label: "Sahtecilik şüphesi" },
@@ -91,5 +112,24 @@ export const api = {
     request<Listing>(`/admin/listings/${id}/reject`, {
       method: "POST",
       body: JSON.stringify({ reason_code, notes: notes ?? null }),
+    }),
+
+  eventQueue: (status: Event["status"] = "pending") =>
+    request<Event[]>(`/admin/events/queue?status=${encodeURIComponent(status)}`),
+
+  approveEvent: (id: string) =>
+    request<Event>(`/admin/events/${id}/approve`, { method: "POST" }),
+
+  rejectEvent: (id: string) =>
+    request<Event>(`/admin/events/${id}/reject`, { method: "POST" }),
+
+  contentList: () => request<ContentPage[]>("/content"),
+
+  contentGet: (slug: string) => request<ContentPage>(`/content/${slug}`),
+
+  contentSave: (slug: string, title: string, body_markdown: string) =>
+    request<ContentPage>(`/content/${slug}`, {
+      method: "PUT",
+      body: JSON.stringify({ title, body_markdown }),
     }),
 };

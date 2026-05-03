@@ -22,6 +22,9 @@ struct RootTabView: View {
             RehberTab()
                 .tabItem { Label("Rehber", systemImage: "list.bullet.rectangle") }
 
+            AraTab()
+                .tabItem { Label("Ara", systemImage: "magnifyingglass") }
+
             EtkinliklerTab()
                 .tabItem { Label("Etkinlikler", systemImage: "calendar") }
 

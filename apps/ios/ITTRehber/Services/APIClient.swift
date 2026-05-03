@@ -109,6 +109,98 @@ final class APIClient {
         try ensureOK(resp, data: data)
     }
 
+    // MARK: - Events
+
+    func events(kanton: String? = nil, past: Bool = false) async throws -> EventListResponse {
+        var components = URLComponents(url: baseURL.appendingPathComponent("events"),
+                                       resolvingAgainstBaseURL: false)!
+        var items: [URLQueryItem] = [.init(name: "past", value: past ? "true" : "false")]
+        if let kanton { items.append(.init(name: "kanton", value: kanton)) }
+        components.queryItems = items
+        return try await get(url: components.url!)
+    }
+
+    func submitEvent(_ input: EventSubmitInput) async throws -> Event {
+        try await post(url: baseURL.appendingPathComponent("events"), body: input)
+    }
+
+    // MARK: - Content
+
+    func contentPages() async throws -> [ContentPage] {
+        try await get(url: baseURL.appendingPathComponent("content"))
+    }
+
+    func contentPage(slug: String) async throws -> ContentPage {
+        try await get(url: baseURL.appendingPathComponent("content/\(slug)"))
+    }
+
+    // MARK: - Global search
+
+    func globalSearch(query: String) async throws -> SearchResponse {
+        var components = URLComponents(url: baseURL.appendingPathComponent("search"),
+                                       resolvingAgainstBaseURL: false)!
+        components.queryItems = [.init(name: "q", value: query)]
+        return try await get(url: components.url!)
+    }
+
+    // MARK: - Favorites + Saved searches + Claim
+
+    func favorites() async throws -> [Listing] {
+        try await get(url: baseURL.appendingPathComponent("me/favorites"))
+    }
+
+    func addFavorite(listingId: UUID) async throws {
+        var req = URLRequest(url: baseURL.appendingPathComponent("me/favorites/\(listingId.uuidString)"))
+        req.httpMethod = "PUT"
+        attachAuth(&req)
+        let (data, resp) = try await session.data(for: req)
+        try ensureOK(resp, data: data)
+    }
+
+    func removeFavorite(listingId: UUID) async throws {
+        var req = URLRequest(url: baseURL.appendingPathComponent("me/favorites/\(listingId.uuidString)"))
+        req.httpMethod = "DELETE"
+        attachAuth(&req)
+        let (data, resp) = try await session.data(for: req)
+        try ensureOK(resp, data: data)
+    }
+
+    func savedSearches() async throws -> [SavedSearch] {
+        try await get(url: baseURL.appendingPathComponent("me/saved-searches"))
+    }
+
+    func createSavedSearch(query: String?, filters: [String: String]) async throws -> SavedSearch {
+        struct Body: Encodable {
+            let query: String?
+            let filters: [String: String]
+            let notify_on_new: Bool
+        }
+        return try await post(
+            url: baseURL.appendingPathComponent("me/saved-searches"),
+            body: Body(query: query, filters: filters, notify_on_new: true)
+        )
+    }
+
+    func deleteSavedSearch(id: UUID) async throws {
+        var req = URLRequest(url: baseURL.appendingPathComponent("me/saved-searches/\(id.uuidString)"))
+        req.httpMethod = "DELETE"
+        attachAuth(&req)
+        let (data, resp) = try await session.data(for: req)
+        try ensureOK(resp, data: data)
+    }
+
+    func claimableListings() async throws -> [Listing] {
+        try await get(url: baseURL.appendingPathComponent("listings/claimable/mine"))
+    }
+
+    func claimListing(id: UUID) async throws -> Listing {
+        struct Empty: Encodable {}
+        return try await post(
+            url: baseURL.appendingPathComponent("listings/\(id.uuidString)/claim"),
+            body: Empty()
+        )
+    }
+
     // MARK: - Generic
 
     private func get<T: Decodable>(url: URL) async throws -> T {

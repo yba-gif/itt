@@ -45,8 +45,10 @@ enum Directory: String, CaseIterable, Identifiable, Codable {
         }
     }
 
-    /// Phase 1: only Sağlık is wired end-to-end. Others show a "Yakında" placeholder.
-    var isPhase1Active: Bool {
-        self == .saglik
-    }
+    /// Phase 1: only Sağlık was wired. Phase 2: all 10 directories share the same
+    /// list/detail/submit code paths against the backend.
+    var isActive: Bool { true }
+
+    @available(*, deprecated, renamed: "isActive")
+    var isPhase1Active: Bool { isActive }
 }

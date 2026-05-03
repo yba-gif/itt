@@ -26,11 +26,7 @@ struct DirectoryGridView: View {
         }
         .background(Color(.systemGroupedBackground))
         .navigationDestination(for: Directory.self) { directory in
-            if directory.isPhase1Active {
-                DirectoryListView(directory: directory)
-            } else {
-                ComingSoonView(directory: directory)
-            }
+            DirectoryListView(directory: directory)
         }
     }
 }

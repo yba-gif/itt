@@ -3,6 +3,9 @@ import MapKit
 
 struct DirectoryDetailView: View {
     let listing: Listing
+    @EnvironmentObject var session: SessionStore
+    @State private var isFavorite: Bool = false
+    @State private var favError: String?
 
     var body: some View {
         ScrollView {
@@ -13,6 +16,21 @@ struct DirectoryDetailView: View {
                 if let description = listing.description, !description.isEmpty {
                     descriptionSection(description)
                 }
+
+                if session.isAuthenticated {
+                    Button {
+                        Task { await toggleFavorite() }
+                    } label: {
+                        Label(
+                            isFavorite ? "Favorilerden çıkar" : "Favorilere ekle",
+                            systemImage: isFavorite ? "star.fill" : "star"
+                        )
+                        .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .padding(.top, 4)
+                }
+
                 Text("Son güncelleme: \(formatted(listing.updatedAt))")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
@@ -26,6 +44,34 @@ struct DirectoryDetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 ShareLink(item: shareURL) { Image(systemName: "square.and.arrow.up") }
             }
+        }
+        .alert("Hata", isPresented: .constant(favError != nil)) {
+            Button("Tamam") { favError = nil }
+        } message: { Text(favError ?? "") }
+        .task { await checkFavorite() }
+    }
+
+    private func checkFavorite() async {
+        guard session.isAuthenticated else { return }
+        do {
+            let favs = try await APIClient.shared.favorites()
+            isFavorite = favs.contains(where: { $0.id == listing.id })
+        } catch { /* offline ok */ }
+    }
+
+    private func toggleFavorite() async {
+        do {
+            if isFavorite {
+                try await APIClient.shared.removeFavorite(listingId: listing.id)
+                isFavorite = false
+            } else {
+                try await APIClient.shared.addFavorite(listingId: listing.id)
+                isFavorite = true
+            }
+        } catch let api as APIError {
+            favError = api.errorDescription
+        } catch {
+            favError = error.localizedDescription
         }
     }
 

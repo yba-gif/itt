@@ -12,10 +12,9 @@ final class DirectoryTests: XCTestCase {
         XCTAssertEqual(codes, expected)
     }
 
-    func testOnlySaglikIsPhase1Active() {
-        XCTAssertTrue(Directory.saglik.isPhase1Active)
-        for d in Directory.allCases where d != .saglik {
-            XCTAssertFalse(d.isPhase1Active, "\(d.rawValue) should not be Phase 1 active")
+    func testAllDirectoriesActiveInPhase2() {
+        for d in Directory.allCases {
+            XCTAssertTrue(d.isActive, "\(d.rawValue) should be active in Phase 2")
         }
     }
 

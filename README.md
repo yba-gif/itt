@@ -54,10 +54,16 @@ End-to-end submit → moderate → display for the **Sağlık** directory:
 
 | Phase | Status |
 |---|---|
-| 1. Foundation (this scaffold) | ⏳ in progress |
-| 2. Directories & content (other 9 dirs, Events, search, v1 migration) | not started |
+| 1. Foundation (auth, Sağlık E2E, admin queue, offline cache) | ✅ done |
+| 2. Directories & content (10 dirs, Events, FTS search, CMS, favorites, saved searches, v1 migration, claim) | ✅ done |
 | 3. Monetization (paid listings, invoices, push) | not started |
 | 4. Launch (TestFlight, App Store, v1 sunset) | not started |
+
+**Phase 2 highlights (since v0.1):**
+- Backend: 10 directories, real Events feed (PRD §5.3 v1 date-filter bug fixed), Postgres FTS on `tsvector + unaccent`, ContentPage CMS, Favorites, Saved Searches, listing claim flow with email match.
+- iOS: 5-tab UI (added Ara), real Events tab with `EventKit` reminders + past sub-tab, global search, Bilgi tab pulls from CMS, favorites toggle, claim banner.
+- Admin: Events moderation queue, Markdown content editor.
+- Migration: `scripts/migrate-from-v1.py --source=mock` works end-to-end (real Sheets pull deferred to live launch).
 
 ## Decision log
 

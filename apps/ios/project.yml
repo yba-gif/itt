@@ -36,6 +36,9 @@ targets:
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         LSApplicationCategoryType: "public.app-category.reference"
+        NSCalendarsUsageDescription: "Etkinlik hatırlatmaları takviminize eklenir."
+        NSCalendarsWriteOnlyAccessUsageDescription: "Etkinlik hatırlatmaları takviminize eklenir."
+        NSContactsUsageDescription: ""
         NSAppTransportSecurity:
           NSExceptionDomains:
             localhost:

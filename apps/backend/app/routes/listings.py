@@ -5,7 +5,7 @@ from __future__ import annotations
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Query, status
-from sqlalchemy import func, or_, select
+from sqlalchemy import func, select
 
 from app.deps import CurrentUser, DBSession
 from app.models.listing import Listing, ListingStatus
@@ -16,6 +16,7 @@ from app.schemas.listing import (
     ListingOut,
     ListingPublicOut,
 )
+from app.services.search import apply_fts
 
 router = APIRouter(prefix="/listings", tags=["listings"])
 
@@ -89,15 +90,7 @@ async def list_listings(
         stmt = stmt.where(Listing.kantons.any(kanton.upper()))
 
     if q:
-        ilike = f"%{q}%"
-        stmt = stmt.where(
-            or_(
-                Listing.name.ilike(ilike),
-                Listing.category.ilike(ilike),
-                Listing.address.ilike(ilike),
-                Listing.description.ilike(ilike),
-            )
-        )
+        stmt = apply_fts(stmt, q)
 
     # Total count
     total = (
@@ -167,3 +160,54 @@ async def my_listings(user: CurrentUser, db: DBSession) -> list[ListingOut]:
         await db.execute(select(Listing).where(Listing.owner_id == user.id))
     ).scalars().all()
     return [ListingOut.model_validate(r) for r in rows]
+
+
+@router.get("/claimable/mine", response_model=list[ListingPublicOut])
+async def claimable_for_me(user: CurrentUser, db: DBSession) -> list[ListingPublicOut]:
+    """Listings imported from v1 (owner_id IS NULL) whose email matches the user's.
+
+    PRD §6.4 + claim-flow note: original provider signs up with the email
+    associated with their listing in the v1 sheet → can claim ownership.
+    """
+    if not user.email:
+        return []
+    rows = (
+        await db.execute(
+            select(Listing).where(
+                Listing.owner_id.is_(None),
+                Listing.email == user.email,
+                Listing.status.in_([ListingStatus.active, ListingStatus.suspended]),
+            )
+        )
+    ).scalars().all()
+    return [
+        ListingPublicOut(
+            id=r.id, name=r.name, directories=list(r.directories or []),
+            kantons=list(r.kantons or []), category=r.category, sub_category=r.sub_category,
+            address=r.address, phone=r.phone if r.phone_public else None,
+            email=r.email if r.email_public else None, website=r.website,
+            description=r.description, image_url=r.image_url, updated_at=r.updated_at,
+        )
+        for r in rows
+    ]
+
+
+@router.post("/{listing_id}/claim", response_model=ListingOut)
+async def claim_listing(listing_id: UUID, user: CurrentUser, db: DBSession) -> ListingOut:
+    """Claim a v1-imported listing whose email matches the current user's email."""
+    listing = await db.get(Listing, listing_id)
+    if listing is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail="not_found")
+    if listing.owner_id is not None:
+        raise HTTPException(status.HTTP_409_CONFLICT, detail="already_owned")
+    if not listing.email or listing.email.lower() != (user.email or "").lower():
+        raise HTTPException(status.HTTP_403_FORBIDDEN, detail="email_mismatch")
+
+    listing.owner_id = user.id
+    # Re-enter review per PRD §6.3 active->pending semantics, so admin can
+    # confirm the ownership change before public update.
+    if listing.status == ListingStatus.active:
+        listing.transition_to(ListingStatus.pending)
+    await db.commit()
+    await db.refresh(listing)
+    return ListingOut.model_validate(listing)

@@ -1,4 +1,4 @@
-# Architecture (Phase 1)
+# Architecture (Phase 1 + 2)
 
 This is what the scaffold actually does, what's stubbed, and what's deferred. The PRD (`docs/prd.md`) is the source of truth for product decisions; this document is the source of truth for engineering choices.
 
@@ -25,7 +25,7 @@ This is what the scaffold actually does, what's stubbed, and what's deferred. Th
 - **Auth:** Sign in with Apple (`POST /auth/siwa`, JWKS verified against `https://appleid.apple.com/auth/keys`) **or** email/password (Argon2id, no email verification per PRD §5.6). Server issues HS256 JWTs with 30-day TTL.
 - **Listings:** anonymous-readable (`GET /listings`); auth-required to create/edit; admin-required to approve/reject. Status transitions enforced server-side via `Listing.transition_to()` (PRD §6.3).
 - **Reference data:** `Kanton` (26 cantons) and `Category` seeded by `app.seed.run` on every boot (idempotent).
-- **Search:** Phase 1 uses ILIKE pattern matching across name/category/address/description. Phase 2 will swap to Postgres FTS with `to_tsvector('simple', unaccent(...))` + GIN index, with a path to Turkish dictionary stemming.
+- **Search:** Phase 2 ships Postgres FTS — a generated `search_tsv tsvector` column on `listings` populated by trigger from `name + category + sub_category + description + array_to_string(kantons)`, GIN-indexed. Configuration is `simple + unaccent` so unaccented input ("saglik") matches accented stored data ("Sağlık") and vice versa. ILIKE is OR'd in as a fallback so the user can also do partial substring queries that aren't lexeme-aligned. Turkish snowball stemming (e.g., reducing "doktorlar" → "doktor") is a research item for Phase 3.
 - **Object storage:** S3-compatible. MinIO in dev (`docker-compose.yml`), Cloudflare R2 in prod. Presigned PUT URL helper exists; image upload endpoint is wired in Phase 2 alongside server-side validation (file type, dimensions, EXIF strip).
 - **PII / GDPR:** account deletion (`DELETE /auth/me`) anonymizes active paid listings (`owner_id = NULL`) and hard-deletes pending submissions. Audit logging is via standard request logs in Phase 1.
 - **Sentry:** initialized when `SENTRY_DSN` is set; skipped otherwise.
@@ -43,9 +43,9 @@ This is what the scaffold actually does, what's stubbed, and what's deferred. Th
 ### Admin (`apps/admin`)
 
 - **Stack:** React 18 + Vite + TypeScript + Tailwind + react-router + @tanstack/react-query.
-- **Phase 1 scope:** Login, Queue (filterable by status), ListingDetail (Approve / Reject with reason codes per PRD §5.8). Reject UI surfaces all six reason codes.
-- **Auth:** email/password admin allow-list, enforced server-side via `is_admin` flag on `User`. SIWA-on-web is Phase 2.
-- **Deferred (Phases 2–3):** bulk approve, content editor (Welcome Guide / Privacy / Terms), push composer, payment reconciliation, audit log UI.
+- **Scope:** Login, Listings queue (filterable by status), ListingDetail (Approve / Reject with reason codes per PRD §5.8), Events moderation queue, Markdown content editor for ContentPages.
+- **Auth:** email/password admin allow-list, enforced server-side via `is_admin` flag on `User`. SIWA-on-web is Phase 3+.
+- **Deferred (Phase 3):** bulk approve, push composer, payment reconciliation, audit log UI, image upload pipeline UI.
 
 ## Data model highlights
 
