@@ -2,11 +2,14 @@
 
 State-machine tests are pure-Python and always run.
 API/DB tests need ``DATABASE_URL`` to point at a reachable Postgres; otherwise skipped.
+
+Each async test gets a fresh engine so SQLAlchemy's pool doesn't cache connections
+bound to a previous test's event loop. Slow but correct under pytest-asyncio's
+function-scoped loops.
 """
 
 from __future__ import annotations
 
-import asyncio
 import os
 import uuid
 
@@ -23,11 +26,16 @@ def _have_db() -> bool:
 needs_db = pytest.mark.skipif(not _have_db(), reason="requires DATABASE_URL pointing at Postgres")
 
 
-@pytest.fixture(scope="session")
-def event_loop():
-    loop = asyncio.new_event_loop()
-    yield loop
-    loop.close()
+@pytest_asyncio.fixture(autouse=True)
+async def _dispose_engine_between_tests():
+    """Dispose the async engine after each test so the next test's loop
+    can open fresh connections."""
+    yield
+    try:
+        from app.db import engine
+        await engine.dispose()
+    except Exception:
+        pass
 
 
 @pytest_asyncio.fixture

@@ -1,6 +1,10 @@
 SHELL := /bin/bash
 PY ?= python3.13
-DOCKER ?= $(shell command -v docker 2>/dev/null || echo /Applications/Docker.app/Contents/Resources/bin/docker)
+DOCKER_BIN_DIR ?= /Applications/Docker.app/Contents/Resources/bin
+DOCKER ?= $(shell command -v docker 2>/dev/null || echo $(DOCKER_BIN_DIR)/docker)
+# Inject Docker.app's bin dir so docker-credential-desktop is reachable
+# even when /usr/local/bin/docker is a stale symlink.
+export PATH := $(DOCKER_BIN_DIR):$(PATH)
 COMPOSE := $(DOCKER) compose
 
 # ---- Top-level convenience ----
@@ -86,7 +90,7 @@ test-unit: venv
 .PHONY: test
 test: venv
 	cd apps/backend && \
-		DATABASE_URL=postgresql+asyncpg://itt:itt_dev@localhost:5432/itt \
+		DATABASE_URL=postgresql+asyncpg://itt:itt_dev@localhost:5433/itt \
 		ADMIN_SEED_EMAIL=bek@itt-rehber.ch \
 		ADMIN_SEED_PASSWORD=changeme \
 		.venv/bin/pytest -q

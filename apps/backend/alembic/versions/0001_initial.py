@@ -30,14 +30,16 @@ def upgrade() -> None:
     op.execute("CREATE EXTENSION IF NOT EXISTS unaccent")
     op.execute("CREATE EXTENSION IF NOT EXISTS pg_trgm")
 
-    listing_status = postgresql.ENUM(*LISTING_STATUS, name="listing_status")
-    listing_package = postgresql.ENUM(*LISTING_PACKAGE, name="listing_package")
-    event_status = postgresql.ENUM(*EVENT_STATUS, name="event_status")
-    payment_method = postgresql.ENUM(*PAYMENT_METHOD, name="payment_method")
-    listing_status.create(op.get_bind(), checkfirst=True)
-    listing_package.create(op.get_bind(), checkfirst=True)
-    event_status.create(op.get_bind(), checkfirst=True)
-    payment_method.create(op.get_bind(), checkfirst=True)
+    # create_type=False so subsequent op.create_table doesn't try to re-CREATE TYPE.
+    listing_status = postgresql.ENUM(*LISTING_STATUS, name="listing_status", create_type=False)
+    listing_package = postgresql.ENUM(*LISTING_PACKAGE, name="listing_package", create_type=False)
+    event_status = postgresql.ENUM(*EVENT_STATUS, name="event_status", create_type=False)
+    payment_method = postgresql.ENUM(*PAYMENT_METHOD, name="payment_method", create_type=False)
+    # Explicit creation, idempotent.
+    postgresql.ENUM(*LISTING_STATUS, name="listing_status").create(op.get_bind(), checkfirst=True)
+    postgresql.ENUM(*LISTING_PACKAGE, name="listing_package").create(op.get_bind(), checkfirst=True)
+    postgresql.ENUM(*EVENT_STATUS, name="event_status").create(op.get_bind(), checkfirst=True)
+    postgresql.ENUM(*PAYMENT_METHOD, name="payment_method").create(op.get_bind(), checkfirst=True)
 
     op.create_table(
         "users",

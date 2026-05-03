@@ -8,8 +8,10 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./apps/backend/alembic/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    # Host port is 5433 to avoid clashing with a host-level Postgres on 5432.
+    # Inside the Docker network containers still reach Postgres at postgres:5432.
     ports:
-      - "5432:5432"
+      - "5433:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-itt} -d ${POSTGRES_DB:-itt}"]
       interval: 5s
