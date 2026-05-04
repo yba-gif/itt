@@ -175,6 +175,7 @@ struct EventRow: View {
 
 struct EventDetailView: View {
     let event: Event
+    @EnvironmentObject var push: PushManager
     @State private var reminderResult: String?
 
     var body: some View {
@@ -230,6 +231,11 @@ struct EventDetailView: View {
         }
         .navigationTitle("Etkinlik")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            // PRD §5.9: contextual push permission ask — first time the user
+            // views an event detail. Idempotent on subsequent visits.
+            await push.requestAuthorizationIfNeeded()
+        }
     }
 
     private func formatted(_ d: Date) -> String {

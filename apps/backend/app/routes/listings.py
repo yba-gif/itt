@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Query, status
 from sqlalchemy import func, select
 
 from app.deps import CurrentUser, DBSession
-from app.models.listing import Listing, ListingStatus
+from app.models.listing import Listing, ListingPackage, ListingStatus
 from app.schemas.listing import (
     DIRECTORY_CODES,
     ListingIn,
@@ -16,6 +17,9 @@ from app.schemas.listing import (
     ListingOut,
     ListingPublicOut,
 )
+from app.services.email import send_email
+from app.services.invoice import issue_invoice, render_invoice_pdf
+from app.services.pricing import FIRST_MONTH_FREE_DAYS, package_label_tr
 from app.services.search import apply_fts
 
 router = APIRouter(prefix="/listings", tags=["listings"])
@@ -127,9 +131,52 @@ async def create_listing(
 ) -> ListingOut:
     listing = Listing(owner_id=user.id, status=ListingStatus.pending)
     _apply_inbound(listing, payload)
+
+    if payload.package is not None:
+        listing.package = payload.package
+        # First-month-free: paid_until starts at today + 30 days. Admin's
+        # mark-paid extends this by the package duration.
+        listing.paid_until = datetime.now(UTC) + timedelta(days=FIRST_MONTH_FREE_DAYS)
+
     db.add(listing)
+    await db.flush()  # need listing.id before issuing invoice
+
+    invoice = None
+    if payload.package is not None:
+        invoice = await issue_invoice(db, listing, payload.package)
+        await db.flush()
+
     await db.commit()
     await db.refresh(listing)
+
+    # Send confirmation email + invoice (best-effort — failures don't block submission).
+    if invoice is not None and listing.email:
+        from app.services.invoice import render_invoice_pdf  # avoid circular at top
+        try:
+            pdf_bytes = render_invoice_pdf(
+                invoice_number=invoice.invoice_number,
+                listing=listing,
+                amount_cents=invoice.amount_chf,
+                package=ListingPackage(invoice.package),
+                issued_at=invoice.issued_at,
+                due_at=invoice.due_at or invoice.issued_at,
+            )
+            send_email(
+                listing.email,
+                subject=f"ITT-Rehber: İlan başvurunuz alındı — {invoice.invoice_number}",
+                body_text=(
+                    f"Merhaba,\n\n"
+                    f"İlanınız incelemeye alındı. Onaylandıktan sonra yayında olacak.\n\n"
+                    f"Paket: {package_label_tr(payload.package)}\n"
+                    f"İlk ay ücretsiz — ödeme talimatları ektedir.\n\n"
+                    f"Fatura No: {invoice.invoice_number}\n"
+                    f"Tutar: {invoice.amount_chf / 100:.2f} CHF\n"
+                ),
+                attachments=[(f"{invoice.invoice_number}.pdf", pdf_bytes, "application/pdf")],
+            )
+        except Exception:
+            pass
+
     return ListingOut.model_validate(listing)
 
 

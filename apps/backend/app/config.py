@@ -35,6 +35,21 @@ class Settings(BaseSettings):
     s3_secret_key: str = "ittminio_dev"
     s3_public_url: str = "http://localhost:9000/itt-media"
 
+    # SMTP (optional — empty = log-only fallback for dev).
+    smtp_host: str = ""
+    smtp_port: int = 587
+    smtp_user: str = ""
+    smtp_password: str = ""
+    smtp_starttls: bool = True
+    smtp_from_email: str = ""
+    smtp_from_name: str = "ITT-Rehber"
+
+    # APNs (optional — empty = log-only push fallback for dev).
+    apns_key_id: str = ""
+    apns_key_p8_path: str = ""
+    apns_topic: str = "ch.itt-rehber.app"
+    apns_use_sandbox: bool = True
+
     @property
     def cors_origin_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",") if o.strip()]

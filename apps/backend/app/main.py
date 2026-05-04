@@ -7,7 +7,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routes import auth, content, events, health, listings, me, moderation, reference, search
+from app.routes import (
+    auth,
+    content,
+    events,
+    health,
+    invoices,
+    listings,
+    me,
+    moderation,
+    push,
+    reference,
+    search,
+    uploads,
+)
 
 if settings.sentry_dsn:
     sentry_sdk.init(
@@ -39,6 +52,11 @@ app.include_router(events.admin_router)
 app.include_router(content.router)
 app.include_router(me.router)
 app.include_router(search.router)
+app.include_router(uploads.router)
+app.include_router(invoices.router)
+app.include_router(invoices.admin_router)
+app.include_router(push.router)
+app.include_router(push.admin_router)
 app.include_router(moderation.router)
 
 

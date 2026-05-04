@@ -93,6 +93,8 @@ test: venv
 		DATABASE_URL=postgresql+asyncpg://itt:itt_dev@localhost:5433/itt \
 		ADMIN_SEED_EMAIL=bek@itt-rehber.ch \
 		ADMIN_SEED_PASSWORD=changeme \
+		S3_ENDPOINT_URL=http://localhost:9000 \
+		S3_PUBLIC_URL=http://localhost:9000/itt-media \
 		.venv/bin/pytest -q
 
 .PHONY: verify

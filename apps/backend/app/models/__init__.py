@@ -2,6 +2,7 @@
 
 from app.models.category import Category
 from app.models.content_page import ContentPage
+from app.models.device_token import DeviceToken
 from app.models.event import Event
 from app.models.favorite import Favorite
 from app.models.invoice import Invoice
@@ -14,6 +15,7 @@ from app.models.user import User
 __all__ = [
     "Category",
     "ContentPage",
+    "DeviceToken",
     "Event",
     "Favorite",
     "Invoice",

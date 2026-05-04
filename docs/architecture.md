@@ -1,4 +1,4 @@
-# Architecture (Phase 1 + 2)
+# Architecture (Phase 1 + 2 + 3)
 
 This is what the scaffold actually does, what's stubbed, and what's deferred. The PRD (`docs/prd.md`) is the source of truth for product decisions; this document is the source of truth for engineering choices.
 
@@ -71,8 +71,12 @@ This is what the scaffold actually does, what's stubbed, and what's deferred. Th
 - **DEVELOPMENT_TEAM is empty in `apps/ios/project.yml`** — Xcode will refuse to sign for a real device. Set this before building for hardware. Simulator builds are fine.
 - **APP_SECRET in `.env.example` is not safe for prod.** Generate ≥32 bytes random before deploying.
 - **No certificate pinning yet.** APIClient has a TODO; wire pinning in Phase 4 when the prod cert is fixed.
-- **`requirements()` validators** — none yet; relying on Pydantic v2 `Field(min_length=...)` constraints. Add image dimension/EXIF validation in Phase 2 alongside the upload endpoint.
 - **No automated DB backups.** Hetzner README mentions a `pg_dump` cron — wire it before launch.
+- **TWINT QR is a placeholder.** The QR encodes `twint://payment?amount=...&reference=...` which most TWINT-aware iOS phones will open, but it's not a Swiss QR-bill. For production, swap `_make_twint_payload()` in `services/invoice.py` for the proper Swiss QR-bill (use `qrbill` library) when commercial TWINT is set up.
+- **APNs is configured but not authenticated.** `services/push.py` falls back to logger-only when `APNS_KEY_P8_PATH` is unset; production needs the .p8 file mounted into the container plus the right `APNS_KEY_ID` / `APPLE_TEAM_ID`.
+- **SMTP is configured but not authenticated.** `services/email.py` logs messages instead of sending when `SMTP_HOST` is unset. Wire a real relay (Resend, SendGrid, Mailgun, Postmark) before launch.
+- **`expire-and-remind.py` is not scheduled.** Phase 4 will add a cron entry on the production VPS.
+- **Image upload accepts only JPG/PNG, max 4000×4000, max 5 MB after normalization.** Increase only after measuring the storage cost on R2.
 
 ## Open questions deferred to engineering team
 

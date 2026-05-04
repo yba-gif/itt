@@ -6,6 +6,8 @@ import Queue from "./pages/Queue";
 import ListingDetail from "./pages/ListingDetail";
 import EventsQueue from "./pages/EventsQueue";
 import ContentEditor from "./pages/ContentEditor";
+import Payments from "./pages/Payments";
+import PushComposer from "./pages/PushComposer";
 import { clearToken, getToken } from "./api/client";
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -20,6 +22,8 @@ function Shell({ children }: { children: React.ReactNode }) {
           <nav className="flex gap-1 text-sm">
             <NavLink to="/queue?status=pending" end className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>İlanlar</NavLink>
             <NavLink to="/events?status=pending" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>Etkinlikler</NavLink>
+            <NavLink to="/payments" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>Ödemeler</NavLink>
+            <NavLink to="/push" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>Bildirim</NavLink>
             <NavLink to="/content" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>İçerik</NavLink>
           </nav>
         </div>
@@ -50,6 +54,8 @@ export default function App() {
       <Route path="/queue" element={<RequireAuth><Queue /></RequireAuth>} />
       <Route path="/listings/:id" element={<RequireAuth><ListingDetail /></RequireAuth>} />
       <Route path="/events" element={<RequireAuth><EventsQueue /></RequireAuth>} />
+      <Route path="/payments" element={<RequireAuth><Payments /></RequireAuth>} />
+      <Route path="/push" element={<RequireAuth><PushComposer /></RequireAuth>} />
       <Route path="/content" element={<RequireAuth><ContentEditor /></RequireAuth>} />
       <Route path="*" element={<Navigate to="/queue" replace />} />
     </Routes>

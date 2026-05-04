@@ -201,6 +201,47 @@ final class APIClient {
         )
     }
 
+    // MARK: - Push registration
+
+    func registerPush(token: String, categories: [String], kanton: String?) async throws {
+        struct Body: Encodable {
+            let token: String
+            let categories: [String]
+            let kanton: String?
+        }
+        var req = URLRequest(url: baseURL.appendingPathComponent("push/register"))
+        req.httpMethod = "POST"
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        attachAuth(&req)
+        req.httpBody = try encoder.encode(Body(token: token, categories: categories, kanton: kanton))
+        let (data, resp) = try await session.data(for: req)
+        try ensureOK(resp, data: data)
+    }
+
+    // MARK: - Image upload (multipart)
+
+    func uploadImage(data: Data, filename: String, mime: String) async throws -> String {
+        let boundary = "ITT-\(UUID().uuidString)"
+        var req = URLRequest(url: baseURL.appendingPathComponent("uploads/image"))
+        req.httpMethod = "POST"
+        req.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        attachAuth(&req)
+
+        var body = Data()
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: \(mime)\r\n\r\n".data(using: .utf8)!)
+        body.append(data)
+        body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        req.httpBody = body
+
+        let (respData, resp) = try await session.data(for: req)
+        try ensureOK(resp, data: respData)
+        struct Out: Decodable { let image_url: String }
+        let decoded = try decoder.decode(Out.self, from: respData)
+        return decoded.image_url
+    }
+
     // MARK: - Generic
 
     private func get<T: Decodable>(url: URL) async throws -> T {

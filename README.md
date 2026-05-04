@@ -56,8 +56,18 @@ End-to-end submit → moderate → display for the **Sağlık** directory:
 |---|---|
 | 1. Foundation (auth, Sağlık E2E, admin queue, offline cache) | ✅ done |
 | 2. Directories & content (10 dirs, Events, FTS search, CMS, favorites, saved searches, v1 migration, claim) | ✅ done |
-| 3. Monetization (paid listings, invoices, push) | not started |
+| 3. Monetization (paid listings, PDF invoices, TWINT QR, payment recon, push, image uploads, expiry) | ✅ done |
 | 4. Launch (TestFlight, App Store, v1 sunset) | not started |
+
+**Phase 3 highlights:**
+- Paid submission flow: 60/100/180 CHF for 3/6/12 months, first month free, multi-directory + multi-kanton no-extra-cost.
+- Server-rendered PDF invoices via reportlab with TWINT QR + bank instructions; sequential `ITT-YYYY-NNNNN` numbering.
+- Email service (SMTP via env, logger-only fallback for dev) auto-sends invoice on submit.
+- Admin Pending Payment queue with TWINT/Havale alındı buttons; mark-paid extends `paid_until` by package duration.
+- `scripts/expire-and-remind.py` runs daily: active→expired, expired→archived (90d), 30-day renewal reminders.
+- APNs push: `DeviceToken` model, `/push/register` from iOS, admin push composer with kanton + category targeting.
+- Image upload pipeline: `/uploads/image` (multipart), Pillow validation (200×200 min, 5 MB max), EXIF strip, JPEG normalize, R2/MinIO PUT.
+- iOS: PhotosPicker + image upload + package picker + post-submit invoice screen + push permission requested contextually after first event view.
 
 **Phase 2 highlights (since v0.1):**
 - Backend: 10 directories, real Events feed (PRD §5.3 v1 date-filter bug fixed), Postgres FTS on `tsvector + unaccent`, ContentPage CMS, Favorites, Saved Searches, listing claim flow with email match.

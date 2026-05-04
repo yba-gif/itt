@@ -132,4 +132,37 @@ export const api = {
       method: "PUT",
       body: JSON.stringify({ title, body_markdown }),
     }),
+
+  invoices: (unpaid: boolean = true) =>
+    request<Invoice[]>(`/admin/invoices?unpaid=${unpaid}`),
+
+  markPaid: (id: string, payment_method: "twint" | "bank") =>
+    request<Invoice>(`/admin/invoices/${id}/mark-paid`, {
+      method: "POST",
+      body: JSON.stringify({ payment_method }),
+    }),
+
+  pushBroadcast: (
+    title: string,
+    body: string,
+    category: "events" | "editorial" | "saved_search" | "my_listing",
+    kanton: string | null
+  ) =>
+    request<{ sent: number; targeted: number }>("/admin/push/broadcast", {
+      method: "POST",
+      body: JSON.stringify({ title, body, category, kanton: kanton || null }),
+    }),
+};
+
+export type Invoice = {
+  id: string;
+  listing_id: string;
+  invoice_number: string;
+  amount_chf: number;  // cents
+  package: string;
+  issued_at: string;
+  due_at: string | null;
+  paid_at: string | null;
+  payment_method: "twint" | "bank" | null;
+  pdf_url: string | null;
 };

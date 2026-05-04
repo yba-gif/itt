@@ -38,6 +38,8 @@ class ListingIn(BaseModel):
     website: HttpUrl | None = None
     description: str | None = Field(default=None, max_length=500)
     image_url: str | None = Field(default=None, max_length=1024)
+    # Phase 3: required for new submissions; existing rows may have None.
+    package: ListingPackage | None = None
 
 
 class ListingOut(BaseModel):
