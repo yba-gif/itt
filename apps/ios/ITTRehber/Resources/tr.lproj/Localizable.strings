@@ -3,7 +3,7 @@
  * referenced from .strings file at runtime later (e.g. accessibility, errors).
  */
 
-"app.name" = "ITT-Rehber";
+"app.name" = "TGS-ITT Rehber";
 "tab.rehber" = "Rehber";
 "tab.events" = "Etkinlikler";
 "tab.info" = "Bilgi";

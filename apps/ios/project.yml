@@ -32,7 +32,7 @@ targets:
     info:
       path: ITTRehber/Info.plist
       properties:
-        CFBundleDisplayName: "ITT-Rehber"
+        CFBundleDisplayName: "TGS-ITT Rehber"
         CFBundleShortVersionString: "0.1.0"
         CFBundleVersion: "1"
         CFBundleLocalizations: [tr]
