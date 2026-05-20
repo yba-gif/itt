@@ -9,6 +9,8 @@
 #  - Object storage: Cloudflare R2 (set S3_ENDPOINT_URL to the R2 endpoint).
 #  - Postgres backups: enable pgbackrest or `pg_dump | gpg | rsync` cron — out of scope here.
 #  - TLS: Traefik issues Let's Encrypt certs automatically on first request.
+#  - Scheduled tasks: the `scheduler` service runs expire-and-remind.py daily at 03:00 Zurich time
+#    via supercronic. No manual VPS crontab entry required.
 
 services:
   traefik:
@@ -79,6 +81,39 @@ services:
       - "traefik.http.routers.api.entrypoints=websecure"
       - "traefik.http.routers.api.tls.certresolver=le"
       - "traefik.http.services.api.loadbalancer.server.port=8000"
+
+  # Runs expire-and-remind.py daily at 03:00 Europe/Zurich.
+  # supercronic (https://github.com/aptible/supercronic) is a cron runner built for
+  # containers: handles SIGTERM cleanly, logs to stdout, no setuid/setgid required.
+  scheduler:
+    image: ghcr.io/itt-rehber/backend:latest
+    build: ../../apps/backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      APP_ENV: production
+      APP_SECRET: ${APP_SECRET}
+      APPLE_BUNDLE_ID: ${APPLE_BUNDLE_ID}
+      APPLE_TEAM_ID: ${APPLE_TEAM_ID}
+      SENTRY_DSN: ${SENTRY_DSN}
+      ADMIN_SEED_EMAIL: ${ADMIN_SEED_EMAIL}
+      S3_ENDPOINT_URL: ${S3_ENDPOINT_URL}
+      S3_REGION: auto
+      S3_BUCKET: ${S3_BUCKET}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY}
+      S3_SECRET_KEY: ${S3_SECRET_KEY}
+      S3_PUBLIC_URL: ${S3_PUBLIC_URL}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-true}
+      SMTP_FROM_EMAIL: ${SMTP_FROM_EMAIL}
+      SMTP_FROM_NAME: ${SMTP_FROM_NAME:-ITT-Rehber}
+    command: python /app/scripts/scheduler.py --hour 3 --minute 0
 
 volumes:
   postgres-data:

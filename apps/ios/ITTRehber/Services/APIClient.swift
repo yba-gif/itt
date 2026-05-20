@@ -71,6 +71,10 @@ final class APIClient {
         try await get(url: baseURL.appendingPathComponent("listings/\(id.uuidString)"))
     }
 
+    func myListings() async throws -> [Listing] {
+        try await get(url: baseURL.appendingPathComponent("listings/mine/all"))
+    }
+
     func submitListing(_ input: ListingSubmitInput) async throws -> Listing {
         try await post(url: baseURL.appendingPathComponent("listings"), body: input)
     }

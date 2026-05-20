@@ -287,12 +287,8 @@ struct MyListingsView: View {
     private func load() async {
         loading = true
         defer { loading = false }
-        // Reuse the public listing shape — backend's /listings/mine/all returns
-        // ListingOut which is a superset; for Phase 2 the public-shaped row is enough.
         do {
-            // Hit public listing endpoint filtered by my email is overkill; for now
-            // surface empty until the dedicated endpoint is wired in Phase 2.x.
-            listings = try await APIClient.shared.listings(directory: nil, kanton: nil, query: nil).items
+            listings = try await APIClient.shared.myListings()
         } catch { /* keep empty */ }
     }
 }
