@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { api, type Invoice } from "../api/client";
+import { api } from "../api/client";
 
 export default function Payments() {
   const qc = useQueryClient();
