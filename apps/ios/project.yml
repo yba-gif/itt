@@ -37,7 +37,7 @@ targets:
         CFBundleVersion: "1"
         CFBundleLocalizations: [tr]
         CFBundleDevelopmentRegion: tr
-        ITTAPIBaseURL: "http://localhost:8000"
+        ITTAPIBaseURL: "https://api.clawdcloud.xyz"
         UILaunchScreen:
           UIColorName: ""
         UISupportedInterfaceOrientations:
