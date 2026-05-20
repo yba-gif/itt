@@ -129,6 +129,8 @@ services:
       SMTP_STARTTLS: ${SMTP_STARTTLS:-true}
       SMTP_FROM_EMAIL: ${SMTP_FROM_EMAIL}
       SMTP_FROM_NAME: ${SMTP_FROM_NAME:-ITT-Rehber}
+    volumes:
+      - ../../scripts:/app/scripts:ro
     command: python /app/scripts/scheduler.py --hour 3 --minute 0
 
 volumes:
