@@ -53,8 +53,8 @@ struct EtkinliklerTab: View {
                 }
             }
             .task { await load() }
-            .onChange(of: mode) { _, _ in Task { await load() } }
-            .onChange(of: selectedKanton) { _, _ in Task { await load() } }
+            .onChange(of: mode, perform: { _ in Task { await load() } })
+            .onChange(of: selectedKanton, perform: { _ in Task { await load() } })
             .alert("Hata", isPresented: .constant(error != nil)) {
                 Button("Tamam") { error = nil }
             } message: { Text(error ?? "") }

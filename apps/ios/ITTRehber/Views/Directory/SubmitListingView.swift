@@ -85,7 +85,7 @@ struct SubmitListingView: View {
                 Text("\(description.count)/500")
             }
 
-            Section("Logo / Görsel") {
+            Section {
                 PhotosPicker(selection: $photoItem, matching: .images) {
                     HStack {
                         if let img = photoPreview {
@@ -110,14 +110,16 @@ struct SubmitListingView: View {
                         Spacer()
                     }
                 }
-                .onChange(of: photoItem) { _, newValue in
+                .onChange(of: photoItem, perform: { newValue in
                     Task { await loadAndUploadImage(newValue) }
-                }
+                })
+            } header: {
+                Text("Logo / Görsel")
             } footer: {
                 Text("Logo zorunludur. JPG/PNG, en az 200×200, en fazla 5 MB.")
             }
 
-            Section("Paket") {
+            Section {
                 ForEach(ListingPackage.allCases) { pkg in
                     HStack {
                         Image(systemName: package == pkg ? "largecircle.fill.circle" : "circle")
@@ -128,6 +130,8 @@ struct SubmitListingView: View {
                     .contentShape(Rectangle())
                     .onTapGesture { package = pkg }
                 }
+            } header: {
+                Text("Paket")
             } footer: {
                 Text("İlk ay tüm paketler için ücretsiz. Faturanız e-postanıza gönderilir; TWINT veya banka havalesi ile ödeyebilirsiniz. Uygulamada ödeme alınmaz.")
             }

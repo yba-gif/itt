@@ -4,8 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>tr</string>
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
 	<key>CFBundleDisplayName</key>
-	<string>ITT-Rehber</string>
+	<string>TGS-ITT Rehber</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -23,9 +25,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>ITTAPIBaseURL</key>
-	<string>http://localhost:8000</string>
+	<string>https://api.clawdcloud.xyz</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.reference</string>
 	<key>NSAppTransportSecurity</key>
@@ -46,13 +48,20 @@
 	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
 	<string>Etkinlik hatırlatmaları takviminize eklenir.</string>
 	<key>NSContactsUsageDescription</key>
-	<string></string>
+	<string>İletişim bilgileri için kullanılır.</string>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
 		<string></string>
 	</dict>
 	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~iphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
