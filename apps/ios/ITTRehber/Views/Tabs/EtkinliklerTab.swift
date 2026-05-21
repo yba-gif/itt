@@ -29,9 +29,18 @@ struct EtkinliklerTab: View {
 
                 Group {
                     if loading && events.isEmpty {
-                        ProgressView("Yükleniyor…")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color.tgsCream)
+                        // P2-1: skeleton rows during first load
+                        List {
+                            ForEach(0..<5, id: \.self) { _ in
+                                ListingRowSkeleton()
+                                    .listRowBackground(Color.white)
+                                    .listRowSeparatorTint(Color.tgsBorder)
+                            }
+                        }
+                        .listStyle(.plain)
+                        .scrollContentBackground(.hidden)
+                        .background(Color.tgsCream)
+                        .allowsHitTesting(false)
                     } else if let err = error, events.isEmpty {
                         // P2-5: inline error when list is empty
                         ErrorStateView(message: err) {

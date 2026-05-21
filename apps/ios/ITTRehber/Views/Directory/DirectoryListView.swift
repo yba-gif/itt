@@ -24,9 +24,18 @@ struct DirectoryListView: View {
             }
 
             if loading && listings.isEmpty {
-                ProgressView("Yükleniyor…")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.tgsCream)
+                // P2-1: skeleton rows while first load is in flight
+                List {
+                    ForEach(0..<6, id: \.self) { _ in
+                        ListingRowSkeleton()
+                            .listRowBackground(Color.white)
+                            .listRowSeparatorTint(Color.tgsBorder)
+                    }
+                }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .background(Color.tgsCream)
+                .allowsHitTesting(false)
             } else if let err = error, listings.isEmpty {
                 // P2-5: inline error state replaces modal alert when list is empty
                 ErrorStateView(message: err.errorDescription ?? "Bir hata oluştu") {

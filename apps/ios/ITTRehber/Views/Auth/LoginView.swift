@@ -13,68 +13,109 @@ struct LoginView: View {
     enum Mode { case login, signup }
 
     var body: some View {
-        Form {
-            // QW-4: explicit tint so Form controls use TGS red even when system blue leaks through
-            Section {
+        // P2-3: TGS form component replaces system Form/Section
+        ScrollView {
+            VStack(spacing: TGSSpacing.lg) {
+                // Mode picker
                 Picker("Mod", selection: $mode) {
                     Text("Giriş").tag(Mode.login)
                     Text("Kayıt").tag(Mode.signup)
                 }
                 .pickerStyle(.segmented)
-            }
+                .padding(.horizontal, TGSSpacing.lg)
+                .padding(.top, TGSSpacing.lg)
 
-            if mode == .signup {
-                Section("Bilgiler") {
-                    TextField("İsim (opsiyonel)", text: $displayName)
-                        .textContentType(.name)
-                }
-            }
-
-            Section("E-posta") {
-                TextField("ornek@itt-rehber.ch", text: $email)
-                    .keyboardType(.emailAddress)
-                    .textContentType(.emailAddress)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                SecureField("Parola", text: $password)
-                    .textContentType(mode == .login ? .password : .newPassword)
-            }
-
-            if let error {
-                Section {
-                    Text(error).foregroundStyle(.red)
-                }
-            }
-
-            Section {
-                Button(action: submit) {
-                    if busy { ProgressView() } else {
-                        Text(mode == .login ? "Giriş yap" : "Kayıt ol")
-                            .frame(maxWidth: .infinity)
+                if mode == .signup {
+                    TGSFormSection(header: "Profil") {
+                        TGSFieldRow(icon: "person",
+                                    placeholder: "İsim (opsiyonel)",
+                                    text: $displayName,
+                                    autocapitalization: .words,
+                                    showDivider: false)
                     }
+                    .padding(.horizontal, TGSSpacing.lg)
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(busy || email.isEmpty || password.count < 8)
-            }
 
-            Section {
-                Button {
-                    showSIWAPlaceholder = true
-                } label: {
-                    HStack {
-                        Image(systemName: "applelogo")
-                        Text("Apple ile Giriş")
+                TGSFormSection(header: "E-posta ile giriş") {
+                    TGSFieldRow(icon: "envelope",
+                                placeholder: "ornek@itt-rehber.ch",
+                                text: $email,
+                                keyboardType: .emailAddress,
+                                autocapitalization: .never,
+                                autocorrect: false)
+                    TGSFieldRow(icon: "lock",
+                                placeholder: "Parola",
+                                text: $password,
+                                isSecure: true,
+                                showDivider: false)
+                }
+                .padding(.horizontal, TGSSpacing.lg)
+
+                // Inline error
+                if let error {
+                    HStack(spacing: TGSSpacing.sm) {
+                        Image(systemName: "exclamationmark.circle.fill")
+                            .foregroundStyle(Color.tgsError)
+                        Text(error)
+                            .font(TGSFont.subheadline)
+                            .foregroundStyle(Color.tgsError)
+                        Spacer()
+                    }
+                    .padding(TGSSpacing.md)
+                    .background(
+                        RoundedRectangle(cornerRadius: TGSRadius.field, style: .continuous)
+                            .fill(Color.tgsErrorBg)
+                    )
+                    .padding(.horizontal, TGSSpacing.lg)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+                }
+
+                // Submit button
+                Button(action: submit) {
+                    Group {
+                        if busy {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Text(mode == .login ? "Giriş yap" : "Kayıt ol")
+                        }
                     }
                     .frame(maxWidth: .infinity)
+                    .padding(.vertical, TGSSpacing.md)
+                    .font(TGSFont.headline)
                 }
-                .buttonStyle(.bordered)
-            } footer: {
-                // QW-1: removed implementation detail from user-facing copy
-                Text("Apple ile Giriş yakında aktif olacak. Şimdilik e-posta ile devam edebilirsiniz.")
-                    .font(.caption)
+                .buttonStyle(.borderedProminent)
+                .tint(Color.tgsRed)
+                .disabled(busy || email.isEmpty || password.count < 8)
+                .padding(.horizontal, TGSSpacing.lg)
+
+                // Apple Sign In placeholder
+                TGSFormSection(
+                    footer: "Apple ile Giriş yakında aktif olacak. Şimdilik e-posta ile devam edebilirsiniz."
+                ) {
+                    Button {
+                        showSIWAPlaceholder = true
+                    } label: {
+                        HStack(spacing: TGSSpacing.sm) {
+                            Image(systemName: "applelogo")
+                                .font(.system(size: 15))
+                            Text("Apple ile Giriş")
+                                .font(TGSFont.body)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, TGSSpacing.md)
+                        .foregroundStyle(Color.tgsCharcoal)
+                    }
+                    .buttonStyle(.plain)
+                }
+                .padding(.horizontal, TGSSpacing.lg)
+
+                Spacer(minLength: TGSSpacing.xl)
             }
+            .animation(.easeInOut(duration: 0.2), value: error)
+            .animation(.easeInOut(duration: 0.2), value: mode)
         }
-        .tint(Color.tgsRed)
+        .background(Color.tgsCream)
         .alert("Yakında", isPresented: $showSIWAPlaceholder) {
             Button("Tamam", role: .cancel) {}
         } message: {

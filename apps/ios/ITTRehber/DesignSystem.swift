@@ -149,6 +149,174 @@ extension View {
     }
 }
 
+// MARK: - TGS Form Components (P2-3)
+
+/// Styled form section card — white inner card with optional header.
+/// Replaces `Form { Section }` with TGS editorial aesthetics.
+struct TGSFormSection<Content: View>: View {
+    let header: String?
+    let footer: String?
+    @ViewBuilder let content: () -> Content
+
+    init(header: String? = nil, footer: String? = nil, @ViewBuilder content: @escaping () -> Content) {
+        self.header = header
+        self.footer = footer
+        self.content = content
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if let header {
+                Text(header)
+                    .font(TGSFont.caption)
+                    .foregroundStyle(Color.tgsMuted)
+                    .textCase(.uppercase)
+                    .tracking(0.3)
+                    .padding(.horizontal, TGSSpacing.xs)
+                    .padding(.bottom, TGSSpacing.xs)
+            }
+
+            VStack(spacing: 0) {
+                content()
+            }
+            .tgsInnerCard()
+
+            if let footer {
+                Text(footer)
+                    .font(TGSFont.micro)
+                    .foregroundStyle(Color.tgsMuted)
+                    .padding(.horizontal, TGSSpacing.xs)
+                    .padding(.top, TGSSpacing.xs)
+            }
+        }
+    }
+}
+
+/// Styled text field row for use inside `TGSFormSection`.
+/// Shows icon, label, and text field on a single row with a hairline divider.
+struct TGSFieldRow: View {
+    let icon: String?
+    let placeholder: String
+    @Binding var text: String
+    var keyboardType: UIKeyboardType = .default
+    var autocapitalization: TextInputAutocapitalization = .sentences
+    var autocorrect: Bool = true
+    var isSecure: Bool = false
+    var showDivider: Bool = true
+
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: TGSSpacing.md) {
+                if let icon {
+                    Image(systemName: icon)
+                        .font(.system(size: 15))
+                        .foregroundStyle(Color.tgsMuted)
+                        .frame(width: 20, alignment: .center)
+                        .accessibilityHidden(true)
+                }
+                Group {
+                    if isSecure {
+                        SecureField(placeholder, text: $text)
+                    } else {
+                        TextField(placeholder, text: $text)
+                            .keyboardType(keyboardType)
+                            .textInputAutocapitalization(autocapitalization)
+                            .autocorrectionDisabled(!autocorrect)
+                    }
+                }
+                .font(TGSFont.body)
+                .foregroundStyle(Color.tgsCharcoal)
+            }
+            .padding(.horizontal, TGSSpacing.lg)
+            .padding(.vertical, TGSSpacing.md)
+
+            if showDivider {
+                Divider()
+                    .overlay(Color.tgsBorder)
+                    .padding(.leading, icon != nil ? TGSSpacing.lg + 20 + TGSSpacing.md : TGSSpacing.lg)
+            }
+        }
+    }
+}
+
+// MARK: - Skeleton Loading (P2-1)
+
+/// Animated shimmer placeholder for list rows and grid tiles while content loads.
+struct SkeletonShape: View {
+    @State private var phase: CGFloat = 0
+
+    var cornerRadius: CGFloat = TGSRadius.field
+    var height: CGFloat = 16
+
+    var body: some View {
+        GeometryReader { geo in
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                .fill(
+                    LinearGradient(
+                        stops: [
+                            .init(color: Color.tgsSurface, location: phase - 0.3),
+                            .init(color: Color.tgsBorder.opacity(0.6), location: phase),
+                            .init(color: Color.tgsSurface, location: phase + 0.3),
+                        ],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .frame(height: height)
+                .onAppear {
+                    withAnimation(.linear(duration: 1.2).repeatForever(autoreverses: false)) {
+                        phase = 1.3
+                    }
+                }
+        }
+        .frame(height: height)
+    }
+}
+
+/// Full listing-row skeleton — mirrors ListingRow layout.
+struct ListingRowSkeleton: View {
+    var body: some View {
+        HStack(spacing: 14) {
+            RoundedRectangle(cornerRadius: TGSRadius.field, style: .continuous)
+                .fill(Color.tgsSurface)
+                .frame(width: 56, height: 56)
+
+            VStack(alignment: .leading, spacing: 6) {
+                SkeletonShape(cornerRadius: 6, height: 14)
+                    .frame(maxWidth: 160)
+                SkeletonShape(cornerRadius: TGSRadius.pill, height: 11)
+                    .frame(maxWidth: 80)
+                SkeletonShape(cornerRadius: 4, height: 10)
+                    .frame(maxWidth: 100)
+            }
+            Spacer()
+        }
+        .padding(.vertical, 8)
+        .accessibilityHidden(true) // skeleton is purely decorative
+    }
+}
+
+/// Grid tile skeleton — mirrors DirectoryTile layout.
+struct DirectoryTileSkeleton: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Circle()
+                .fill(Color.tgsSurface)
+                .frame(width: 46, height: 46)
+            Spacer(minLength: TGSSpacing.md)
+            SkeletonShape(cornerRadius: 6, height: 14)
+                .frame(maxWidth: 80)
+            Spacer(minLength: TGSSpacing.md)
+            SkeletonShape(cornerRadius: TGSRadius.pill, height: 10)
+                .frame(maxWidth: 60)
+        }
+        .frame(maxWidth: .infinity, minHeight: 148, alignment: .topLeading)
+        .padding(TGSSpacing.lg)
+        .tgsCard()
+        .accessibilityHidden(true)
+    }
+}
+
 // MARK: - Inline Error State (P2-5)
 
 /// Reusable full-screen error state with an icon, message, and optional retry action.

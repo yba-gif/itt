@@ -16,9 +16,18 @@ struct AraTab: View {
                     .background(Color.tgsCream)
 
                 if loading {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.tgsCream)
+                    // P2-1: skeleton while search is in flight
+                    List {
+                        ForEach(0..<5, id: \.self) { _ in
+                            ListingRowSkeleton()
+                                .listRowBackground(Color.white)
+                                .listRowSeparatorTint(Color.tgsBorder)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.tgsCream)
+                    .allowsHitTesting(false)
                 } else if let result {
                     if result.total == 0 {
                         emptyState
