@@ -353,13 +353,51 @@ struct EventDetailView: View {
             .padding(TGSSpacing.lg)
         }
         .background(Color.tgsCream)
+        // Floating tab bar clearance — NavigationStack push doesn't inherit
+        // the parent tab's safeAreaInset.
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 80)
+        }
         .navigationTitle("Etkinlik")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ShareLink(item: shareText, subject: Text(event.title)) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .accessibilityLabel("Etkinliği paylaş")
+            }
+        }
         .task {
             // PRD §5.9: contextual push permission ask — first time the user
             // views an event detail. Idempotent on subsequent visits.
             await push.requestAuthorizationIfNeeded()
         }
+    }
+
+    /// Multi-line shareable summary. Recipients see the title in the subject
+    /// (in apps that show subjects, like Mail/Slack), and the formatted
+    /// title + date + venue + description + canonical URL in the body.
+    private var shareText: String {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "tr_CH")
+        f.dateStyle = .full
+        f.timeStyle = .short
+        var lines: [String] = ["📅 \(event.title)"]
+        lines.append(f.string(from: event.startsAt))
+        if let venue = event.venue, !venue.isEmpty {
+            lines.append("📍 \(venue)")
+        }
+        if let address = event.address, !address.isEmpty {
+            lines.append(address)
+        }
+        if let description = event.description, !description.isEmpty {
+            lines.append("")
+            lines.append(description)
+        }
+        lines.append("")
+        lines.append("https://itt-rehber.ch/event/\(event.id.uuidString)")
+        return lines.joined(separator: "\n")
     }
 
     private func formatted(_ d: Date) -> String {
