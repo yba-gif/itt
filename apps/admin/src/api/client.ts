@@ -105,6 +105,9 @@ export const api = {
   queue: (status: Listing["status"] = "pending") =>
     request<Listing[]>(`/admin/queue?status=${encodeURIComponent(status)}`),
 
+  getListing: (id: string) =>
+    request<Listing>(`/admin/listings/${id}`),
+
   approve: (id: string) =>
     request<Listing>(`/admin/listings/${id}/approve`, { method: "POST" }),
 

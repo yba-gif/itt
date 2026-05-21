@@ -32,6 +32,15 @@ async def queue(
     return [ListingOut.model_validate(r) for r in rows]
 
 
+@router.get("/listings/{listing_id}", response_model=ListingOut)
+async def get_listing(listing_id: UUID, admin: CurrentAdmin, db: DBSession) -> ListingOut:
+    """Fetch any listing regardless of status — needed by the admin detail view."""
+    listing = await db.get(Listing, listing_id)
+    if listing is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail="not_found")
+    return ListingOut.model_validate(listing)
+
+
 @router.post("/listings/{listing_id}/approve", response_model=ListingOut)
 async def approve(listing_id: UUID, admin: CurrentAdmin, db: DBSession) -> ListingOut:
     listing = await db.get(Listing, listing_id)
