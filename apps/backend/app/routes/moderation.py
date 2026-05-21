@@ -75,3 +75,20 @@ async def reject(
     await db.commit()
     await db.refresh(listing)
     return ListingOut.model_validate(listing)
+
+
+@router.post("/listings/{listing_id}/archive", response_model=ListingOut)
+async def archive(listing_id: UUID, admin: CurrentAdmin, db: DBSession) -> ListingOut:
+    """Admin hard-remove: active → suspended → archived (two-step if currently active)."""
+    listing = await db.get(Listing, listing_id)
+    if listing is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, detail="not_found")
+    try:
+        if listing.status == ListingStatus.active:
+            listing.transition_to(ListingStatus.suspended)
+        listing.transition_to(ListingStatus.archived)
+    except ValueError as e:
+        raise HTTPException(status.HTTP_409_CONFLICT, detail=str(e)) from e
+    await db.commit()
+    await db.refresh(listing)
+    return ListingOut.model_validate(listing)
