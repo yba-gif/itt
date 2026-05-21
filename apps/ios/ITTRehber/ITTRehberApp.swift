@@ -56,9 +56,11 @@ struct RootTabView: View {
                     .opacity(selectedTab == .profil ? 1 : 0)
                     .allowsHitTesting(selectedTab == .profil)
             }
-            // Reserve space so scroll content clears the floating bar
+            // Reserve space so scroll content clears the floating bar.
+            // Bar height ~56pt + padding-bottom 20pt = 76pt visible; add ~30pt
+            // breathing room so text doesn't visually touch the bar's top edge.
             .safeAreaInset(edge: .bottom) {
-                Color.clear.frame(height: 82)
+                Color.clear.frame(height: 108)
             }
 
             // Floating pill — sits above safe area

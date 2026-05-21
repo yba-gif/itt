@@ -31,6 +31,12 @@ struct DirectoryDetailView: View {
         }
         .ignoresSafeArea(edges: .top)
         .background(Color.white)
+        // NavigationStack push doesn't inherit the parent tab's safeAreaInset
+        // for the floating tab bar — apply locally so the bottom of the
+        // content card clears the tab bar.
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 80)
+        }
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(.hidden, for: .navigationBar)

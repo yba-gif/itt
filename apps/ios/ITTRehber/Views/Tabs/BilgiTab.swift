@@ -152,6 +152,12 @@ struct ContentPageView: View {
             }
         }
         .background(Color.tgsCream)
+        // NavigationStack push destinations don't inherit the parent's
+        // safeAreaInset for the floating tab bar — apply locally so the last
+        // paragraph clears the tab bar instead of disappearing behind it.
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 80)
+        }
         .navigationTitle(page?.title ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .task { await load() }
