@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RehberTab: View {
     @AppStorage("hasSeenWelcome") private var hasSeenWelcome = false
+    @State private var showAI = false
 
     var body: some View {
         NavigationStack {
@@ -20,6 +21,9 @@ struct RehberTab: View {
             .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             .navigationDestination(for: Directory.self) { directory in
                 DirectoryListView(directory: directory)
+            }
+            .fullScreenCover(isPresented: $showAI) {
+                ITTAIView()
             }
         }
     }
@@ -50,12 +54,58 @@ struct RehberTab: View {
                 }
 
                 glassCard
+                aiEntryButton
             }
             .padding(.horizontal, TGSSpacing.xl)
             .padding(.top, 60)
             .padding(.bottom, 50)
         }
         .clipShape(WaveClipShape(waveDepth: 30))
+    }
+
+    // MARK: - İTT AI Entry Button
+
+    private var aiEntryButton: some View {
+        Button {
+            showAI = true
+        } label: {
+            HStack(spacing: TGSSpacing.md) {
+                ZStack {
+                    Circle()
+                        .fill(.white.opacity(0.15))
+                        .frame(width: 36, height: 36)
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(.white)
+                }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("İTT AI'ya sor")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(.white)
+                    Text("Yapay zeka asistanı")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.white.opacity(0.6))
+                }
+
+                Spacer(minLength: 0)
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.45))
+            }
+            .padding(TGSSpacing.md)
+            .background(
+                .ultraThinMaterial,
+                in: RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
+                    .stroke(.white.opacity(0.25), lineWidth: 1)
+            )
+        }
+        .buttonStyle(TGSSpringButtonStyle())
+        .accessibilityLabel("İTT AI — Yapay zeka asistanını aç")
     }
 
     private var glassCard: some View {
