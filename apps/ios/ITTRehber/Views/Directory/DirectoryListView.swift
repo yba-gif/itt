@@ -160,6 +160,15 @@ struct ListingRow: View {
             .uppercased()
     }
 
+    /// Primary directory for color tinting the image fallback.
+    /// Falls back to .isletme color if no recognized directory present.
+    private var primaryDirectory: Directory {
+        for code in listing.directories {
+            if let d = Directory(rawValue: code) { return d }
+        }
+        return .isletme
+    }
+
     var body: some View {
         HStack(spacing: 14) {
             // Logo / avatar
@@ -221,12 +230,22 @@ struct ListingRow: View {
         .accessibilityElement(children: .combine)
     }
 
+    /// Color-tinted image fallback when listing has no `image_url`.
+    /// Tints the background with the primary directory's color (12% opacity)
+    /// and renders initials in the directory color for brand consistency.
+    /// Falls back to the SF Symbol icon if the name has no extractable initials.
     private var initialsPlaceholder: some View {
         ZStack {
-            Color.tgsSurface
-            Text(initials.isEmpty ? "?" : initials)
-                .font(.system(size: 18, weight: .bold))
-                .foregroundStyle(Color.tgsMuted)
+            primaryDirectory.color.opacity(0.12)
+            if initials.isEmpty {
+                Image(systemName: primaryDirectory.systemImage)
+                    .font(.system(size: 22, weight: .semibold))
+                    .foregroundStyle(primaryDirectory.color)
+            } else {
+                Text(initials)
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .foregroundStyle(primaryDirectory.color)
+            }
         }
     }
 }
