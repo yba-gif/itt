@@ -12,12 +12,6 @@ final class ITTAIService: ObservableObject {
     @Published var isStreaming: Bool = false
     @Published var error: String?
 
-    private let model = "gemini-1.5-flash"
-
-    private var apiKey: String {
-        Bundle.main.object(forInfoDictionaryKey: "GeminiAPIKey") as? String ?? ""
-    }
-
     // MARK: - System Prompt
     // TODO: Replace placeholder with full TGS-ITT knowledge base when provided.
     private let systemPrompt = """
@@ -57,19 +51,14 @@ final class ITTAIService: ObservableObject {
         isStreaming = true
         defer { isStreaming = false }
 
-        guard !apiKey.isEmpty else {
-            updateMessage(id: assistantID, text: "API anahtarı yapılandırılmamış. Lütfen geliştiriciye bildirin.")
-            return
-        }
-
         do {
-            let endpoint = "https://generativelanguage.googleapis.com/v1beta/models/\(model):streamGenerateContent?key=\(apiKey)&alt=sse"
-            guard let url = URL(string: endpoint) else { return }
+            // All requests go through the ITT backend proxy — API key stays server-side.
+            let proxyURL = APIClient.shared.baseURL.appendingPathComponent("ai/chat")
 
-            var req = URLRequest(url: url)
+            var req = URLRequest(url: proxyURL)
             req.httpMethod = "POST"
             req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            req.timeoutInterval = 30
+            req.timeoutInterval = 45
 
             // Build conversation history — exclude the empty assistant placeholder at end
             let contents: [[String: Any]] = messages.dropLast().map { msg in

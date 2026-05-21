@@ -35,6 +35,43 @@ final class APIClient {
         let cfg = URLSessionConfiguration.default
         cfg.timeoutIntervalForRequest = 15
         cfg.waitsForConnectivity = false
+
+        // MARK: - TODO P4 — Certificate Pinning
+        // Wire TLS pinning before App Store 1.0 launch.
+        //
+        // Recommended approach — URLSessionDelegate with SecTrust validation:
+        //
+        //   1. Export the leaf certificate from api.clawdcloud.xyz as DER:
+        //      $ openssl s_client -connect api.clawdcloud.xyz:443 </dev/null \
+        //          | openssl x509 -outform der -out api_cert.der
+        //      Add api_cert.der to Assets.xcassets or the app bundle.
+        //
+        //   2. Implement URLSessionDelegate:
+        //      func urlSession(_ session: URLSession,
+        //                      didReceive challenge: URLAuthenticationChallenge,
+        //                      completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        //          guard let trust = challenge.protectionSpace.serverTrust,
+        //                let pinnedData = NSDataAsset(name: "api_cert")?.data else {
+        //              completionHandler(.cancelAuthenticationChallenge, nil)
+        //              return
+        //          }
+        //          // Compare leaf cert DER bytes against pinned copy
+        //          if SecTrustGetCertificateCount(trust) > 0,
+        //             let cert = SecTrustGetCertificateAtIndex(trust, 0) {
+        //              let certData = SecCertificateCopyData(cert) as Data
+        //              if certData == pinnedData {
+        //                  completionHandler(.useCredential, URLCredential(trust: trust))
+        //                  return
+        //              }
+        //          }
+        //          completionHandler(.cancelAuthenticationChallenge, nil)
+        //      }
+        //
+        //   3. Pass the delegate to URLSession(configuration:delegate:delegateQueue:)
+        //      and store in self.session. Re-pin on certificate rotation.
+        //
+        // Note: pinning breaks local dev (localhost). Guard with:
+        //   #if DEBUG ... #else /* pin */ #endif
         self.session = URLSession(configuration: cfg)
 
         self.decoder = JSONDecoder()

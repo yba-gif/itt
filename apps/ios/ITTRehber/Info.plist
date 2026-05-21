@@ -27,12 +27,10 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.1.0</string>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>10</string>
 	<key>ITTAPIBaseURL</key>
 	<string>https://api.clawdcloud.xyz</string>
-	<key>GeminiAPIKey</key>
-	<string>AIzaSyAOLcgA5xY3MMcZKlc6Fym4YEGY02pJ968</string>
-	<key>LSApplicationCategoryType</key>
+<key>LSApplicationCategoryType</key>
 	<string>public.app-category.reference</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
