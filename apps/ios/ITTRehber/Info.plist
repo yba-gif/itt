@@ -27,7 +27,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.1.0</string>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>7</string>
 	<key>ITTAPIBaseURL</key>
 	<string>https://api.clawdcloud.xyz</string>
 	<key>GeminiAPIKey</key>
