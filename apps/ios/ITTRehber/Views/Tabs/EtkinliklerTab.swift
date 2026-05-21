@@ -55,6 +55,7 @@ struct EtkinliklerTab: View {
             }
             .background(Color.tgsCream)
             .navigationTitle("Etkinlikler")
+            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

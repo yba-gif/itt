@@ -37,6 +37,7 @@ struct BilgiTab: View {
                 }
             }
             .navigationTitle("Bilgi")
+            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             .refreshable { await load() }
             .task { await load() }
         }

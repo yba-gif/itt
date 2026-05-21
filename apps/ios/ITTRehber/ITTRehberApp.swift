@@ -19,23 +19,41 @@ struct ITTRehberApp: App {
     }
 }
 
+// Sprint 6: custom floating tab bar replaces system TabView
 struct RootTabView: View {
+    @State private var selectedTab: AppTab = .rehber
+
     var body: some View {
-        TabView {
-            RehberTab()
-                .tabItem { Label("Rehber", systemImage: "square.grid.2x2.fill") }
+        ZStack(alignment: .bottom) {
+            // All tab views pre-loaded; only active one accepts hit-testing.
+            // This preserves per-tab NavigationStack state when switching tabs.
+            Group {
+                RehberTab()
+                    .opacity(selectedTab == .rehber ? 1 : 0)
+                    .allowsHitTesting(selectedTab == .rehber)
+                AraTab()
+                    .opacity(selectedTab == .ara ? 1 : 0)
+                    .allowsHitTesting(selectedTab == .ara)
+                EtkinliklerTab()
+                    .opacity(selectedTab == .etkinlikler ? 1 : 0)
+                    .allowsHitTesting(selectedTab == .etkinlikler)
+                BilgiTab()
+                    .opacity(selectedTab == .bilgi ? 1 : 0)
+                    .allowsHitTesting(selectedTab == .bilgi)
+                ProfilTab()
+                    .opacity(selectedTab == .profil ? 1 : 0)
+                    .allowsHitTesting(selectedTab == .profil)
+            }
+            // Reserve space so scroll content clears the floating bar
+            .safeAreaInset(edge: .bottom) {
+                Color.clear.frame(height: 82)
+            }
 
-            AraTab()
-                .tabItem { Label("Ara", systemImage: "magnifyingglass") }
-
-            EtkinliklerTab()
-                .tabItem { Label("Etkinlikler", systemImage: "calendar") }
-
-            BilgiTab()
-                .tabItem { Label("Bilgi", systemImage: "info.circle.fill") }
-
-            ProfilTab()
-                .tabItem { Label("Profil", systemImage: "person.crop.circle.fill") }
+            // Floating pill — sits above safe area
+            FloatingTabBar(selected: $selectedTab)
+                .padding(.bottom, 20)
+                .padding(.horizontal, 32)
         }
+        .ignoresSafeArea(edges: .bottom)
     }
 }

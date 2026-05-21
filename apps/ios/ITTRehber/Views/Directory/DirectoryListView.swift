@@ -54,6 +54,7 @@ struct DirectoryListView: View {
         .background(Color.tgsCream)
         .navigationTitle(directory.titleTR)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {

@@ -58,6 +58,10 @@ enum TGSFont {
     static let caption: Font = .system(size: 12, weight: .medium, design: .default)
     /// 11pt semibold — micro labels, pills
     static let micro: Font = .system(size: 11, weight: .semibold, design: .default)
+    /// 15pt semibold monospaced — data numbers (counts, stats)
+    static let mono: Font = .system(size: 15, weight: .semibold, design: .monospaced)
+    /// 22pt bold monospaced — large data figures
+    static let monoLarge: Font = .system(size: 22, weight: .bold, design: .monospaced)
 }
 
 // MARK: - Radius & Spacing Tokens (P1-7)
@@ -355,5 +359,134 @@ struct ErrorStateView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.tgsCream)
         .accessibilityElement(children: .contain)
+    }
+}
+
+// MARK: - Spring Interaction (Sprint 6)
+
+/// Bodrum-inspired spring press — 85% scale, fast damping.
+struct TGSSpringButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.87 : 1.0)
+            .animation(
+                .spring(response: 0.22, dampingFraction: 0.55),
+                value: configuration.isPressed
+            )
+    }
+}
+
+// MARK: - Hero Shapes (Sprint 6)
+
+/// Wave clip shape — clips the bottom of a hero section with a downward curve,
+/// matching the Bodrum-style SVG wave divider pattern.
+struct WaveClipShape: Shape {
+    var waveDepth: CGFloat = 28
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: .zero)
+        path.addLine(to: CGPoint(x: rect.width, y: 0))
+        path.addLine(to: CGPoint(x: rect.width, y: rect.height - waveDepth))
+        path.addQuadCurve(
+            to: CGPoint(x: 0, y: rect.height - waveDepth),
+            control: CGPoint(x: rect.width / 2, y: rect.height + waveDepth * 0.7)
+        )
+        path.closeSubpath()
+        return path
+    }
+}
+
+/// Grain texture overlay — subtle 3% opacity SVG-noise equivalent rendered once.
+struct GrainOverlay: View {
+    // Pre-generated dot positions so Canvas doesn't recompute on every frame.
+    private let dots: [(CGFloat, CGFloat)] = {
+        var rng = SystemRandomNumberGenerator()
+        return (0..<900).map { _ in
+            (CGFloat.random(in: 0...1, using: &rng),
+             CGFloat.random(in: 0...1, using: &rng))
+        }
+    }()
+
+    var body: some View {
+        Canvas { ctx, size in
+            for (nx, ny) in dots {
+                let rect = CGRect(x: nx * size.width, y: ny * size.height, width: 1.2, height: 1.2)
+                ctx.fill(Path(ellipseIn: rect), with: .color(.white.opacity(0.07)))
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+}
+
+// MARK: - Floating Tab Bar (Sprint 6)
+
+/// Bodrum-inspired floating pill tab bar — frosted glass, icon-only,
+/// spring-animated selection using matchedGeometryEffect.
+struct FloatingTabBar: View {
+    @Binding var selected: AppTab
+    @Namespace private var tabNS
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(AppTab.allCases, id: \.self) { tab in
+                Button {
+                    withAnimation(.spring(response: 0.32, dampingFraction: 0.68)) {
+                        selected = tab
+                    }
+                } label: {
+                    ZStack {
+                        if selected == tab {
+                            Circle()
+                                .fill(Color.tgsRed.opacity(0.12))
+                                .matchedGeometryEffect(id: "navPill", in: tabNS)
+                                .frame(width: 44, height: 44)
+                        }
+                        Image(systemName: tab.icon)
+                            .font(.system(
+                                size: 20,
+                                weight: selected == tab ? .semibold : .regular
+                            ))
+                            .foregroundStyle(selected == tab ? Color.tgsRed : Color.tgsMuted)
+                    }
+                    .frame(width: 52, height: 44)
+                }
+                .buttonStyle(TGSSpringButtonStyle())
+                .accessibilityLabel(tab.label)
+                .accessibilityAddTraits(selected == tab ? .isSelected : [])
+            }
+        }
+        .padding(.horizontal, TGSSpacing.sm)
+        .padding(.vertical, TGSSpacing.sm - 2)
+        .background(.ultraThinMaterial)
+        .clipShape(Capsule())
+        .overlay(Capsule().stroke(Color.tgsBorder.opacity(0.45), lineWidth: 1))
+        .shadow(color: Color.tgsCharcoal.opacity(0.14), radius: 24, x: 0, y: 8)
+    }
+}
+
+/// Tab identifiers for the custom floating tab bar.
+enum AppTab: Int, CaseIterable, Hashable {
+    case rehber, ara, etkinlikler, bilgi, profil
+
+    var icon: String {
+        switch self {
+        case .rehber:      return "square.grid.2x2.fill"
+        case .ara:         return "magnifyingglass"
+        case .etkinlikler: return "calendar"
+        case .bilgi:       return "info.circle.fill"
+        case .profil:      return "person.crop.circle.fill"
+        }
+    }
+
+    var label: String {
+        switch self {
+        case .rehber:      return "Rehber"
+        case .ara:         return "Ara"
+        case .etkinlikler: return "Etkinlikler"
+        case .bilgi:       return "Bilgi"
+        case .profil:      return "Profil"
+        }
     }
 }
