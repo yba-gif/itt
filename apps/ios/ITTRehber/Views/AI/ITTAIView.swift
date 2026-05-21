@@ -22,7 +22,7 @@ struct ITTAIView: View {
     var body: some View {
         ZStack {
             // Deep dark background with subtle TGS-red glow at top
-            Color(tgsHex: 0x0D1017).ignoresSafeArea()
+            Color.tgsAIDark.ignoresSafeArea()
             RadialGradient(
                 colors: [Color.tgsRed.opacity(0.12), Color.clear],
                 center: UnitPoint(x: 0.5, y: 0),
@@ -124,13 +124,13 @@ struct ITTAIView: View {
                 .padding(.bottom, 8)
                 .animation(.easeOut(duration: 0.2), value: service.messages.count)
             }
-            .onChange(of: service.messages.count) { _ in
+            .tgsOnChange(of: service.messages.count) {
                 withAnimation(.easeOut(duration: 0.3)) {
                     proxy.scrollTo("ittai-bottom", anchor: .bottom)
                 }
             }
             // Scroll to bottom as streaming text grows
-            .onChange(of: service.messages.last?.text) { _ in
+            .tgsOnChange(of: service.messages.last?.text) {
                 proxy.scrollTo("ittai-bottom", anchor: .bottom)
             }
         }
@@ -215,7 +215,7 @@ struct ITTAIView: View {
             .padding(.vertical, 10)
             .background(
                 RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(Color(tgsHex: 0x1A1E2A))
+                    .fill(Color.tgsAIChip)
                     .overlay(
                         RoundedRectangle(cornerRadius: 14, style: .continuous)
                             .stroke(.white.opacity(0.1), lineWidth: 1)
@@ -245,7 +245,7 @@ struct ITTAIView: View {
                     .padding(.vertical, 10)
                     .background(
                         RoundedRectangle(cornerRadius: 22, style: .continuous)
-                            .fill(Color(tgsHex: 0x1C2030))
+                            .fill(Color.tgsAIInput)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 22, style: .continuous)
                                     .stroke(.white.opacity(0.1), lineWidth: 1)
@@ -277,7 +277,7 @@ struct ITTAIView: View {
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 12)
-            .background(Color(tgsHex: 0x0D1017))
+            .background(Color.tgsAIDark)
         }
     }
 
@@ -343,7 +343,7 @@ private struct MessageBubble: View {
                 }
                 .background(
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        .fill(Color(tgsHex: 0x1E2433))
+                        .fill(Color.tgsAISurface)
                         .overlay(
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
                                 .stroke(.white.opacity(0.07), lineWidth: 1)

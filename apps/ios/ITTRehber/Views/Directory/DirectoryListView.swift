@@ -95,7 +95,7 @@ struct DirectoryListView: View {
                     .listRowSeparatorTint(Color.tgsBorder)
                 }
             } header: {
-                Text("\(totalCount) uzman bulundu")
+                Text("\(totalCount) \(directory.resultLabel) bulundu")
                     .font(TGSFont.caption)
                     .foregroundStyle(Color.tgsMuted)
                     .textCase(nil)

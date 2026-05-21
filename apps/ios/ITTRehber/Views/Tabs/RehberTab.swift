@@ -33,7 +33,7 @@ struct RehberTab: View {
     private var heroSection: some View {
         ZStack(alignment: .bottom) {
             LinearGradient(
-                colors: [Color.tgsRed, Color(tgsHex: 0x6B1020)],
+                colors: [Color.tgsRed, Color.tgsHeroGradientEnd],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -56,6 +56,11 @@ struct RehberTab: View {
                     Text("Rehber")
                         .font(.system(size: 26, weight: .black))
                         .foregroundStyle(.white.opacity(0.82))
+                    Text("Uzman · Hizmet · Etkinlik")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(.white.opacity(0.40))
+                        .tracking(0.4)
+                        .padding(.top, 3)
                 }
 
                 glassCard
@@ -88,7 +93,7 @@ struct RehberTab: View {
                     Text("İTT AI'ya sor")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(.white)
-                    Text("Yapay zeka asistanı")
+                    Text("İsviçre'deki sorularınız için")
                         .font(.system(size: 11))
                         .foregroundStyle(.white.opacity(0.6))
                 }
@@ -208,13 +213,22 @@ struct DirectoryTile: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ZStack {
+            ZStack(alignment: .bottomTrailing) {
                 Circle()
                     .fill(Color.tgsRed.opacity(0.10))
                     .frame(width: 46, height: 46)
                 Image(systemName: directory.systemImage)
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundStyle(Color.tgsRed)
+                if directory.isNew {
+                    Text("Yeni")
+                        .font(.system(size: 8, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 2)
+                        .background(Capsule().fill(Color.tgsRed))
+                        .offset(x: 6, y: 4)
+                }
             }
             Spacer(minLength: TGSSpacing.md)
             Text(directory.titleTR)

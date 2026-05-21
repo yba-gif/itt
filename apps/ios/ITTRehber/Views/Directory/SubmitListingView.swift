@@ -233,8 +233,8 @@ struct SubmitListingView: View {
                     .padding(.horizontal, TGSSpacing.lg)
                     .padding(.vertical, TGSSpacing.md)
                 }
-                .onChange(of: photoItem) { newValue in
-                    Task { await loadAndUploadImage(newValue) }
+                .tgsOnChange(of: photoItem) {
+                    Task { await loadAndUploadImage(photoItem) }
                 }
             }
 

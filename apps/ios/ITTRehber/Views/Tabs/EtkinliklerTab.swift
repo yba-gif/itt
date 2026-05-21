@@ -71,8 +71,8 @@ struct EtkinliklerTab: View {
                 }
             }
             .task { await load() }
-            .onChange(of: mode, perform: { _ in Task { await load() } })
-            .onChange(of: selectedKanton, perform: { _ in Task { await load() } })
+            .tgsOnChange(of: mode) { Task { await load() } }
+            .tgsOnChange(of: selectedKanton) { Task { await load() } }
             // P2-5: alert only fires when list has content (inline handles empty case)
             .alert("Hata", isPresented: .constant(error != nil && !events.isEmpty)) {
                 Button("Tekrar Dene") { error = nil; Task { await load() } }

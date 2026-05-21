@@ -29,6 +29,18 @@ extension Color {
     /// Success background — #EDFAF3
     static let tgsSuccessBg = Color(tgsHex: 0xEDFAF3)
 
+    // MARK: Hero / AI surface tokens
+    /// Hero gradient endpoint — deep crimson #6B1020
+    static let tgsHeroGradientEnd = Color(tgsHex: 0x6B1020)
+    /// İTT AI full-screen background — very dark blue-black #0D1017
+    static let tgsAIDark          = Color(tgsHex: 0x0D1017)
+    /// İTT AI assistant message surface — dark blue-grey #1E2433
+    static let tgsAISurface       = Color(tgsHex: 0x1E2433)
+    /// İTT AI input field background — dark navy #1C2030
+    static let tgsAIInput         = Color(tgsHex: 0x1C2030)
+    /// İTT AI suggestion chip background — very dark blue #1A1E2A
+    static let tgsAIChip          = Color(tgsHex: 0x1A1E2A)
+
     init(tgsHex hex: UInt32) {
         self.init(
             red:   Double((hex >> 16) & 0xFF) / 255,
@@ -149,6 +161,28 @@ extension View {
             self.symbolEffect(.bounce, value: value)
         } else {
             self
+        }
+    }
+
+    /// Deprecation-free `onChange(of:)` replacement for iOS 16+.
+    /// Uses the two-parameter `{ old, new in }` form on iOS 17 and the
+    /// single-parameter `perform:` form on iOS 16 — no warnings either way.
+    func tgsOnChange<V: Equatable>(of value: V, perform action: @escaping () -> Void) -> some View {
+        modifier(_OnChangeCompat(value: value, action: action))
+    }
+}
+
+// MARK: - onChange Compatibility Shim (iOS 16 / 17)
+
+private struct _OnChangeCompat<V: Equatable>: ViewModifier {
+    let value: V
+    let action: () -> Void
+
+    func body(content: Content) -> some View {
+        if #available(iOS 17.0, *) {
+            content.onChange(of: value) { _, _ in action() }
+        } else {
+            content.onChange(of: value, perform: { _ in action() })
         }
     }
 }
