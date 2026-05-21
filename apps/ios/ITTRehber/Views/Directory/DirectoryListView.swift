@@ -27,6 +27,11 @@ struct DirectoryListView: View {
                 ProgressView("Yükleniyor…")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.tgsCream)
+            } else if let err = error, listings.isEmpty {
+                // P2-5: inline error state replaces modal alert when list is empty
+                ErrorStateView(message: err.errorDescription ?? "Bir hata oluştu") {
+                    error = nil; Task { await reload() }
+                }
             } else if listings.isEmpty {
                 EmptyStateView(onClearFilters: {
                     query = ""
@@ -61,7 +66,8 @@ struct DirectoryListView: View {
                 }
             }
         }
-        .alert("Hata", isPresented: .constant(error != nil)) {
+        // P2-5: show alert only when list already has content (inline state handles empty case)
+        .alert("Hata", isPresented: .constant(error != nil && !listings.isEmpty)) {
             Button("Tekrar Dene") { error = nil; Task { await reload() } }
             Button("Kapat", role: .cancel) { error = nil }
         } message: { Text(error?.errorDescription ?? "") }
@@ -157,6 +163,7 @@ struct ListingRow: View {
             }
             .frame(width: 56, height: 56)
             .clipShape(RoundedRectangle(cornerRadius: TGSRadius.field, style: .continuous))
+            .accessibilityHidden(true) // decorative — row label covers this
 
             // Text
             VStack(alignment: .leading, spacing: 4) {
@@ -190,6 +197,8 @@ struct ListingRow: View {
             Spacer(minLength: 0)
         }
         .padding(.vertical, 8)
+        // P1-4: synthesise a single VoiceOver label from all visible text
+        .accessibilityElement(children: .combine)
     }
 
     private var initialsPlaceholder: some View {
@@ -207,6 +216,7 @@ struct OfflineBanner: View {
         HStack(spacing: 8) {
             Image(systemName: "wifi.slash")
                 .font(.caption.weight(.semibold))
+                .accessibilityHidden(true)
             Text("Çevrimdışı — son önbellek gösteriliyor")
                 .font(.caption.weight(.medium))
             Spacer()
@@ -216,6 +226,8 @@ struct OfflineBanner: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 9)
         .background(Color.tgsAmberBg)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Çevrimdışı — son önbellek gösteriliyor")
     }
 }
 
@@ -255,6 +267,8 @@ struct EmptyStateView: View {
                     )
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Filtreleri temizle")
+            .accessibilityHint("Arama ve kanton filtrelerini sıfırlar")
             .padding(.top, 4)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

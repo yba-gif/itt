@@ -6,6 +6,9 @@ struct DirectoryDetailView: View {
     @EnvironmentObject var session: SessionStore
     @State private var isFavorite: Bool = false
     @State private var favError: String?
+    // P2-2: undo toast state
+    @State private var showFavToast: Bool = false
+    @State private var favToastMessage: String = ""
 
     var body: some View {
         ScrollView {
@@ -19,12 +22,14 @@ struct DirectoryDetailView: View {
                 }
 
                 if session.isAuthenticated {
+                    // P2-2: spring animation on star icon, haptic on tap, undo toast
                     Button {
                         Task { await toggleFavorite() }
                     } label: {
                         HStack(spacing: 8) {
                             Image(systemName: isFavorite ? "star.fill" : "star")
                                 .font(.system(size: 15, weight: .semibold))
+                                .tgsBounce(value: isFavorite)
                             Text(isFavorite ? "Favorilerden çıkar" : "Favorilere ekle")
                                 .font(.subheadline.weight(.semibold))
                         }
@@ -36,19 +41,43 @@ struct DirectoryDetailView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                         .background(
-                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            RoundedRectangle(cornerRadius: TGSRadius.inner - 2, style: .continuous)
                                 .fill(
                                     isFavorite
                                         ? Color(red: 1.0, green: 0.88, blue: 0.40).opacity(0.20)
                                         : Color.tgsSurface
                                 )
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                    RoundedRectangle(cornerRadius: TGSRadius.inner - 2, style: .continuous)
                                         .stroke(Color.tgsBorder, lineWidth: 1)
                                 )
                         )
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(isFavorite ? "Favorilerden çıkar" : "Favorilere ekle")
+                    .accessibilityAddTraits(.isButton)
+
+                    // P2-2: undo toast
+                    if showFavToast {
+                        HStack(spacing: 8) {
+                            Image(systemName: isFavorite ? "star.fill" : "star.slash.fill")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(Color(red: 0.80, green: 0.55, blue: 0.0))
+                            Text(favToastMessage)
+                                .font(TGSFont.caption)
+                                .foregroundStyle(Color.tgsCharcoal)
+                        }
+                        .padding(.horizontal, TGSSpacing.md)
+                        .padding(.vertical, TGSSpacing.sm)
+                        .background(
+                            Capsule()
+                                .fill(Color.white)
+                                .overlay(Capsule().stroke(Color.tgsBorder, lineWidth: 1))
+                                .shadow(color: Color.tgsCharcoal.opacity(0.08), radius: 8, x: 0, y: 2)
+                        )
+                        .transition(.scale(scale: 0.92).combined(with: .opacity))
+                        .frame(maxWidth: .infinity)
+                    }
                 }
 
                 Text("Son güncelleme: \(formatted(listing.updatedAt))")
@@ -82,18 +111,32 @@ struct DirectoryDetailView: View {
     }
 
     private func toggleFavorite() async {
+        // P2-2: haptic before network call so it feels instant
+        let haptic = UIImpactFeedbackGenerator(style: .light)
+        haptic.impactOccurred()
         do {
             if isFavorite {
                 try await APIClient.shared.removeFavorite(listingId: listing.id)
-                isFavorite = false
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.65)) { isFavorite = false }
+                showToast("Favorilerden çıkarıldı")
             } else {
                 try await APIClient.shared.addFavorite(listingId: listing.id)
-                isFavorite = true
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.65)) { isFavorite = true }
+                showToast("Favorilere eklendi")
             }
         } catch let api as APIError {
             favError = api.errorDescription
         } catch {
             favError = error.localizedDescription
+        }
+    }
+
+    private func showToast(_ message: String) {
+        favToastMessage = message
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) { showFavToast = true }
+        Task {
+            try? await Task.sleep(for: .seconds(2.5))
+            withAnimation(.easeOut(duration: 0.25)) { showFavToast = false }
         }
     }
 

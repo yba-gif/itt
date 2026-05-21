@@ -136,4 +136,56 @@ struct TGSInnerCardModifier: ViewModifier {
 extension View {
     func tgsCard() -> some View { modifier(TGSCardModifier()) }
     func tgsInnerCard() -> some View { modifier(TGSInnerCardModifier()) }
+
+    /// Applies a symbol bounce effect when `value` changes on iOS 17+;
+    /// no-ops on iOS 16 so the deployment target stays at 16.0.
+    @ViewBuilder
+    func tgsBounce<V: Equatable>(value: V) -> some View {
+        if #available(iOS 17.0, *) {
+            self.symbolEffect(.bounce, value: value)
+        } else {
+            self
+        }
+    }
+}
+
+// MARK: - Inline Error State (P2-5)
+
+/// Reusable full-screen error state with an icon, message, and optional retry action.
+/// Replaces one-off modal alerts for load failures throughout the app.
+struct ErrorStateView: View {
+    let message: String
+    var retryLabel: String = "Tekrar Dene"
+    var onRetry: (() -> Void)?
+
+    var body: some View {
+        VStack(spacing: TGSSpacing.xl) {
+            ZStack {
+                Circle()
+                    .fill(Color.tgsErrorBg)
+                    .frame(width: 72, height: 72)
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 30))
+                    .foregroundStyle(Color.tgsError)
+            }
+            .accessibilityHidden(true)
+
+            Text(message)
+                .font(TGSFont.subheadline)
+                .foregroundStyle(Color.tgsMuted)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, TGSSpacing.xl)
+
+            if let onRetry {
+                Button(retryLabel, action: onRetry)
+                    .font(TGSFont.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.tgsRed)
+                    .accessibilityHint("Yüklenirken bir hata oluştu, tekrar denemek için dokunun")
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.tgsCream)
+        .accessibilityElement(children: .contain)
+    }
 }

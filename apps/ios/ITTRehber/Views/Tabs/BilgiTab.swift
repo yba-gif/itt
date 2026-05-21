@@ -109,22 +109,9 @@ struct ContentPageView: View {
                 }
                 .padding(16)
             } else if let error {
-                VStack(spacing: 16) {
-                    ZStack {
-                        Circle().fill(Color.tgsErrorBg).frame(width: 64, height: 64)
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.system(size: 28))
-                            .foregroundStyle(Color.tgsError)
-                    }
-                    Text(error)
-                        .foregroundStyle(Color.tgsMuted)
-                        .multilineTextAlignment(.center)
-                    Button("Tekrar Dene") { self.error = nil; Task { await load() } }
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color.tgsRed)
-                }
-                .padding(.top, 60)
-                .padding(.horizontal, 32)
+                // P2-5: reusable inline error state
+                ErrorStateView(message: error) { self.error = nil; Task { await load() } }
+                    .padding(.top, 32)
             } else {
                 ProgressView().padding(.top, 60)
             }

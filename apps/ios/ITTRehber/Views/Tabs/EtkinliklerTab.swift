@@ -32,6 +32,11 @@ struct EtkinliklerTab: View {
                         ProgressView("Yükleniyor…")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .background(Color.tgsCream)
+                    } else if let err = error, events.isEmpty {
+                        // P2-5: inline error when list is empty
+                        ErrorStateView(message: err) {
+                            error = nil; Task { await load() }
+                        }
                     } else if events.isEmpty {
                         emptyState
                     } else {
@@ -58,7 +63,8 @@ struct EtkinliklerTab: View {
             .task { await load() }
             .onChange(of: mode, perform: { _ in Task { await load() } })
             .onChange(of: selectedKanton, perform: { _ in Task { await load() } })
-            .alert("Hata", isPresented: .constant(error != nil)) {
+            // P2-5: alert only fires when list has content (inline handles empty case)
+            .alert("Hata", isPresented: .constant(error != nil && !events.isEmpty)) {
                 Button("Tekrar Dene") { error = nil; Task { await load() } }
                 Button("Kapat", role: .cancel) { error = nil }
             } message: { Text(error ?? "") }
@@ -105,14 +111,58 @@ struct EtkinliklerTab: View {
         .background(Color.tgsCream)
     }
 
+    // P2-6: group events into relative time buckets
+    private enum DateGroup: String, CaseIterable {
+        case thisWeek   = "Bu Hafta"
+        case nextWeek   = "Gelecek Hafta"
+        case thisMonth  = "Bu Ay"
+        case later      = "Daha Sonra"
+        case past       = "Geçmiş"
+    }
+
+    private func dateGroup(for event: Event) -> DateGroup {
+        let cal = Calendar.current
+        let now = Date()
+        let startOfToday = cal.startOfDay(for: now)
+        let startOfNextWeek = cal.date(byAdding: .weekOfYear, value: 1, to: cal.startOfDay(for: now))!
+        let startOfWeekAfterNext = cal.date(byAdding: .weekOfYear, value: 2, to: startOfToday)!
+        let endOfMonth = cal.date(byAdding: .month, value: 1, to: startOfToday)!
+
+        if event.startsAt < startOfToday { return .past }
+        if event.startsAt < startOfNextWeek { return .thisWeek }
+        if event.startsAt < startOfWeekAfterNext { return .nextWeek }
+        if event.startsAt < endOfMonth { return .thisMonth }
+        return .later
+    }
+
+    private var groupedEvents: [(DateGroup, [Event])] {
+        let groups = Dictionary(grouping: events, by: { dateGroup(for: $0) })
+        let order: [DateGroup] = mode == .past
+            ? [.past]
+            : [.thisWeek, .nextWeek, .thisMonth, .later]
+        return order.compactMap { g in
+            guard let items = groups[g], !items.isEmpty else { return nil }
+            return (g, items)
+        }
+    }
+
     private var list: some View {
         List {
-            ForEach(events) { event in
-                NavigationLink(destination: EventDetailView(event: event)) {
-                    EventRow(event: event)
+            ForEach(groupedEvents, id: \.0) { group, items in
+                Section {
+                    ForEach(items) { event in
+                        NavigationLink(destination: EventDetailView(event: event)) {
+                            EventRow(event: event)
+                        }
+                        .listRowBackground(Color.white)
+                        .listRowSeparatorTint(Color.tgsBorder)
+                    }
+                } header: {
+                    Text(group.rawValue)
+                        .font(TGSFont.caption)
+                        .foregroundStyle(Color.tgsMuted)
+                        .textCase(nil)
                 }
-                .listRowBackground(Color.white)
-                .listRowSeparatorTint(Color.tgsBorder)
             }
         }
         .listStyle(.plain)
