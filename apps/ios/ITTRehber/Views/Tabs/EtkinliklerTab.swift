@@ -22,7 +22,8 @@ struct EtkinliklerTab: View {
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal, 12)
-                .padding(.top, 8)
+                .padding(.top, 10)
+                .padding(.bottom, 4)
 
                 kantonRow
 
@@ -30,6 +31,7 @@ struct EtkinliklerTab: View {
                     if loading && events.isEmpty {
                         ProgressView("Yükleniyor…")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(Color.tgsCream)
                     } else if events.isEmpty {
                         emptyState
                     } else {
@@ -37,6 +39,7 @@ struct EtkinliklerTab: View {
                     }
                 }
             }
+            .background(Color.tgsCream)
             .navigationTitle("Etkinlikler")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -72,25 +75,33 @@ struct EtkinliklerTab: View {
             HStack {
                 Text(selectedKanton.isEmpty ? "Tüm kantonlar" : "Kanton: \(selectedKanton)")
                     .font(.subheadline)
+                    .foregroundStyle(Color.tgsCharcoal)
                 Image(systemName: "chevron.down")
                     .font(.caption2)
+                    .foregroundStyle(Color.tgsMuted)
                 Spacer()
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
         }
     }
 
     private var emptyState: some View {
         VStack(spacing: 12) {
-            Image(systemName: "calendar.badge.exclamationmark")
-                .font(.system(size: 44))
-                .foregroundStyle(.tertiary)
+            ZStack {
+                Circle()
+                    .fill(Color.tgsSurface)
+                    .frame(width: 80, height: 80)
+                Image(systemName: "calendar.badge.exclamationmark")
+                    .font(.system(size: 34))
+                    .foregroundStyle(Color.tgsMuted)
+            }
             Text(mode == .upcoming ? "Yaklaşan etkinlik yok" : "Geçmiş etkinlik yok")
                 .font(.headline)
+                .foregroundStyle(Color.tgsCharcoal)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemGroupedBackground))
+        .background(Color.tgsCream)
     }
 
     private var list: some View {
@@ -99,9 +110,13 @@ struct EtkinliklerTab: View {
                 NavigationLink(destination: EventDetailView(event: event)) {
                     EventRow(event: event)
                 }
+                .listRowBackground(Color.white)
+                .listRowSeparatorTint(Color.tgsBorder)
             }
         }
         .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(Color.tgsCream)
         .refreshable { await load() }
     }
 
@@ -133,45 +148,48 @@ struct EventRow: View {
             VStack(spacing: 1) {
                 Text(monthAbbr)
                     .font(.system(size: 11, weight: .bold))
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color.tgsRed)
                 Text(dayNum)
                     .font(.system(size: 22, weight: .bold))
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(Color.tgsCharcoal)
             }
             .frame(width: 52, height: 52)
             .background(
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(Color.accentColor.opacity(0.10))
+                    .fill(Color.tgsRed.opacity(0.09))
             )
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(Color.tgsCharcoal)
                     .lineLimit(2)
+
                 HStack(spacing: 6) {
                     Label(timeStr, systemImage: "clock")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.tgsMuted)
                     if let venue = event.venue {
                         Text("·")
-                            .foregroundStyle(.tertiary)
+                            .foregroundStyle(Color.tgsBorder)
                         Text(venue)
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(Color.tgsMuted)
                             .lineLimit(1)
                     }
                 }
+
                 Text(event.kanton)
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(Color.accentColor)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Color.tgsRed)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 2)
-                    .background(Capsule().fill(Color.accentColor.opacity(0.10)))
+                    .background(Capsule().fill(Color.tgsRed.opacity(0.10)))
             }
 
             Spacer(minLength: 0)
         }
-        .padding(.vertical, 6)
+        .padding(.vertical, 8)
     }
 
     private var monthAbbr: String {
@@ -203,33 +221,38 @@ struct EventDetailView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: 16) {
                 if let urlString = event.imageURL, let url = URL(string: urlString) {
                     AsyncImage(url: url) { phase in
                         switch phase {
-                        case .empty: Color(.systemGray5)
+                        case .empty: Color.tgsSurface
                         case .success(let img): img.resizable().scaledToFill()
-                        case .failure: Color(.systemGray5)
-                        @unknown default: Color(.systemGray5)
+                        case .failure: Color.tgsSurface
+                        @unknown default: Color.tgsSurface
                         }
                     }
                     .frame(height: 180)
                     .frame(maxWidth: .infinity)
-                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 }
 
-                Text(event.title).font(.title2.bold())
+                Text(event.title)
+                    .font(.title2.bold())
+                    .foregroundStyle(Color.tgsCharcoal)
+
                 Text(formatted(event.startsAt))
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.tgsMuted)
 
                 if let venue = event.venue {
                     Label(venue, systemImage: "mappin.and.ellipse")
                         .font(.subheadline)
+                        .foregroundStyle(Color.tgsCharcoal)
                 }
                 if let address = event.address {
                     Label(address, systemImage: "map")
                         .font(.subheadline)
+                        .foregroundStyle(Color.tgsCharcoal)
                 }
 
                 Button {
@@ -239,19 +262,31 @@ struct EventDetailView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .padding(.top, 8)
+                .padding(.top, 4)
 
                 if let reminderResult {
-                    Text(reminderResult).font(.caption).foregroundStyle(.secondary)
+                    Text(reminderResult)
+                        .font(.caption)
+                        .foregroundStyle(Color.tgsMuted)
                 }
 
                 if let description = event.description, !description.isEmpty {
-                    Text("Açıklama").font(.headline).padding(.top, 4)
-                    Text(description)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Açıklama")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(Color.tgsMuted)
+                            .textCase(.uppercase)
+                            .tracking(0.4)
+                        Text(description)
+                            .foregroundStyle(Color.tgsCharcoal)
+                            .lineSpacing(4)
+                    }
+                    .padding(.top, 4)
                 }
             }
             .padding(16)
         }
+        .background(Color.tgsCream)
         .navigationTitle("Etkinlik")
         .navigationBarTitleDisplayMode(.inline)
         .task {

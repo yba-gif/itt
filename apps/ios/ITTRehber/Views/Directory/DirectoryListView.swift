@@ -26,6 +26,7 @@ struct DirectoryListView: View {
             if loading && listings.isEmpty {
                 ProgressView("Yükleniyor…")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.tgsCream)
             } else if listings.isEmpty {
                 EmptyStateView(onClearFilters: {
                     query = ""
@@ -36,6 +37,7 @@ struct DirectoryListView: View {
                 listingList
             }
         }
+        .background(Color.tgsCream)
         .navigationTitle(directory.titleTR)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -72,19 +74,24 @@ struct DirectoryListView: View {
                     NavigationLink(destination: DirectoryDetailView(listing: listing)) {
                         ListingRow(listing: listing)
                     }
+                    .listRowBackground(Color.white)
+                    .listRowSeparatorTint(Color.tgsBorder)
                 }
             } header: {
                 Text("\(totalCount) uzman bulundu")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color.tgsMuted)
+                    .textCase(nil)
+                    .padding(.leading, 4)
             }
         }
         .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(Color.tgsCream)
         .refreshable { await reload() }
     }
 
     private func initialLoad() async {
-        // Hydrate from cache so the list paints immediately.
         let cached = cache.cachedListings(for: directory)
         if !cached.isEmpty && listings.isEmpty {
             listings = cached
@@ -147,20 +154,23 @@ struct ListingRow: View {
                     initialsPlaceholder
                 }
             }
-            .frame(width: 58, height: 58)
-            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .frame(width: 56, height: 56)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
             // Text
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(listing.name)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(Color.tgsCharcoal)
                     .lineLimit(1)
 
                 if let category = listing.category, !category.isEmpty {
                     Text(category)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(Color.tgsRed)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(Capsule().fill(Color.tgsRed.opacity(0.10)))
                         .lineLimit(1)
                 }
 
@@ -168,25 +178,25 @@ struct ListingRow: View {
                     HStack(spacing: 3) {
                         Image(systemName: "mappin.circle.fill")
                             .font(.caption2)
-                            .foregroundStyle(.tertiary)
+                            .foregroundStyle(Color.tgsMuted)
                         Text(listing.kantons.prefix(3).joined(separator: " · "))
                             .font(.caption)
-                            .foregroundStyle(.tertiary)
+                            .foregroundStyle(Color.tgsMuted)
                     }
                 }
             }
 
             Spacer(minLength: 0)
         }
-        .padding(.vertical, 6)
+        .padding(.vertical, 8)
     }
 
     private var initialsPlaceholder: some View {
         ZStack {
-            Color(.systemGray5)
+            Color.tgsSurface
             Text(initials.isEmpty ? "?" : initials)
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundStyle(Color(.systemGray2))
+                .font(.system(size: 18, weight: .bold))
+                .foregroundStyle(Color.tgsMuted)
         }
     }
 }
@@ -200,73 +210,82 @@ struct OfflineBanner: View {
                 .font(.caption.weight(.medium))
             Spacer()
         }
-        .foregroundStyle(Color(red: 0.55, green: 0.42, blue: 0.0))
+        .foregroundStyle(Color(red: 0.50, green: 0.38, blue: 0.0))
         .padding(.horizontal, 16)
         .padding(.vertical, 9)
-        .background(Color(red: 1.0, green: 0.92, blue: 0.60))
+        .background(Color(red: 1.0, green: 0.93, blue: 0.64))
     }
 }
 
 struct EmptyStateView: View {
     let onClearFilters: () -> Void
+
     var body: some View {
         VStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Color(.systemGray6))
+                    .fill(Color.tgsSurface)
                     .frame(width: 80, height: 80)
                 Image(systemName: "doc.text.magnifyingglass")
                     .font(.system(size: 34))
-                    .foregroundStyle(Color(.systemGray3))
+                    .foregroundStyle(Color.tgsMuted)
             }
             VStack(spacing: 6) {
                 Text("Sonuç bulunamadı")
                     .font(.headline)
+                    .foregroundStyle(Color.tgsCharcoal)
                 Text("Farklı anahtar kelimeler veya kanton deneyin.")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.tgsMuted)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
             }
             Button(action: onClearFilters) {
                 Text("Filtreleri temizle")
-                    .font(.subheadline.weight(.medium))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.tgsCharcoal)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 9)
-                    .background(Capsule().fill(Color(.systemGray5)))
-                    .foregroundStyle(.primary)
+                    .background(
+                        Capsule()
+                            .fill(Color.tgsSurface)
+                            .overlay(Capsule().stroke(Color.tgsBorder, lineWidth: 1))
+                    )
             }
             .buttonStyle(.plain)
             .padding(.top, 4)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemGroupedBackground))
+        .background(Color.tgsCream)
     }
 }
 
 struct SubmitGateView: View {
     let onClose: () -> Void
+
     var body: some View {
         VStack(spacing: 20) {
             ZStack {
                 Circle()
-                    .fill(Color.accentColor.opacity(0.10))
+                    .fill(Color.tgsRed.opacity(0.10))
                     .frame(width: 88, height: 88)
                 Image(systemName: "person.crop.circle.badge.plus")
                     .font(.system(size: 40))
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color.tgsRed)
             }
             VStack(spacing: 8) {
                 Text("Önce giriş yapın")
                     .font(.title3.bold())
+                    .foregroundStyle(Color.tgsCharcoal)
                 Text("Hizmet eklemek için Profil sekmesinden hesap oluşturun veya giriş yapın.")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.tgsMuted)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
             }
             Button("Kapat", action: onClose)
                 .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color.tgsRed)
                 .padding(.top, 4)
         }
         .padding(24)

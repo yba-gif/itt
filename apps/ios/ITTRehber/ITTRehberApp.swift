@@ -13,8 +13,8 @@ struct ITTRehberApp: App {
                 .environmentObject(session)
                 .environmentObject(cache)
                 .environmentObject(push)
-                .preferredColorScheme(nil) // respect system
-                .tint(Color(red: 0.10, green: 0.39, blue: 0.78)) // #1A64C7 brand blue
+                .preferredColorScheme(.light) // TGS design is light-only
+                .tint(Color.tgsRed) // TGS brand red #B82030
         }
     }
 }

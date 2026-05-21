@@ -13,6 +13,7 @@ struct DirectoryDetailView: View {
                 hero
                 actionsRow
                 details
+
                 if let description = listing.description, !description.isEmpty {
                     descriptionSection(description)
                 }
@@ -27,12 +28,24 @@ struct DirectoryDetailView: View {
                             Text(isFavorite ? "Favorilerden çıkar" : "Favorilere ekle")
                                 .font(.subheadline.weight(.semibold))
                         }
-                        .foregroundStyle(isFavorite ? Color(red: 1.0, green: 0.75, blue: 0.0) : .secondary)
+                        .foregroundStyle(
+                            isFavorite
+                                ? Color(red: 0.80, green: 0.55, blue: 0.0)
+                                : Color.tgsMuted
+                        )
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                         .background(
                             RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                .fill(isFavorite ? Color(red: 1.0, green: 0.75, blue: 0.0).opacity(0.12) : Color(.secondarySystemGroupedBackground))
+                                .fill(
+                                    isFavorite
+                                        ? Color(red: 1.0, green: 0.88, blue: 0.40).opacity(0.20)
+                                        : Color.tgsSurface
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                        .stroke(Color.tgsBorder, lineWidth: 1)
+                                )
                         )
                     }
                     .buttonStyle(.plain)
@@ -40,11 +53,12 @@ struct DirectoryDetailView: View {
 
                 Text("Son güncelleme: \(formatted(listing.updatedAt))")
                     .font(.caption)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(Color.tgsMuted)
                     .padding(.top, 2)
             }
             .padding(16)
         }
+        .background(Color.tgsCream)
         .navigationTitle(listing.name)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -90,38 +104,41 @@ struct DirectoryDetailView: View {
                     case .success(let img):
                         img.resizable().scaledToFill()
                     default:
-                        Color(.systemGray5)
+                        Color.tgsSurface
                             .overlay(
                                 Image(systemName: "photo")
                                     .font(.system(size: 32))
-                                    .foregroundStyle(Color(.systemGray3))
+                                    .foregroundStyle(Color.tgsMuted)
                             )
                     }
                 }
                 .frame(height: 200)
                 .frame(maxWidth: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             }
-            VStack(alignment: .leading, spacing: 6) {
+
+            VStack(alignment: .leading, spacing: 8) {
                 Text(listing.name)
                     .font(.title2.bold())
+                    .foregroundStyle(Color.tgsCharcoal)
+
                 HStack(spacing: 8) {
                     if let category = listing.category, !category.isEmpty {
                         Text(category)
                             .font(.caption.weight(.semibold))
-                            .foregroundStyle(Color.accentColor)
+                            .foregroundStyle(Color.tgsRed)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 4)
-                            .background(Capsule().fill(Color.accentColor.opacity(0.12)))
+                            .background(Capsule().fill(Color.tgsRed.opacity(0.10)))
                     }
                     if !listing.kantons.isEmpty {
                         HStack(spacing: 3) {
                             Image(systemName: "mappin.circle.fill")
                                 .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(Color.tgsMuted)
                             Text(listing.kantons.prefix(3).joined(separator: " · "))
                                 .font(.caption.weight(.medium))
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(Color.tgsMuted)
                         }
                     }
                 }
@@ -131,23 +148,28 @@ struct DirectoryDetailView: View {
 
     private var actionsRow: some View {
         HStack(spacing: 10) {
-            if let phone = listing.phone, let url = URL(string: "tel://\(phone.filter { !$0.isWhitespace })") {
-                ActionButton(icon: "phone.fill", label: "Ara", color: Color(red: 0.18, green: 0.73, blue: 0.47)) {
+            if let phone = listing.phone,
+               let url = URL(string: "tel://\(phone.filter { !$0.isWhitespace })") {
+                ActionButton(icon: "phone.fill", label: "Ara",
+                             color: Color(red: 0.13, green: 0.65, blue: 0.37)) {
                     UIApplication.shared.open(url)
                 }
             }
             if let email = listing.email, let url = URL(string: "mailto:\(email)") {
-                ActionButton(icon: "envelope.fill", label: "E-posta", color: Color.accentColor) {
+                ActionButton(icon: "envelope.fill", label: "E-posta",
+                             color: Color.tgsRed) {
                     UIApplication.shared.open(url)
                 }
             }
             if listing.address != nil {
-                ActionButton(icon: "map.fill", label: "Harita", color: Color(red: 0.98, green: 0.45, blue: 0.09)) {
+                ActionButton(icon: "map.fill", label: "Harita",
+                             color: Color(red: 0.95, green: 0.40, blue: 0.05)) {
                     openInMaps()
                 }
             }
             if let website = listing.website, let url = URL(string: website) {
-                ActionButton(icon: "safari.fill", label: "Web", color: Color(red: 0.03, green: 0.57, blue: 0.70)) {
+                ActionButton(icon: "safari.fill", label: "Web",
+                             color: Color(red: 0.02, green: 0.50, blue: 0.65)) {
                     UIApplication.shared.open(url)
                 }
             }
@@ -158,42 +180,43 @@ struct DirectoryDetailView: View {
         VStack(alignment: .leading, spacing: 0) {
             if let address = listing.address {
                 DetailRow(icon: "mappin.and.ellipse", label: "Adres", value: address)
-                Divider().padding(.leading, 44)
+                Divider().padding(.leading, 44).overlay(Color.tgsBorder)
             }
             if let phone = listing.phone {
                 DetailRow(icon: "phone", label: "Telefon", value: phone)
-                if listing.email != nil || listing.website != nil { Divider().padding(.leading, 44) }
+                if listing.email != nil || listing.website != nil {
+                    Divider().padding(.leading, 44).overlay(Color.tgsBorder)
+                }
             }
             if let email = listing.email {
                 DetailRow(icon: "envelope", label: "E-posta", value: email)
-                if listing.website != nil { Divider().padding(.leading, 44) }
+                if listing.website != nil {
+                    Divider().padding(.leading, 44).overlay(Color.tgsBorder)
+                }
             }
             if let website = listing.website {
                 DetailRow(icon: "globe", label: "Web", value: website)
             }
         }
         .padding(.vertical, 4)
-        .background(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(Color(.secondarySystemGroupedBackground))
-        )
+        .tgsInnerCard()
     }
 
     private func descriptionSection(_ description: String) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Hakkında")
-                .font(.headline)
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(Color.tgsMuted)
+                .textCase(.uppercase)
+                .tracking(0.4)
             Text(description)
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .lineSpacing(4)
+                .foregroundStyle(Color.tgsCharcoal)
+                .lineSpacing(5)
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(Color(.secondarySystemGroupedBackground))
-        )
+        .tgsInnerCard()
     }
 
     private func openInMaps() {
@@ -214,7 +237,8 @@ struct DirectoryDetailView: View {
     }
 
     private var shareURL: URL {
-        URL(string: "https://itt-rehber.ch/listing/\(listing.id.uuidString)") ?? URL(string: "https://itt-rehber.ch")!
+        URL(string: "https://itt-rehber.ch/listing/\(listing.id.uuidString)")
+            ?? URL(string: "https://itt-rehber.ch")!
     }
 
     private func formatted(_ date: Date) -> String {
@@ -229,7 +253,7 @@ struct DirectoryDetailView: View {
 struct ActionButton: View {
     let icon: String
     let label: String
-    var color: Color = .accentColor
+    var color: Color = Color.tgsRed
     let action: () -> Void
 
     var body: some View {
@@ -237,7 +261,7 @@ struct ActionButton: View {
             VStack(spacing: 5) {
                 ZStack {
                     Circle()
-                        .fill(color.opacity(0.15))
+                        .fill(color.opacity(0.12))
                         .frame(width: 44, height: 44)
                     Image(systemName: icon)
                         .font(.system(size: 18, weight: .semibold))
@@ -251,7 +275,11 @@ struct ActionButton: View {
             .padding(.vertical, 10)
             .background(
                 RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(Color(.secondarySystemGroupedBackground))
+                    .fill(Color.white)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .stroke(Color.tgsBorder, lineWidth: 1)
+                    )
             )
         }
         .buttonStyle(.plain)
@@ -268,17 +296,17 @@ struct DetailRow: View {
             if !icon.isEmpty {
                 Image(systemName: icon)
                     .font(.system(size: 15))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.tgsMuted)
                     .frame(width: 20, alignment: .center)
                     .padding(.top, 1)
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text(label)
                     .font(.caption)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(Color.tgsMuted)
                 Text(value)
                     .font(.subheadline)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(Color.tgsCharcoal)
                     .textSelection(.enabled)
             }
             Spacer()

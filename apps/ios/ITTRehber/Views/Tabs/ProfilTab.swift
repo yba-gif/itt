@@ -158,14 +158,18 @@ struct FavoritesView: View {
                 ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if favorites.isEmpty {
                 VStack(spacing: 12) {
-                    Image(systemName: "star")
-                        .font(.system(size: 44))
-                        .foregroundStyle(.tertiary)
+                    ZStack {
+                        Circle().fill(Color.tgsSurface).frame(width: 72, height: 72)
+                        Image(systemName: "star")
+                            .font(.system(size: 30))
+                            .foregroundStyle(Color.tgsMuted)
+                    }
                     Text("Henüz favori yok")
                         .font(.headline)
+                        .foregroundStyle(Color.tgsCharcoal)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(.systemGroupedBackground))
+                .background(Color.tgsCream)
             } else {
                 List {
                     ForEach(favorites) { listing in
@@ -210,19 +214,23 @@ struct SavedSearchesView: View {
         Group {
             if rows.isEmpty {
                 VStack(spacing: 12) {
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 44))
-                        .foregroundStyle(.tertiary)
+                    ZStack {
+                        Circle().fill(Color.tgsSurface).frame(width: 72, height: 72)
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 30))
+                            .foregroundStyle(Color.tgsMuted)
+                    }
                     Text("Kayıtlı arama yok")
                         .font(.headline)
+                        .foregroundStyle(Color.tgsCharcoal)
                     Text("Ara sekmesinden yaptığınız bir aramayı kaydedebilirsiniz.")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.tgsMuted)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(.systemGroupedBackground))
+                .background(Color.tgsCream)
             } else {
                 List {
                     ForEach(rows) { row in
@@ -264,13 +272,18 @@ struct MyListingsView: View {
                 ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if listings.isEmpty {
                 VStack(spacing: 12) {
-                    Image(systemName: "list.bullet.rectangle")
-                        .font(.system(size: 44))
-                        .foregroundStyle(.tertiary)
-                    Text("Henüz ilan yok").font(.headline)
+                    ZStack {
+                        Circle().fill(Color.tgsSurface).frame(width: 72, height: 72)
+                        Image(systemName: "list.bullet.rectangle")
+                            .font(.system(size: 30))
+                            .foregroundStyle(Color.tgsMuted)
+                    }
+                    Text("Henüz ilan yok")
+                        .font(.headline)
+                        .foregroundStyle(Color.tgsCharcoal)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(.systemGroupedBackground))
+                .background(Color.tgsCream)
             } else {
                 List(listings) { listing in
                     NavigationLink(destination: DirectoryDetailView(listing: listing)) {

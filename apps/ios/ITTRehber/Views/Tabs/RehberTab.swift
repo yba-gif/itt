@@ -5,36 +5,17 @@ struct RehberTab: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    // Hero banner
-                    HStack(alignment: .center, spacing: 0) {
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text("TGS-ITT Rehber")
-                                .font(.title3.weight(.bold))
-                                .foregroundStyle(.primary)
-                            Text("İsviçre'deki Türk topluluğu için")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                        ZStack {
-                            Circle()
-                                .fill(Color.accentColor.opacity(0.12))
-                                .frame(width: 52, height: 52)
-                            Image(systemName: "globe.europe.africa.fill")
-                                .font(.system(size: 26))
-                                .foregroundStyle(Color.accentColor)
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 16)
-                    .padding(.bottom, 20)
+                    heroSection
+                        .padding(.horizontal, 20)
+                        .padding(.top, 20)
+                        .padding(.bottom, 28)
 
                     DirectoryGridView()
                         .padding(.horizontal, 16)
-                        .padding(.bottom, 24)
+                        .padding(.bottom, 32)
                 }
             }
-            .background(Color(.systemGroupedBackground))
+            .background(Color.tgsCream)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("")
             .navigationDestination(for: Directory.self) { directory in
@@ -42,13 +23,25 @@ struct RehberTab: View {
             }
         }
     }
+
+    private var heroSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            TGSEyebrow(icon: "globe.europe.africa.fill", label: "İSVİÇRE'DE TÜRK TOPLULUĞU")
+            Text("TGS-ITT Rehber")
+                .font(.system(size: 28, weight: .bold))
+                .foregroundStyle(Color.tgsCharcoal)
+            Text("Uzman, hizmet ve etkinlik rehberi")
+                .font(.system(size: 14))
+                .foregroundStyle(Color.tgsMuted)
+        }
+    }
 }
 
 struct DirectoryGridView: View {
-    private let columns = [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)]
+    private let columns = [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)]
 
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 14) {
+        LazyVGrid(columns: columns, spacing: 12) {
             ForEach(Directory.allCases) { directory in
                 NavigationLink(value: directory) {
                     DirectoryTile(directory: directory)
@@ -59,46 +52,45 @@ struct DirectoryGridView: View {
     }
 }
 
+/// Editorial white card tile — mirrors website's Programs.tsx card pattern.
 struct DirectoryTile: View {
     let directory: Directory
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Icon in a frosted circle
+            // Icon badge
             ZStack {
                 Circle()
-                    .fill(.white.opacity(0.22))
-                    .frame(width: 50, height: 50)
+                    .fill(Color.tgsRed.opacity(0.10))
+                    .frame(width: 46, height: 46)
                 Image(systemName: directory.systemImage)
-                    .font(.system(size: 22, weight: .semibold))
-                    .foregroundStyle(.white)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(Color.tgsRed)
             }
 
-            Spacer(minLength: 14)
+            Spacer(minLength: 12)
 
             Text(directory.titleTR)
                 .font(.system(size: 15, weight: .bold))
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.tgsCharcoal)
                 .lineLimit(2)
-                .minimumScaleFactor(0.82)
+                .minimumScaleFactor(0.85)
                 .fixedSize(horizontal: false, vertical: true)
+
+            Spacer(minLength: 14)
+
+            // CTA arrow
+            HStack(spacing: 3) {
+                Text("İncele")
+                    .font(.system(size: 12, weight: .semibold))
+                Image(systemName: "arrow.right")
+                    .font(.system(size: 10, weight: .bold))
+            }
+            .foregroundStyle(Color.tgsRed)
         }
-        .frame(maxWidth: .infinity, minHeight: 128, alignment: .topLeading)
+        .frame(maxWidth: .infinity, minHeight: 148, alignment: .topLeading)
         .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            directory.color,
-                            directory.color.opacity(0.75)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-        )
-        .shadow(color: directory.color.opacity(0.40), radius: 10, x: 0, y: 5)
+        .tgsCard()
     }
 }
 
@@ -109,24 +101,25 @@ struct ComingSoonView: View {
         VStack(spacing: 20) {
             ZStack {
                 Circle()
-                    .fill(directory.color.opacity(0.12))
+                    .fill(Color.tgsRed.opacity(0.10))
                     .frame(width: 90, height: 90)
                 Image(systemName: directory.systemImage)
                     .font(.system(size: 40))
-                    .foregroundStyle(directory.color)
+                    .foregroundStyle(Color.tgsRed)
             }
             VStack(spacing: 8) {
                 Text(directory.titleTR)
                     .font(.title2.bold())
+                    .foregroundStyle(Color.tgsCharcoal)
                 Text("Bu rehber yakında hizmete girecek.")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.tgsMuted)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemGroupedBackground))
+        .background(Color.tgsCream)
         .navigationTitle(directory.titleTR)
         .navigationBarTitleDisplayMode(.inline)
     }
