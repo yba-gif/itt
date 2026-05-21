@@ -128,27 +128,50 @@ struct EventRow: View {
     let event: Event
 
     var body: some View {
-        HStack(spacing: 12) {
-            VStack {
-                Text(monthAbbr).font(.caption.bold()).foregroundStyle(.tint)
-                Text(dayNum).font(.title3.bold())
+        HStack(spacing: 14) {
+            // Date badge
+            VStack(spacing: 1) {
+                Text(monthAbbr)
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(Color.accentColor)
+                Text(dayNum)
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundStyle(.primary)
             }
-            .frame(width: 48)
-            .padding(.vertical, 4)
+            .frame(width: 52, height: 52)
             .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.accentColor.opacity(0.1))
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color.accentColor.opacity(0.10))
             )
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text(event.title).font(.headline)
-                Text("\(timeStr) • \(event.kanton)\(event.venue.map { " • \($0)" } ?? "")")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(event.title)
+                    .font(.system(size: 16, weight: .semibold))
+                    .lineLimit(2)
+                HStack(spacing: 6) {
+                    Label(timeStr, systemImage: "clock")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    if let venue = event.venue {
+                        Text("·")
+                            .foregroundStyle(.tertiary)
+                        Text(venue)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                }
+                Text(event.kanton)
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(Color.accentColor)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(Color.accentColor.opacity(0.10)))
             }
+
+            Spacer(minLength: 0)
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 6)
     }
 
     private var monthAbbr: String {

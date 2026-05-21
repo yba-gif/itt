@@ -21,20 +21,27 @@ struct DirectoryDetailView: View {
                     Button {
                         Task { await toggleFavorite() }
                     } label: {
-                        Label(
-                            isFavorite ? "Favorilerden çıkar" : "Favorilere ekle",
-                            systemImage: isFavorite ? "star.fill" : "star"
-                        )
+                        HStack(spacing: 8) {
+                            Image(systemName: isFavorite ? "star.fill" : "star")
+                                .font(.system(size: 15, weight: .semibold))
+                            Text(isFavorite ? "Favorilerden çıkar" : "Favorilere ekle")
+                                .font(.subheadline.weight(.semibold))
+                        }
+                        .foregroundStyle(isFavorite ? Color(red: 1.0, green: 0.75, blue: 0.0) : .secondary)
                         .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                .fill(isFavorite ? Color(red: 1.0, green: 0.75, blue: 0.0).opacity(0.12) : Color(.secondarySystemGroupedBackground))
+                        )
                     }
-                    .buttonStyle(.bordered)
-                    .padding(.top, 4)
+                    .buttonStyle(.plain)
                 }
 
                 Text("Son güncelleme: \(formatted(listing.updatedAt))")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
-                    .padding(.top, 4)
+                    .padding(.top, 2)
             }
             .padding(16)
         }
@@ -76,72 +83,117 @@ struct DirectoryDetailView: View {
     }
 
     private var hero: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 12) {
             if let imageURL = listing.imageURL, let url = URL(string: imageURL) {
                 AsyncImage(url: url) { phase in
                     switch phase {
-                    case .empty: Color(.systemGray5)
-                    case .success(let img): img.resizable().scaledToFill()
-                    case .failure: Color(.systemGray5)
-                    @unknown default: Color(.systemGray5)
+                    case .success(let img):
+                        img.resizable().scaledToFill()
+                    default:
+                        Color(.systemGray5)
+                            .overlay(
+                                Image(systemName: "photo")
+                                    .font(.system(size: 32))
+                                    .foregroundStyle(Color(.systemGray3))
+                            )
                     }
                 }
-                .frame(height: 180)
+                .frame(height: 200)
                 .frame(maxWidth: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             }
-            Text(listing.name).font(.title2.bold())
-            let meta = ([listing.category] + listing.kantons).compactMap { $0 }.joined(separator: " • ")
-            if !meta.isEmpty {
-                Text(meta).font(.subheadline).foregroundStyle(.secondary)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(listing.name)
+                    .font(.title2.bold())
+                HStack(spacing: 8) {
+                    if let category = listing.category, !category.isEmpty {
+                        Text(category)
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(Color.accentColor)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(Capsule().fill(Color.accentColor.opacity(0.12)))
+                    }
+                    if !listing.kantons.isEmpty {
+                        HStack(spacing: 3) {
+                            Image(systemName: "mappin.circle.fill")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Text(listing.kantons.prefix(3).joined(separator: " · "))
+                                .font(.caption.weight(.medium))
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
             }
         }
     }
 
     private var actionsRow: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 10) {
             if let phone = listing.phone, let url = URL(string: "tel://\(phone.filter { !$0.isWhitespace })") {
-                ActionButton(icon: "phone.fill", label: "Ara") { UIApplication.shared.open(url) }
+                ActionButton(icon: "phone.fill", label: "Ara", color: Color(red: 0.18, green: 0.73, blue: 0.47)) {
+                    UIApplication.shared.open(url)
+                }
             }
             if let email = listing.email, let url = URL(string: "mailto:\(email)") {
-                ActionButton(icon: "envelope.fill", label: "E-posta") { UIApplication.shared.open(url) }
+                ActionButton(icon: "envelope.fill", label: "E-posta", color: Color.accentColor) {
+                    UIApplication.shared.open(url)
+                }
             }
             if listing.address != nil {
-                ActionButton(icon: "map.fill", label: "Harita") { openInMaps() }
+                ActionButton(icon: "map.fill", label: "Harita", color: Color(red: 0.98, green: 0.45, blue: 0.09)) {
+                    openInMaps()
+                }
             }
             if let website = listing.website, let url = URL(string: website) {
-                ActionButton(icon: "safari.fill", label: "Web") { UIApplication.shared.open(url) }
+                ActionButton(icon: "safari.fill", label: "Web", color: Color(red: 0.03, green: 0.57, blue: 0.70)) {
+                    UIApplication.shared.open(url)
+                }
             }
         }
     }
 
     private var details: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 0) {
             if let address = listing.address {
-                DetailRow(label: "Adres", value: address)
+                DetailRow(icon: "mappin.and.ellipse", label: "Adres", value: address)
+                Divider().padding(.leading, 44)
             }
             if let phone = listing.phone {
-                DetailRow(label: "Telefon", value: phone)
+                DetailRow(icon: "phone", label: "Telefon", value: phone)
+                if listing.email != nil || listing.website != nil { Divider().padding(.leading, 44) }
             }
             if let email = listing.email {
-                DetailRow(label: "E-posta", value: email)
+                DetailRow(icon: "envelope", label: "E-posta", value: email)
+                if listing.website != nil { Divider().padding(.leading, 44) }
             }
             if let website = listing.website {
-                DetailRow(label: "Web", value: website)
+                DetailRow(icon: "globe", label: "Web", value: website)
             }
         }
-        .padding(14)
+        .padding(.vertical, 4)
         .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
                 .fill(Color(.secondarySystemGroupedBackground))
         )
     }
 
     private func descriptionSection(_ description: String) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("Hakkında").font(.headline)
-            Text(description).font(.body)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Hakkında")
+                .font(.headline)
+            Text(description)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .lineSpacing(4)
         }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .fill(Color(.secondarySystemGroupedBackground))
+        )
     }
 
     private func openInMaps() {
@@ -177,39 +229,61 @@ struct DirectoryDetailView: View {
 struct ActionButton: View {
     let icon: String
     let label: String
+    var color: Color = .accentColor
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 4) {
-                Image(systemName: icon).font(.system(size: 18))
-                Text(label).font(.caption)
+            VStack(spacing: 5) {
+                ZStack {
+                    Circle()
+                        .fill(color.opacity(0.15))
+                        .frame(width: 44, height: 44)
+                    Image(systemName: icon)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(color)
+                }
+                Text(label)
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(color)
             }
-            .frame(maxWidth: .infinity, minHeight: 56)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
             .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(Color.accentColor.opacity(0.12))
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(Color(.secondarySystemGroupedBackground))
             )
-            .foregroundStyle(Color.accentColor)
         }
         .buttonStyle(.plain)
     }
 }
 
 struct DetailRow: View {
+    var icon: String = ""
     let label: String
     let value: String
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline) {
-            Text(label)
-                .font(.subheadline.weight(.medium))
-                .foregroundStyle(.secondary)
-                .frame(width: 80, alignment: .leading)
-            Text(value)
-                .font(.subheadline)
-                .textSelection(.enabled)
+        HStack(alignment: .top, spacing: 12) {
+            if !icon.isEmpty {
+                Image(systemName: icon)
+                    .font(.system(size: 15))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 20, alignment: .center)
+                    .padding(.top, 1)
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(label)
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+                Text(value)
+                    .font(.subheadline)
+                    .foregroundStyle(.primary)
+                    .textSelection(.enabled)
+            }
             Spacer()
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
     }
 }

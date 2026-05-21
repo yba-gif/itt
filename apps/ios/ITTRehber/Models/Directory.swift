@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 /// Ten directories per PRD §4.2. Codes match backend `directories[]` values.
 enum Directory: String, CaseIterable, Identifiable, Codable {
@@ -32,16 +33,31 @@ enum Directory: String, CaseIterable, Identifiable, Codable {
 
     var systemImage: String {
         switch self {
-        case .saglik: return "cross.case"
+        case .saglik: return "cross.case.fill"
         case .hukuk: return "scale.3d"
-        case .isletme: return "storefront"
-        case .finans: return "francsign.circle"
-        case .tercume: return "character.bubble"
-        case .meslek: return "hammer"
-        case .okullar: return "graduationcap"
-        case .camiler: return "moon.stars"
-        case .mezunlar: return "person.2"
-        case .destek_dersi: return "book"
+        case .isletme: return "storefront.fill"
+        case .finans: return "francsign.circle.fill"
+        case .tercume: return "character.bubble.fill"
+        case .meslek: return "hammer.fill"
+        case .okullar: return "graduationcap.fill"
+        case .camiler: return "moon.stars.fill"
+        case .mezunlar: return "person.2.fill"
+        case .destek_dersi: return "book.fill"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .saglik:      return Color(red: 0.18, green: 0.73, blue: 0.47) // fresh green
+        case .hukuk:       return Color(red: 0.15, green: 0.39, blue: 0.92) // royal blue
+        case .isletme:     return Color(red: 0.98, green: 0.45, blue: 0.09) // vivid orange
+        case .finans:      return Color(red: 0.49, green: 0.23, blue: 0.93) // violet
+        case .tercume:     return Color(red: 0.03, green: 0.57, blue: 0.70) // teal
+        case .meslek:      return Color(red: 0.85, green: 0.47, blue: 0.04) // amber
+        case .okullar:     return Color(red: 0.05, green: 0.65, blue: 0.91) // sky blue
+        case .camiler:     return Color(red: 0.02, green: 0.59, blue: 0.41) // emerald
+        case .mezunlar:    return Color(red: 0.20, green: 0.27, blue: 0.40) // slate navy
+        case .destek_dersi:return Color(red: 0.86, green: 0.15, blue: 0.15) // red
         }
     }
 

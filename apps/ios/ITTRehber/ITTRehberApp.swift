@@ -14,7 +14,7 @@ struct ITTRehberApp: App {
                 .environmentObject(cache)
                 .environmentObject(push)
                 .preferredColorScheme(nil) // respect system
-                .tint(Color("BrandPrimary", bundle: nil))
+                .tint(Color(red: 0.10, green: 0.39, blue: 0.78)) // #1A64C7 brand blue
         }
     }
 }
@@ -23,7 +23,7 @@ struct RootTabView: View {
     var body: some View {
         TabView {
             RehberTab()
-                .tabItem { Label("Rehber", systemImage: "list.bullet.rectangle") }
+                .tabItem { Label("Rehber", systemImage: "square.grid.2x2.fill") }
 
             AraTab()
                 .tabItem { Label("Ara", systemImage: "magnifyingglass") }
@@ -32,10 +32,10 @@ struct RootTabView: View {
                 .tabItem { Label("Etkinlikler", systemImage: "calendar") }
 
             BilgiTab()
-                .tabItem { Label("Bilgi", systemImage: "info.circle") }
+                .tabItem { Label("Bilgi", systemImage: "info.circle.fill") }
 
             ProfilTab()
-                .tabItem { Label("Profil", systemImage: "person.crop.circle") }
+                .tabItem { Label("Profil", systemImage: "person.crop.circle.fill") }
         }
     }
 }
