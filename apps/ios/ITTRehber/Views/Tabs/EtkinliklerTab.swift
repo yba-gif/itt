@@ -21,9 +21,9 @@ struct EtkinliklerTab: View {
                     Text("Geçmiş").tag(Mode.past)
                 }
                 .pickerStyle(.segmented)
-                .padding(.horizontal, 12)
-                .padding(.top, 10)
-                .padding(.bottom, 4)
+                .padding(.horizontal, TGSSpacing.md)
+                .padding(.top, TGSSpacing.sm + 2)
+                .padding(.bottom, TGSSpacing.xs)
 
                 kantonRow
 
@@ -156,13 +156,13 @@ struct EventRow: View {
             }
             .frame(width: 52, height: 52)
             .background(
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                RoundedRectangle(cornerRadius: TGSRadius.field, style: .continuous)
                     .fill(Color.tgsRed.opacity(0.09))
             )
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(TGSFont.rowTitle)
                     .foregroundStyle(Color.tgsCharcoal)
                     .lineLimit(2)
 
@@ -290,7 +290,7 @@ struct EventDetailView: View {
                     .padding(.top, 4)
                 }
             }
-            .padding(16)
+            .padding(TGSSpacing.lg)
         }
         .background(Color.tgsCream)
         .navigationTitle("Etkinlik")

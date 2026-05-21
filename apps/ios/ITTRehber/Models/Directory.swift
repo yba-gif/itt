@@ -61,6 +61,22 @@ enum Directory: String, CaseIterable, Identifiable, Codable {
         }
     }
 
+    /// P1-3: per-category CTA for directory tiles — more specific than generic "İncele"
+    var cta: String {
+        switch self {
+        case .saglik:       return "Uzmanları gör"
+        case .hukuk:        return "Avukatları gör"
+        case .isletme:      return "İşletmeleri gör"
+        case .finans:       return "Danışmanları gör"
+        case .tercume:      return "Tercümanları gör"
+        case .meslek:       return "Meslekleri keşfet"
+        case .okullar:      return "Okulları gör"
+        case .camiler:      return "Camileri gör"
+        case .mezunlar:     return "Mezunları gör"
+        case .destek_dersi: return "Öğretmenleri gör"
+        }
+    }
+
     /// Phase 1: only Sağlık was wired. Phase 2: all 10 directories share the same
     /// list/detail/submit code paths against the backend.
     var isActive: Bool { true }

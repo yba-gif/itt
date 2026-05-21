@@ -62,10 +62,10 @@ struct AraTab: View {
         .padding(.horizontal, 13)
         .padding(.vertical, 10)
         .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
+            RoundedRectangle(cornerRadius: TGSRadius.field, style: .continuous)
                 .fill(Color.white)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    RoundedRectangle(cornerRadius: TGSRadius.field, style: .continuous)
                         .stroke(Color.tgsBorder, lineWidth: 1)
                 )
         )
@@ -124,12 +124,12 @@ struct AraTab: View {
                 } header: {
                     HStack {
                         Text(directory?.titleTR ?? group.directory)
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(TGSFont.caption)
                             .foregroundStyle(Color.tgsMuted)
                             .textCase(nil)
                         Spacer()
                         Text("\(group.count)")
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(TGSFont.caption)
                             .foregroundStyle(Color.tgsMuted)
                     }
                 }

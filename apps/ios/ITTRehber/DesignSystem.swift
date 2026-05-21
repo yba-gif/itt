@@ -38,6 +38,50 @@ extension Color {
     }
 }
 
+// MARK: - Type Scale (P1-6)
+// Maps to SF Pro. Decorative sizes use @ScaledMetric for Dynamic Type support.
+
+enum TGSFont {
+    /// 28pt bold — hero titles (RehberTab, detail views)
+    static let display: Font = .system(size: 28, weight: .bold, design: .default)
+    /// 22pt bold — screen-level titles
+    static let title: Font = .system(size: 22, weight: .bold, design: .default)
+    /// 17pt semibold — card/section headings
+    static let headline: Font = .system(size: 17, weight: .semibold, design: .default)
+    /// 15pt semibold — row titles, tile labels
+    static let rowTitle: Font = .system(size: 15, weight: .semibold, design: .default)
+    /// 15pt regular — body copy
+    static let body: Font = .system(size: 15, weight: .regular, design: .default)
+    /// 13pt regular — secondary body
+    static let subheadline: Font = .system(size: 13, weight: .regular, design: .default)
+    /// 12pt medium — labels, eyebrows
+    static let caption: Font = .system(size: 12, weight: .medium, design: .default)
+    /// 11pt semibold — micro labels, pills
+    static let micro: Font = .system(size: 11, weight: .semibold, design: .default)
+}
+
+// MARK: - Radius & Spacing Tokens (P1-7)
+
+enum TGSRadius {
+    /// 24pt — primary cards (DirectoryTile, sheet containers)
+    static let card: CGFloat    = 24
+    /// 16pt — inner cards (detail rows, description sections)
+    static let inner: CGFloat   = 16
+    /// 12pt — form fields, search bars
+    static let field: CGFloat   = 12
+    /// 999pt — pills and capsules
+    static let pill: CGFloat    = 999
+}
+
+enum TGSSpacing {
+    static let xs: CGFloat  = 4
+    static let sm: CGFloat  = 8
+    static let md: CGFloat  = 12
+    static let lg: CGFloat  = 16
+    static let xl: CGFloat  = 20
+    static let xxl: CGFloat = 24
+}
+
 // MARK: - Section Eyebrow
 /// Red pill label — mirrors website's `section-eyebrow` pattern.
 struct TGSEyebrow: View {

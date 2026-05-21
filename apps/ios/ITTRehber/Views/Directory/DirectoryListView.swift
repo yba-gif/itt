@@ -80,7 +80,7 @@ struct DirectoryListView: View {
                 }
             } header: {
                 Text("\(totalCount) uzman bulundu")
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(TGSFont.caption)
                     .foregroundStyle(Color.tgsMuted)
                     .textCase(nil)
                     .padding(.leading, 4)
@@ -156,18 +156,18 @@ struct ListingRow: View {
                 }
             }
             .frame(width: 56, height: 56)
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: TGSRadius.field, style: .continuous))
 
             // Text
             VStack(alignment: .leading, spacing: 4) {
                 Text(listing.name)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(TGSFont.rowTitle)
                     .foregroundStyle(Color.tgsCharcoal)
                     .lineLimit(1)
 
                 if let category = listing.category, !category.isEmpty {
                     Text(category)
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(TGSFont.micro)
                         .foregroundStyle(Color.tgsRed)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 2)

@@ -56,7 +56,7 @@ struct DirectoryDetailView: View {
                     .foregroundStyle(Color.tgsMuted)
                     .padding(.top, 2)
             }
-            .padding(16)
+            .padding(TGSSpacing.lg)
         }
         .background(Color.tgsCream)
         .navigationTitle(listing.name)
@@ -211,7 +211,7 @@ struct DirectoryDetailView: View {
     private func descriptionSection(_ description: String) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Hakkında")
-                .font(.system(size: 13, weight: .semibold))
+                .font(TGSFont.subheadline)
                 .foregroundStyle(Color.tgsMuted)
                 .textCase(.uppercase)
                 .tracking(0.4)
@@ -220,7 +220,7 @@ struct DirectoryDetailView: View {
                 .foregroundStyle(Color.tgsCharcoal)
                 .lineSpacing(5)
         }
-        .padding(16)
+        .padding(TGSSpacing.lg)
         .frame(maxWidth: .infinity, alignment: .leading)
         .tgsInnerCard()
     }
