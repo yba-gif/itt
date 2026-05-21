@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A0C95F53B942D8C4E6338FD /* BilgiTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8376C08CDA824AC4390F62C /* BilgiTab.swift */; };
+		0B5DFCC3FAFE15AB7DA31968 /* FilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274396F0DFE2E7E16FD5D8D2 /* FilterBar.swift */; };
+		0F9FBCBB40A5201AA7B25495 /* SubmitListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AE9FED68797E5FBB38DAFF /* SubmitListingView.swift */; };
+		3FE09DF1DE84AF1447A72DB4 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCCA6607B281B19DED7E467 /* Auth.swift */; };
+		45CE2D48DD54DFA9E2280FE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5410097375F77CBB91F8C4C /* Localizable.strings */; };
+		AA11BB22CC33DD44EE55FF66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA11BB22CC33DD44EE55FF77 /* Assets.xcassets */; };
+		47CBBF254346F0630C88C9C5 /* OfflineCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC2150275C0C55DFC9288AD /* OfflineCache.swift */; };
+		582F2473225E1B3A00E0DC6C /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458D5F354BF1607783409846 /* Directory.swift */; };
+		60BF47EADE3CEC4D76D12AD3 /* ProfilTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2042094EA3CD37C1A8E90E /* ProfilTab.swift */; };
+		6B9814E8C884F295E8C6B68C /* AraTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8779E8E0FC93F742114E56 /* AraTab.swift */; };
+		845DFCEA65728B4547C6ED18 /* EtkinliklerTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FFD64F4A7257088085D25B /* EtkinliklerTab.swift */; };
+		878E9CCA40BE8F2B9D14E652 /* ContentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FD417865C37956DDA833CF /* ContentPage.swift */; };
+		940E21EE93AE8AE72354CF1C /* DirectoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1C19F9EB33439DA5FD0549 /* DirectoryListView.swift */; };
+		9A967E1668E677ED30F290E5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E7E556696BCB64FDBE1F7 /* Event.swift */; };
+		9AE361C8D615321482D1355F /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C537710B537EBA580A98FA /* Listing.swift */; };
+		9F88073F190193799DF32558 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A083EBEE8BDD56607A526E05 /* PushManager.swift */; };
+		AAC9F039CC3952808F1A39B0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89C125BAE335D8D4D64CD98 /* LoginView.swift */; };
+		B4D114740E1E5A2CD3F8BA66 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A67D3EA027C27141F09B7AA2 /* APIClient.swift */; };
+		C7B50D58E7232ACA24928A70 /* DirectoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0931608C79CE3BF7B0C196A3 /* DirectoryDetailView.swift */; };
+		839EA5F995F540CFACD2FF29 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D842E44300054152A1BAA261 /* DesignSystem.swift */; };
+		D7C9431BA5BB836C03E5F9FE /* ITTRehberApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FDE00515169F5A80993C1D /* ITTRehberApp.swift */; };
+		E6AC024784C88D96C261D74C /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D217BB3173B75F254DEAB46 /* SessionStore.swift */; };
+		EA987E3853FB51C87291D882 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBA0B528306DA92156F0187 /* DirectoryTests.swift */; };
+		EF8F0A83C29F008B681079D1 /* Kanton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A707EB3F35A63E3EB5C686D /* Kanton.swift */; };
+		F288138852B365CE7CC63E59 /* RehberTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFE9689325ED571C8023473 /* RehberTab.swift */; };
+		F95164038A0BE6E942B55C1F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E25A02006717227E5EBBCFF /* Keychain.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DA88106C2E4C7BB05E705D85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE70AA5E52A6487C34780D2E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C9AA52355DC7284AB974A758;
+			remoteInfo = ITTRehber;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		06FD417865C37956DDA833CF /* ContentPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentPage.swift; sourceTree = "<group>"; };
+		0931608C79CE3BF7B0C196A3 /* DirectoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryDetailView.swift; sourceTree = "<group>"; };
+		0DFE9689325ED571C8023473 /* RehberTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RehberTab.swift; sourceTree = "<group>"; };
+		14D6C7F71AA2FA7F09EBFE13 /* ITTRehber.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ITTRehber.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D217BB3173B75F254DEAB46 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		274396F0DFE2E7E16FD5D8D2 /* FilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBar.swift; sourceTree = "<group>"; };
+		458D5F354BF1607783409846 /* Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
+		4E25A02006717227E5EBBCFF /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		55FDE00515169F5A80993C1D /* ITTRehberApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITTRehberApp.swift; sourceTree = "<group>"; };
+		D842E44300054152A1BAA261 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		5A707EB3F35A63E3EB5C686D /* Kanton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kanton.swift; sourceTree = "<group>"; };
+		65FFD64F4A7257088085D25B /* EtkinliklerTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EtkinliklerTab.swift; sourceTree = "<group>"; };
+		7CC2150275C0C55DFC9288AD /* OfflineCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineCache.swift; sourceTree = "<group>"; };
+		840E7E556696BCB64FDBE1F7 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		87BCD55E1088E448249EB95E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9FCCA6607B281B19DED7E467 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		A083EBEE8BDD56607A526E05 /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
+		A67D3EA027C27141F09B7AA2 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		AFBA0B528306DA92156F0187 /* DirectoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
+		B7AE9FED68797E5FBB38DAFF /* SubmitListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitListingView.swift; sourceTree = "<group>"; };
+		B8376C08CDA824AC4390F62C /* BilgiTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BilgiTab.swift; sourceTree = "<group>"; };
+		BCA94054049F6BC8404F2435 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BD2042094EA3CD37C1A8E90E /* ProfilTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilTab.swift; sourceTree = "<group>"; };
+		CD1C19F9EB33439DA5FD0549 /* DirectoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryListView.swift; sourceTree = "<group>"; };
+		EE8779E8E0FC93F742114E56 /* AraTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AraTab.swift; sourceTree = "<group>"; };
+		F5C537710B537EBA580A98FA /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
+		F89C125BAE335D8D4D64CD98 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		FBEA37265BF4F48F5F789A22 /* ITTRehberTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ITTRehberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFF28429E458845D2114724F /* ITTRehber.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ITTRehber.entitlements; sourceTree = "<group>"; };
+		AA11BB22CC33DD44EE55FF77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1F10DDA96C154EC6BBC9F121 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				EE8779E8E0FC93F742114E56 /* AraTab.swift */,
+				B8376C08CDA824AC4390F62C /* BilgiTab.swift */,
+				65FFD64F4A7257088085D25B /* EtkinliklerTab.swift */,
+				BD2042094EA3CD37C1A8E90E /* ProfilTab.swift */,
+				0DFE9689325ED571C8023473 /* RehberTab.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		2A05E98EE53F77F7DD9B4582 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A67D3EA027C27141F09B7AA2 /* APIClient.swift */,
+				4E25A02006717227E5EBBCFF /* Keychain.swift */,
+				A083EBEE8BDD56607A526E05 /* PushManager.swift */,
+				1D217BB3173B75F254DEAB46 /* SessionStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2A5FFA40E041969706276461 /* ITTRehber */ = {
+			isa = PBXGroup;
+			children = (
+				BCA94054049F6BC8404F2435 /* Info.plist */,
+				FFF28429E458845D2114724F /* ITTRehber.entitlements */,
+				55FDE00515169F5A80993C1D /* ITTRehberApp.swift */,
+				D842E44300054152A1BAA261 /* DesignSystem.swift */,
+				6125F81BB00BDE078174382F /* Models */,
+				C98DE1C66DEB0841AFE70CB3 /* Persistence */,
+				86C1A94C5E2D8F5545E50257 /* Resources */,
+				2A05E98EE53F77F7DD9B4582 /* Services */,
+				2A79DF505F78E0E0C9EFD8AC /* Views */,
+			);
+			path = ITTRehber;
+			sourceTree = "<group>";
+		};
+		2A79DF505F78E0E0C9EFD8AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6886B3A66743F910546792B6 /* Auth */,
+				F5CC81A50F348BE6E2777741 /* Directory */,
+				1F10DDA96C154EC6BBC9F121 /* Tabs */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5123DB00BC39C36875959D55 = {
+			isa = PBXGroup;
+			children = (
+				2A5FFA40E041969706276461 /* ITTRehber */,
+				E37BD5D2F85F8FE05ADA93F9 /* ITTRehberTests */,
+				B1020072009190CFA17CD948 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6125F81BB00BDE078174382F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9FCCA6607B281B19DED7E467 /* Auth.swift */,
+				06FD417865C37956DDA833CF /* ContentPage.swift */,
+				458D5F354BF1607783409846 /* Directory.swift */,
+				840E7E556696BCB64FDBE1F7 /* Event.swift */,
+				5A707EB3F35A63E3EB5C686D /* Kanton.swift */,
+				F5C537710B537EBA580A98FA /* Listing.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6886B3A66743F910546792B6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F89C125BAE335D8D4D64CD98 /* LoginView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		86C1A94C5E2D8F5545E50257 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C5410097375F77CBB91F8C4C /* Localizable.strings */,
+				AA11BB22CC33DD44EE55FF77 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B1020072009190CFA17CD948 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14D6C7F71AA2FA7F09EBFE13 /* ITTRehber.app */,
+				FBEA37265BF4F48F5F789A22 /* ITTRehberTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C98DE1C66DEB0841AFE70CB3 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				7CC2150275C0C55DFC9288AD /* OfflineCache.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		E37BD5D2F85F8FE05ADA93F9 /* ITTRehberTests */ = {
+			isa = PBXGroup;
+			children = (
+				AFBA0B528306DA92156F0187 /* DirectoryTests.swift */,
+			);
+			path = ITTRehberTests;
+			sourceTree = "<group>";
+		};
+		F5CC81A50F348BE6E2777741 /* Directory */ = {
+			isa = PBXGroup;
+			children = (
+				0931608C79CE3BF7B0C196A3 /* DirectoryDetailView.swift */,
+				CD1C19F9EB33439DA5FD0549 /* DirectoryListView.swift */,
+				274396F0DFE2E7E16FD5D8D2 /* FilterBar.swift */,
+				B7AE9FED68797E5FBB38DAFF /* SubmitListingView.swift */,
+			);
+			path = Directory;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B6EA2DA4E1C97C437EC80927 /* ITTRehberTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 324880E60E5CB4056A769903 /* Build configuration list for PBXNativeTarget "ITTRehberTests" */;
+			buildPhases = (
+				E69617554ED9B2BDA1E067B4 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B4F5537345D47714C409BDE8 /* PBXTargetDependency */,
+			);
+			name = ITTRehberTests;
+			packageProductDependencies = (
+			);
+			productName = ITTRehberTests;
+			productReference = FBEA37265BF4F48F5F789A22 /* ITTRehberTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C9AA52355DC7284AB974A758 /* ITTRehber */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6B364A777212C0B58C5A6BA /* Build configuration list for PBXNativeTarget "ITTRehber" */;
+			buildPhases = (
+				5A58C6C6BEDBF7A1D1D668FB /* Sources */,
+				307934AEFF1A55814D6B7B9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ITTRehber;
+			packageProductDependencies = (
+			);
+			productName = ITTRehber;
+			productReference = 14D6C7F71AA2FA7F09EBFE13 /* ITTRehber.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE70AA5E52A6487C34780D2E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B6EA2DA4E1C97C437EC80927 = {
+						DevelopmentTeam = YT734G2394;
+						ProvisioningStyle = Automatic;
+					};
+					C9AA52355DC7284AB974A758 = {
+						DevelopmentTeam = YT734G2394;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1C125E2CA59E28E7AC32AA2F /* Build configuration list for PBXProject "ITTRehber" */;
+			developmentRegion = tr;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				tr,
+			);
+			mainGroup = 5123DB00BC39C36875959D55;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B1020072009190CFA17CD948 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C9AA52355DC7284AB974A758 /* ITTRehber */,
+				B6EA2DA4E1C97C437EC80927 /* ITTRehberTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		307934AEFF1A55814D6B7B9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45CE2D48DD54DFA9E2280FE7 /* Localizable.strings in Resources */,
+				AA11BB22CC33DD44EE55FF66 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5A58C6C6BEDBF7A1D1D668FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4D114740E1E5A2CD3F8BA66 /* APIClient.swift in Sources */,
+				6B9814E8C884F295E8C6B68C /* AraTab.swift in Sources */,
+				3FE09DF1DE84AF1447A72DB4 /* Auth.swift in Sources */,
+				0A0C95F53B942D8C4E6338FD /* BilgiTab.swift in Sources */,
+				878E9CCA40BE8F2B9D14E652 /* ContentPage.swift in Sources */,
+				582F2473225E1B3A00E0DC6C /* Directory.swift in Sources */,
+				C7B50D58E7232ACA24928A70 /* DirectoryDetailView.swift in Sources */,
+				940E21EE93AE8AE72354CF1C /* DirectoryListView.swift in Sources */,
+				845DFCEA65728B4547C6ED18 /* EtkinliklerTab.swift in Sources */,
+				9A967E1668E677ED30F290E5 /* Event.swift in Sources */,
+				0B5DFCC3FAFE15AB7DA31968 /* FilterBar.swift in Sources */,
+				839EA5F995F540CFACD2FF29 /* DesignSystem.swift in Sources */,
+				D7C9431BA5BB836C03E5F9FE /* ITTRehberApp.swift in Sources */,
+				EF8F0A83C29F008B681079D1 /* Kanton.swift in Sources */,
+				F95164038A0BE6E942B55C1F /* Keychain.swift in Sources */,
+				9AE361C8D615321482D1355F /* Listing.swift in Sources */,
+				AAC9F039CC3952808F1A39B0 /* LoginView.swift in Sources */,
+				47CBBF254346F0630C88C9C5 /* OfflineCache.swift in Sources */,
+				60BF47EADE3CEC4D76D12AD3 /* ProfilTab.swift in Sources */,
+				9F88073F190193799DF32558 /* PushManager.swift in Sources */,
+				F288138852B365CE7CC63E59 /* RehberTab.swift in Sources */,
+				E6AC024784C88D96C261D74C /* SessionStore.swift in Sources */,
+				0F9FBCBB40A5201AA7B25495 /* SubmitListingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E69617554ED9B2BDA1E067B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA987E3853FB51C87291D882 /* DirectoryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B4F5537345D47714C409BDE8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C9AA52355DC7284AB974A758 /* ITTRehber */;
+			targetProxy = DA88106C2E4C7BB05E705D85 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C5410097375F77CBB91F8C4C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				87BCD55E1088E448249EB95E /* tr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00F60FA3581044164058D758 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = YT734G2394;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.itt-rehber.app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		9E03B289D889BA46FBD1418B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YT734G2394;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.itt-rehber.app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		A73BA672BAF3B525F7C6A78F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ITTRehber/ITTRehber.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ITTRehber/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B9882B2DB6FE10FE13D1D214 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ITTRehber.app/ITTRehber";
+			};
+			name = Release;
+		};
+		BF1DC6E751B67A27B7BF251D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ITTRehber.app/ITTRehber";
+			};
+			name = Debug;
+		};
+		E297ECC5BFB9F14C39138D0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ITTRehber/ITTRehber.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ITTRehber/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1C125E2CA59E28E7AC32AA2F /* Build configuration list for PBXProject "ITTRehber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E03B289D889BA46FBD1418B /* Debug */,
+				00F60FA3581044164058D758 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		324880E60E5CB4056A769903 /* Build configuration list for PBXNativeTarget "ITTRehberTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF1DC6E751B67A27B7BF251D /* Debug */,
+				B9882B2DB6FE10FE13D1D214 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A6B364A777212C0B58C5A6BA /* Build configuration list for PBXNativeTarget "ITTRehber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E297ECC5BFB9F14C39138D0E /* Debug */,
+				A73BA672BAF3B525F7C6A78F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE70AA5E52A6487C34780D2E /* Project object */;
+}
