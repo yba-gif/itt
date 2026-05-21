@@ -21,7 +21,7 @@ from app.config import settings
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
-_GEMINI_MODEL = "gemini-1.5-flash"
+_GEMINI_MODEL = "gemini-2.0-flash"
 _GEMINI_STREAM_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/"
     f"{_GEMINI_MODEL}:streamGenerateContent?alt=sse"
