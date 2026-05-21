@@ -396,7 +396,7 @@ struct EventDetailView: View {
             lines.append(description)
         }
         lines.append("")
-        lines.append("https://itt-rehber.ch/event/\(event.id.uuidString)")
+        lines.append("https://tgs-itt.ch/event/\(event.id.uuidString)")
         return lines.joined(separator: "\n")
     }
 

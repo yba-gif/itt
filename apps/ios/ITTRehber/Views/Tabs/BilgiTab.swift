@@ -76,6 +76,19 @@ struct BilgiTab: View {
                         }
                     }
                 }
+
+                // Socials section — full-bleed row of platform chips
+                Section {
+                    SocialsRow()
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 40, trailing: 0))
+                        .listRowSeparator(.hidden)
+                } header: {
+                    Label("Bizi Takip Edin", systemImage: "heart.text.square.fill")
+                        .foregroundStyle(Color.tgsRed)
+                        .font(.footnote.weight(.semibold))
+                        .textCase(nil)
+                }
             }
             .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden)
@@ -333,6 +346,64 @@ struct SocialAidHotlineCard: View {
         if let url = URL(string: "tel://\(phone)") {
             UIApplication.shared.open(url)
         }
+    }
+}
+
+// MARK: - Socials Row
+
+/// Horizontal row of platform chips at the bottom of the Bilgi tab.
+/// Each tile is tappable and opens the respective URL in the default
+/// browser / mail app.
+struct SocialsRow: View {
+    private struct Social {
+        let label: String
+        let systemIcon: String?       // SF Symbol fallback
+        let url: String
+        let tint: Color
+    }
+
+    private let items: [Social] = [
+        .init(label: "Facebook",  systemIcon: "f.square.fill",       url: "https://www.facebook.com/itt.tgs",                 tint: Color(red: 0.10, green: 0.36, blue: 0.78)),
+        .init(label: "X",         systemIcon: "xmark",                url: "https://x.com/isvicreturkitt",                     tint: Color.black),
+        .init(label: "Instagram", systemIcon: "camera.fill",          url: "https://www.instagram.com/isvicreturktoplumu_itt/", tint: Color(red: 0.78, green: 0.16, blue: 0.50)),
+        .init(label: "Web",       systemIcon: "globe",                url: "https://tgs-itt.ch/",                              tint: Color.tgsRed),
+        .init(label: "E-posta",   systemIcon: "envelope.fill",        url: "mailto:info@tgs-itt.ch",                           tint: Color.tgsCharcoal),
+    ]
+
+    var body: some View {
+        HStack(spacing: 10) {
+            ForEach(items, id: \.label) { item in
+                socialChip(item)
+            }
+        }
+        .padding(.horizontal, TGSSpacing.md)
+    }
+
+    private func socialChip(_ item: Social) -> some View {
+        Button {
+            if let url = URL(string: item.url) {
+                UIApplication.shared.open(url)
+            }
+        } label: {
+            VStack(spacing: 6) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(item.tint.opacity(0.12))
+                        .frame(height: 56)
+                    Image(systemName: item.systemIcon ?? "link")
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundStyle(item.tint)
+                }
+                Text(item.label)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(Color.tgsCharcoal)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.9)
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(TGSSpringButtonStyle())
+        .accessibilityLabel("\(item.label) sayfasını aç")
     }
 }
 

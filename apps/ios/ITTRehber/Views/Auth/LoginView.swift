@@ -56,7 +56,7 @@ struct LoginView: View {
 
                 TGSFormSection(header: "E-posta ile giriş") {
                     TGSFieldRow(icon: "envelope",
-                                placeholder: "ornek@itt-rehber.ch",
+                                placeholder: "ornek@tgs-itt.ch",
                                 text: $email,
                                 keyboardType: .emailAddress,
                                 autocapitalization: .never,

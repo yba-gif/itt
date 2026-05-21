@@ -407,8 +407,8 @@ struct DirectoryDetailView: View {
     }
 
     private var shareURL: URL {
-        URL(string: "https://itt-rehber.ch/listing/\(listing.id.uuidString)")
-            ?? URL(string: "https://itt-rehber.ch")!
+        URL(string: "https://tgs-itt.ch/listing/\(listing.id.uuidString)")
+            ?? URL(string: "https://tgs-itt.ch")!
     }
 
 }
