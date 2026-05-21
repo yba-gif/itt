@@ -1,0 +1,23 @@
+[
+  {
+    "name": "İTT",
+    "directory": "meslek",
+    "category": "Lehre, Praktikum, Schnupperlehre",
+    "kantons": [
+      "AG",
+      "BE",
+      "BS",
+      "SO",
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": "Yönetim",
+    "_source": "SS1_meslek",
+    "id": "3aea42e6-8b46-55df-928e-8fa73c091ac9"
+  }
+]

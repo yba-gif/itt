@@ -1,0 +1,604 @@
+[
+  {
+    "name": "İsviçre Türk Toplumu İTT",
+    "directory": "finans",
+    "category": "Muhasebe Hizmetleri, Vergi Danışmanlığı",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@tgs-itt.ch",
+    "phone": "0792091075",
+    "address": null,
+    "website": null,
+    "description": "www.tgs-itt.ch",
+    "image_url": "https://tgs-itt.ch/wp-content/uploads/2022/01/cropped-oynanmis.png",
+    "contact_person": null,
+    "_source": "SS1_finans",
+    "id": "6d794523-cd14-5bdb-8520-6d414c5bde64"
+  },
+  {
+    "name": "Baris Kredit",
+    "directory": "finans",
+    "category": "Finansman / Kredi",
+    "kantons": [
+      "SO"
+    ],
+    "email": "info@bariskredit.ch",
+    "phone": null,
+    "address": null,
+    "website": "https://bariskredit.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1erTPtTka0TfkfnsonRUW_3so_qSafk9Q",
+    "contact_person": null,
+    "_source": "SS1_finans",
+    "id": "c3437311-b8b5-5118-a946-85f251e958a7"
+  },
+  {
+    "name": "Baris Kredit",
+    "directory": "finans",
+    "category": "Finansman / Kredi",
+    "kantons": [
+      "SH"
+    ],
+    "email": "info@bariskredit.ch",
+    "phone": "+41526240476",
+    "address": null,
+    "website": "https://bariskredit.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1B7vjNTpJGtI8aEcWN06HcNaep7Ugjslo",
+    "contact_person": null,
+    "_source": "SS1_finans",
+    "id": "385fdf42-2f2a-5bc0-bb41-870781cf2ebd"
+  },
+  {
+    "name": "Cennet Sönmez",
+    "directory": "finans",
+    "category": "Sigorta, Finansman / Kredi, Vergi Danışmanlığı, Muhasebe Hizmetleri",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@cennet-consulting.ch",
+    "phone": "+41 79 273 20 20",
+    "address": "Plaza Lerzenstrasse 10, 8953 Dietikon",
+    "website": "https://cennet-consulting.ch",
+    "description": null,
+    "image_url": "https://cennet-consulting.ch/assets/images/logo.png",
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "8f554339-4f15-5c8c-871d-987af885c23b"
+  },
+  {
+    "name": "Mehmet Demir",
+    "directory": "finans",
+    "category": "Diş",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "bfd3ebef-f1d8-56d2-b792-a1035c4ed5de"
+  },
+  {
+    "name": "Fatma Kaya",
+    "directory": "finans",
+    "category": "Göz",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "eb1c9129-c6cb-5447-8d6f-6ede6b33d462"
+  },
+  {
+    "name": "Ali Özdemir",
+    "directory": "finans",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "f8d8f6d9-b606-5c83-b94d-3e0ecad9090b"
+  },
+  {
+    "name": "Zeynep Güven",
+    "directory": "finans",
+    "category": "Diğer",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "4bac99ec-6c7f-5a38-a014-dbc86d491d3a"
+  },
+  {
+    "name": "Hasan Çetin",
+    "directory": "finans",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "9cb71200-d3c8-5148-a4aa-f478c9452ca0"
+  },
+  {
+    "name": "Emine Şahin",
+    "directory": "finans",
+    "category": "Diş",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "56c0d7cb-fb5c-5eeb-a4a0-15088323242b"
+  },
+  {
+    "name": "Kemal Tuncer",
+    "directory": "finans",
+    "category": "Göz",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "973d0714-335b-592b-83a2-665f2a9b6889"
+  },
+  {
+    "name": "Ayşe Akın",
+    "directory": "finans",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "dd3b0a07-4c37-5053-b3c0-924a5fccda14"
+  },
+  {
+    "name": "Mehmet Güney",
+    "directory": "finans",
+    "category": "Diğer",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "9812ccca-edf8-5d90-b985-a8e1dc6b9a2c"
+  },
+  {
+    "name": "Fatma Demir",
+    "directory": "finans",
+    "category": "Genel (Hausarzt)",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "336e5d7c-3056-59a5-8475-def72ab66a8e"
+  },
+  {
+    "name": "Ali Kaya",
+    "directory": "finans",
+    "category": "Diş",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "19dabae5-8e3b-5009-9af1-bc413ff6daf9"
+  },
+  {
+    "name": "Zeynep Özdemir",
+    "directory": "finans",
+    "category": "Göz",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "c8669d53-5078-5913-94ab-098e6f25b7cd"
+  },
+  {
+    "name": "Hasan Şahin",
+    "directory": "finans",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "dea7be4b-ca88-5229-b582-474fbd991a1f"
+  },
+  {
+    "name": "Emine Tuncer",
+    "directory": "finans",
+    "category": "Diğer",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "0202c1e9-09eb-5a2b-96ea-63f153144f51"
+  },
+  {
+    "name": "Kemal Güven",
+    "directory": "finans",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "7d84386e-dc47-5732-b5f4-613cb8d0f96e"
+  },
+  {
+    "name": "Ayşe Akın",
+    "directory": "finans",
+    "category": "Diş",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "0ef941bf-b169-5299-af10-d24a25901a27"
+  },
+  {
+    "name": "Mehmet Demir",
+    "directory": "finans",
+    "category": "Göz",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "59e2f54d-6083-5be4-8df5-e87f7d9dffab"
+  },
+  {
+    "name": "Fatma Kaya",
+    "directory": "finans",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "d1a7f411-ba4b-5db9-8c85-7d7e09386668"
+  },
+  {
+    "name": "Ali Özdemir",
+    "directory": "finans",
+    "category": "Diğer",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "62e2ba56-fd4f-5294-8c3e-ff2f4b39569a"
+  },
+  {
+    "name": "Zeynep Güven",
+    "directory": "finans",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "2dc3ff6e-df11-5980-90ad-3c29bffc0561"
+  },
+  {
+    "name": "Hasan Çetin",
+    "directory": "finans",
+    "category": "Diş",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "eec24397-4928-508c-931e-5811e30d3a63"
+  },
+  {
+    "name": "Emine Şahin",
+    "directory": "finans",
+    "category": "Göz",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "676b046e-0c62-53c2-a674-46c6c42f106c"
+  },
+  {
+    "name": "Kemal Tuncer",
+    "directory": "finans",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "43d0eaec-9fc3-52be-b53d-5f43d9ae2b37"
+  },
+  {
+    "name": "Ayşe Akın",
+    "directory": "finans",
+    "category": "Diğer",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "6c2fc509-e1d8-581e-bdda-f3ce3dfd8f21"
+  },
+  {
+    "name": "Mehmet Güney",
+    "directory": "finans",
+    "category": "Göz",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "46410bff-1965-552c-8158-3f5988464510"
+  },
+  {
+    "name": "Fatma Demir",
+    "directory": "finans",
+    "category": "Diş",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "3c86ef01-c8c9-5a28-b33b-33bb00500bb4"
+  },
+  {
+    "name": "Ali Kaya",
+    "directory": "finans",
+    "category": "Göz",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "12d96145-c1f0-5f93-afe0-6868e0550e5a"
+  },
+  {
+    "name": "Zeynep Özdemir",
+    "directory": "finans",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "c803e385-d003-5a7a-8293-37145f3dee2d"
+  },
+  {
+    "name": "Hasan Şahin",
+    "directory": "finans",
+    "category": "Diğer",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "e2471f8a-583f-5d63-9dcd-6435a3712d86"
+  },
+  {
+    "name": "Ayşe Akın",
+    "directory": "finans",
+    "category": "Fizyoterapi / Masaj",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "2037517f-09f5-5bf6-9610-f9dd77161e78"
+  },
+  {
+    "name": "Teslim Fidanoğlu",
+    "directory": "finans",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "BE"
+    ],
+    "email": "dr.fidanoglu@hin.ch",
+    "phone": "+41313810705",
+    "address": "Effingerstrasse 45, 3008 Bern",
+    "website": "https://www.doktor-fidanoglu.ch/",
+    "description": null,
+    "image_url": "https://d2f0ora2gkri0g.cloudfront.net/8c/\n33/8c3315a3-9ef2-45dd-b624-2a957f7\n5bf3d.jpg",
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "c312c0a8-30d3-528c-9519-5edad6e8339a"
+  },
+  {
+    "name": "Mehtap Tatan de Froment",
+    "directory": "finans",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "BE"
+    ],
+    "email": "praxis.zaehringer@hin.ch",
+    "phone": "+41313011665",
+    "address": "Zähringerstrasse 45, 3012 Bern",
+    "website": "https://praxis-zaehringer-ahornweg.ch/standort-zaehringer/",
+    "description": null,
+    "image_url": "https://www.doktor.ch/pictures/118755/portrait/118755.png",
+    "contact_person": null,
+    "_source": "SS2_finans",
+    "id": "62aae99c-f571-5e11-a99f-1a662e2f57b2"
+  }
+]

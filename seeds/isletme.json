@@ -1,0 +1,631 @@
+[
+  {
+    "name": "4D Montagen GmbH",
+    "directory": "isletme",
+    "category": "İnşaat",
+    "kantons": [
+      "BE"
+    ],
+    "email": "info@4dmontagen.ch",
+    "phone": "+41629619119",
+    "address": "Bernstrasse 7, 3360 Herzogenbuchsee",
+    "website": "https://www.4dmontagen.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1W8zO8L1C2ci6pI9ykRlR7RM6V6M6zDXc",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "9bfda96f-b109-5705-bc04-52204ffe6aca"
+  },
+  {
+    "name": "Adam's Döner",
+    "directory": "isletme",
+    "category": "Restoran",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@adamsdoener.ch",
+    "phone": "+41447402020",
+    "address": "Industriestrasse 29, 8305 Dietlikon",
+    "website": "https://www.adamsdoener.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1QkjmWE6eddRdxSTodfdrAeIvb_G6GQGu",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "546ac84d-930e-59d1-a337-882274aa32ce"
+  },
+  {
+    "name": "Akın Logistik",
+    "directory": "isletme",
+    "category": "Nakliye / Taşımacılık",
+    "kantons": [
+      "SO"
+    ],
+    "email": "info@akinlogistik.ch",
+    "phone": "0792977537",
+    "address": "Hauptstrasse 215, 4565 Recherswil",
+    "website": "https://akinlogistik.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1QoL80xpTXElYprVIHggKZJMbyqXCVcNL",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "046d4518-eabb-5df7-8a23-85b87aae18a6"
+  },
+  {
+    "name": "Aksa Food",
+    "directory": "isletme",
+    "category": "Kasap, Market",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@aksafood.ch",
+    "phone": "043 960 19 79",
+    "address": "Wehntalerstrasse 280, 8046 Zürich",
+    "website": "https://www.aksafood.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1aORH6Q_zKeZTTSzvH5DKRxlBi1QL9paF",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "90730736-363f-5ef6-86a3-c450864023e1"
+  },
+  {
+    "name": "Altay Travel",
+    "directory": "isletme",
+    "category": "Turizm / Seyahat",
+    "kantons": [
+      "BE"
+    ],
+    "email": "info@altaytravel.ch",
+    "phone": "+41 31 398 60 00",
+    "address": "Bümplizstrasse 111, 3018 Bern",
+    "website": "https://altaytravel.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1b-4spMfDS9VNvZcAAF4vy7vxq5KRyEmb",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "c0a225b7-c97e-54f9-851a-5d45eaa8ebd3"
+  },
+  {
+    "name": "Altın Steakhouse",
+    "directory": "isletme",
+    "category": "Restoran",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@altin-steakhouse.ch",
+    "phone": "043 437 07 02",
+    "address": "Bernerstrasse Nord 224, 8064 Zürich",
+    "website": "https://zurich.altin-steakhouse.ch/",
+    "description": null,
+    "image_url": "https://zurich.altin-steakhouse.ch/wp-content/uploads/2024/02/zurich.png",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "2978792d-3cf8-5ec6-9d08-09d0d32deb9e"
+  },
+  {
+    "name": "Altın Steakhouse",
+    "directory": "isletme",
+    "category": "Restoran",
+    "kantons": [
+      "AG"
+    ],
+    "email": "info@altin-steakhouse.ch",
+    "phone": "+41 62 791 34 44",
+    "address": "Oltnerstrasse 93, 4663 Aarburg",
+    "website": "https://aarburg.altin-steakhouse.ch/",
+    "description": null,
+    "image_url": "https://aarburg.altin-steakhouse.ch/wp-content/uploads/2024/02/aarburg.png",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "cb298777-b628-58f8-82ff-f767d3bb75c6"
+  },
+  {
+    "name": "AYDINS",
+    "directory": "isletme",
+    "category": "Fırın",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@simitexpress.ch",
+    "phone": "+41 76 730 99 53",
+    "address": "Badenerstr. 816, 8048 Zürich",
+    "website": "https://www.aydins.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1UdxkcNZ634a1LsdrbRQxnydkRNs1O0RW",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "d5741abb-b24a-58c1-aca2-3d08aff08aec"
+  },
+  {
+    "name": "Berem",
+    "directory": "isletme",
+    "category": "Gıda",
+    "kantons": [
+      "BL"
+    ],
+    "email": "info@berem.ch",
+    "phone": "+41 61 821 92 00",
+    "address": "Güterstrasse 47, 4133 Pratteln",
+    "website": "https://berem.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1nQXd2UBtL-ERLxveY5DqtKzOjeDOdKrK",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "da6a8231-6f3d-5353-84d6-3c110c689558"
+  },
+  {
+    "name": "Can Grill Haus",
+    "directory": "isletme",
+    "category": "Restoran",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": "031 398 02 02",
+    "address": "Murtenstrasse 41, 3008 Bern",
+    "website": "https://www.cangrillhaus.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/10-Pa83Q4iDLt4PJhnawD4Iuf2WVAQX1t",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "df4266fc-2277-5022-a521-fe93be036413"
+  },
+  {
+    "name": "Coral Travel",
+    "directory": "isletme",
+    "category": "Turizm / Seyahat",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "service@coraltravel.ch",
+    "phone": "+41 44 515 50 50",
+    "address": "Flurstrasse 32a, 8048 Zürich",
+    "website": "https://coraltravel.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1nR5WmLwYycJL28lNwq6U1Nw8pDAZBuSP",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "6c141b27-64fd-56a9-82a1-5dc4e29eb837"
+  },
+  {
+    "name": "Dägerli Schönegg Garage GmbH",
+    "directory": "isletme",
+    "category": "Otomobil / Garaj",
+    "kantons": [
+      "AG"
+    ],
+    "email": "auto@ds-garage.ch",
+    "phone": "+41 56 441 08 88",
+    "address": "Grütstrasse 4,5200 Brugg",
+    "website": "https://www.ds-garage.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1ogW0Ks4eksP2li6Xu2c1iHu5P0Y1EzCt",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "2cffb1b9-ee77-5bea-9c1a-c835b915a32e"
+  },
+  {
+    "name": "DAIMEX AG",
+    "directory": "isletme",
+    "category": "Danışmanlık, Nakliye / Taşımacılık",
+    "kantons": [
+      "BE"
+    ],
+    "email": "info@daimex.ch",
+    "phone": "+41 62 530 20 20",
+    "address": "Güterstrasse 12, 3360 Herzogenbuchsee",
+    "website": "https://daimex.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1nTMsuJXYKVccxPtMDT8Srj_hgsQMaagW",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "9cfa09fc-0058-5fa9-b7d3-3626146e2654"
+  },
+  {
+    "name": "Enderli Metallbau AG",
+    "directory": "isletme",
+    "category": "İnşaat",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@enderli-metallbau.ch",
+    "phone": "+41448071030",
+    "address": "Talacherstrasse 10, 8302 Kloten",
+    "website": "https://enderli-metallbau.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1f9dMLZTPYQu7OCgR153bn29PgEoMOlat",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "27df4d6d-72ca-5897-8e3a-9d0130187041"
+  },
+  {
+    "name": "ePowerCon AG",
+    "directory": "isletme",
+    "category": "İnşaat",
+    "kantons": [
+      "GR"
+    ],
+    "email": "info@epowercon.ch",
+    "phone": "+41816324500",
+    "address": "Via Caguils 27, 7013 Domat/Ems",
+    "website": "https://epowercon.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1fv2Uxj_nIarmFXQAOOi0mUuy7UzOFCGr",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "0c4173aa-6f37-53e8-9e8d-64854543c54c"
+  },
+  {
+    "name": "Garage Ulus",
+    "directory": "isletme",
+    "category": "Otomobil / Garaj",
+    "kantons": [
+      "BE"
+    ],
+    "email": "info@ulus.ch",
+    "phone": "0319915333",
+    "address": "Freiburgstrasse 88, 3174 Thörishaus",
+    "website": "https://ulus.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1YzaoEVkKkYHg01l4LAam5UdYl9BB7rSI",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "8b83bbba-01a5-5579-80a8-c61c94034f4d"
+  },
+  {
+    "name": "Güneş Grenchen",
+    "directory": "isletme",
+    "category": "Kasap, Market",
+    "kantons": [
+      "SO"
+    ],
+    "email": null,
+    "phone": "032 653 27 24",
+    "address": "Archstrasse 4, 2540 Grenchen",
+    "website": "https://www.facebook.com/GuenesMarktGrenchenHaegendorf/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/18BemSTpPZw-J930pZyvC4o-1bE_rMuVG",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "37af6a72-7469-557f-89bc-81d6164949fb"
+  },
+  {
+    "name": "Güneş Hägendorf",
+    "directory": "isletme",
+    "category": "Kasap, Market",
+    "kantons": [
+      "SO"
+    ],
+    "email": null,
+    "phone": "0622166363",
+    "address": "Industriestrasse W 40, 4614 Hägendorf",
+    "website": "https://www.facebook.com/GuenesMarktGrenchenHaegendorf/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1OjvcauHuNqSHihWvNpor38Ax2bIGEFyV",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "21cae1db-1333-5d2a-88b3-bb4e30bef9a7"
+  },
+  {
+    "name": "Gurbet Döner",
+    "directory": "isletme",
+    "category": "Kasap",
+    "kantons": [
+      "SO"
+    ],
+    "email": "info@gurbet-doner.ch",
+    "phone": "062 559 93 36",
+    "address": "Härdli 11A, 4657 Dulliken",
+    "website": "https://gurbet-döner.ch",
+    "description": null,
+    "image_url": "https://xn--gurbet-dner-yfb.ch/wp-content/uploads/2022/12/logo-1536x554.png",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "247f311c-ae17-54b5-8cc9-6d6b343b7076"
+  },
+  {
+    "name": "Gurbet Market",
+    "directory": "isletme",
+    "category": "Market",
+    "kantons": [
+      "SO"
+    ],
+    "email": null,
+    "phone": "062 530 20 23",
+    "address": "İm Grund 9, 5014 Gretzenbach",
+    "website": "https://www.instagram.com/gurbet_market_ch?igsh=MWc2aTl0ZzdrYm9xYw==",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1x5NShc52q_pN--AhcLvuJAKm-pln9E5P",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "5716fa04-2583-516c-9222-0a0bbd7d9f23"
+  },
+  {
+    "name": "Gurbet Market",
+    "directory": "isletme",
+    "category": "Market",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": "062 530 20 23",
+    "address": "Bodenhof 4, 6014 Luzern",
+    "website": "https://www.instagram.com/gurbet_market_ch?igsh=MWc2aTl0ZzdrYm9xYw==",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1x5NShc52q_pN--AhcLvuJAKm-pln9E5P",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "20ae9ee3-e76c-5094-b230-61cd89a059bd"
+  },
+  {
+    "name": "Güven Shop",
+    "directory": "isletme",
+    "category": "Diğer",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@gueven.ch",
+    "phone": "+41 44 843 20 30",
+    "address": "Bahnstrasse 80, 8105 Regensdorf",
+    "website": "https://gueven.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/16lmU9mFrJH7m6MUEraDypK40QlkWLbvV",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "221a45d1-0a3d-5397-be49-8d0f6d3f3497"
+  },
+  {
+    "name": "Hair & Beauty Beyza",
+    "directory": "isletme",
+    "category": "Kuaför",
+    "kantons": [
+      "AG"
+    ],
+    "email": "info@hairandbeautybeyza.ch",
+    "phone": "+41 56 442 26 16",
+    "address": "Bahnhofplatz 7, 5200 Brugg",
+    "website": "https://hairandbeautybeyza.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1D6BCPmxbYk6PQYk9LBOGwHsPxcpNsEHq",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "3c5510c6-bc2e-5c3b-9390-d994feac681a"
+  },
+  {
+    "name": "HAN Teppichreinigung",
+    "directory": "isletme",
+    "category": "Temizlik",
+    "kantons": [
+      "SO"
+    ],
+    "email": "info@hanteppichreinigung.ch",
+    "phone": "+41 62 558 16 20",
+    "address": "Gösgerstrasse 35, 4652 Winznau",
+    "website": "https://hanteppichreinigung.com/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1gKpxGceh6Zwhy4AAJkmW9Ke5iu0zv9t5",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "4e6f9555-6fb5-5eac-839b-61960a4ab6b4"
+  },
+  {
+    "name": "Has Gastro Service AG",
+    "directory": "isletme",
+    "category": "Gıda",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@hasgastro.ch",
+    "phone": "+41 43 422 51 51",
+    "address": "Hüttenwiesenstrasse 10, 8108 Dällikon",
+    "website": "https://hasgastro.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1k7zshfpr8w1GeJOBvuj0J-B9UIOBKzDF",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "4defaae5-a693-5bde-8ffb-fd716077e2f8"
+  },
+  {
+    "name": "Memet Usta Restaurant & Grill",
+    "directory": "isletme",
+    "category": "Restoran",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": "+41764551012",
+    "address": "Bahnstrasse 80, 8105 Regensdorf",
+    "website": "https://www.memet-steakgrill.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1lyrm8V2XVijUXD3xPTuxHW_63_y-LE-R",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "87c8d6ba-ec01-568f-9521-4dff1cdec870"
+  },
+  {
+    "name": "Möbelwelt - İstikbal - Bellona",
+    "directory": "isletme",
+    "category": "Mobilya",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@or-trading.ch",
+    "phone": "076 337 27 13",
+    "address": "Riedstrasse 1, 8953 Dietikon",
+    "website": null,
+    "description": "www.istikbal.com.tr",
+    "image_url": "https://lh3.googleusercontent.com/d/1wfpYPNdO4fLhyS5df2jBUs-SX2QFzItl",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "5650baf1-ec04-564a-bf65-5a7c2b6d6605"
+  },
+  {
+    "name": "Mus-Et Steakhouse",
+    "directory": "isletme",
+    "category": "Restoran",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": "+41 76 818 55 03",
+    "address": "Wehntalerstrasse 280, 8046 Zürich",
+    "website": "https://www.mus-et.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1DbLSbdFqfdf_WpSVX1N0nwE2EiwgnF9t",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "39904352-606e-5ae4-bb02-592645bd51ae"
+  },
+  {
+    "name": "Netto",
+    "directory": "isletme",
+    "category": "Market, Kasap",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@nettoschlieren.ch",
+    "phone": "+41 (0) 43 535 09 27",
+    "address": "Uitikonerstrasse 4, 8952 Schlieren",
+    "website": "https://www.nettoschlieren.ch/",
+    "description": null,
+    "image_url": "https://www.nettoschlieren.ch/wp-content/uploads/2018/04/netto-schlieren-logo-500.png",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "3b2c7574-454c-5be7-b755-98b4027587a5"
+  },
+  {
+    "name": "Pala-Food GmbH",
+    "directory": "isletme",
+    "category": "Gıda",
+    "kantons": [
+      "TG"
+    ],
+    "email": "info@pala-food.ch",
+    "phone": "+41716590707",
+    "address": "Wydenstrasse 25, 8575 Bürglen",
+    "website": "https://shop.pala-food.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1cTFGA39M888NyASU4U_n4isAoiRjBEkq",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "6a835049-9e90-5f70-a615-096e05333626"
+  },
+  {
+    "name": "Planet Consulting",
+    "directory": "isletme",
+    "category": "Danışmanlık",
+    "kantons": [
+      "AG"
+    ],
+    "email": "info@planetholding.ch",
+    "phone": "+41 62 893 29 90",
+    "address": "Bruggerstr.11C, 5103 Wildegg",
+    "website": "https://planetgmbh.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1DriOhgT1aKcFhyaePoMzIXzoaetddgaA",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "383fc1e7-5976-5466-8d9e-d3a7e04be82c"
+  },
+  {
+    "name": "RE/MAX Cihan Salda",
+    "directory": "isletme",
+    "category": "Emlak",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "cihan.salda@remax.ch",
+    "phone": "+41794065545",
+    "address": "Bahnhofstrasse 19, 8304 Wallisellen",
+    "website": "https://www.remax.ch/de/im/cihan-salda-73902081",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1r_LeTx5zzfBp5WfVlKPYHHebHrwIamh4",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "d7f6c5f8-1b89-5940-8a6f-cc11d9e22a76"
+  },
+  {
+    "name": "Serkan Coiffeur",
+    "directory": "isletme",
+    "category": "Kuaför",
+    "kantons": [
+      "BE"
+    ],
+    "email": "serkancoiffeur@outlook.com",
+    "phone": "+41763745070",
+    "address": "Bözingenstrasse 134, 2504 Biel",
+    "website": "https://www.instagram.com/serkancoiffeur",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1n68ytUw7iJgf-WD6TOqnq6NhDlXPaOvC",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "f209c8c8-b835-52b0-a49e-834ed4b33d2a"
+  },
+  {
+    "name": "Wengi's Steakhouse",
+    "directory": "isletme",
+    "category": "Restoran",
+    "kantons": [
+      "SO"
+    ],
+    "email": null,
+    "phone": "076 405 45 00",
+    "address": "Wengistrasse 31, 4500 Solothurn",
+    "website": "https://wengissteakhouse.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1bi53veVavwZTeP3MuZkYEWNoidvrYzsG",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "a0fdda75-ae4e-5da5-8dc8-48aac55eb813"
+  },
+  {
+    "name": "yalcom GmbH",
+    "directory": "isletme",
+    "category": "İnşaat",
+    "kantons": [
+      "ZG"
+    ],
+    "email": "info@yalcom.ch",
+    "phone": "+41 (0) 41 252 00 00",
+    "address": "Grafenauweg 8, 6300 Zug",
+    "website": "https://yalcom.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1VCzyaM4UL3RJt1idlgb5ms0Q_MRmGaGZ",
+    "contact_person": null,
+    "_source": "SS1_işletme",
+    "id": "70acf054-0308-5dc4-828e-7bcd30ffffea"
+  },
+  {
+    "name": "İşletme1",
+    "directory": "isletme",
+    "category": "Market, Danışmanlık, Nakliye, Restoran, Kafe, Butik, Kasap, Fırın",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@tgs-itt.ch",
+    "phone": null,
+    "address": "Plaza Lerzenstrasse 10, 8953 Dietikon",
+    "website": null,
+    "description": null,
+    "image_url": "https://tgs-itt.ch/wp-content/uploads/2022/01/cropped-oynanmis.png",
+    "contact_person": null,
+    "_source": "SS2_işletme",
+    "id": "0fb2d724-35d6-561a-b697-16d420bc338d"
+  },
+  {
+    "name": "deneme",
+    "directory": "isletme",
+    "category": "restoran",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": "https://tgs-itt.ch/wp-content/uploads/2022/01/cropped-oynanmis.png",
+    "contact_person": null,
+    "_source": "SS2_işletme",
+    "id": "5e3cce2b-7fc2-50c7-a5f6-a1d0cbdea7f4"
+  }
+]

@@ -1,0 +1,284 @@
+[
+  {
+    "id": "b1d33413-da39-565c-aa47-2f78948bd890",
+    "kanton": "AG",
+    "association_name": "Türkisch - Islamischer Verein Aarburg",
+    "address": "Oltenerstrasse 84, 4663 Aarburg"
+  },
+  {
+    "id": "923df6bd-7922-56e7-89b0-6ab4d5e7ce61",
+    "kanton": "ZH",
+    "association_name": "Türkisch Islamischer Kulturverein Wädenswil",
+    "address": "Moosacherstrasse 5, 8804 Au"
+  },
+  {
+    "id": "52aebf76-b85b-598c-a1e9-af66883ae87f",
+    "kanton": "ZG",
+    "association_name": "Türkisch - Islamische Vereinigung Baar",
+    "address": "Gewerbestrasse 9, 6340 Baar"
+  },
+  {
+    "id": "6a625af8-4383-53cc-bbe9-ece5f23c419b",
+    "kanton": "ZH",
+    "association_name": "Bachenbülach Mevlana Moschee",
+    "address": "Länggenstrasse 26, 8184 Bachenbülach"
+  },
+  {
+    "id": "3ec2acdb-0bf1-5096-8fe0-9b6e80089919",
+    "kanton": "BS",
+    "association_name": "Türkisch Islamischer Sozial und Kultur Verein Basel",
+    "address": "Leimgrubenweg 6, 4053 Basel"
+  },
+  {
+    "id": "a049e34a-2c95-57b5-a2f5-529fe6f24eaf",
+    "kanton": "BE",
+    "association_name": "Türkisch - Islamischer Verein Biel",
+    "address": "Mittelstrasse 35b, 2502 Biel"
+  },
+  {
+    "id": "f6962e14-3264-513b-b8bb-ec98db61653d",
+    "kanton": "AG",
+    "association_name": "Türkisch - Islamischer Verein Buchs",
+    "address": "Brummelstrasse 2, 5033 Buchs"
+  },
+  {
+    "id": "9e48fe48-8adf-5c0d-8f6e-2c75b74c14d7",
+    "kanton": "TG",
+    "association_name": "Bürglen Türkisch-Islamischer Kulturverein",
+    "address": "Industriestrasse 2 V, 8575 Bürglen"
+  },
+  {
+    "id": "fc6e1f55-6d7b-593b-85c0-eb169d8fc98b",
+    "kanton": "ZG",
+    "association_name": "SMG Schweizerische Muslimische Gemeinschaft",
+    "address": "Gewerbestrasse 8, 6330 Cham"
+  },
+  {
+    "id": "66dfe36c-a5ae-5159-83c3-8d71c0560585",
+    "kanton": "ZH",
+    "association_name": "Türkisch- Islamischer Kulturverein Dällikon",
+    "address": "Industriestrasse 4, 8108 Dällikon"
+  },
+  {
+    "id": "54c67b6c-fa0a-551f-9379-4c7d9adc7b6a",
+    "kanton": "AG",
+    "association_name": "Türkischer Kulturverein Döttingen",
+    "address": "Hauptstrasse 5, 5312 Döttingen"
+  },
+  {
+    "id": "97fba3aa-29e1-5ffe-a132-f44aca2349a7",
+    "kanton": "VD",
+    "association_name": "Centre Islamique et Culturel Turc de Lausanne et Env.",
+    "address": "Av. Tir-Federal 35, 1024 Ecublens"
+  },
+  {
+    "id": "27f8cafb-0d58-59b4-b751-3b9ea56fe645",
+    "kanton": "TG",
+    "association_name": "Egnach Mevlana Moschee",
+    "address": "Romanshornerstrasse 134, 9322 Egnach"
+  },
+  {
+    "id": "a9cc43c3-eeb2-5fc6-aa81-1d7c7d944fad",
+    "kanton": "FL",
+    "association_name": "Türkisch-Islamische Gemeinschaft Fürstentum Liechtenstein-Grüne Moschee",
+    "address": "Essanestrasse 152, 9492 Eschen"
+  },
+  {
+    "id": "6b82bc8b-bcd8-54b0-9712-7639cdd4f4e1",
+    "kanton": "TI",
+    "association_name": "Associazione Islamica Turco-Ticinese",
+    "address": "Via Campagna 2/1, 6512 Giubiasco"
+  },
+  {
+    "id": "6a9cf24b-c102-504f-87b9-4670733ffdb6",
+    "kanton": "SG",
+    "association_name": "Türkisch-Islamischer Kulturverein Heerbrugg",
+    "address": "Rietstrasse 1, 9435 Heerbrugg"
+  },
+  {
+    "id": "97c0e344-aee2-532a-9bd0-fb3a360d1799",
+    "kanton": "BE",
+    "association_name": "Darul Erkam Moschee Herzogenbuchsee",
+    "address": "Hofmattstrasse 22, 3360 Herzogenbuchsee"
+  },
+  {
+    "id": "1f9162af-89d6-5ad1-a184-35d4f59f6362",
+    "kanton": "TG",
+    "association_name": "Türkischer Kulturverein Kreuzlingen",
+    "address": "Bergstrasse 5a, 8280 Kreuzlingen"
+  },
+  {
+    "id": "6a2f2afc-61cc-5033-b431-3add351a6c36",
+    "kanton": "BE",
+    "association_name": "Türkischer Kulturverein Langenthal",
+    "address": "Bleienbachstrasse 14, 4900 Langenthal"
+  },
+  {
+    "id": "4fe32aa4-316a-5bfd-bc28-54863d618f95",
+    "kanton": "VS",
+    "association_name": "Association Turque de Monthey",
+    "address": "Av. du Crochetan 42 p.a. Maison du Monde, 1870 Monthey"
+  },
+  {
+    "id": "6fa2a5c1-5218-5953-8531-5615f5856e9f",
+    "kanton": "VD",
+    "association_name": "Association et Centre Culturel Turc Moudon",
+    "address": "Place de la Gare 13, 1510 Moudon"
+  },
+  {
+    "id": "7090ca0d-8a6f-5e4b-a520-935e659a2b52",
+    "kanton": "GL",
+    "association_name": "Türkischer Verein Glarus",
+    "address": "Molliserstrasse 45, 8754 Netstal"
+  },
+  {
+    "id": "4f6fb0e0-6fe5-5216-8501-8a26969530c3",
+    "kanton": "NE",
+    "association_name": "Assocition Culturelle d'anatolie",
+    "address": "Av. de la Gare 41, 2000 Neuchâtel"
+  },
+  {
+    "id": "ee68d240-f235-5e64-909e-742f44655589",
+    "kanton": "AG",
+    "association_name": "Ehli Beyt Camii",
+    "address": "Industriestrasse 3 A, 5702 Niederlenz"
+  },
+  {
+    "id": "5c92c598-807c-5ded-947a-6bac6c9e04c5",
+    "kanton": "BE",
+    "association_name": "Bern Türkisch Islamischer Verein",
+    "address": "Oberdorfstrasse 2, 3072 Ostermundigen"
+  },
+  {
+    "id": "0f5a3f77-b62e-5f88-b1d1-cbcf70d922a1",
+    "kanton": "GE",
+    "association_name": "Fondation Communauté Musulmane-Genève",
+    "address": "Rte de St-Julien 120, 1228 Plan-les-Ouates"
+  },
+  {
+    "id": "0180110b-fbaa-5326-a487-c8074b9776d8",
+    "kanton": "TI",
+    "association_name": "Centro Culturale Turco Islamico di Lugano",
+    "address": "Via Giuseppe Maggi 4-A, 6963 Pregassona - Lugano"
+  },
+  {
+    "id": "64548474-b7a7-5ae8-8c32-b8b607525c17",
+    "kanton": "AG",
+    "association_name": "Türkisch - Islamischer Verein Reinach",
+    "address": "Hauptstrasse 3, 5734 Reinach"
+  },
+  {
+    "id": "b27a4415-0fa4-577e-87d5-5f91057608a9",
+    "kanton": "VD",
+    "association_name": "Nouvelle Mosquee de Renens",
+    "address": "Villas du Mont 1, 1020 Renens"
+  },
+  {
+    "id": "5eb771bc-08d9-58e9-bc6a-3d7d20d801d4",
+    "kanton": "AG",
+    "association_name": "Rheinfelden Merkez Camii",
+    "address": "Gerstenweg 8, 4310 Rheinfelden"
+  },
+  {
+    "id": "e1d791c9-826d-5342-a0ce-6f5454756315",
+    "kanton": "SG",
+    "association_name": "Türkischer Kulturverein-Diyanet Umgebung Rorschach",
+    "address": "Neustadtstrasse 11 a, 9400 Rorschach"
+  },
+  {
+    "id": "156215a5-ffc9-5f51-8230-7f2e7cb15d27",
+    "kanton": "ZH",
+    "association_name": "Rüti Türkisch-Islamische Verein",
+    "address": "Bandwiesstrasse 4, 8630 Rüti"
+  },
+  {
+    "id": "52ce2e59-2e1f-5d78-a168-e0929946f6d0",
+    "kanton": "SH",
+    "association_name": "Türkisch-Islamischer Verein Aksa Moschee",
+    "address": "Schalterweg 10, 8200 Schaffhausen"
+  },
+  {
+    "id": "7bb4ca0e-6ad1-54ee-928f-e677bedd6821",
+    "kanton": "UR",
+    "association_name": "Islamischer Verein Uri",
+    "address": "Schachengasse 8, 6467 Schattdorf"
+  },
+  {
+    "id": "527acea6-662e-5c89-9494-78e03b57d4f1",
+    "kanton": "AG",
+    "association_name": "Verein für soz. Zus. der türk. Arb. in Seon und Umg.",
+    "address": "Birchmattstrasse 5, 5703 Seon"
+  },
+  {
+    "id": "0a90bb61-2f81-508a-80ff-2b4f51c93b41",
+    "kanton": "SO",
+    "association_name": "Anatolisch-Helvetischer Verein Fatih Moschee",
+    "address": "Holunderweg 55, 4500 Solothurn"
+  },
+  {
+    "id": "3e1b3b71-d602-5bb9-94de-683ea3467ff4",
+    "kanton": "SG",
+    "association_name": "Türkisch Islamischer Verein Eyüp Sultan Moschee",
+    "address": "Meisenstrasse 6, 9000 St. Gallen"
+  },
+  {
+    "id": "1e30c002-f569-5765-8283-0953def87eb2",
+    "kanton": "SG",
+    "association_name": "Türkisch-Schweizerischer Kulturverein Uznach",
+    "address": "Rotfarb 14, 8730 Uznach"
+  },
+  {
+    "id": "028940c8-31fc-5848-b9c0-ee2bda6015e2",
+    "kanton": "SZ",
+    "association_name": "Siebnen Hasret Camisi",
+    "address": "Seestrasse 4, 8855 Wangen"
+  },
+  {
+    "id": "407e26f3-e4b5-5c0a-9654-4f473aee2d14",
+    "kanton": "SG",
+    "association_name": "Stiftung Islamisches Kulturzentrum Wattwil",
+    "address": "Rickenstrasse 9, 9630 Wattwil"
+  },
+  {
+    "id": "b735dc49-6c52-55b4-b98d-c1c5594c60c3",
+    "kanton": "ZH",
+    "association_name": "Uster Türkischer Verein Diyanet Moschee",
+    "address": "Zürichstrasse 105, 8606 Werrikon"
+  },
+  {
+    "id": "b60a5e5c-9f1a-50b0-887b-51e889e443ad",
+    "kanton": "SG",
+    "association_name": "Türkischer Kultu- & Sozialverein Wil",
+    "address": "Dufourtstrasse 4-6, 9500 Wil"
+  },
+  {
+    "id": "1d30af23-2cac-5a5f-86d9-e1a23639355e",
+    "kanton": "ZH",
+    "association_name": "Verein Türkgücü Winterthur",
+    "address": "Theaterstrasse 25, 8400 Winterthur"
+  },
+  {
+    "id": "e8cf9469-2831-57bb-aeef-23c5341c8c09",
+    "kanton": "ZH",
+    "association_name": "Winterthur Türkisch-Islamischer Verein",
+    "address": "Bürglistrasse 31 a, 8400 Winterthur"
+  },
+  {
+    "id": "96661561-e614-5415-9edb-a3a4b17a2ebe",
+    "kanton": "ZH",
+    "association_name": "ISK Islamische Stiftung Zürich",
+    "address": "Calandastrasse 11, 8048 Zürich"
+  },
+  {
+    "id": "afd2bd6d-a53c-5ec4-a195-4dfe5d56cbc5",
+    "kanton": "ZH",
+    "association_name": "Türkisch - Islamische Kulturverein Zürich",
+    "address": "Kochstrasse 22, 8004 Zürich"
+  },
+  {
+    "id": "4a43a209-aff0-5fe1-9a6e-2295bec6513a",
+    "kanton": "ZH",
+    "association_name": "Zürich Nord Mimar Sinan Moschee",
+    "address": "Schwamendingenstrasse 102, 8050 Zürich"
+  }
+]

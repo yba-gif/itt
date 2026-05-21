@@ -1,0 +1,1412 @@
+[
+  {
+    "id": "9a8bf010-cf02-53e4-9743-32a2e78f3a3e",
+    "kanton": "AG",
+    "region": "Aarau",
+    "school_name": "Aareschulhaus/Schachen",
+    "day": "Cumartesi",
+    "time": "09.30-11.50",
+    "address": "Bündtenweg 2\r\n5000 Aarau",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "5bd51951-56f6-52fb-9088-a454a79acfae",
+    "kanton": "AG",
+    "region": "Aarburg",
+    "school_name": "Schulhaus Höhe",
+    "day": "Çarşamba",
+    "time": "16.00\r- 18.00",
+    "address": "Feldstr. 8\r, 4663 Aarburg",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "f4dc770e-7035-501b-a9ce-fbb7080e3971",
+    "kanton": "AG",
+    "region": "Aargau Buchs",
+    "school_name": "Gysimatte Primarschule",
+    "day": "Cumartesi",
+    "time": "10:30-14:30",
+    "address": "Gysistrasse 1, 5033 Buchs",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "85fa5ac0-1363-5d5a-bc18-aa405d9d6450",
+    "kanton": "AG",
+    "region": "Aargau Reinach Anaokulu",
+    "school_name": null,
+    "day": "Pazartesi",
+    "time": "16.00-18.00",
+    "address": "Titlisstrasse 16, 5734 Reinach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "50a2eac6-51d7-58d4-8963-aa07a67bc042",
+    "kanton": "BL",
+    "region": "Aesch - Schützenmatt",
+    "school_name": "Schützenmatt Schulhaus",
+    "day": "Cuma",
+    "time": "16.00-18.20",
+    "address": "Donacherstrasse 43, 4147 Aesch",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "1b0c6f3b-80a8-5f36-8bc8-5d6385b5a82b",
+    "kanton": "BL",
+    "region": "Aesch - Schützenmatt Anaokulu",
+    "school_name": "Schützenmatt Schulhaus",
+    "day": "Salı",
+    "time": "15.40-17.40",
+    "address": "Donacherstrasse 43, 4147 Aesch",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "22d40917-a3b5-544e-9daa-524101e74697",
+    "kanton": "ZH",
+    "region": "Albisriederplatz",
+    "school_name": "Schulhaus Albisriederplatz",
+    "day": "Salı",
+    "time": "13.45-15.20",
+    "address": "Norastrasse 20, 8004 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "ea18031d-ade8-5303-96c9-f813bcfe6118",
+    "kanton": "ZH",
+    "region": "Albisriederplatz",
+    "school_name": "Schulhaus Albisriederplatz",
+    "day": "Çarşamba",
+    "time": "13.30-15.50",
+    "address": "Norastrasse 20, 8004 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "fced2410-faea-594c-89a5-7364df8332df",
+    "kanton": "ZH",
+    "region": "Allenmoos",
+    "school_name": "Schule Allenmoos",
+    "day": "Çarşamba",
+    "time": "13.30-15.30",
+    "address": "Schnürbungert 25, 8057 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "e2b16341-1c1c-54e9-bbf6-bee996fa1768",
+    "kanton": "BL",
+    "region": "Allschwil",
+    "school_name": "Neuallschwill Schulzentrum",
+    "day": "Salı",
+    "time": "15.40-18.00",
+    "address": "Muesmattweg 6, 4123 Allschwill",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "4b9772ec-8714-51c2-9828-918e3fde2a15",
+    "kanton": "UR",
+    "region": "Altdorf",
+    "school_name": null,
+    "day": "Pazartesi",
+    "time": "16.50-19.10",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Wappen_Uri_matt.svg"
+  },
+  {
+    "id": "76ed367e-6eab-5ebc-b579-efded66a0443",
+    "kanton": "TG",
+    "region": "Amriswil",
+    "school_name": "Turnhalle",
+    "day": "Perşembe",
+    "time": "17.00\r-19.20",
+    "address": "Freierstrasse 32, \r8580 Amriswil",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "2d7e61b3-af5c-5524-9297-318ed3d99f59",
+    "kanton": "TG",
+    "region": "Arbon",
+    "school_name": "Sekundarschulzentrum",
+    "day": "Salı",
+    "time": "17.00-19.20",
+    "address": "Rebenstr. 4, 9320 Arbon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "90dc758f-d70f-574f-a5ca-acdef3f7123f",
+    "kanton": "ZH",
+    "region": "Bachenbülach (I)",
+    "school_name": "Schulhaus Halden",
+    "day": "Perşembe",
+    "time": "15.20-17.40",
+    "address": "Halden 16, 8184 Bachenbülach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "ae173e73-b11b-5381-869f-c70446059f99",
+    "kanton": "SO",
+    "region": "Balsthal",
+    "school_name": "Rainfeld Schulhaus",
+    "day": "Cuma",
+    "time": "15.30-17.50",
+    "address": "Hölzlistr. 1, 4710 Balsthal",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  },
+  {
+    "id": "ef403159-0611-574b-91af-064adf0bae18",
+    "kanton": "ZH",
+    "region": "Bassersdorf",
+    "school_name": "Schulhaus Geeren",
+    "day": "Çarşamba",
+    "time": "16.20-18.30",
+    "address": "Opfikonerstr. 25, 8303 Bassersdorf",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "05589614-2cf7-5117-a197-ed4d40f34dd8",
+    "kanton": "SG",
+    "region": "Bazenheid",
+    "school_name": "Primar Schulhaus Eichbühl B",
+    "day": "Salı",
+    "time": "17.00-19.00",
+    "address": "Wilerstr. 39 A, 9602 Bazenheid",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "20e67009-2839-5758-a932-c9b28c12f0ec",
+    "kanton": "BE",
+    "region": "Biel",
+    "school_name": "College des Platanes",
+    "day": "Çarşamba",
+    "time": "14.45-17.00",
+    "address": "Allestrasse 35, 2503\r\nBiel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Wappen_Bern_matt.svg"
+  },
+  {
+    "id": "87029de1-9f45-594e-a56c-689d701e496a",
+    "kanton": "SO",
+    "region": "Bifang",
+    "school_name": "Bifang Schulhaus",
+    "day": "Perşembe",
+    "time": "16.15-18.30",
+    "address": "Aarauerstr. 68, 4600 Olten",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  },
+  {
+    "id": "4939e100-1e4d-5c49-acff-9af93c4474e5",
+    "kanton": "BL",
+    "region": "Birsfelden",
+    "school_name": "Rheinpark Sekundar Schule",
+    "day": "Cuma",
+    "time": "15.40-18.00",
+    "address": "Rheinparksstrasse 18, 4127 Birsfelden",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "472960c0-19f5-5db7-ad4f-d9a83a1e2c45",
+    "kanton": "BS",
+    "region": "Blaesi",
+    "school_name": "Schulhaus Blaesi",
+    "day": "Çarşamba",
+    "time": "14.00-17.45",
+    "address": "Müllheimerstr. 94, 4057 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "9d8c4b9c-b98b-5f43-86e9-2870797a0c71",
+    "kanton": "BS",
+    "region": "Blaesi Anaokulu",
+    "school_name": "Schulhaus Blaesi",
+    "day": "Perşembe",
+    "time": "15.40-17.40",
+    "address": "Amerbachstrasse 52, 4057\r Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "dbb1ef98-9bbf-5705-9247-7e225f075b10",
+    "kanton": "AG",
+    "region": "Bremgarten",
+    "school_name": "Schulhaus Isenlauf",
+    "day": "Pazartesi",
+    "time": "15:30-17:50",
+    "address": "Badstrasse 3, 5620 Bremgarten",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "9a3f91a5-6113-59f0-b2f0-61dc25c18640",
+    "kanton": "AG",
+    "region": "Brugg",
+    "school_name": "Stapferschulhaus",
+    "day": "Pazartesi",
+    "time": "16.00\r-18:00",
+    "address": "Museumstr.6\r, 5200 Brugg",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "5a4bb5a2-202c-54ec-baf3-6c95b8f8ab8f",
+    "kanton": "SO",
+    "region": "Brühl",
+    "school_name": "Schulhaus Brühl",
+    "day": "Cumartesi",
+    "time": "09.00-11.20",
+    "address": "Brühlstr.120, 4500 Brühl",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  },
+  {
+    "id": "ad899aed-f4c0-5f24-b999-f9e7f1d96312",
+    "kanton": "AR",
+    "region": "Bühler",
+    "school_name": null,
+    "day": "Cuma",
+    "time": "16.30-18.15",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Wappen_Appenzell_Ausserrhoden_matt.svg"
+  },
+  {
+    "id": "70b7fed6-fd41-5413-ab2a-0a35a95ca7ce",
+    "kanton": "ZH",
+    "region": "Bülach (II)",
+    "school_name": "Allmend Schulhaus",
+    "day": "Salı",
+    "time": "16.00-18.20",
+    "address": "Leeweg 21, 8180 Bülach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "3f56a5f6-1489-5978-86b6-10552a58285b",
+    "kanton": "ZH",
+    "region": "Bülach (III)",
+    "school_name": "Schulhaus Hohfuri",
+    "day": "Çarşamba",
+    "time": "12.50-15.10",
+    "address": "Unterweg 51, 8180 Bülach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "ab84afb4-6efb-5398-9ed7-d035aa416322",
+    "kanton": "BE",
+    "region": "Burgdorf",
+    "school_name": "Gotthelfschulhaus",
+    "day": "Perşembe",
+    "time": "16.00-18.00",
+    "address": "Gotthelfstr. 34, 3400 \r\nBurgdorf",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Wappen_Bern_matt.svg"
+  },
+  {
+    "id": "cbdc3781-b51f-5f72-8e05-397dcf2c7e02",
+    "kanton": "TG",
+    "region": "Bürglen",
+    "school_name": "Sekundarschule Bürglen",
+    "day": "Cuma",
+    "time": "16.30-18.50",
+    "address": "Eichholzstr. 21, 8604 Volketswil",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "7699492e-08eb-5c4e-b2da-8de4b34fcf5e",
+    "kanton": "GE",
+    "region": "Cenevre",
+    "school_name": "Ecole SAPAY",
+    "day": "Pazartesi",
+    "time": "16.30-19.00",
+    "address": "Chemin le Sapay 10, 1228 Planes-les-Ouates",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Wappen_Genf_matt.svg/1920px-Wappen_Genf_matt.svg.png"
+  },
+  {
+    "id": "64ce3557-317b-519f-9297-9da92012ccf0",
+    "kanton": "GE",
+    "region": "Cenevre",
+    "school_name": "Geneve English School",
+    "day": "Pazartesi",
+    "time": "15.30-18.00",
+    "address": "Rte de Malagny 36, 1294 Genthod",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Wappen_Genf_matt.svg/1920px-Wappen_Genf_matt.svg.png"
+  },
+  {
+    "id": "831ce569-99c2-57a0-83ea-c8080b5b9022",
+    "kanton": "GE",
+    "region": "Cenevre\r Başkonsolosluğu",
+    "school_name": "Consulat Général de Turquie / T.C.Cenevre\r Başkonsolosluğu",
+    "day": "Cuma",
+    "time": "16.30-18.30",
+    "address": "20, Route de Pré-Bois, 1215 Genève 15\r (International Center Cointrin)",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Wappen_Genf_matt.svg/1920px-Wappen_Genf_matt.svg.png"
+  },
+  {
+    "id": "4012840d-c7e7-562c-ae24-ecdb371169d8",
+    "kanton": "ZG",
+    "region": "Cham",
+    "school_name": null,
+    "day": "Pazartesi",
+    "time": "17.15-19.20",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Wappen_Zug_matt.svg"
+  },
+  {
+    "id": "80e67cb3-97b9-53fb-bbb5-4636f95a1516",
+    "kanton": "GR",
+    "region": "Chur",
+    "school_name": null,
+    "day": "Cumartesi",
+    "time": "10.00-12.20",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/CHE_Graub%C3%BCnden_COA.svg/1920px-CHE_Graub%C3%BCnden_COA.svg.png"
+  },
+  {
+    "id": "5b21ca2e-f36c-5170-80f8-fa406861efc4",
+    "kanton": "ZH",
+    "region": "Daellikon (I)",
+    "school_name": "Schulhaus Leepünt",
+    "day": "Cumartesi",
+    "time": "09.30-13.30",
+    "address": "Schulstr. 5, 8108 Daellikon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "0c480086-e0bc-5093-b2c7-471b29956348",
+    "kanton": "SO",
+    "region": "Derendingen",
+    "school_name": "Schulhaus Steinmatt",
+    "day": "Pazartesi",
+    "time": "16.15\r-18.15",
+    "address": "Viktor Kaufmannstr. 1\r, 4552 Derendingen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  },
+  {
+    "id": "c80f94b4-6e94-58bf-b00b-26227a69929f",
+    "kanton": "ZH",
+    "region": "Dietikon",
+    "school_name": "SchulhausZentral C",
+    "day": "Perşembe",
+    "time": "16.30-19.10",
+    "address": "Bremgartnerstr.15, 8953 Dietikon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "3b46cfef-c75d-5394-9d26-8637f03564d4",
+    "kanton": "SO",
+    "region": "Dulliken",
+    "school_name": "Schulhaus Neumatt",
+    "day": "Pazartesi",
+    "time": "16.00-18.15",
+    "address": "Altelandstr. 12, 4657 Dulliken",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  },
+  {
+    "id": "4adbf2e8-91eb-5dd5-a5b9-6f6442208f1b",
+    "kanton": "SG",
+    "region": "Ebnat-Kappel",
+    "school_name": "Schulhaus Wier",
+    "day": "Salı",
+    "time": "17.00-19.15",
+    "address": "Hüslibergstrasse, 9642 Ebnat-Kappel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "91342cd6-c83f-5a83-ade4-eefd2052581c",
+    "kanton": "ZH",
+    "region": "Effretikon",
+    "school_name": "Schulhaus Schlimperg",
+    "day": "Cuma",
+    "time": "16.00-18.20",
+    "address": "Schlimpergstr. 18, 8307 Effretikon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "714e282a-58fa-5dbb-a059-832503a8a4f5",
+    "kanton": "ZH",
+    "region": "Embrach (Ebnet) (I)",
+    "school_name": "Schulhaus Ebnet",
+    "day": "Çarşamba",
+    "time": "13.50-18.10",
+    "address": "Ebnetstr. 11, 8424 Embrach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "32e5a101-56f2-50be-a6df-99fbb03a54ca",
+    "kanton": "GL",
+    "region": "Ennenda",
+    "school_name": null,
+    "day": "Çarşamba",
+    "time": "16.20-18.40",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Wappen_Glarus_matt.svg/1920px-Wappen_Glarus_matt.svg.png"
+  },
+  {
+    "id": "184f3b2f-331f-5794-9e2e-1f52cae13f5d",
+    "kanton": "AG",
+    "region": "Fislisbach",
+    "school_name": "Schule Fislisbach",
+    "day": "Cumartesi",
+    "time": "09.30\r-11.30",
+    "address": "Birmenstorferstrasse 11\r, 5542 Fislisbach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "0099f697-2277-5390-934c-03e8b5f25384",
+    "kanton": "SG",
+    "region": "Flawil",
+    "school_name": "Schulhaus Altes Feld",
+    "day": "Perşembe",
+    "time": "17.00-19.00",
+    "address": "St.Gallerstrasse 70, 9230 Flawil",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "1d961731-177f-5700-8a6b-420478ffbfa4",
+    "kanton": "TG",
+    "region": "Frauenfeld",
+    "school_name": "Oberstufenzentrum Auen",
+    "day": "Cuma",
+    "time": "16.30-18.50",
+    "address": "Thurstr. 23, 8500 Frauenfeld",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "0e6fbcbd-1036-5876-80bb-2c77909dce81",
+    "kanton": "BL",
+    "region": "Frenkendorf",
+    "school_name": "Sekundarschule Frenkendorf",
+    "day": "Perşembe",
+    "time": "15.40-18.00",
+    "address": "Schulstr. 12, 4402 Frenkendorf",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "f196c5ed-3a7f-5e15-8507-87a46d842d6c",
+    "kanton": "FR",
+    "region": "Fribourg",
+    "school_name": "College Gambach",
+    "day": "Cumartesi",
+    "time": "09:00-14:30",
+    "address": "Av. Weck-Reynold 9\r, 1700 Fribourg",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Wappen_Freiburg_matt.svg/1920px-Wappen_Freiburg_matt.svg.png"
+  },
+  {
+    "id": "da190f8b-a0af-5aaa-bdc1-a8da69e5e49f",
+    "kanton": "SO",
+    "region": "Gerlafingen",
+    "school_name": "Primarschule Schulhaus Gländ 1",
+    "day": "Çarşamba",
+    "time": "13.10-16-40",
+    "address": "Gländstrasse 12, 4563 Gerlafingen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  },
+  {
+    "id": "1eb23ed9-a9e6-5249-85ca-7ba0efbc4ed9",
+    "kanton": "LU",
+    "region": "Geuensee",
+    "school_name": null,
+    "day": "Perşembe",
+    "time": "16.20-18.30",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Wappen_Luzern_matt.svg"
+  },
+  {
+    "id": "c2b789ee-d464-5c53-bab8-172f785ee78e",
+    "kanton": "TI",
+    "region": "Giubiasco",
+    "school_name": null,
+    "day": "Çarşamba",
+    "time": "13.40-16.00",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Wappen_Tessin_matt.svg/1920px-Wappen_Tessin_matt.svg.png"
+  },
+  {
+    "id": "0de2a903-a16d-5bf5-a239-83974c740fb5",
+    "kanton": "ZH",
+    "region": "Glattfelden (IV)",
+    "school_name": "Primarschule Eichhölzli",
+    "day": "Pazartesi",
+    "time": "16.20-18.20",
+    "address": "Schulstr.6, 8192 Glattfelden",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "6f773bdd-5c7d-56fc-a191-abdedae7674f",
+    "kanton": "BS",
+    "region": "Gotthelf Schulhaus",
+    "school_name": "Gotthelf Schulhaus",
+    "day": "Salı",
+    "time": "15.40-18.O0",
+    "address": "Gotthelfplatz 1\r, 4054 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "51513576-f4d1-5a81-b436-303e5566e4f9",
+    "kanton": "SO",
+    "region": "Grenchen",
+    "school_name": "Bezirksschule Grenchen",
+    "day": "Perşembe",
+    "time": "16.00-18.20",
+    "address": "Schulstr.35, 2540 Grenchen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  },
+  {
+    "id": "d6c53896-fa05-5390-ab8b-2ac927e2a611",
+    "kanton": "ZH",
+    "region": "Hirzenbach I",
+    "school_name": "Schulhaus Hirzenbach",
+    "day": "Salı",
+    "time": "16.00-18.00",
+    "address": "Luchwiesenstr. 186, 8051 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "7ddd8be4-834a-5664-8e94-c1a9d3c13138",
+    "kanton": "ZH",
+    "region": "Hirzenbach II",
+    "school_name": "Schulhaus Hirzenbach",
+    "day": "Perşembe",
+    "time": "16.00-18.00",
+    "address": "Luchwiesenstr. 186, 8051 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "57f445bf-0898-5755-be30-f9f4c2e4b456",
+    "kanton": "ZH",
+    "region": "Horgen",
+    "school_name": "Schulhaus Waldegg",
+    "day": "Pazartesi",
+    "time": "16.30-18.45",
+    "address": "Waldeggstr. 5, 8810 Horgen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "eccae6cd-27b1-5989-a926-6708dc09befb",
+    "kanton": "ZH",
+    "region": "Im Herrlig I",
+    "school_name": "Schulhaus Im Herrlig",
+    "day": "Cumartesi",
+    "time": "09.00-11.10",
+    "address": "Badenerstr.724, 8040 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "32d7f2e0-5738-5ef2-8bc5-40b64aa70ff6",
+    "kanton": "ZH",
+    "region": "Im Herrlig II",
+    "school_name": "Schule Herrlig",
+    "day": "Cumartesi",
+    "time": "09.15-13.15",
+    "address": "Badenerstr. 724, 8048 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "7998aa69-71a5-58b7-b5f8-993b840c3e32",
+    "kanton": "BS",
+    "region": "Insel",
+    "school_name": "Inselschulhaus",
+    "day": "Salı",
+    "time": "15:40-17:45",
+    "address": "Inselstrasse 45, 4057 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "3033f239-b500-5495-bb4d-8c749283f11a",
+    "kanton": "BS",
+    "region": "Isaak Iselin",
+    "school_name": "Isaak Iselin Schulhaus",
+    "day": "Perşembe",
+    "time": "15.45-17.45",
+    "address": "Strassburgeralle 65, 4055 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "96bc4cf1-3194-5258-8ed2-6737d5b31d58",
+    "kanton": "SG",
+    "region": "Jona",
+    "school_name": "Schulhaus Dorf",
+    "day": "Salı",
+    "time": "16.30-18.40",
+    "address": "St. Gallerstr. 44, 8645 Rapperswil-Jona",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "0aa1f710-aa5e-52d9-8485-3acfe14986bd",
+    "kanton": "AG",
+    "region": "Kleindöttingen",
+    "school_name": "Schulen Böttstein",
+    "day": "Çarşamba",
+    "time": "12.45\r-14.55",
+    "address": "Schulhausstr. 28\r, 5314 Kleindöttingen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "b5cdf23b-c20e-53fc-a282-6a42e8090b47",
+    "kanton": "BS",
+    "region": "Kleinhüningen",
+    "school_name": "Schulhaus Kleinhünningen",
+    "day": "Cuma",
+    "time": "15.40-17.45",
+    "address": "Dorfstr. 51, 4057 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "cecc5108-3393-50d4-991f-0e67a27ac7f5",
+    "kanton": "BS",
+    "region": "Kleinhüningen Anaokulu",
+    "school_name": "Schulhaus Kleinhünningen",
+    "day": "Cuma",
+    "time": "13.15-15.15",
+    "address": "Dorfstr. 51, 4057 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "9f8a8ec9-5aa8-5ab0-a97f-fb8b6b6b97e0",
+    "kanton": "SH",
+    "region": "Kreuzgut",
+    "school_name": null,
+    "day": "Pazartesi",
+    "time": "16.30-18.50",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Wappen_Schaffhausen_matt.svg"
+  },
+  {
+    "id": "f4b20354-44fa-52b8-aeef-17cb5105b0d8",
+    "kanton": "TG",
+    "region": "Kreuzlingen",
+    "school_name": "SSZ Pestalozzi",
+    "day": "Çarşamba",
+    "time": "13.00-17.30",
+    "address": "Pestalozzistr. 9, 8280 Kreuzlingen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "be13d769-8236-5e24-ab51-9bf1b644dc34",
+    "kanton": "TG",
+    "region": "Kreuzlingen",
+    "school_name": "SSZ Pestalozzi",
+    "day": "Cuma",
+    "time": "16.00-18.20",
+    "address": "Pestalozzistr. 9, 8280 Kreuzlingen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "d2d1eeea-dde0-57f1-bfd4-fadd2b82df1f",
+    "kanton": "NE",
+    "region": "La Chaux de Fonds",
+    "school_name": "Ecole Secondaire",
+    "day": "Cuma",
+    "time": "15.45-19.00",
+    "address": "Av. De Forge 18, 2300 La chaux de Fonds",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Wappen_Neuenburg_matt.svg"
+  },
+  {
+    "id": "1b1a42ac-a8fd-570c-aba4-c3669299eb63",
+    "kanton": "NE",
+    "region": "La Chaux de Fonds Anaokulu",
+    "school_name": null,
+    "day": "Salı",
+    "time": "15.30-18.00",
+    "address": "Rue Cernil-Antoine 23, 2300 La Chaux de Fonds",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Wappen_Neuenburg_matt.svg"
+  },
+  {
+    "id": "24156be2-7e01-5dd4-ad36-8bab9877e290",
+    "kanton": "GE",
+    "region": "Lancy ILL",
+    "school_name": "Institut International de Lancy",
+    "day": "Pazartesi",
+    "time": "15.30-17.50",
+    "address": "Av. Eugene-Lance 24, 1212 Grand Lancy",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Wappen_Genf_matt.svg/1920px-Wappen_Genf_matt.svg.png"
+  },
+  {
+    "id": "4138cc73-75fe-5851-b203-f0642a444003",
+    "kanton": "BE",
+    "region": "Langenthal",
+    "school_name": "Schulzentrum \r\nKreuzfeld 5",
+    "day": "Cuma",
+    "time": "16.00-18.00",
+    "address": "Talstr. 28, 4900 \rLangenthal",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Wappen_Bern_matt.svg"
+  },
+  {
+    "id": "1f1f5faa-d1c1-5127-ab32-a45739f1c41a",
+    "kanton": "BL",
+    "region": "Laufen",
+    "school_name": "Primarschule Baselstrasse",
+    "day": "Cuma",
+    "time": "16.00-18.00",
+    "address": "Baselstr. 5, 4242 Laufen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "052119ac-896d-5881-8e91-ec3578427372",
+    "kanton": "AG",
+    "region": "Lenzburg",
+    "school_name": "Schulanlage Angelrain",
+    "day": "Çarşamba",
+    "time": "16.00\r-18.15",
+    "address": "Angelrainstr. 7\r, 5600 Lenzburg",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "29248eae-1a5c-5afb-a773-039fa715d7b1",
+    "kanton": "BS",
+    "region": "Leonhard",
+    "school_name": "Sekundarschule Leonhard",
+    "day": "Cumartesi",
+    "time": "09.30-11.45",
+    "address": "Leonhardsstrasse 15\r, 4051 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "bb217fec-c16d-5984-89e5-917eb966c551",
+    "kanton": "ZH",
+    "region": "Loogarten",
+    "school_name": "Schulhaus Loogarten",
+    "day": "Salı",
+    "time": "16.20-18.40",
+    "address": "Eugen-Hueber Str. 145, 8048 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "636615b4-878f-5d61-ab5c-bdc5cef0f821",
+    "kanton": "BE",
+    "region": "Lyss",
+    "school_name": "Stegmattschulhaus",
+    "day": "Cumartesi",
+    "time": "09.30-13:30",
+    "address": "Kirchenfeldstrasse 5-7,\r 3250 Lyss",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Wappen_Bern_matt.svg"
+  },
+  {
+    "id": "59b6474f-682e-567b-9486-2632f78ea7e3",
+    "kanton": "BS",
+    "region": "Margrethen",
+    "school_name": "Margarethen Schulhaus",
+    "day": "Çarşamba",
+    "time": "14.00-17.45",
+    "address": "Gempenstr. 48, 4053 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "6078f062-9fb9-5f00-a689-9d9cd15c75f1",
+    "kanton": "ZH",
+    "region": "Mattenbach",
+    "school_name": "Schulhaus Mattenbach",
+    "day": "Salı",
+    "time": "16.00-18.20",
+    "address": "Endlikerstrasse 18, 8400 Winterthur",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "1fb735e8-8abe-54e6-a229-0d0250d5e0a5",
+    "kanton": "SG",
+    "region": "Mels",
+    "school_name": "Schulhaus Heiligkreuz",
+    "day": "Perşembe",
+    "time": "17.00-19.05",
+    "address": "Reschustr.1, 8888 Heiligkreuz",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "3a23817f-6dd4-5ad2-936d-e69dd3beea9f",
+    "kanton": "AG",
+    "region": "Menziken",
+    "school_name": "Altes Schulhaus",
+    "day": "Cuma",
+    "time": "16:00-18:00",
+    "address": "Zwingstrasse 1, 5737 Menziken",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "43bd076a-87b1-53e1-8b74-803ac0da9aca",
+    "kanton": "VS",
+    "region": "Monthey",
+    "school_name": "Cycle d’Orientation",
+    "day": "Cuma",
+    "time": "16.40-19.00",
+    "address": "Rue de Tonkin 28, 1870 Monthey",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Wappen_Wallis_matt.svg/1920px-Wappen_Wallis_matt.svg.png"
+  },
+  {
+    "id": "bbc7d326-69bb-55b1-8aa0-41ead9c8f18d",
+    "kanton": "VD",
+    "region": "Moudon",
+    "school_name": "College de Grenette",
+    "day": "Perşembe",
+    "time": "16.00-18.15",
+    "address": "Av. De Lucens 3b, 1510 Moudon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Wappen_Waadt_matt.svg"
+  },
+  {
+    "id": "4248a833-b835-56ed-942d-2777bf91c83b",
+    "kanton": "TG",
+    "region": "Münchwilen",
+    "school_name": "Schulhaus Waldegg",
+    "day": "Salı",
+    "time": "16.00-18.20",
+    "address": "Waldeggstrasse, 9542 Münchwilen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "8b6f2b80-957f-5544-8ae3-a26b64894ce5",
+    "kanton": "BL",
+    "region": "Muttenz",
+    "school_name": "Margelacker Primarschule",
+    "day": "Perşembe",
+    "time": "15.40-18.00",
+    "address": "Reichensteinerstr.1, 4132 Muttenz",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "241ed52f-2a51-5bf9-a3c0-15ca7b6cc621",
+    "kanton": "NE",
+    "region": "Neuchâtel",
+    "school_name": "Collège de la Maladière",
+    "day": "Salı",
+    "time": "16.45-19.00",
+    "address": "Avenue du Mail 13, 2000 Neuchâtel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Wappen_Neuenburg_matt.svg"
+  },
+  {
+    "id": "cd181f98-a605-5b93-863b-98866f4d7f89",
+    "kanton": "AG",
+    "region": "Neuenhof",
+    "school_name": "Schibler Schulhaus",
+    "day": "Çarşamba",
+    "time": "16.00\r-18.15",
+    "address": "Schibler Schulhaus\r, 5432 Neuenhof",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "48597ad0-b1ba-54db-95ed-54bf8d724a92",
+    "kanton": "AG",
+    "region": "Oftringen",
+    "school_name": "Schulhaus Pfäffenacker",
+    "day": "Çarşamba",
+    "time": "13.15\r-15.20",
+    "address": "Kirchstr. 4\r, 4665 Oftringen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "2a9e94b5-1acf-517e-ba89-e53e1eade7dd",
+    "kanton": "ZH",
+    "region": "Opfikon (I)",
+    "school_name": "Schulhaus Mettlen",
+    "day": "Cumartesi",
+    "time": "09.40-12.50",
+    "address": "Dorfstr. 4, 8152 Opfikon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "d3be6738-e49a-5653-afe6-bea0973e187b",
+    "kanton": "BE",
+    "region": "Ostermundigen",
+    "school_name": "Schule Rothus",
+    "day": "Cuma",
+    "time": "16.00-18.00",
+    "address": "Wegmühlegassli 103, \r\n3065 Bolligen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Wappen_Bern_matt.svg"
+  },
+  {
+    "id": "390247b2-79c3-53e1-85e9-b9d1f2febb54",
+    "kanton": "ZH",
+    "region": "Pfungen",
+    "school_name": "Schulhaus Breiteacker",
+    "day": "Pazartesi",
+    "time": "15.50-18.10",
+    "address": "Breiteackerstr. 44 A, 8422 Pfungen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "db60aeda-a9d5-58d9-a77f-f78c1a4237d5",
+    "kanton": "BL",
+    "region": "Pratteln",
+    "school_name": "Erlimatt Schulhaus",
+    "day": "Pazartesi",
+    "time": "15.40-18.00",
+    "address": "Erliweg 12, 4113 Pratteln",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "e4367843-4234-5ad3-ad4f-9967db4b0cab",
+    "kanton": "ZH",
+    "region": "Pünt Uster",
+    "school_name": "Schulhaus Pünt",
+    "day": "Perşembe",
+    "time": "16.30-18.50",
+    "address": "Willstr. 30, 8630 Uster",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "c7f37e07-c1fa-5ef7-833d-4af7e16c723d",
+    "kanton": "BL",
+    "region": "Reinach",
+    "school_name": "Schulhaus Fichten",
+    "day": "Pazartesi",
+    "time": "15.40-18.00",
+    "address": "Fichtenweg 72, 4153 Reinach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "9c1a1853-b88e-5069-9786-a927ba20ad6b",
+    "kanton": "BL",
+    "region": "Reinach Anaokulu",
+    "school_name": "Schulhaus Fichten",
+    "day": "Pazartesi",
+    "time": "13.30-15.30",
+    "address": "Fichtenweg 72, 4153 Reinach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Coat_of_arms_of_Kanton_Basel-Landschaft.svg/1920px-Coat_of_arms_of_Kanton_Basel-Landschaft.svg.png"
+  },
+  {
+    "id": "6770a20a-21e8-54dc-bd65-e41c2bcee95c",
+    "kanton": "AG",
+    "region": "Reinach AG Anaokulu",
+    "school_name": "Impuls Zusammenleben",
+    "day": "Pazartesi",
+    "time": "16:00-18:00",
+    "address": "Aarauerstrasse 9, 5734 Reinach AG",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "25470a28-a236-5cfe-98e8-59f7eb2b6dbe",
+    "kanton": "VD",
+    "region": "Renens",
+    "school_name": null,
+    "day": "Çarşamba",
+    "time": "13:00-15:00",
+    "address": "Sent. de la Gare 9, 1020 Renens",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Wappen_Waadt_matt.svg"
+  },
+  {
+    "id": "ae13200d-f2dd-5953-9871-a3e5b29a47b4",
+    "kanton": "VD",
+    "region": "Renens Anaokulu",
+    "school_name": null,
+    "day": "Cumartesi",
+    "time": "11.00-13.00",
+    "address": "Sent. de la Gare 9, 1020 Renens",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Wappen_Waadt_matt.svg"
+  },
+  {
+    "id": "8b750210-9831-53ab-9ee6-16bb8dc58591",
+    "kanton": "AG",
+    "region": "Rheinfelden",
+    "school_name": "Augarten Primarschule",
+    "day": "Çarşamba",
+    "time": "14.20\r-16.50",
+    "address": "Waldhofstr. 34\r, 4310 Rheinfelden",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "4eddfdfd-ceb3-5aba-b51b-cad7a7bfca0a",
+    "kanton": "SG",
+    "region": "Rheintal - Heerbrugg",
+    "school_name": "Schulhaus Blattacker \r– Heerbrugg",
+    "day": "Perşembe",
+    "time": "17.15\r-19.00",
+    "address": "Brändlistrasse 3, 9435 Heerbrugg",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "86293173-2955-598b-ab93-8669107c17ff",
+    "kanton": "TG",
+    "region": "Romanshorn",
+    "school_name": "Oberschulhaus",
+    "day": "Çarşamba",
+    "time": "13.00-17.40",
+    "address": "Schulstrasse 1, 8590 Romanshorn",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "029958ab-a982-5be3-ade0-7e8e86934f68",
+    "kanton": "TG",
+    "region": "Romanshorn Anaokulu",
+    "school_name": "Ludothek",
+    "day": "Pazartesi",
+    "time": "15.45-17.45",
+    "address": "Alleestr 43, 8590 Romanshorn",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "c50fc123-a19f-5aa1-bc66-74b403ec0694",
+    "kanton": "SG",
+    "region": "Rorschach",
+    "school_name": "Schulhaus Mühletobel",
+    "day": "Çarşamba",
+    "time": "13.00-18.20",
+    "address": "Mühletobelstrasse 69, 9400 Rorschach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "c6399cd5-05e7-53f9-a78c-1a2eb48fba7c",
+    "kanton": "BE",
+    "region": "Rüfenacht",
+    "school_name": "Rüfenacht Schule",
+    "day": "Cumartesi",
+    "time": "10.00-12.20",
+    "address": "Rosenweg 9, 3075 \r\nRüfenacht",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Wappen_Bern_matt.svg"
+  },
+  {
+    "id": "188f9139-0ab5-51e3-9c73-7b457c89af3d",
+    "kanton": "ZH",
+    "region": "Schlieren",
+    "school_name": "Schule Schulstrasse",
+    "day": "Cuma",
+    "time": "17.00-19.00",
+    "address": "Schulstr.18, 8952 Schlieren",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "63ea1afb-9442-5766-ba02-4a5bf6b4755d",
+    "kanton": "SG",
+    "region": "Schmerikon",
+    "school_name": "Schulhaus Sand",
+    "day": "Çarşamba",
+    "time": "13.00-15.10",
+    "address": "Birkenstr. 7, 8716 Schmerikon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "2064b762-f075-5eb5-8130-73e318cb22f4",
+    "kanton": "SO",
+    "region": "Schönenwerd",
+    "school_name": "Schulhaus Feld",
+    "day": "Cuma",
+    "time": "16.15-18.30",
+    "address": "Weiermattstr. 20, 5012 Schönenwerd",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  },
+  {
+    "id": "4fd37207-7bb2-5016-8fa1-e95d2dfa9339",
+    "kanton": "AG",
+    "region": "Seon",
+    "school_name": "Schulhaus Hertimatt II",
+    "day": "Çarşamba",
+    "time": "13.00\r-15.00",
+    "address": "Oberdorfstr. 23 A\r, 5703 Seon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "9c37147f-ba0e-5797-a88a-f87f2cd2ae1c",
+    "kanton": "SZ",
+    "region": "Siebnen",
+    "school_name": null,
+    "day": "Pazartesi",
+    "time": "16.30-19.40",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Wappen_Schwyz_matt.svg"
+  },
+  {
+    "id": "67f0513d-37f2-56a0-994c-1e1b8def589f",
+    "kanton": "ZH",
+    "region": "Sihlfeld",
+    "school_name": "Schulhaus Sihlfeld",
+    "day": "Cuma",
+    "time": "15.30-17.15",
+    "address": "Sihlfeldstr.165, 8004 Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "5d68a511-86cd-5c2d-8aa5-7e4ceb94d0e9",
+    "kanton": "VS",
+    "region": "Sion",
+    "school_name": "Ecole des Colines",
+    "day": "Cumartesi",
+    "time": "11.45-13.30",
+    "address": "Chemin des Collines 31,\r 1950 Sion",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Wappen_Wallis_matt.svg/1920px-Wappen_Wallis_matt.svg.png"
+  },
+  {
+    "id": "477fb1d2-c0b3-52a5-a351-2dae73f5b597",
+    "kanton": "TG",
+    "region": "Sirnach",
+    "school_name": "Oberes Schulhaus",
+    "day": "Pazartesi",
+    "time": "16.00-18.30",
+    "address": "Wilerstr. 3, 8370 Sirnach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "d7be8116-dfb3-5364-95e2-9ae9fa542d8c",
+    "kanton": "SG",
+    "region": "Spelterini",
+    "school_name": "Primarschulhaus Spelterini",
+    "day": "Çarşamba",
+    "time": "13.40-16.00",
+    "address": "Sonnenstr. 16, 9000 St. Gallen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "77a3f70e-b140-534c-b854-8f223fd7a0b8",
+    "kanton": "AG",
+    "region": "Spreitenbach",
+    "school_name": "Schulhaus Hauflaendli",
+    "day": "Cumartesi",
+    "time": "10.30\r-12.50",
+    "address": "Haufländlistr. 12\r, 8957 Spreitenbach",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "ea72492a-6499-5d38-924f-1a01e566c92e",
+    "kanton": "SG",
+    "region": "St. Margrethen",
+    "school_name": "Schulhaus Wiesenau",
+    "day": "Salı",
+    "time": "17.00-19.20",
+    "address": "Wiesenstrasse 18, 9430 St. Margrethen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "deadcd01-63f7-58b6-9268-ee6336d28694",
+    "kanton": "AG",
+    "region": "Stein",
+    "school_name": "Primarschule Stein",
+    "day": "Salı",
+    "time": "15.15 -17:15",
+    "address": "Brotkorbstrasse 11\r, 4332 Stein-Säckingen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "fa16fedd-36e2-58d8-93ad-aec2b46fdf37",
+    "kanton": "BE",
+    "region": "Stöckacker / Tscharnergut",
+    "school_name": "Schulhaus Stöckacker",
+    "day": "Çarşamba",
+    "time": "13.00-15:00",
+    "address": "Bienenstr.5-11, 3018 \r\nBern",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Wappen_Bern_matt.svg"
+  },
+  {
+    "id": "8cb77da7-3816-5ace-b971-41dcf23c7f28",
+    "kanton": "AG",
+    "region": "Suhr",
+    "school_name": "Primarschule Dorf",
+    "day": "Salı",
+    "time": "16.00\r-18.20",
+    "address": "Tramstr. 26\r, 5034 Suhr",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "633f69f1-2862-5eac-a914-25dc9ad354fb",
+    "kanton": "AG",
+    "region": "Teufenthal",
+    "school_name": "Schule Teufenthal",
+    "day": "Perşembe",
+    "time": "16.00\r-18.30",
+    "address": "Dorfstrasse\r, 5723 Teufenthal",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "b9880538-5419-5451-8159-d7b89c8ba315",
+    "kanton": "BS",
+    "region": "Thiersteiner",
+    "school_name": "Schulhaus Thiersteiner",
+    "day": "Pazartesi",
+    "time": "14.00-17.45",
+    "address": "Barschwilerstr. 11, 4053 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "d543e022-b85f-53dd-9b23-1e67c074ef03",
+    "kanton": "BS",
+    "region": "Thiersteiner Anaokulu",
+    "school_name": "Schulhaus Thiersteiner",
+    "day": "Çarşamba",
+    "time": "14.00-17.45",
+    "address": "Barschwilerstr. 11, 4053 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "66e59d8b-da58-52db-900f-8b2fd6830915",
+    "kanton": "ZH",
+    "region": "Töss",
+    "school_name": "Betreuung Eichliacker (Anaokul)",
+    "day": "Cumartesi",
+    "time": "09.20-13.30",
+    "address": "Eichliackerstr. 79, 8406 Winterthur",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "4c25cf44-10b0-513d-a56d-48ab3c91c392",
+    "kanton": "ZH",
+    "region": "Urdorf (I) Anaokul +1",
+    "school_name": "Schulhaus Embri",
+    "day": "Çarşamba",
+    "time": "16.30-18.30",
+    "address": "Bahnhofstr. 49, 8902 Urdorf",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "ee01e50e-867e-5d15-8108-478a9338592e",
+    "kanton": "ZH",
+    "region": "Urdorf (II)",
+    "school_name": "Schulhaus Embri",
+    "day": "Perşembe",
+    "time": "17.00-19.00",
+    "address": "Im Embri 49, 8902 Urdorf",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "07565af7-7d04-5c6b-a55d-b14e203cf809",
+    "kanton": "FL",
+    "region": "Vaduz",
+    "school_name": null,
+    "day": "Cumartesi",
+    "time": "09.20-11.40",
+    "address": null,
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Flag_of_Liechtenstein.svg/1920px-Flag_of_Liechtenstein.svg.png"
+  },
+  {
+    "id": "78a78d6b-0fe1-5850-a50b-4ad45cc8c6b5",
+    "kanton": "ZH",
+    "region": "Volketswil (I)",
+    "school_name": "Schulhaus Feldhof",
+    "day": "Pazartesi",
+    "time": "16.30-18.50",
+    "address": "Eichholzstr. 21, 8604 Volketswil",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "b39d21c7-f780-5e23-bd9f-4d8dd49d56ac",
+    "kanton": "ZH",
+    "region": "Volketswil (II)",
+    "school_name": "Schulhaus Feldhof",
+    "day": "Salı",
+    "time": "16.30-18.50",
+    "address": "Eichholzstr. 21, 8604 Volketswil",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "3188cd5c-9716-5425-bcc6-63f75827c676",
+    "kanton": "ZH",
+    "region": "Wädenswil Au",
+    "school_name": "Schulhaus Ort",
+    "day": "Cumartesi",
+    "time": "10.20-12.40",
+    "address": "Altelandstr. 79, 8804 Au",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "7c5bfbf2-f355-50eb-995d-5d75a0a16936",
+    "kanton": "ZH",
+    "region": "Wallisellen",
+    "school_name": "Schule Wallisellen",
+    "day": "Pazartesi",
+    "time": "16.30-17.50\n17.50-19.10",
+    "address": "Alte Winterthurerstrasse 26a, 8304 Wallisellen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "28c871a3-5061-5bf4-8206-421872768107",
+    "kanton": "ZH",
+    "region": "Wallrüti",
+    "school_name": "Schulhaus Wallrüti",
+    "day": "Çarşamba",
+    "time": "13.00-15.20",
+    "address": "Guggenbühl str.140, 8404 Winterthur",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "9ddb35df-e3f8-5f08-bad1-05a0c018ab7e",
+    "kanton": "BS",
+    "region": "Wasgenring",
+    "school_name": "Schulhaus Wasgenring",
+    "day": "Çarşamba",
+    "time": "13.00-17.30",
+    "address": "Welschmattstr. 30, 4055 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "9d81bbe9-6ef6-55d1-b7c7-fcd3fae19818",
+    "kanton": "BS",
+    "region": "Wasgenring Anaokulu",
+    "school_name": "Schulhaus Wasgenring",
+    "day": "Cuma",
+    "time": "15.45-17.45",
+    "address": "Welschmattstr. 30, 4055 Basel",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Wappen_Basel-Stadt_matt.svg"
+  },
+  {
+    "id": "a71f4f6c-ff8a-59bb-a7c3-80f7f6263b9c",
+    "kanton": "SG",
+    "region": "Wattwil",
+    "school_name": "Schulhaus Dorf",
+    "day": "Cuma",
+    "time": "17.00-19.20",
+    "address": "Unterdorfstr. 12, 9630 Wattwil",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "56ebe379-a0ab-5ee4-b9c9-59835ebfcc4d",
+    "kanton": "TG",
+    "region": "Weinfelden",
+    "school_name": "Paul-Reinhart Schulhaus",
+    "day": "Cumartesi",
+    "time": "10.15-12.35",
+    "address": "Industriestr. 23, 8570 Weinfelden",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Wappen_Thurgau_matt.svg"
+  },
+  {
+    "id": "539ad293-f7d3-5678-b81c-bd81cd758a2b",
+    "kanton": "ZH",
+    "region": "Wetzkikon Guldisloo",
+    "school_name": "Schulhaus Guldisloo",
+    "day": "Salı",
+    "time": "16.00-19.00",
+    "address": "Guldisloo 17, 8620 Wetzikon",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "d0c8a657-cf92-5f20-af9e-89182a254b2a",
+    "kanton": "SG",
+    "region": "Wil",
+    "school_name": "Allee Schulhaus",
+    "day": "Çarşamba",
+    "time": "13.00-15.00",
+    "address": "Alleestr. 3, 9500 Wil",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_canton_of_St._Gallen.svg"
+  },
+  {
+    "id": "1a5fdb0f-8e8c-5261-a816-520a14df219e",
+    "kanton": "AG",
+    "region": "Windisch",
+    "school_name": "Schulhaus Dohlenzelg",
+    "day": "Cuma",
+    "time": "15.45-18.00",
+    "address": "Dohlenzelgstrasse 28,\r 5210 Windisch",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Wappen_Aargau_matt.svg/1280px-Wappen_Aargau_matt.svg.png"
+  },
+  {
+    "id": "7da9efc1-6cb7-57e0-ba49-71759342f0ff",
+    "kanton": "ZH",
+    "region": "Wolfswinkel \rİsengrind",
+    "school_name": "Schulhaus Im Isengrind",
+    "day": "Salı",
+    "time": "16.00-18.00",
+    "address": "Wolfswinkel 5, 8046\r Zürich",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "902b5d83-5624-5fc4-903a-79de8c1fd122",
+    "kanton": "ZH",
+    "region": "Wollishofen",
+    "school_name": "Schule Entlisberg",
+    "day": "Perşembe",
+    "time": "16.30-18.35",
+    "address": "Balberstr. 71, 8038 Wollishofen",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "f6b74de5-d38e-5ed3-8bf5-49dc044b7236",
+    "kanton": "ZH",
+    "region": "Wülflingen",
+    "school_name": "Primarschule Ausserdorf",
+    "day": "Cuma",
+    "time": "16.00-18.20",
+    "address": "Wieshofstr. 59, 8408 Winterthur",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Wappen_Z%C3%BCrich_matt.svg"
+  },
+  {
+    "id": "df616500-5b3e-5b23-8281-33e295b42caf",
+    "kanton": "SO",
+    "region": "Zuchwil",
+    "school_name": "Schulhaus Pisoni",
+    "day": "Salı",
+    "time": "16.20-18.40",
+    "address": "Damstr.1, 4528 Zuchwil",
+    "flag_url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Wappen_Solothurn_matt.svg"
+  }
+]

@@ -1,0 +1,503 @@
+[
+  {
+    "name": ".İsviçre Türk Toplumu İTT",
+    "directory": "tercume",
+    "category": "Almanca, Fransızca, İngilizce",
+    "kantons": [
+      "BE",
+      "ZH"
+    ],
+    "email": "info@tgs-itt.ch",
+    "phone": "0792091075",
+    "address": null,
+    "website": null,
+    "description": "www.tgs-itt.ch",
+    "image_url": "https://tgs-itt.ch/wp-content/uploads/2022/01/cropped-oynanmis.png",
+    "contact_person": null,
+    "_source": "SS1_tercüme",
+    "id": "ac2ad0a3-e4cd-5b2b-bfc0-4decfbd3119b"
+  },
+  {
+    "name": "Fatih Karaoğlu",
+    "directory": "tercume",
+    "category": "Almanca, Fransızca, İngilizce",
+    "kantons": [
+      "BE"
+    ],
+    "email": "fatihk.54@gmail.com",
+    "phone": "076 329 95 94",
+    "address": null,
+    "website": "https://www.linkedin.com/in/fatihkaraoglu",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1n9v0WtoB6GeJOuxsatrdd0tp8IiO8uqO",
+    "contact_person": null,
+    "_source": "SS1_tercüme",
+    "id": "7c186c1c-47c8-5926-809e-63d2fa57f632"
+  },
+  {
+    "name": "Mehmet Kaya",
+    "directory": "tercume",
+    "category": "Türkçe -> Almanca (sözlü)",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "878aafec-9de6-5d6d-a7bb-ec21e492feda"
+  },
+  {
+    "name": "Fatma Demir",
+    "directory": "tercume",
+    "category": "Almanca -> Türkçe (yazılı)",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "08bd0066-4316-542c-8998-0071bee377f0"
+  },
+  {
+    "name": "Ayşe Koç",
+    "directory": "tercume",
+    "category": "Almanca -> Türkçe (sözlü)",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "8babc493-2918-542f-b75c-e9816b0dc3da"
+  },
+  {
+    "name": "Emre Şahin",
+    "directory": "tercume",
+    "category": "Türkçe -> Fransızca (yazılı)",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "a1e03769-42d0-5fb8-b257-fddf3f76116a"
+  },
+  {
+    "name": "Hasan Çelik",
+    "directory": "tercume",
+    "category": "Türkçe -> Fransızca (sözlü)",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "f8ed91f4-badb-50e6-b7fe-f634f43699af"
+  },
+  {
+    "name": "Zeynep Aydın",
+    "directory": "tercume",
+    "category": "Fransızca -> Türkçe (yazılı)",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "0a96636f-1b3e-5377-80c9-58e0d6ebacbd"
+  },
+  {
+    "name": "Cansu Güneş",
+    "directory": "tercume",
+    "category": "Fransızca -> Türkçe (sözlü)",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "69c5928b-74d1-5543-a8d3-7cabecf2c39a"
+  },
+  {
+    "name": "Selin Aksoy",
+    "directory": "tercume",
+    "category": "Türkçe -> Almanca (yazılı)",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "a19e12e8-d566-5ef8-a292-cf08584beb9b"
+  },
+  {
+    "name": "Orhan Bulut",
+    "directory": "tercume",
+    "category": "Türkçe -> Almanca (sözlü)",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "b5794aed-d9e6-5f5b-9379-a6405cda748c"
+  },
+  {
+    "name": "Deniz Kaya",
+    "directory": "tercume",
+    "category": "Almanca -> Türkçe (yazılı)",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "c8be692c-8b8a-52d2-95e3-739280421e72"
+  },
+  {
+    "name": "Melike Şen",
+    "directory": "tercume",
+    "category": "Almanca -> Türkçe (sözlü)",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "06e2a98c-0699-54b0-ae1f-ee9889654500"
+  },
+  {
+    "name": "Arda Güner",
+    "directory": "tercume",
+    "category": "Türkçe -> Fransızca (yazılı)",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "1101de96-1433-56d2-a96f-67cf58f7ab7e"
+  },
+  {
+    "name": "Leyla Özdemir",
+    "directory": "tercume",
+    "category": "Türkçe -> Fransızca (sözlü)",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "9bf9d9ce-5cfa-543b-818a-da597c89b8be"
+  },
+  {
+    "name": "Burak Yıldırım",
+    "directory": "tercume",
+    "category": "Fransızca -> Türkçe (yazılı)",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "665dc83e-ef8b-504a-a6e5-5aa1e5a441eb"
+  },
+  {
+    "name": "Esra Korkmaz",
+    "directory": "tercume",
+    "category": "Fransızca -> Türkçe (sözlü)",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "42a636ce-e2ec-5a33-9887-034e646507db"
+  },
+  {
+    "name": "Gül Eren",
+    "directory": "tercume",
+    "category": "Türkçe -> Almanca (yazılı)",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "f7f91aeb-29da-5be5-9541-75780a972157"
+  },
+  {
+    "name": "Oğuzhan Polat",
+    "directory": "tercume",
+    "category": "Türkçe -> Almanca (sözlü)",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "b516edf3-392e-5da3-9956-2738247b0bfd"
+  },
+  {
+    "name": "Sevgi Çetin",
+    "directory": "tercume",
+    "category": "Almanca -> Türkçe (yazılı)",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "bd8820e7-1c05-56d3-bb7f-316e4a3b2200"
+  },
+  {
+    "name": "Mustafa Can",
+    "directory": "tercume",
+    "category": "Almanca -> Türkçe (sözlü)",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "8576988e-0449-5780-8b31-fd6c193a36f0"
+  },
+  {
+    "name": "Nazlı Arslan",
+    "directory": "tercume",
+    "category": "Türkçe -> Fransızca (yazılı)",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "fc24023d-eab4-5ad2-ac46-3f7acb8c1898"
+  },
+  {
+    "name": "Murat Çiftçi",
+    "directory": "tercume",
+    "category": "Türkçe -> Fransızca (sözlü)",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "131a9dfc-5814-5702-81bf-c334c411b4ac"
+  },
+  {
+    "name": "Pelin Taş",
+    "directory": "tercume",
+    "category": "Fransızca -> Türkçe (yazılı)",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "42f72e85-6bc0-53f8-8cee-d8cf5afe8cdb"
+  },
+  {
+    "name": "Derya Kurt",
+    "directory": "tercume",
+    "category": "Fransızca -> Türkçe (sözlü)",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "175422a0-9b51-5baf-9639-2f979b9535be"
+  },
+  {
+    "name": "İpek Gül",
+    "directory": "tercume",
+    "category": "Türkçe -> Almanca (sözlü)",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "246ebf4c-d618-5771-860d-7b89ee031b2d"
+  },
+  {
+    "name": "Hakan Durmaz",
+    "directory": "tercume",
+    "category": "Almanca -> Türkçe (yazılı)",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "7a13326b-8617-57f6-8894-c38672df522a"
+  },
+  {
+    "name": "Cem Özkan",
+    "directory": "tercume",
+    "category": "Almanca -> Türkçe (sözlü)",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "2e66b6bf-7fbb-5d1e-bf9b-db1925e993c9"
+  },
+  {
+    "name": "Elif Yalçın",
+    "directory": "tercume",
+    "category": "Türkçe -> Fransızca (yazılı)",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "46daeb1a-7c78-50ed-8a9a-6a23bd51e4ab"
+  },
+  {
+    "name": "Volkan Uçar",
+    "directory": "tercume",
+    "category": "Türkçe -> Fransızca (sözlü)",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_tercüme",
+    "id": "148ca843-3676-55bc-a8d3-a6eae7aa7d39"
+  }
+]
