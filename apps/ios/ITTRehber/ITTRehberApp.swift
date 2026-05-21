@@ -7,6 +7,9 @@ struct ITTRehberApp: App {
     @StateObject private var cache = OfflineCache.shared
     @StateObject private var push = PushManager.shared
 
+    /// Persists across launches. False until OnboardingView's `finish()` runs.
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+
     var body: some Scene {
         WindowGroup {
             RootTabView()
@@ -15,6 +18,13 @@ struct ITTRehberApp: App {
                 .environmentObject(push)
                 .preferredColorScheme(.light) // TGS design is light-only
                 .tint(Color.tgsRed) // TGS brand red #B82030
+                // First launch: cover everything with the onboarding flow
+                .fullScreenCover(isPresented: .init(
+                    get: { !hasCompletedOnboarding },
+                    set: { _ in }  // OnboardingView owns the dismiss via @AppStorage
+                )) {
+                    OnboardingView()
+                }
         }
     }
 }

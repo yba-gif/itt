@@ -35,18 +35,25 @@ targets:
       properties:
         CFBundleDisplayName: "TGS-ITT Rehber"
         CFBundleShortVersionString: "0.1.0"
-        CFBundleVersion: "1"
+        CFBundleVersion: "24"
         CFBundleLocalizations: [tr]
         CFBundleDevelopmentRegion: tr
+        CFBundleIconName: "AppIcon"
+        ITSAppUsesNonExemptEncryption: false
         ITTAPIBaseURL: "https://api.clawdcloud.xyz"
         UILaunchScreen:
           UIColorName: ""
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~iphone:
+          - UIInterfaceOrientationPortrait
         LSApplicationCategoryType: "public.app-category.reference"
         NSCalendarsUsageDescription: "Etkinlik hatırlatmaları takviminize eklenir."
         NSCalendarsWriteOnlyAccessUsageDescription: "Etkinlik hatırlatmaları takviminize eklenir."
-        NSContactsUsageDescription: ""
+        NSContactsUsageDescription: "İletişim bilgileri için kullanılır."
         NSAppTransportSecurity:
           NSExceptionDomains:
             localhost:

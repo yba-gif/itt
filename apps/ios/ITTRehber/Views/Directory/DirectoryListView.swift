@@ -6,6 +6,10 @@ struct DirectoryListView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var cache: OfflineCache
 
+    /// Set during onboarding (Kanton.code or "" for all). Used as initial filter
+    /// when entering a directory view for the first time in a session.
+    @AppStorage("preferredKanton") private var preferredKanton = ""
+
     @State private var listings: [Listing] = []
     @State private var totalCount: Int = 0
     @State private var query: String = ""
@@ -14,6 +18,7 @@ struct DirectoryListView: View {
     @State private var error: APIError?
     @State private var isOffline: Bool = false
     @State private var showSubmit: Bool = false
+    @State private var didInitialKantonSetup = false
     @Namespace private var rowNS
 
     var body: some View {
@@ -114,6 +119,14 @@ struct DirectoryListView: View {
     }
 
     private func initialLoad() async {
+        // First entry to this view in the session: seed the kanton filter with
+        // the user's onboarding choice (if any). User can clear it via FilterBar.
+        if !didInitialKantonSetup {
+            didInitialKantonSetup = true
+            if selectedKanton.isEmpty && !preferredKanton.isEmpty {
+                selectedKanton = preferredKanton
+            }
+        }
         let cached = cache.cachedListings(for: directory)
         if !cached.isEmpty && listings.isEmpty {
             listings = cached
