@@ -16,6 +16,18 @@ extension Color {
     static let tgsBorder   = Color(tgsHex: 0xE3DEDA)
     /// Secondary / muted text — #626C7A
     static let tgsMuted    = Color(tgsHex: 0x626C7A)
+    /// Warning / offline amber foreground — #7A5F00
+    static let tgsAmber    = Color(tgsHex: 0x7A5F00)
+    /// Warning / offline amber background — #FFF0B3
+    static let tgsAmberBg  = Color(tgsHex: 0xFFF0B3)
+    /// Destructive / error red — slightly lighter than tgsRed for backgrounds
+    static let tgsError    = Color(tgsHex: 0x9E1B2A)
+    /// Error background — very light red
+    static let tgsErrorBg  = Color(tgsHex: 0xFDF0F1)
+    /// Success green foreground — #1A7A48
+    static let tgsSuccess  = Color(tgsHex: 0x1A7A48)
+    /// Success background — #EDFAF3
+    static let tgsSuccessBg = Color(tgsHex: 0xEDFAF3)
 
     init(tgsHex hex: UInt32) {
         self.init(

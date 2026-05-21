@@ -67,7 +67,8 @@ struct DirectoryDetailView: View {
             }
         }
         .alert("Hata", isPresented: .constant(favError != nil)) {
-            Button("Tamam") { favError = nil }
+            Button("Tekrar Dene") { favError = nil; Task { await checkFavorite() } }
+            Button("Kapat", role: .cancel) { favError = nil }
         } message: { Text(favError ?? "") }
         .task { await checkFavorite() }
     }
@@ -115,6 +116,7 @@ struct DirectoryDetailView: View {
                 .frame(height: 200)
                 .frame(maxWidth: .infinity)
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .accessibilityLabel("\(listing.name) görseli")
             }
 
             VStack(alignment: .leading, spacing: 8) {
@@ -151,24 +153,28 @@ struct DirectoryDetailView: View {
             if let phone = listing.phone,
                let url = URL(string: "tel://\(phone.filter { !$0.isWhitespace })") {
                 ActionButton(icon: "phone.fill", label: "Ara",
+                             a11yLabel: "\(listing.name) ara: \(phone)",
                              color: Color(red: 0.13, green: 0.65, blue: 0.37)) {
                     UIApplication.shared.open(url)
                 }
             }
             if let email = listing.email, let url = URL(string: "mailto:\(email)") {
                 ActionButton(icon: "envelope.fill", label: "E-posta",
+                             a11yLabel: "\(listing.name) e-posta gönder",
                              color: Color.tgsRed) {
                     UIApplication.shared.open(url)
                 }
             }
             if listing.address != nil {
                 ActionButton(icon: "map.fill", label: "Harita",
+                             a11yLabel: "Haritada aç",
                              color: Color(red: 0.95, green: 0.40, blue: 0.05)) {
                     openInMaps()
                 }
             }
             if let website = listing.website, let url = URL(string: website) {
                 ActionButton(icon: "safari.fill", label: "Web",
+                             a11yLabel: "Web sitesini aç",
                              color: Color(red: 0.02, green: 0.50, blue: 0.65)) {
                     UIApplication.shared.open(url)
                 }
@@ -253,6 +259,7 @@ struct DirectoryDetailView: View {
 struct ActionButton: View {
     let icon: String
     let label: String
+    var a11yLabel: String = ""
     var color: Color = Color.tgsRed
     let action: () -> Void
 
@@ -283,6 +290,7 @@ struct ActionButton: View {
             )
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(a11yLabel.isEmpty ? label : a11yLabel)
     }
 }
 

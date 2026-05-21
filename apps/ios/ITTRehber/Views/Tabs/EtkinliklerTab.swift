@@ -59,7 +59,8 @@ struct EtkinliklerTab: View {
             .onChange(of: mode, perform: { _ in Task { await load() } })
             .onChange(of: selectedKanton, perform: { _ in Task { await load() } })
             .alert("Hata", isPresented: .constant(error != nil)) {
-                Button("Tamam") { error = nil }
+                Button("Tekrar Dene") { error = nil; Task { await load() } }
+                Button("Kapat", role: .cancel) { error = nil }
             } message: { Text(error ?? "") }
         }
     }
@@ -179,7 +180,7 @@ struct EventRow: View {
                     }
                 }
 
-                Text(event.kanton)
+                Text(kantonDisplayName)
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(Color.tgsRed)
                     .padding(.horizontal, 8)
@@ -190,6 +191,11 @@ struct EventRow: View {
             Spacer(minLength: 0)
         }
         .padding(.vertical, 8)
+    }
+
+    // QW-3: show full canton name, fall back to code if not found
+    private var kantonDisplayName: String {
+        Kanton.all.first(where: { $0.code == event.kanton })?.nameTR ?? event.kanton
     }
 
     private var monthAbbr: String {
@@ -386,6 +392,7 @@ struct SubmitEventView: View {
                 Text("Etkinlikler yayınlanmadan önce yönetici onayından geçer.")
             }
         }
+        .tint(Color.tgsRed)
         .navigationTitle("Etkinlik Ekle")
         .navigationBarTitleDisplayMode(.inline)
         .alert("Gönderildi", isPresented: $showSuccess) {

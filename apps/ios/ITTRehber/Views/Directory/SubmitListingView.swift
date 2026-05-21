@@ -148,8 +148,24 @@ struct SubmitListingView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(!isValid || busy)
+            } footer: {
+                // P0-3: show what's still required so disabled button is never unexplained
+                if !validationHints.isEmpty {
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("Göndermeden önce:")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(Color.tgsRed)
+                        ForEach(validationHints, id: \.self) { hint in
+                            Label(hint, systemImage: "exclamationmark.circle.fill")
+                                .font(.caption)
+                                .foregroundStyle(Color.tgsRed)
+                        }
+                    }
+                    .padding(.top, 4)
+                }
             }
         }
+        .tint(Color.tgsRed)
         .navigationTitle("Hizmetinizi Ekleyin")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $submitted) { listing in
@@ -165,6 +181,16 @@ struct SubmitListingView: View {
             && !selectedDirectories.isEmpty
             && imageURL != nil
             && description.count <= 500
+    }
+
+    /// P0-3: human-readable hints for each unmet requirement
+    private var validationHints: [String] {
+        var hints: [String] = []
+        if name.isEmpty            { hints.append("İşletme/uzman adı girin") }
+        if selectedKantons.isEmpty { hints.append("En az bir kanton seçin") }
+        if imageURL == nil && !uploadingImage { hints.append("Logo görseli yükleyin") }
+        if description.count > 500 { hints.append("Açıklama \(description.count - 500) karakter fazla") }
+        return hints
     }
 
     private func loadAndUploadImage(_ item: PhotosPickerItem?) async {

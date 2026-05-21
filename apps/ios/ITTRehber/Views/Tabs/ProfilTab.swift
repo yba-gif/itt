@@ -58,7 +58,7 @@ struct ProfileLoggedInView: View {
 
             Section {
                 NavigationLink("Favorilerim") { FavoritesView() }
-                NavigationLink("Kayıtlı aramalar") { SavedSearchesView() }
+                // QW-10: SavedSearchesView hidden until AraTab has a "Save Search" button (Phase 2)
                 NavigationLink("İlanlarım") { MyListingsView() }
             }
 
@@ -82,7 +82,8 @@ struct ProfileLoggedInView: View {
             Text("Hesabınız kalıcı olarak silinecek.")
         }
         .alert("Hata", isPresented: .constant(deleteError != nil)) {
-            Button("Tamam") { deleteError = nil }
+            Button("Tekrar Dene", role: .destructive) { deleteError = nil; Task { await deleteAccount() } }
+            Button("Kapat", role: .cancel) { deleteError = nil }
         } message: { Text(deleteError ?? "") }
         .task {
             do { claimable = try await APIClient.shared.claimableListings() }

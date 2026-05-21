@@ -62,7 +62,8 @@ struct DirectoryListView: View {
             }
         }
         .alert("Hata", isPresented: .constant(error != nil)) {
-            Button("Tamam") { error = nil }
+            Button("Tekrar Dene") { error = nil; Task { await reload() } }
+            Button("Kapat", role: .cancel) { error = nil }
         } message: { Text(error?.errorDescription ?? "") }
         .task { await initialLoad() }
     }
@@ -210,10 +211,11 @@ struct OfflineBanner: View {
                 .font(.caption.weight(.medium))
             Spacer()
         }
-        .foregroundStyle(Color(red: 0.50, green: 0.38, blue: 0.0))
+        // QW-6: use DesignSystem amber tokens instead of hardcoded colours
+        .foregroundStyle(Color.tgsAmber)
         .padding(.horizontal, 16)
         .padding(.vertical, 9)
-        .background(Color(red: 1.0, green: 0.93, blue: 0.64))
+        .background(Color.tgsAmberBg)
     }
 }
 

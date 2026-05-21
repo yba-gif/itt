@@ -14,6 +14,7 @@ struct LoginView: View {
 
     var body: some View {
         Form {
+            // QW-4: explicit tint so Form controls use TGS red even when system blue leaks through
             Section {
                 Picker("Mod", selection: $mode) {
                     Text("Giriş").tag(Mode.login)
@@ -68,14 +69,16 @@ struct LoginView: View {
                 }
                 .buttonStyle(.bordered)
             } footer: {
-                Text("Apple ile Giriş Faz 2 kapsamında etkinleştirilecek (gerçek Apple Developer Team gerektirir).")
+                // QW-1: removed implementation detail from user-facing copy
+                Text("Apple ile Giriş yakında aktif olacak. Şimdilik e-posta ile devam edebilirsiniz.")
                     .font(.caption)
             }
         }
+        .tint(Color.tgsRed)
         .alert("Yakında", isPresented: $showSIWAPlaceholder) {
             Button("Tamam", role: .cancel) {}
         } message: {
-            Text("Apple ile Giriş için Apple Developer ekip kimliği yapılandırılmalı. Şimdilik e-posta ile devam edin.")
+            Text("Apple ile Giriş yakında aktif olacak.")
         }
     }
 

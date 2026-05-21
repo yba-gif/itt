@@ -5,20 +5,37 @@ struct FilterBar: View {
     @Binding var selectedKanton: String
     let onChange: () -> Void
 
+    // P0-2: debounce live search — cancels the previous task on each keystroke
+    @State private var debounceTask: Task<Void, Never>?
+
     var body: some View {
         VStack(spacing: 8) {
             // Search field
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(Color.tgsMuted)
-                TextField("İsim, uzmanlık veya adres ara", text: $query)
+                TextField("İsim, uzmanlık veya adres ara…", text: $query)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                     .submitLabel(.search)
                     .foregroundStyle(Color.tgsCharcoal)
-                    .onSubmit(onChange)
+                    // Live search with 400 ms debounce
+                    .onChange(of: query) { _ in
+                        debounceTask?.cancel()
+                        debounceTask = Task {
+                            try? await Task.sleep(for: .milliseconds(400))
+                            guard !Task.isCancelled else { return }
+                            onChange()
+                        }
+                    }
+                    // Immediate reload on Return key
+                    .onSubmit {
+                        debounceTask?.cancel()
+                        onChange()
+                    }
                 if !query.isEmpty {
                     Button {
+                        debounceTask?.cancel()
                         query = ""
                         onChange()
                     } label: {
@@ -52,7 +69,11 @@ struct FilterBar: View {
                     }
                 } label: {
                     HStack(spacing: 4) {
-                        Text(selectedKanton.isEmpty ? "Kanton" : "Kanton: \(selectedKanton)")
+                        Image(systemName: selectedKanton.isEmpty ? "location" : "location.fill")
+                            .font(.caption)
+                        Text(selectedKanton.isEmpty
+                             ? "Kanton"
+                             : (Kanton.all.first(where: { $0.code == selectedKanton })?.nameTR ?? selectedKanton))
                             .foregroundStyle(selectedKanton.isEmpty ? Color.tgsMuted : Color.tgsCharcoal)
                         Image(systemName: "chevron.down")
                             .foregroundStyle(Color.tgsMuted)
@@ -65,16 +86,18 @@ struct FilterBar: View {
                             .fill(selectedKanton.isEmpty ? Color.tgsSurface : Color.tgsRed.opacity(0.10))
                             .overlay(
                                 Capsule()
-                                    .stroke(selectedKanton.isEmpty ? Color.tgsBorder : Color.tgsRed.opacity(0.30),
+                                    .stroke(selectedKanton.isEmpty ? Color.tgsBorder : Color.tgsRed.opacity(0.35),
                                             lineWidth: 1)
                             )
                     )
                 }
+                // QW-3 companion: kanton filter now shows full name in the button label (via Kanton lookup above)
 
                 Spacer()
 
                 if !query.isEmpty || !selectedKanton.isEmpty {
                     Button("Sıfırla") {
+                        debounceTask?.cancel()
                         query = ""
                         selectedKanton = ""
                         onChange()

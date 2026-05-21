@@ -7,20 +7,31 @@ struct BilgiTab: View {
     var body: some View {
         NavigationStack {
             List {
-                Section("Acil Durumlar") {
-                    EmergencyRow(label: "Polis", number: "117")
-                    EmergencyRow(label: "İtfaiye", number: "118")
-                    EmergencyRow(label: "Tıbbi Acil", number: "144")
-                    EmergencyRow(label: "Zehir Danışma", number: "145")
-                    EmergencyRow(label: "Yol Yardım", number: "140")
+                Section {
+                    // QW-7: sorted by urgency — medical first
+                    EmergencyRow(label: "Tıbbi Acil",     number: "144", icon: "heart.fill",    color: .red)
+                    EmergencyRow(label: "Polis",          number: "117", icon: "shield.fill",   color: .blue)
+                    EmergencyRow(label: "İtfaiye",        number: "118", icon: "flame.fill",    color: .orange)
+                    EmergencyRow(label: "Zehir Danışma",  number: "145", icon: "pills.fill",    color: .purple)
+                    EmergencyRow(label: "Yol Yardım",     number: "140", icon: "car.fill",      color: Color.tgsMuted)
+                } header: {
+                    Label("Acil Durumlar", systemImage: "exclamationmark.triangle.fill")
+                        .foregroundStyle(Color.tgsError)
+                        .font(.footnote.weight(.semibold))
+                        .textCase(nil)
                 }
 
                 Section("Rehber") {
                     if loading && pages.isEmpty {
-                        HStack { ProgressView(); Text("Yükleniyor…").foregroundStyle(.secondary) }
+                        HStack {
+                            ProgressView()
+                            Text("Yükleniyor…").foregroundStyle(Color.tgsMuted)
+                        }
                     } else {
                         ForEach(pages.filter { $0.slug != "emergency" }) { page in
-                            NavigationLink(page.title) { ContentPageView(slug: page.slug) }
+                            NavigationLink(page.title) {
+                                ContentPageView(slug: page.slug)
+                            }
                         }
                     }
                 }
@@ -45,10 +56,21 @@ struct BilgiTab: View {
 struct EmergencyRow: View {
     let label: String
     let number: String
+    let icon: String
+    let color: Color
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(color.opacity(0.12))
+                    .frame(width: 36, height: 36)
+                Image(systemName: icon)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(color)
+            }
             Text(label)
+                .foregroundStyle(Color.tgsCharcoal)
             Spacer()
             Button {
                 if let url = URL(string: "tel://\(number)") {
@@ -56,9 +78,16 @@ struct EmergencyRow: View {
                 }
             } label: {
                 Text(number)
-                    .font(.body.monospacedDigit())
-                    .foregroundStyle(.tint)
+                    .font(.body.monospacedDigit().weight(.semibold))
+                    .foregroundStyle(Color.tgsRed)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 5)
+                    .background(
+                        Capsule().fill(Color.tgsRed.opacity(0.10))
+                    )
             }
+            .buttonStyle(.plain)
+            .accessibilityLabel("\(label): \(number) numarasını ara")
         }
     }
 }
@@ -75,21 +104,32 @@ struct ContentPageView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     Text(page.bodyMarkdown).font(.body)
                     Text("Son güncelleme: \(formatted(page.updatedAt))")
-                        .font(.caption).foregroundStyle(.tertiary)
+                        .font(.caption).foregroundStyle(Color.tgsMuted)
                         .padding(.top, 8)
                 }
                 .padding(16)
             } else if let error {
-                VStack(spacing: 12) {
-                    Image(systemName: "exclamationmark.triangle")
-                        .foregroundStyle(.orange)
-                    Text(error).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                VStack(spacing: 16) {
+                    ZStack {
+                        Circle().fill(Color.tgsErrorBg).frame(width: 64, height: 64)
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 28))
+                            .foregroundStyle(Color.tgsError)
+                    }
+                    Text(error)
+                        .foregroundStyle(Color.tgsMuted)
+                        .multilineTextAlignment(.center)
+                    Button("Tekrar Dene") { self.error = nil; Task { await load() } }
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color.tgsRed)
                 }
                 .padding(.top, 60)
+                .padding(.horizontal, 32)
             } else {
                 ProgressView().padding(.top, 60)
             }
         }
+        .background(Color.tgsCream)
         .navigationTitle(page?.title ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .task { await load() }

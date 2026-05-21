@@ -32,7 +32,8 @@ struct AraTab: View {
             .background(Color.tgsCream)
             .navigationTitle("Ara")
             .alert("Hata", isPresented: .constant(error != nil)) {
-                Button("Tamam") { error = nil }
+                Button("Tekrar Dene") { error = nil; Task { await search() } }
+                Button("Kapat", role: .cancel) { error = nil }
             } message: { Text(error ?? "") }
         }
     }
@@ -41,7 +42,7 @@ struct AraTab: View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(Color.tgsMuted)
-            TextField("Tüm rehberlerde ara", text: $query)
+            TextField("Tüm rehberlerde ara…", text: $query)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .submitLabel(.search)
@@ -80,7 +81,7 @@ struct AraTab: View {
                     .font(.system(size: 36))
                     .foregroundStyle(Color.tgsMuted)
             }
-            Text("Tüm rehberlerde tek aramada bulun")
+            Text("İsviçre'deki Türk uzman ve hizmetleri arayın")
                 .font(.subheadline)
                 .foregroundStyle(Color.tgsMuted)
                 .multilineTextAlignment(.center)
