@@ -28,7 +28,7 @@ struct RehberTab: View {
         }
     }
 
-    // MARK: Hero — gradient + wave + glassmorphic card (Sprint 6)
+    // MARK: Hero — ITT logo header + gradient wave
 
     private var heroSection: some View {
         ZStack(alignment: .bottom) {
@@ -40,16 +40,21 @@ struct RehberTab: View {
             .overlay(GrainOverlay())
 
             VStack(alignment: .leading, spacing: TGSSpacing.lg) {
-                TGSEyebrow(icon: "globe.europe.africa.fill", label: "İSVİÇRE'DE TÜRK TOPLULUĞU")
-                    .colorInvert()
-                    .opacity(0.9)
+                // Official ITT logo
+                Image("ITTLogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 72)
+                    .padding(.top, 8)
 
+                // Title
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("TGS-ITT")
-                        .font(.system(size: 34, weight: .black))
+                    Text("İsviçre Türk Toplumu")
+                        .font(.system(size: 26, weight: .black))
                         .foregroundStyle(.white)
                     Text("Rehber")
-                        .font(.system(size: 34, weight: .black))
+                        .font(.system(size: 26, weight: .black))
                         .foregroundStyle(.white.opacity(0.82))
                 }
 
@@ -57,7 +62,7 @@ struct RehberTab: View {
                 aiEntryButton
             }
             .padding(.horizontal, TGSSpacing.xl)
-            .padding(.top, 60)
+            .padding(.top, 52)
             .padding(.bottom, 50)
         }
         .clipShape(WaveClipShape(waveDepth: 30))
@@ -108,29 +113,10 @@ struct RehberTab: View {
         .accessibilityLabel("İTT AI — Yapay zeka asistanını aç")
     }
 
+    @ViewBuilder
     private var glassCard: some View {
-        Group {
-            if !hasSeenWelcome {
-                WelcomeBanner { hasSeenWelcome = true }
-                    .background(
-                        .ultraThinMaterial,
-                        in: RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
-                            .stroke(.white.opacity(0.25), lineWidth: 1)
-                    )
-            } else {
-                HStack(spacing: TGSSpacing.md) {
-                    Image(systemName: "mappin.and.ellipse")
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundStyle(.white.opacity(0.8))
-                    Text("Uzman, hizmet ve etkinlik rehberi")
-                        .font(TGSFont.subheadline)
-                        .foregroundStyle(.white.opacity(0.8))
-                    Spacer(minLength: 0)
-                }
-                .padding(TGSSpacing.md)
+        if !hasSeenWelcome {
+            WelcomeBanner { hasSeenWelcome = true }
                 .background(
                     .ultraThinMaterial,
                     in: RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
@@ -139,7 +125,6 @@ struct RehberTab: View {
                     RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
                         .stroke(.white.opacity(0.25), lineWidth: 1)
                 )
-            }
         }
     }
 }
