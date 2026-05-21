@@ -324,7 +324,7 @@ struct EventDetailView: View {
                 Button {
                     Task { await scheduleReminder() }
                 } label: {
-                    Label("Hatırlatma kur (24 saat önce)", systemImage: "bell")
+                    Label("Hatırlatma kur", systemImage: "bell")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
