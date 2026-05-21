@@ -286,16 +286,28 @@ struct MyListingsView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.tgsCream)
             } else {
-                List(listings) { listing in
-                    NavigationLink(destination: DirectoryDetailView(listing: listing)) {
-                        ListingRow(listing: listing)
+                List {
+                    ForEach(listings) { listing in
+                        NavigationLink(destination: DirectoryDetailView(listing: listing)) {
+                            // P3-9: status badge shown for owner's own listings
+                            VStack(alignment: .leading, spacing: 4) {
+                                ListingRow(listing: listing)
+                                ListingStatusBadge(status: listing.status)
+                            }
+                        }
+                        .listRowBackground(Color.white)
+                        .listRowSeparatorTint(Color.tgsBorder)
                     }
                 }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .background(Color.tgsCream)
             }
         }
         .navigationTitle("İlanlarım")
         .navigationBarTitleDisplayMode(.inline)
         .task { await load() }
+        .refreshable { await load() }
     }
 
     private func load() async {
@@ -304,5 +316,35 @@ struct MyListingsView: View {
         do {
             listings = try await APIClient.shared.myListings()
         } catch { /* keep empty */ }
+    }
+}
+
+// MARK: - Listing Status Badge (P3-9)
+
+struct ListingStatusBadge: View {
+    let status: String
+
+    private var config: (label: String, icon: String, fg: Color, bg: Color) {
+        switch status {
+        case "active":
+            return ("Yayında", "checkmark.circle.fill", Color.tgsSuccess, Color.tgsSuccessBg)
+        case "pending":
+            return ("İncelemede", "clock.fill", Color.tgsAmber, Color.tgsAmberBg)
+        case "rejected":
+            return ("Reddedildi", "xmark.circle.fill", Color.tgsError, Color.tgsErrorBg)
+        default:
+            return (status, "circle", Color.tgsMuted, Color.tgsSurface)
+        }
+    }
+
+    var body: some View {
+        let c = config
+        Label(c.label, systemImage: c.icon)
+            .font(TGSFont.micro)
+            .foregroundStyle(c.fg)
+            .padding(.horizontal, TGSSpacing.sm)
+            .padding(.vertical, 3)
+            .background(Capsule().fill(c.bg))
+            .accessibilityLabel("Durum: \(c.label)")
     }
 }

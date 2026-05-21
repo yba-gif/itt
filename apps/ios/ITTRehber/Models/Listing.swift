@@ -14,6 +14,28 @@ struct Listing: Codable, Identifiable, Hashable {
     let description: String?
     let imageURL: String?
     let updatedAt: Date
+    /// State machine status — "pending" | "active" | "rejected".
+    /// Public /listings endpoint only returns active; /me/listings returns all.
+    /// Defaults to "active" when absent (older API responses / public route).
+    let status: String
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id          = try c.decode(UUID.self,   forKey: .id)
+        name        = try c.decode(String.self, forKey: .name)
+        directories = try c.decode([String].self, forKey: .directories)
+        kantons     = try c.decode([String].self, forKey: .kantons)
+        category    = try c.decodeIfPresent(String.self, forKey: .category)
+        subCategory = try c.decodeIfPresent(String.self, forKey: .subCategory)
+        address     = try c.decodeIfPresent(String.self, forKey: .address)
+        phone       = try c.decodeIfPresent(String.self, forKey: .phone)
+        email       = try c.decodeIfPresent(String.self, forKey: .email)
+        website     = try c.decodeIfPresent(String.self, forKey: .website)
+        description = try c.decodeIfPresent(String.self, forKey: .description)
+        imageURL    = try c.decodeIfPresent(String.self, forKey: .imageURL)
+        updatedAt   = try c.decode(Date.self,   forKey: .updatedAt)
+        status      = (try? c.decode(String.self, forKey: .status)) ?? "active"
+    }
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -29,6 +51,7 @@ struct Listing: Codable, Identifiable, Hashable {
         case description
         case imageURL = "image_url"
         case updatedAt = "updated_at"
+        case status
     }
 }
 
