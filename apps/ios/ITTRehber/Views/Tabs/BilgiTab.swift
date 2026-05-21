@@ -7,6 +7,14 @@ struct BilgiTab: View {
     var body: some View {
         NavigationStack {
             List {
+                // Featured hotline card — full-bleed, prominent, sits at the top
+                Section {
+                    SocialAidHotlineCard()
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 12, trailing: 0))
+                        .listRowSeparator(.hidden)
+                }
+
                 Section {
                     // QW-7: sorted by urgency — medical first
                     EmergencyRow(label: "Tıbbi Acil",     number: "144", icon: "heart.fill",    color: .red)
@@ -225,6 +233,105 @@ struct ConsulateTileRow: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel("\(city) konsolosluğunu ara")
+        }
+    }
+}
+
+// MARK: - Sosyal Yardım Hattı (Social Aid Hotline) Card
+
+/// Featured card at the top of Bilgi tab. The TGS-ITT social-aid hotline
+/// — lawyers, healthcare workers, educators who listen to community
+/// problems and route callers to the right authorities.
+struct SocialAidHotlineCard: View {
+    private let phone = "+41445932424"
+    private let phoneDisplay = "+41 44 593 24 24"
+
+    var body: some View {
+        Button(action: call) {
+            ZStack(alignment: .bottomTrailing) {
+                // Background gradient + decorative star
+                LinearGradient(
+                    colors: [Color.tgsRed, Color(red: 0.55, green: 0.07, blue: 0.13)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+
+                // Decorative star in the corner (subtle, like the original poster)
+                Image(systemName: "star.fill")
+                    .font(.system(size: 180))
+                    .foregroundStyle(.white.opacity(0.06))
+                    .offset(x: 50, y: 30)
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: 0) {
+                    // Header
+                    HStack(alignment: .top, spacing: TGSSpacing.md) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("SOSYAL YARDIM HATTI")
+                                .font(.system(size: 19, weight: .black, design: .rounded))
+                                .foregroundStyle(.white)
+                                .fixedSize(horizontal: false, vertical: true)
+                            Text("Tüm sosyal sorunlarınızda yanınızdayız")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundStyle(.white.opacity(0.85))
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        Spacer(minLength: 0)
+                        ZStack {
+                            Circle()
+                                .fill(.white.opacity(0.18))
+                                .frame(width: 44, height: 44)
+                            Image(systemName: "headphones")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundStyle(.white)
+                        }
+                    }
+
+                    // Description
+                    Text("Hukukçu, sağlıkçı ve eğitimcilerimiz sorunlarınızı dinleyip doğru mercilere yönlendiriyor.")
+                        .font(.system(size: 12.5))
+                        .foregroundStyle(.white.opacity(0.85))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 12)
+                        .padding(.bottom, 14)
+
+                    // Phone CTA chip
+                    HStack(spacing: 8) {
+                        Image(systemName: "phone.fill")
+                            .font(.system(size: 14, weight: .semibold))
+                        Text(phoneDisplay)
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .monospacedDigit()
+                        Spacer(minLength: 0)
+                        Text("Bize ulaşın")
+                            .font(.system(size: 11, weight: .heavy))
+                            .tracking(0.6)
+                            .opacity(0.7)
+                    }
+                    .foregroundStyle(Color.tgsRed)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 11)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            .fill(.white)
+                    )
+                    .shadow(color: .black.opacity(0.20), radius: 8, x: 0, y: 4)
+                }
+                .padding(18)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: TGSRadius.card, style: .continuous))
+            .shadow(color: Color.tgsRed.opacity(0.30), radius: 14, x: 0, y: 6)
+            .padding(.horizontal, TGSSpacing.md)
+        }
+        .buttonStyle(TGSSpringButtonStyle())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Sosyal Yardım Hattı'nı ara: \(phoneDisplay)")
+    }
+
+    private func call() {
+        if let url = URL(string: "tel://\(phone)") {
+            UIApplication.shared.open(url)
         }
     }
 }
