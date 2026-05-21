@@ -1,4 +1,5 @@
 import SwiftUI
+import AuthenticationServices
 
 struct LoginView: View {
     @EnvironmentObject var session: SessionStore
@@ -8,22 +9,39 @@ struct LoginView: View {
     @State private var displayName = ""
     @State private var error: String?
     @State private var busy = false
-    @State private var showSIWAPlaceholder = false
 
     enum Mode { case login, signup }
 
     var body: some View {
-        // P2-3: TGS form component replaces system Form/Section
         ScrollView {
             VStack(spacing: TGSSpacing.lg) {
-                // Mode picker
+
+                // ── Apple Sign In (primary CTA) ──────────────────────────
+                SIWAButton { credential in
+                    await handleSIWA(credential)
+                }
+                .frame(height: 50)
+                .padding(.horizontal, TGSSpacing.lg)
+                .padding(.top, TGSSpacing.lg)
+
+                // Divider
+                HStack {
+                    Rectangle().fill(Color.tgsBorder).frame(height: 1)
+                    Text("veya e-posta ile")
+                        .font(.caption)
+                        .foregroundStyle(Color.tgsMuted)
+                        .fixedSize()
+                    Rectangle().fill(Color.tgsBorder).frame(height: 1)
+                }
+                .padding(.horizontal, TGSSpacing.lg)
+
+                // ── Email/password ───────────────────────────────────────
                 Picker("Mod", selection: $mode) {
                     Text("Giriş").tag(Mode.login)
                     Text("Kayıt").tag(Mode.signup)
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal, TGSSpacing.lg)
-                .padding(.top, TGSSpacing.lg)
 
                 if mode == .signup {
                     TGSFormSection(header: "Profil") {
@@ -51,7 +69,6 @@ struct LoginView: View {
                 }
                 .padding(.horizontal, TGSSpacing.lg)
 
-                // Inline error
                 if let error {
                     HStack(spacing: TGSSpacing.sm) {
                         Image(systemName: "exclamationmark.circle.fill")
@@ -70,12 +87,10 @@ struct LoginView: View {
                     .transition(.opacity.combined(with: .move(edge: .top)))
                 }
 
-                // Submit button
                 Button(action: submit) {
                     Group {
                         if busy {
-                            ProgressView()
-                                .tint(.white)
+                            ProgressView().tint(.white)
                         } else {
                             Text(mode == .login ? "Giriş yap" : "Kayıt ol")
                         }
@@ -89,39 +104,39 @@ struct LoginView: View {
                 .disabled(busy || email.isEmpty || password.count < 8)
                 .padding(.horizontal, TGSSpacing.lg)
 
-                // Apple Sign In placeholder
-                TGSFormSection(
-                    footer: "Apple ile Giriş yakında aktif olacak. Şimdilik e-posta ile devam edebilirsiniz."
-                ) {
-                    Button {
-                        showSIWAPlaceholder = true
-                    } label: {
-                        HStack(spacing: TGSSpacing.sm) {
-                            Image(systemName: "applelogo")
-                                .font(.system(size: 15))
-                            Text("Apple ile Giriş")
-                                .font(TGSFont.body)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, TGSSpacing.md)
-                        .foregroundStyle(Color.tgsCharcoal)
-                    }
-                    .buttonStyle(.plain)
-                }
-                .padding(.horizontal, TGSSpacing.lg)
-
                 Spacer(minLength: TGSSpacing.xl)
             }
             .animation(.easeInOut(duration: 0.2), value: error)
             .animation(.easeInOut(duration: 0.2), value: mode)
         }
         .background(Color.tgsCream)
-        .alert("Yakında", isPresented: $showSIWAPlaceholder) {
-            Button("Tamam", role: .cancel) {}
-        } message: {
-            Text("Apple ile Giriş yakında aktif olacak.")
+    }
+
+    // MARK: - Apple Sign In handler
+
+    private func handleSIWA(_ credential: ASAuthorizationAppleIDCredential) async {
+        guard let tokenData = credential.identityToken,
+              let identityToken = String(data: tokenData, encoding: .utf8) else {
+            error = "Apple kimlik doğrulaması başarısız oldu."
+            return
+        }
+        let fullName = [credential.fullName?.givenName, credential.fullName?.familyName]
+            .compactMap { $0 }.joined(separator: " ")
+        busy = true
+        error = nil
+        defer { busy = false }
+        do {
+            let token = try await APIClient.shared.siwaLogin(
+                identityToken: identityToken,
+                displayName: fullName.isEmpty ? nil : fullName
+            )
+            await session.adopt(token.accessToken)
+        } catch {
+            self.error = (error as? APIError)?.errorDescription ?? error.localizedDescription
         }
     }
+
+    // MARK: - Email submit
 
     private func submit() {
         Task {
@@ -144,6 +159,59 @@ struct LoginView: View {
             } catch {
                 self.error = (error as? APIError)?.errorDescription ?? error.localizedDescription
             }
+        }
+    }
+}
+
+// MARK: - Sign In With Apple Button (UIViewRepresentable)
+
+struct SIWAButton: UIViewRepresentable {
+    let onCredential: (ASAuthorizationAppleIDCredential) async -> Void
+
+    func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
+        let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+        button.addTarget(context.coordinator, action: #selector(Coordinator.tapped), for: .touchUpInside)
+        return button
+    }
+
+    func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {}
+
+    func makeCoordinator() -> Coordinator { Coordinator(onCredential: onCredential) }
+
+    final class Coordinator: NSObject, ASAuthorizationControllerDelegate,
+                             ASAuthorizationControllerPresentationContextProviding {
+        let onCredential: (ASAuthorizationAppleIDCredential) async -> Void
+
+        init(onCredential: @escaping (ASAuthorizationAppleIDCredential) async -> Void) {
+            self.onCredential = onCredential
+        }
+
+        @objc func tapped() {
+            let provider = ASAuthorizationAppleIDProvider()
+            let request = provider.createRequest()
+            request.requestedScopes = [.fullName, .email]
+            let controller = ASAuthorizationController(authorizationRequests: [request])
+            controller.delegate = self
+            controller.presentationContextProvider = self
+            controller.performRequests()
+        }
+
+        func authorizationController(controller: ASAuthorizationController,
+                                     didCompleteWithAuthorization auth: ASAuthorization) {
+            guard let credential = auth.credential as? ASAuthorizationAppleIDCredential else { return }
+            Task { await onCredential(credential) }
+        }
+
+        func authorizationController(controller: ASAuthorizationController,
+                                     didCompleteWithError error: Error) {
+            // User cancelled or error — no-op
+        }
+
+        func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+            UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first { $0.isKeyWindow } ?? ASPresentationAnchor()
         }
     }
 }

@@ -22,18 +22,20 @@ struct ITTRehberApp: App {
 // Sprint 6: custom floating tab bar replaces system TabView
 struct RootTabView: View {
     @State private var selectedTab: AppTab = .rehber
+    /// Incremented each time the user re-taps the Rehber tab — signals pop-to-root.
+    @State private var rehberPopToken = 0
 
     var body: some View {
         ZStack(alignment: .bottom) {
             // All tab views pre-loaded; only active one accepts hit-testing.
             // This preserves per-tab NavigationStack state when switching tabs.
             Group {
-                RehberTab()
+                RehberTab(popToRoot: $rehberPopToken)
                     .opacity(selectedTab == .rehber ? 1 : 0)
                     .allowsHitTesting(selectedTab == .rehber)
-                AraTab()
-                    .opacity(selectedTab == .ara ? 1 : 0)
-                    .allowsHitTesting(selectedTab == .ara)
+                ITTAIView(isModal: false)
+                    .opacity(selectedTab == .ittai ? 1 : 0)
+                    .allowsHitTesting(selectedTab == .ittai)
                 EtkinliklerTab()
                     .opacity(selectedTab == .etkinlikler ? 1 : 0)
                     .allowsHitTesting(selectedTab == .etkinlikler)
@@ -50,9 +52,12 @@ struct RootTabView: View {
             }
 
             // Floating pill — sits above safe area
-            FloatingTabBar(selected: $selectedTab)
-                .padding(.bottom, 20)
-                .padding(.horizontal, 32)
+            FloatingTabBar(selected: $selectedTab, onReselect: { tab in
+                // Tapping the already-active tab pops its NavigationStack to root
+                if tab == .rehber { rehberPopToken += 1 }
+            })
+            .padding(.bottom, 20)
+            .padding(.horizontal, 32)
         }
         .ignoresSafeArea(edges: .bottom)
     }

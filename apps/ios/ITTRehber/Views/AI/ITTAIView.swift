@@ -4,6 +4,10 @@ import SwiftUI
 // Entry: hero glass card button in RehberTab → .fullScreenCover
 
 struct ITTAIView: View {
+    /// When true, shows the X dismiss button (modal presentation).
+    /// When false, the view is hosted as a tab — no dismiss button.
+    var isModal: Bool = true
+
     @StateObject private var service = ITTAIService.shared
     @State private var inputText = ""
     @FocusState private var isInputFocused: Bool
@@ -81,16 +85,18 @@ struct ITTAIView: View {
                 .transition(.opacity)
             }
 
-            // Dismiss
-            Button { dismiss() } label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.7))
-                    .frame(width: 34, height: 34)
-                    .background(Circle().fill(.white.opacity(0.1)))
+            // Dismiss — only in modal presentation
+            if isModal {
+                Button { dismiss() } label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(.white.opacity(0.7))
+                        .frame(width: 34, height: 34)
+                        .background(Circle().fill(.white.opacity(0.1)))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Kapat")
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Kapat")
         }
         .padding(.horizontal, 16)
         .padding(.top, 8)

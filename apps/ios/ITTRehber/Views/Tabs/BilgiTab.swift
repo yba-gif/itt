@@ -21,6 +21,38 @@ struct BilgiTab: View {
                         .textCase(nil)
                 }
 
+                Section {
+                    ConsulateTileRow(
+                        city: "Bern",
+                        title: "Türkiye Büyükelçiliği",
+                        address: "Villastrasse 32, 3006 Bern",
+                        phone: "+41313592200"
+                    )
+                    ConsulateTileRow(
+                        city: "Zürich",
+                        title: "Başkonsolosluk",
+                        address: "Basteiplatz 2, 8001 Zürich",
+                        phone: "+41442016400"
+                    )
+                    ConsulateTileRow(
+                        city: "Cenevre",
+                        title: "Başkonsolosluk",
+                        address: "Avenue Soret 4, 1203 Genève",
+                        phone: "+41227321600"
+                    )
+                    ConsulateTileRow(
+                        city: "Basel",
+                        title: "Konsolosluk",
+                        address: "Wallstrasse 11, 4051 Basel",
+                        phone: "+41613122061"
+                    )
+                } header: {
+                    Label("Konsolosluk Bilgileri", systemImage: "building.columns.fill")
+                        .foregroundStyle(Color.tgsRed)
+                        .font(.footnote.weight(.semibold))
+                        .textCase(nil)
+                }
+
                 Section("Rehber") {
                     if loading && pages.isEmpty {
                         HStack {
@@ -28,7 +60,8 @@ struct BilgiTab: View {
                             Text("Yükleniyor…").foregroundStyle(Color.tgsMuted)
                         }
                     } else {
-                        ForEach(pages.filter { $0.slug != "emergency" }) { page in
+                        // Exclude slugs shown elsewhere in this view
+                        ForEach(pages.filter { !["emergency", "welcome", "consulate"].contains($0.slug) }) { page in
                             NavigationLink(page.title) {
                                 ContentPageView(slug: page.slug)
                             }
@@ -36,6 +69,9 @@ struct BilgiTab: View {
                     }
                 }
             }
+            .listStyle(.insetGrouped)
+            .scrollContentBackground(.hidden)
+            .background(Color.tgsCream)
             .navigationTitle("Bilgi")
             .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             .refreshable { await load() }
@@ -102,13 +138,11 @@ struct ContentPageView: View {
     var body: some View {
         ScrollView {
             if let page {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(page.bodyMarkdown).font(.body)
-                    Text("Son güncelleme: \(formatted(page.updatedAt))")
-                        .font(.caption).foregroundStyle(Color.tgsMuted)
-                        .padding(.top, 8)
-                }
-                .padding(16)
+                MarkdownView(markdown: page.bodyMarkdown)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .padding(.bottom, 24)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             } else if let error {
                 // P2-5: reusable inline error state
                 ErrorStateView(message: error) { self.error = nil; Task { await load() } }
@@ -133,11 +167,155 @@ struct ContentPageView: View {
         }
     }
 
-    private func formatted(_ d: Date) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "tr_CH")
-        f.dateStyle = .medium
-        f.timeStyle = .short
-        return f.string(from: d)
+}
+
+// MARK: - Consulate Row
+
+struct ConsulateTileRow: View {
+    let city: String
+    let title: String
+    let address: String
+    let phone: String
+
+    var body: some View {
+        HStack(spacing: 12) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(Color.tgsRed.opacity(0.10))
+                    .frame(width: 40, height: 40)
+                Image(systemName: "building.columns.fill")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(Color.tgsRed)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 4) {
+                    Text(city)
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundStyle(Color.tgsCharcoal)
+                    Text("·")
+                        .foregroundStyle(Color.tgsMuted)
+                    Text(title)
+                        .font(.system(size: 13, weight: .regular))
+                        .foregroundStyle(Color.tgsMuted)
+                }
+                Text(address)
+                    .font(.caption)
+                    .foregroundStyle(Color.tgsMuted)
+            }
+
+            Spacer()
+
+            Button {
+                if let url = URL(string: "tel://\(phone)") {
+                    UIApplication.shared.open(url)
+                }
+            } label: {
+                Image(systemName: "phone.fill")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(Color.tgsRed)
+                    .frame(width: 36, height: 36)
+                    .background(Capsule().fill(Color.tgsRed.opacity(0.10)))
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("\(city) konsolosluğunu ara")
+        }
+    }
+}
+
+// MARK: - Markdown Renderer
+//
+// Renders headings (# ## ###), bullet lists (-), and inline **bold** / *italic*.
+// SwiftUI's Text(_:markdown:) only does inline markdown, so we parse blocks ourselves
+// and apply per-block fonts.
+
+private enum MarkdownBlockKind {
+    case h1, h2, h3, paragraph, listItem, blank
+}
+
+private struct MarkdownBlock: Identifiable {
+    let id = UUID()
+    let kind: MarkdownBlockKind
+    let text: String
+}
+
+struct MarkdownView: View {
+    let markdown: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            ForEach(parseBlocks()) { block in
+                row(for: block)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func row(for block: MarkdownBlock) -> some View {
+        switch block.kind {
+        case .h1:
+            inlineText(block.text)
+                .font(.system(size: 26, weight: .bold, design: .rounded))
+                .foregroundStyle(Color.tgsCharcoal)
+                .padding(.top, 6)
+                .padding(.bottom, 2)
+        case .h2:
+            inlineText(block.text)
+                .font(.system(size: 19, weight: .bold))
+                .foregroundStyle(Color.tgsRed)
+                .padding(.top, 10)
+                .padding(.bottom, 2)
+        case .h3:
+            inlineText(block.text)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(Color.tgsCharcoal)
+                .padding(.top, 4)
+        case .paragraph:
+            inlineText(block.text)
+                .font(.body)
+                .foregroundStyle(Color.tgsCharcoal)
+                .fixedSize(horizontal: false, vertical: true)
+        case .listItem:
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text("•")
+                    .font(.body.weight(.bold))
+                    .foregroundStyle(Color.tgsRed)
+                inlineText(block.text)
+                    .font(.body)
+                    .foregroundStyle(Color.tgsCharcoal)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        case .blank:
+            Color.clear.frame(height: 2)
+        }
+    }
+
+    private func inlineText(_ s: String) -> Text {
+        if let attr = try? AttributedString(
+            markdown: s,
+            options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        ) {
+            return Text(attr)
+        }
+        return Text(s)
+    }
+
+    private func parseBlocks() -> [MarkdownBlock] {
+        markdown.components(separatedBy: "\n").map { line -> MarkdownBlock in
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            if trimmed.isEmpty {
+                return MarkdownBlock(kind: .blank, text: "")
+            } else if trimmed.hasPrefix("### ") {
+                return MarkdownBlock(kind: .h3, text: String(trimmed.dropFirst(4)))
+            } else if trimmed.hasPrefix("## ") {
+                return MarkdownBlock(kind: .h2, text: String(trimmed.dropFirst(3)))
+            } else if trimmed.hasPrefix("# ") {
+                return MarkdownBlock(kind: .h1, text: String(trimmed.dropFirst(2)))
+            } else if trimmed.hasPrefix("- ") {
+                return MarkdownBlock(kind: .listItem, text: String(trimmed.dropFirst(2)))
+            } else {
+                return MarkdownBlock(kind: .paragraph, text: trimmed)
+            }
+        }
     }
 }

@@ -138,6 +138,14 @@ final class APIClient {
         )
     }
 
+    func siwaLogin(identityToken: String, displayName: String?) async throws -> AuthToken {
+        struct Body: Encodable { let identity_token: String; let display_name: String? }
+        return try await post(
+            url: baseURL.appendingPathComponent("auth/siwa"),
+            body: Body(identity_token: identityToken, display_name: displayName)
+        )
+    }
+
     func me() async throws -> UserMe {
         try await get(url: baseURL.appendingPathComponent("auth/me"))
     }

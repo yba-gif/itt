@@ -460,6 +460,8 @@ struct GrainOverlay: View {
 /// spring-animated selection using matchedGeometryEffect.
 struct FloatingTabBar: View {
     @Binding var selected: AppTab
+    /// Called when the user taps a tab that is already selected (e.g. pop to root).
+    var onReselect: (AppTab) -> Void = { _ in }
     @Namespace private var tabNS
 
     var body: some View {
@@ -467,7 +469,11 @@ struct FloatingTabBar: View {
             ForEach(AppTab.allCases, id: \.self) { tab in
                 Button {
                     withAnimation(.spring(response: 0.32, dampingFraction: 0.68)) {
-                        selected = tab
+                        if selected == tab {
+                            onReselect(tab)
+                        } else {
+                            selected = tab
+                        }
                     }
                 } label: {
                     ZStack {
@@ -502,12 +508,12 @@ struct FloatingTabBar: View {
 
 /// Tab identifiers for the custom floating tab bar.
 enum AppTab: Int, CaseIterable, Hashable {
-    case rehber, ara, etkinlikler, bilgi, profil
+    case rehber, ittai, etkinlikler, bilgi, profil
 
     var icon: String {
         switch self {
         case .rehber:      return "square.grid.2x2.fill"
-        case .ara:         return "magnifyingglass"
+        case .ittai:       return "sparkles"
         case .etkinlikler: return "calendar"
         case .bilgi:       return "info.circle.fill"
         case .profil:      return "person.crop.circle.fill"
@@ -517,10 +523,36 @@ enum AppTab: Int, CaseIterable, Hashable {
     var label: String {
         switch self {
         case .rehber:      return "Rehber"
-        case .ara:         return "Ara"
+        case .ittai:       return "İTT AI"
         case .etkinlikler: return "Etkinlikler"
         case .bilgi:       return "Bilgi"
         case .profil:      return "Profil"
+        }
+    }
+}
+
+// MARK: - Navigation Zoom Transition Helpers
+
+extension View {
+    /// Marks this view as the source of a navigation zoom transition.
+    /// Falls back to the default push animation on iOS 16/17.
+    @ViewBuilder
+    func zoomSource<ID: Hashable>(id: ID, in namespace: Namespace.ID) -> some View {
+        if #available(iOS 18, *) {
+            self.matchedTransitionSource(id: id, in: namespace)
+        } else {
+            self
+        }
+    }
+
+    /// Applies a zoom reveal to a view being pushed onto the NavigationStack.
+    /// Falls back to the default push animation on iOS 16/17.
+    @ViewBuilder
+    func zoomNavTransition<ID: Hashable>(sourceID: ID, in namespace: Namespace.ID) -> some View {
+        if #available(iOS 18, *) {
+            self.navigationTransition(.zoom(sourceID: sourceID, in: namespace))
+        } else {
+            self
         }
     }
 }

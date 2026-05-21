@@ -1,52 +1,79 @@
 import SwiftUI
 
 struct RehberTab: View {
+    /// Incremented by parent when the user re-taps the Rehber tab — pops to root.
+    @Binding var popToRoot: Int
+    @State private var navPath: [Directory] = []
     @State private var showAI = false
+    @State private var showSearch = false
+    @Namespace private var tileNS
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 0) {
-                    heroSection
-                    categoriesSection
-                        .padding(.bottom, 32)
+        NavigationStack(path: $navPath) {
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 0) {
+                        // Invisible anchor at the very top for scroll-to-top
+                        Color.clear.frame(height: 0).id("rehber-top")
+                        heroSection
+                        categoriesSection
+                            .padding(.bottom, 32)
+                    }
+                }
+                .background(Color.tgsCream)
+                // Pop to root OR scroll to top on tab re-tap
+                .tgsOnChange(of: popToRoot) {
+                    if navPath.isEmpty {
+                        // Already at root — scroll to top
+                        withAnimation(.spring(response: 0.40, dampingFraction: 0.82)) {
+                            proxy.scrollTo("rehber-top", anchor: .top)
+                        }
+                    } else {
+                        // On a subpage — pop to root
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.82)) {
+                            navPath = []
+                        }
+                    }
                 }
             }
-            .background(Color.tgsCream)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.white, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) { navLogo }
+                // Centered, no Liquid Glass capsule (unlike leading/trailing placements)
+                ToolbarItem(placement: .principal) { navLogo }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Text("🇨🇭").font(.system(size: 22))
-                        .accessibilityLabel("İsviçre")
+                    Button {
+                        showSearch = true
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(Color.tgsRed)
+                    }
+                    .accessibilityLabel("Ara")
                 }
             }
             .navigationDestination(for: Directory.self) { directory in
                 DirectoryListView(directory: directory)
+                    .zoomNavTransition(sourceID: directory, in: tileNS)
             }
             .fullScreenCover(isPresented: $showAI) {
                 ITTAIView()
             }
+            .sheet(isPresented: $showSearch) {
+                AraTab()
+            }
         }
     }
 
-    // MARK: – Nav logo
+    // MARK: – Nav logo (combined brand image)
 
     private var navLogo: some View {
-        HStack(spacing: 3) {
-            Text("İTT")
-                .font(.system(size: 21, weight: .black, design: .rounded))
-                .foregroundStyle(Color.tgsRed)
-            Text("Rehber")
-                .font(.system(size: 21, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color.tgsCharcoal)
-            Circle()
-                .fill(Color.tgsRed)
-                .frame(width: 5, height: 5)
-                .offset(y: -4)
-        }
+        Image("ITTHeaderLogo")
+            .resizable()
+            .scaledToFit()
+            .frame(height: 22)
+            .accessibilityLabel("İsviçre Türk Toplumu — TGS · ATS")
     }
 
     // MARK: – Hero
@@ -200,7 +227,7 @@ struct RehberTab: View {
             }
             .padding(.horizontal, TGSSpacing.lg)
 
-            DirectoryGridView()
+            DirectoryGridView(namespace: tileNS)
                 .padding(.horizontal, TGSSpacing.lg)
         }
         .padding(.top, TGSSpacing.xl)
@@ -219,6 +246,7 @@ struct RehberTab: View {
 // MARK: - Directory Grid
 
 struct DirectoryGridView: View {
+    var namespace: Namespace.ID
     private let columns = [GridItem(.flexible(), spacing: TGSSpacing.md),
                            GridItem(.flexible(), spacing: TGSSpacing.md)]
     @State private var appeared = false
@@ -229,6 +257,8 @@ struct DirectoryGridView: View {
                 NavigationLink(value: directory) {
                     DirectoryTile(directory: directory)
                 }
+                // Zoom transition source (iOS 18+); no-op on earlier
+                .zoomSource(id: directory, in: namespace)
                 .buttonStyle(TGSSpringButtonStyle())
                 .accessibilityLabel(directory.titleTR)
                 .accessibilityHint(directory.cta)

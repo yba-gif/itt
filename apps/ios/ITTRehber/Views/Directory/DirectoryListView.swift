@@ -14,6 +14,7 @@ struct DirectoryListView: View {
     @State private var error: APIError?
     @State private var isOffline: Bool = false
     @State private var showSubmit: Bool = false
+    @Namespace private var rowNS
 
     var body: some View {
         VStack(spacing: 0) {
@@ -88,8 +89,12 @@ struct DirectoryListView: View {
         List {
             Section {
                 ForEach(listings) { listing in
-                    NavigationLink(destination: DirectoryDetailView(listing: listing)) {
+                    NavigationLink(
+                        destination: DirectoryDetailView(listing: listing)
+                            .zoomNavTransition(sourceID: listing.id, in: rowNS)
+                    ) {
                         ListingRow(listing: listing)
+                            .zoomSource(id: listing.id, in: rowNS)
                     }
                     .listRowBackground(Color.white)
                     .listRowSeparatorTint(Color.tgsBorder)
@@ -144,6 +149,7 @@ struct DirectoryListView: View {
 
 struct ListingRow: View {
     let listing: Listing
+    @State private var appeared = false
 
     private var initials: String {
         listing.name
@@ -207,6 +213,10 @@ struct ListingRow: View {
             Spacer(minLength: 0)
         }
         .padding(.vertical, 8)
+        .opacity(appeared ? 1 : 0)
+        .offset(x: appeared ? 0 : 20)
+        .animation(.spring(response: 0.38, dampingFraction: 0.80), value: appeared)
+        .onAppear { appeared = true }
         // P1-4: synthesise a single VoiceOver label from all visible text
         .accessibilityElement(children: .combine)
     }
