@@ -35,8 +35,8 @@ export default function AIQuestions() {
       )}
 
       {data && data.items.length > 0 && (
-        <div className="bg-white border border-slate-200 rounded overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="bg-white border border-slate-200 rounded overflow-x-auto">
+          <table className="w-full text-sm min-w-[600px]">
             <thead className="bg-slate-50 text-slate-600">
               <tr>
                 <th className="text-left px-4 py-2.5 font-medium w-44">Tarih</th>

@@ -193,7 +193,7 @@ function ConsulateForm({
             ×
           </button>
         </div>
-        <div className="p-5 grid grid-cols-2 gap-4">
+        <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Şehir" value={form.city} onChange={(v) => update("city", v)} />
           <Field label="Sıralama" type="number" value={String(form.sort_order)} onChange={(v) => update("sort_order", Number(v) || 0)} />
           <Field className="col-span-2" label="Başlık" value={form.title} onChange={(v) => update("title", v)} />

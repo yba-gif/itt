@@ -167,7 +167,7 @@ function SocialForm({
             ×
           </button>
         </div>
-        <div className="p-5 grid grid-cols-2 gap-4">
+        <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Etiket" value={form.label} onChange={(v) => setForm({ ...form, label: v })} hint="örn. Facebook, X, Instagram" />
           <Field label="Sıralama" type="number" value={String(form.sort_order)} onChange={(v) => setForm({ ...form, sort_order: Number(v) || 0 })} />
           <Field className="col-span-2" label="URL" value={form.url} onChange={(v) => setForm({ ...form, url: v })} hint="https://, mailto:, tel:" />
