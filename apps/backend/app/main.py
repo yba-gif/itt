@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.routes import (
+    admin_users,
     ai,
     auth,
     content,
@@ -60,6 +61,7 @@ app.include_router(invoices.admin_router)
 app.include_router(push.router)
 app.include_router(push.admin_router)
 app.include_router(moderation.router)
+app.include_router(admin_users.router)
 
 
 @app.get("/")

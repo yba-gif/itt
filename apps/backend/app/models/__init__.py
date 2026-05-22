@@ -1,5 +1,6 @@
 """Import all models so SQLAlchemy registers them with Base.metadata."""
 
+from app.models.ai_question import AIQuestion
 from app.models.category import Category
 from app.models.content_page import ContentPage
 from app.models.device_token import DeviceToken
@@ -13,6 +14,7 @@ from app.models.saved_search import SavedSearch
 from app.models.user import User
 
 __all__ = [
+    "AIQuestion",
     "Category",
     "ContentPage",
     "DeviceToken",

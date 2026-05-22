@@ -28,6 +28,8 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from app.config import settings
+from app.db import SessionLocal
+from app.models.ai_question import AIQuestion
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
@@ -88,6 +90,25 @@ def _openai_to_gemini_sse(text_chunk: str) -> bytes:
     return f"data: {json.dumps(payload, ensure_ascii=False)}\n\n".encode("utf-8")
 
 
+async def _log_question(question: str, response_chars: int) -> None:
+    """Append one row to ai_questions. Best-effort — log a warning on failure
+    but never let logging break the user-facing AI stream."""
+    if not question:
+        return
+    try:
+        async with SessionLocal() as session:
+            session.add(
+                AIQuestion(
+                    question=question[:4000],  # keep table tidy
+                    response_chars=response_chars,
+                )
+            )
+            await session.commit()
+    except Exception as exc:  # noqa: BLE001 — logging shouldn't break the proxy
+        import logging
+        logging.getLogger(__name__).warning("ai_questions log failed: %s", exc)
+
+
 # --- Route ---------------------------------------------------------------
 
 
@@ -103,6 +124,14 @@ async def ai_chat(body: ChatRequest) -> StreamingResponse:
     messages = _gemini_to_openai_messages(body)
     if not messages or messages[-1]["role"] == "system":
         raise HTTPException(status_code=400, detail="Empty conversation")
+
+    # The user's most recent question is the last user-role message —
+    # capture it for the admin log. Earlier conversation turns are context
+    # we don't store separately.
+    user_question = next(
+        (m["content"] for m in reversed(messages) if m["role"] == "user"),
+        "",
+    )
 
     # Map generationConfig → OpenAI sampling args (best-effort)
     gen = body.generationConfig or {}
@@ -121,6 +150,7 @@ async def ai_chat(body: ChatRequest) -> StreamingResponse:
     }
 
     async def _stream():
+        response_chars = 0
         async with httpx.AsyncClient(timeout=45.0) as client:
             async with client.stream("POST", _OPENAI_URL, json=openai_payload, headers=headers) as resp:
                 if resp.status_code != 200:
@@ -132,6 +162,7 @@ async def ai_chat(body: ChatRequest) -> StreamingResponse:
                     except Exception:
                         msg = error_body.decode(errors="replace")[:200]
                     yield _openai_to_gemini_sse(f"⚠️ AI error: {msg}")
+                    await _log_question(user_question, 0)
                     return
 
                 async for line in resp.aiter_lines():
@@ -155,6 +186,11 @@ async def ai_chat(body: ChatRequest) -> StreamingResponse:
                     text_piece = delta.get("content")
                     if not text_piece:
                         continue
+                    response_chars += len(text_piece)
                     yield _openai_to_gemini_sse(text_piece)
+
+            # Log only after the stream completes — keeps the AI table free
+            # of half-finished noise.
+            await _log_question(user_question, response_chars)
 
     return StreamingResponse(_stream(), media_type="text/event-stream")
