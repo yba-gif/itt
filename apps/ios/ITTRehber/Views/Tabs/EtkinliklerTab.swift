@@ -324,16 +324,28 @@ struct EventDetailView: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 if let venue = event.venue {
-                    Label(venue, systemImage: "mappin.and.ellipse")
-                        .font(.subheadline)
-                        .foregroundStyle(Color.tgsCharcoal)
-                        .fixedSize(horizontal: false, vertical: true)
+                    Button {
+                        openInMaps(query: [venue, event.address].compactMap { $0 }.joined(separator: ", "))
+                    } label: {
+                        Label(venue, systemImage: "mappin.and.ellipse")
+                            .font(.subheadline)
+                            .foregroundStyle(Color.tgsCharcoal)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityHint("Haritada aç")
                 }
                 if let address = event.address {
-                    Label(address, systemImage: "map")
-                        .font(.subheadline)
-                        .foregroundStyle(Color.tgsCharcoal)
-                        .fixedSize(horizontal: false, vertical: true)
+                    Button {
+                        openInMaps(query: address)
+                    } label: {
+                        Label(address, systemImage: "map")
+                            .font(.subheadline)
+                            .foregroundStyle(Color.tgsCharcoal)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityHint("Haritada aç")
                 }
 
                 Button {
@@ -421,6 +433,18 @@ struct EventDetailView: View {
         f.dateStyle = .full
         f.timeStyle = .short
         return f.string(from: d)
+    }
+
+    /// Open the event venue/address in Apple Maps. Mirrors the pattern used
+    /// in DirectoryDetailView.openInMaps() — geocode first for a precise pin,
+    /// fall back to a query URL if geocoding fails.
+    private func openInMaps(query: String) {
+        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        if let encoded = trimmed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           let url = URL(string: "https://maps.apple.com/?q=\(encoded)") {
+            UIApplication.shared.open(url)
+        }
     }
 
     private func scheduleReminder() async {

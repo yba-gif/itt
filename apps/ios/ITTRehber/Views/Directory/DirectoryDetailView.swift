@@ -297,7 +297,10 @@ struct DirectoryDetailView: View {
             VStack(spacing: 0) {
                 if let address = listing.address {
                     ContactRow(icon: "mappin.and.ellipse", label: "Adres",
-                               value: address, accent: accent, isLast: listing.phone == nil && listing.email == nil && listing.website == nil)
+                               value: address, accent: accent,
+                               isLast: listing.phone == nil && listing.email == nil && listing.website == nil) {
+                        openInMaps()
+                    }
                 }
                 if let phone = listing.phone {
                     ContactRow(icon: "phone.fill", label: "Telefon",
