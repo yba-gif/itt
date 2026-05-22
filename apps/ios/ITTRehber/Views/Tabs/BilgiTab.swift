@@ -848,13 +848,21 @@ struct MarkdownView: View {
 // edit; rotate the IBAN, TWINT, etc. by changing the constants below.
 
 struct DonationView: View {
-    // ⚠️ Replace with TGS-ITT's actual bank/TWINT details before launch.
-    // Kept as constants so they're trivial to update in one place.
-    private let bankName = "PostFinance"
-    private let accountHolder = "TGS-ITT — İsviçre Türk Toplumu"
-    private let iban = "CH00 0000 0000 0000 0000 0"
-    private let bic = "POFICHBEXXX"
-    private let twintPhone = "+41 44 593 24 24"
+    // TGS-ITT donation account. The IBAN clearing 04835 historically belongs
+    // to Credit Suisse Schweiz AG, which merged into UBS in 2023 — the IBAN
+    // keeps routing correctly through UBS's systems. Update bankName if the
+    // account migrates to a different institution.
+    private let bankName = "UBS Switzerland AG"
+    private let bankNote = "Önceki adı: Credit Suisse Schweiz AG"
+    private let accountHolder = "Türkische Gemeinschaft Schweiz / İsviçre Türk Toplumu"
+    private let accountAddress = "8953 Dietikon"
+    private let iban = "CH60 0483 5016 0284 9100 2"
+    /// Optional — only used for international (non-CH) transfers. Standard
+    /// UBS Switzerland AG BIC after the CS merger.
+    private let bic: String? = "UBSWCHZH80A"
+    /// Optional — set to a phone/handle when TWINT is enabled. Hides the
+    /// whole TWINT card when nil.
+    private let twintPhone: String? = nil
     private let contactEmail = "info@tgs-itt.ch"
 
     var body: some View {
@@ -863,7 +871,7 @@ struct DonationView: View {
                 hero
                 whyCard
                 bankCard
-                twintCard
+                if twintPhone != nil { twintCard }
                 contactRow
             }
             .padding(.horizontal, 20)
@@ -945,10 +953,12 @@ struct DonationView: View {
         VStack(alignment: .leading, spacing: 12) {
             sectionLabel("Banka Havalesi")
             VStack(spacing: 0) {
-                copyRow(label: "Banka", value: bankName, isLast: false)
-                copyRow(label: "Hesap sahibi", value: accountHolder, isLast: false)
-                copyRow(label: "IBAN", value: iban, isLast: false, mono: true)
-                copyRow(label: "BIC / SWIFT", value: bic, isLast: true, mono: true)
+                copyRow(label: "Banka", value: bankName, footnote: bankNote, isLast: false)
+                copyRow(label: "Hesap sahibi", value: accountHolder, footnote: accountAddress, isLast: false)
+                copyRow(label: "IBAN", value: iban, isLast: bic == nil, mono: true)
+                if let bic {
+                    copyRow(label: "BIC / SWIFT", value: bic, footnote: "Sadece uluslararası havaleler için gerekli", isLast: true, mono: true)
+                }
             }
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
@@ -956,7 +966,7 @@ struct DonationView: View {
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
                     .stroke(Color.tgsBorder.opacity(0.7), lineWidth: 0.5)
             )
-            Text("IBAN veya BIC'e dokunarak panoya kopyalayabilirsiniz.")
+            Text("Herhangi bir satıra dokunarak değeri panoya kopyalayabilirsiniz.")
                 .font(.caption)
                 .foregroundStyle(Color.tgsMuted)
                 .padding(.horizontal, 4)
@@ -965,7 +975,7 @@ struct DonationView: View {
 
     @State private var copiedField: String? = nil
 
-    private func copyRow(label: String, value: String, isLast: Bool, mono: Bool = false) -> some View {
+    private func copyRow(label: String, value: String, footnote: String? = nil, isLast: Bool, mono: Bool = false) -> some View {
         Button {
             UIPasteboard.general.string = value
             withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
@@ -984,8 +994,15 @@ struct DonationView: View {
                         Text(value)
                             .font(mono ? .system(size: 14, weight: .semibold, design: .monospaced) : .system(size: 14, weight: .medium))
                             .foregroundStyle(Color.tgsCharcoal)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.75)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.85)
+                            .fixedSize(horizontal: false, vertical: true)
+                        if let footnote, !footnote.isEmpty {
+                            Text(footnote)
+                                .font(.caption2)
+                                .foregroundStyle(Color.tgsMuted)
+                                .lineLimit(1)
+                        }
                     }
                     Spacer(minLength: 0)
                     if copiedField == label {
@@ -1025,7 +1042,7 @@ struct DonationView: View {
                         .foregroundStyle(.white)
                 }
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(twintPhone)
+                    Text(twintPhone ?? "")
                         .font(.system(size: 15, weight: .semibold, design: .monospaced))
                         .foregroundStyle(Color.tgsCharcoal)
                     Text("TWINT uygulamasında bu numarayı kullanarak bağış yapabilirsiniz")
