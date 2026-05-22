@@ -264,21 +264,6 @@ struct Consulate: Identifiable {
             consulTitle: "T.C. Cenevre Başkonsolosu",
             consulPhotoURL: "https://cenevre-bk.mfa.gov.tr/Content/assets/consulate/images/localCache//60/1b429194-368f-480f-a07f-f1b37021cdf9.png"
         ),
-        Consulate(
-            city: "Basel",
-            title: "Fahri Konsolosluk",
-            address: "Wallstrasse 11, 4051 Basel",
-            phone: "+41613122061",
-            phoneDisplay: "+41 61 312 20 61",
-            email: nil,
-            website: "https://bern.be.mfa.gov.tr",
-            hoursSummary: "Randevu ile",
-            hoursDetail: "Fahri konsolosluk. Lütfen önceden randevu alınız. Resmi konsolosluk işlemleri için Bern Büyükelçiliği'ne yönlendirilirsiniz.",
-            // ⚠️ Replace with the current honorary consul's name + photo.
-            consulName: nil,
-            consulTitle: "T.C. Basel Fahri Konsolosu",
-            consulPhotoURL: nil
-        ),
     ]
 }
 
