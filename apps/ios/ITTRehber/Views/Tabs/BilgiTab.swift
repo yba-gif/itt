@@ -3,6 +3,10 @@ import SwiftUI
 struct BilgiTab: View {
     @State private var pages: [ContentPage] = []
     @State private var loading = false
+    // Consulates + socials are now DB-backed but ship with offline-safe
+    // fallbacks so the section never renders empty.
+    @State private var consulates: [Consulate] = Consulate.fallback
+    @State private var socials: [Social] = Social.fallback
 
     var body: some View {
         NavigationStack {
@@ -30,7 +34,7 @@ struct BilgiTab: View {
                 }
 
                 Section {
-                    ForEach(Consulate.all) { c in
+                    ForEach(consulates) { c in
                         NavigationLink {
                             ConsulateDetailView(consulate: c)
                         } label: {
@@ -46,7 +50,7 @@ struct BilgiTab: View {
 
                 // Socials — moved above Rehber so platforms are seen first
                 Section {
-                    SocialsRow()
+                    SocialsRow(items: socials)
                         .listRowBackground(Color.clear)
                         .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 12, trailing: 0))
                         .listRowSeparator(.hidden)
@@ -94,11 +98,26 @@ struct BilgiTab: View {
     private func load() async {
         loading = true
         defer { loading = false }
-        do {
-            pages = try await APIClient.shared.contentPages()
-        } catch {
-            // Offline-friendly: keep whatever we already loaded.
-        }
+        // Three independent fetches — issue concurrently so a slow endpoint
+        // doesn't block the others. Each one falls back silently to its
+        // current value (which starts as fallback data for consulates +
+        // socials so the section never renders empty).
+        async let pagesTask: Void = {
+            do { pages = try await APIClient.shared.contentPages() } catch { }
+        }()
+        async let consulatesTask: Void = {
+            do {
+                let fetched = try await APIClient.shared.consulates()
+                if !fetched.isEmpty { consulates = fetched }
+            } catch { }
+        }()
+        async let socialsTask: Void = {
+            do {
+                let fetched = try await APIClient.shared.socials()
+                if !fetched.isEmpty { socials = fetched }
+            } catch { }
+        }()
+        _ = await (pagesTask, consulatesTask, socialsTask)
     }
 }
 
@@ -191,8 +210,8 @@ struct ContentPageView: View {
 
 // MARK: - Consulate model + data
 
-struct Consulate: Identifiable {
-    var id: String { city }
+struct Consulate: Identifiable, Codable, Hashable {
+    let id: UUID
     let city: String
     let title: String
     let address: String
@@ -208,21 +227,39 @@ struct Consulate: Identifiable {
     let hoursSummary: String
     /// Detail/footnote on hours (e.g. randevu requirement).
     let hoursDetail: String?
-
     /// Current consul / ambassador. Optional so the card hides when not set.
-    /// Update by editing `Consulate.all` below — single source of truth.
     let consulName: String?
     /// Their role, always shown ("T.C. … Büyükelçisi" / "… Başkonsolosu").
     let consulTitle: String
-    /// Remote photo URL (https://…). Use the official MFA / consulate
-    /// website photo. Nil → renders initials placeholder.
+    /// Remote photo URL (https://…). Nil → renders initials placeholder.
     let consulPhotoURL: String?
+    let sortOrder: Int
 
-    /// All Turkish consulates serving Switzerland. Verify before launch —
-    /// emails follow standard MFA patterns (embassy.*/consulate.*) but should
-    /// be confirmed against the official mfa.gov.tr pages.
-    static let all: [Consulate] = [
+    enum CodingKeys: String, CodingKey {
+        case id
+        case city
+        case title
+        case address
+        case phone
+        case phoneDisplay = "phone_display"
+        case email
+        case website
+        case hoursSummary = "hours_summary"
+        case hoursDetail = "hours_detail"
+        case consulName = "consul_name"
+        case consulTitle = "consul_title"
+        case consulPhotoURL = "consul_photo_url"
+        case sortOrder = "sort_order"
+    }
+
+    /// Offline fallback when the /consulates API is unreachable. The
+    /// production source of truth is the DB; this matches the seed data
+    /// loaded by Alembic migration 0007 so the app never shows an empty
+    /// section. Stable UUIDs are used so the same identity persists across
+    /// hits/misses.
+    static let fallback: [Consulate] = [
         Consulate(
+            id: UUID(uuidString: "00000000-0000-0000-0000-000000000001")!,
             city: "Bern",
             title: "Türkiye Büyükelçiliği",
             address: "Villastrasse 32, 3006 Bern",
@@ -234,9 +271,11 @@ struct Consulate: Identifiable {
             hoursDetail: "Konsolosluk işlemleri için randevu zorunludur. Randevu için web sitesini ziyaret edin.",
             consulName: "Şebnem İncesu",
             consulTitle: "T.C. Bern Büyükelçisi",
-            consulPhotoURL: "https://bern-be.mfa.gov.tr/Content/assets/consulate/images/localCache//60/866246c9-a693-427a-aab8-02ad0e68de29.png"
+            consulPhotoURL: "https://bern-be.mfa.gov.tr/Content/assets/consulate/images/localCache//60/866246c9-a693-427a-aab8-02ad0e68de29.png",
+            sortOrder: 10
         ),
         Consulate(
+            id: UUID(uuidString: "00000000-0000-0000-0000-000000000002")!,
             city: "Zürich",
             title: "Türkiye Cumhuriyeti Başkonsolosluğu",
             address: "Basteiplatz 2, 8001 Zürich",
@@ -248,9 +287,11 @@ struct Consulate: Identifiable {
             hoursDetail: "Konsolosluk işlemleri için randevu zorunludur.",
             consulName: "Fazlı Çorman",
             consulTitle: "T.C. Zürih Başkonsolosu",
-            consulPhotoURL: "https://zurih-bk.mfa.gov.tr/Content/assets/consulate/images/localCache//60/841b03b0-dcaf-48a4-b221-469bddb709be.png"
+            consulPhotoURL: "https://zurih-bk.mfa.gov.tr/Content/assets/consulate/images/localCache//60/841b03b0-dcaf-48a4-b221-469bddb709be.png",
+            sortOrder: 20
         ),
         Consulate(
+            id: UUID(uuidString: "00000000-0000-0000-0000-000000000003")!,
             city: "Cenevre",
             title: "Türkiye Cumhuriyeti Başkonsolosluğu",
             address: "Avenue Soret 4, 1203 Genève",
@@ -262,7 +303,8 @@ struct Consulate: Identifiable {
             hoursDetail: "Konsolosluk işlemleri için randevu zorunludur.",
             consulName: "Salih Boğaç Güldere",
             consulTitle: "T.C. Cenevre Başkonsolosu",
-            consulPhotoURL: "https://cenevre-bk.mfa.gov.tr/Content/assets/consulate/images/localCache//60/1b429194-368f-480f-a07f-f1b37021cdf9.png"
+            consulPhotoURL: "https://cenevre-bk.mfa.gov.tr/Content/assets/consulate/images/localCache//60/1b429194-368f-480f-a07f-f1b37021cdf9.png",
+            sortOrder: 30
         ),
     ]
 }
@@ -665,30 +707,57 @@ struct SocialAidHotlineCard: View {
     }
 }
 
-// MARK: - Socials Row
+// MARK: - Social model + Socials Row
 
-/// Horizontal row of platform chips at the bottom of the Bilgi tab.
-/// Each tile is tappable and opens the respective URL in the default
-/// browser / mail app.
-struct SocialsRow: View {
-    private struct Social {
-        let label: String
-        let systemIcon: String?       // SF Symbol fallback
-        let url: String
-        let tint: Color
+/// One row in the 'Bizi Takip Edin' platform chip strip. Now DB-backed
+/// (Phase C migration) — the iOS app fetches /socials on Bilgi tab load
+/// and falls back to the hardcoded list below when offline.
+struct Social: Identifiable, Codable, Hashable {
+    let id: UUID
+    let label: String
+    let systemIcon: String
+    let url: String
+    /// Hex like "#1A5CC8". Backend stores as 7-char string.
+    let tintHex: String
+    let sortOrder: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case label
+        case systemIcon = "system_icon"
+        case url
+        case tintHex = "tint_hex"
+        case sortOrder = "sort_order"
     }
 
-    private let items: [Social] = [
-        .init(label: "Facebook",  systemIcon: "f.square.fill",       url: "https://www.facebook.com/itt.tgs",                 tint: Color(red: 0.10, green: 0.36, blue: 0.78)),
-        .init(label: "X",         systemIcon: "xmark",                url: "https://x.com/isvicreturkitt",                     tint: Color.black),
-        .init(label: "Instagram", systemIcon: "camera.fill",          url: "https://www.instagram.com/isvicreturktoplumu_itt/", tint: Color(red: 0.78, green: 0.16, blue: 0.50)),
-        .init(label: "Web",       systemIcon: "globe",                url: "https://tgs-itt.ch/",                              tint: Color.tgsRed),
-        .init(label: "E-posta",   systemIcon: "envelope.fill",        url: "mailto:info@tgs-itt.ch",                           tint: Color.tgsCharcoal),
+    /// SwiftUI Color from the stored hex. Falls back to brand red on bad input.
+    var tint: Color {
+        let hex = tintHex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
+        guard hex.count == 6, let val = Int(hex, radix: 16) else { return Color.tgsRed }
+        return Color(
+            red: Double((val >> 16) & 0xFF) / 255,
+            green: Double((val >> 8) & 0xFF) / 255,
+            blue: Double(val & 0xFF) / 255
+        )
+    }
+
+    /// Offline fallback matching the seed data in Alembic migration 0007.
+    static let fallback: [Social] = [
+        Social(id: UUID(uuidString: "00000000-0000-0000-1000-000000000001")!, label: "Facebook",  systemIcon: "f.square.fill", url: "https://www.facebook.com/itt.tgs",                  tintHex: "#1A5CC8", sortOrder: 10),
+        Social(id: UUID(uuidString: "00000000-0000-0000-1000-000000000002")!, label: "X",         systemIcon: "xmark",         url: "https://x.com/isvicreturkitt",                      tintHex: "#000000", sortOrder: 20),
+        Social(id: UUID(uuidString: "00000000-0000-0000-1000-000000000003")!, label: "Instagram", systemIcon: "camera.fill",   url: "https://www.instagram.com/isvicreturktoplumu_itt/", tintHex: "#C82980", sortOrder: 30),
+        Social(id: UUID(uuidString: "00000000-0000-0000-1000-000000000004")!, label: "Web",       systemIcon: "globe",         url: "https://tgs-itt.ch/",                               tintHex: "#B82030", sortOrder: 40),
+        Social(id: UUID(uuidString: "00000000-0000-0000-1000-000000000005")!, label: "E-posta",   systemIcon: "envelope.fill", url: "mailto:info@tgs-itt.ch",                            tintHex: "#1B2734", sortOrder: 50),
     ]
+}
+
+/// Horizontal row of platform chips at the bottom of the Bilgi tab.
+struct SocialsRow: View {
+    let items: [Social]
 
     var body: some View {
         HStack(spacing: 10) {
-            ForEach(items, id: \.label) { item in
+            ForEach(items) { item in
                 socialChip(item)
             }
         }
@@ -706,7 +775,7 @@ struct SocialsRow: View {
                     RoundedRectangle(cornerRadius: 14, style: .continuous)
                         .fill(item.tint.opacity(0.12))
                         .frame(height: 56)
-                    Image(systemName: item.systemIcon ?? "link")
+                    Image(systemName: item.systemIcon)
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(item.tint)
                 }

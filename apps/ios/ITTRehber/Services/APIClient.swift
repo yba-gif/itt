@@ -183,6 +183,16 @@ final class APIClient {
         try await get(url: baseURL.appendingPathComponent("content/\(slug)"))
     }
 
+    // MARK: - Consulates + Socials (Phase C.3 — moved from hardcoded)
+
+    func consulates() async throws -> [Consulate] {
+        try await get(url: baseURL.appendingPathComponent("consulates"))
+    }
+
+    func socials() async throws -> [Social] {
+        try await get(url: baseURL.appendingPathComponent("socials"))
+    }
+
     // MARK: - Global search
 
     func globalSearch(query: String) async throws -> SearchResponse {
