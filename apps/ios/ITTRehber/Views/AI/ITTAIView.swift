@@ -338,7 +338,7 @@ private struct MessageBubble: View {
                             .padding(.horizontal, 14)
                             .padding(.vertical, 14)
                     } else {
-                        Text(message.text)
+                        Text(MessageBubble.attributed(message.text))
                             .font(.system(size: 15))
                             .foregroundStyle(.white.opacity(0.88))
                             .padding(.horizontal, 14)
@@ -359,6 +359,21 @@ private struct MessageBubble: View {
                 Spacer(minLength: 56)
             }
         }
+    }
+
+    /// Convert assistant markdown (bold, italic, links) into an AttributedString.
+    /// We use `inlineOnlyPreservingWhitespace` so line breaks survive but block
+    /// constructs (headings, fenced code, etc.) are treated as literal — those
+    /// rarely appear in our chat answers and aren't worth the complexity.
+    /// Falls back to plain text if parsing fails (e.g. mid-stream half-tokens).
+    static func attributed(_ raw: String) -> AttributedString {
+        if let attr = try? AttributedString(
+            markdown: raw,
+            options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        ) {
+            return attr
+        }
+        return AttributedString(raw)
     }
 }
 
