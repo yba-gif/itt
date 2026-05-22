@@ -39,7 +39,12 @@ _log = logging.getLogger(__name__)
 
 _OPENAI_MODEL = "gpt-4o-mini"
 _OPENAI_URL = "https://api.openai.com/v1/chat/completions"
-_GEMINI_MODEL = "gemini-1.5-flash"
+# 2.5-flash-lite chosen over 2.5-flash because:
+#  - "lite" skips the "thinking" tokens 2.5-flash spends on internal reasoning,
+#    which inflates cost+latency without helping a community-directory chatbot
+#  - confirmed available to new API keys (1.5-flash was retired, 2.0-flash is
+#    "no longer available to new users", 2.5-flash works but is overkill here)
+_GEMINI_MODEL = "gemini-2.5-flash-lite"
 _GEMINI_URL = (
     f"https://generativelanguage.googleapis.com/v1beta/models/{_GEMINI_MODEL}"
     ":streamGenerateContent?alt=sse"
