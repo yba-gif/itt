@@ -257,14 +257,12 @@ struct Consulate: Identifiable {
             phone: "+41227321600",
             phoneDisplay: "+41 22 732 16 00",
             email: "konsolosluk.cenevre@mfa.gov.tr",
-            website: "https://cenevre.bk.mfa.gov.tr",
+            website: "https://cenevre-bk.mfa.gov.tr",
             hoursSummary: "Pzt - Cuma 09:00 - 13:00",
             hoursDetail: "Konsolosluk işlemleri için randevu zorunludur.",
-            // ⚠️ Replace with the current consul general's name + photo URL.
-            // Source: cenevre.bk.mfa.gov.tr/Mission/MissionChief
-            consulName: nil,
+            consulName: "Salih Boğaç Güldere",
             consulTitle: "T.C. Cenevre Başkonsolosu",
-            consulPhotoURL: nil
+            consulPhotoURL: "https://cenevre-bk.mfa.gov.tr/Content/assets/consulate/images/localCache//60/1b429194-368f-480f-a07f-f1b37021cdf9.png"
         ),
         Consulate(
             city: "Basel",
