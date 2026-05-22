@@ -289,13 +289,24 @@ struct EventDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 if let urlString = event.imageURL, let url = URL(string: urlString) {
-                    CachedAsyncImage(url: url) { phase in
-                        switch phase {
-                        case .empty: Color.tgsSurface
-                        case .success(let img): img.resizable().scaledToFill()
-                        case .failure: Color.tgsSurface
-                        @unknown default: Color.tgsSurface
+                    // GeometryReader bounds the image to actual parent width so
+                    // .scaledToFill() can't push the whole detail page off-screen
+                    // (same fix pattern as DirectoryDetailView hero — wide banner
+                    // images would otherwise force horizontal overflow).
+                    GeometryReader { proxy in
+                        CachedAsyncImage(url: url) { phase in
+                            switch phase {
+                            case .empty: Color.tgsSurface
+                            case .success(let img):
+                                img.resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: proxy.size.width, height: proxy.size.height)
+                                    .clipped()
+                            case .failure: Color.tgsSurface
+                            @unknown default: Color.tgsSurface
+                            }
                         }
+                        .frame(width: proxy.size.width, height: proxy.size.height)
                     }
                     .frame(height: 180)
                     .frame(maxWidth: .infinity)
@@ -305,20 +316,24 @@ struct EventDetailView: View {
                 Text(event.title)
                     .font(.title2.bold())
                     .foregroundStyle(Color.tgsCharcoal)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 Text(formatted(event.startsAt))
                     .font(.subheadline)
                     .foregroundStyle(Color.tgsMuted)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if let venue = event.venue {
                     Label(venue, systemImage: "mappin.and.ellipse")
                         .font(.subheadline)
                         .foregroundStyle(Color.tgsCharcoal)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 if let address = event.address {
                     Label(address, systemImage: "map")
                         .font(.subheadline)
                         .foregroundStyle(Color.tgsCharcoal)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
                 Button {
