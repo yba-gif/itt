@@ -86,7 +86,8 @@ struct DirectoryDetailView: View {
             // width — that's what was pushing the whole detail page past the
             // screen edge. Constraining maxWidth + clipping locally fixes it.
             heroBackground
-                .frame(maxWidth: .infinity, maxHeight: 310)
+                .frame(maxWidth: .infinity)
+                .frame(height: 310)
                 .clipped()
 
             // Gradient for text legibility
@@ -95,6 +96,7 @@ struct DirectoryDetailView: View {
                 startPoint: .init(x: 0.5, y: 0.3),
                 endPoint: .bottom
             )
+            .frame(height: 310)
 
             // Metadata overlaid on image
             VStack(alignment: .leading, spacing: 6) {
@@ -105,6 +107,7 @@ struct DirectoryDetailView: View {
                         .padding(.horizontal, 11)
                         .padding(.vertical, 5)
                         .background(Capsule().fill(accent))
+                        .lineLimit(1)
                 }
 
                 Text(listing.name)
@@ -128,9 +131,13 @@ struct DirectoryDetailView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 44) // extra breathing room for card overlap
         }
-        // Constrain the whole hero to parent width — prevents a wide source
-        // image from forcing the entire detail screen past the screen edge.
-        .frame(maxWidth: .infinity, maxHeight: 310)
+        // Force an exact 310pt height — using maxHeight alone lets the hero
+        // collapse to fit the smallest child (title VStack ~60pt) on larger
+        // devices like iPhone 16/17 Pro Max where parent layout pressure is
+        // different. Also constrain to parent width so wide images can't
+        // push horizontal overflow.
+        .frame(maxWidth: .infinity)
+        .frame(height: 310)
         .clipped()
     }
 
