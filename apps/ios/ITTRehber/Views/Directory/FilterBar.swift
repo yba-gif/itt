@@ -20,7 +20,7 @@ struct FilterBar: View {
                     .submitLabel(.search)
                     .foregroundStyle(Color.tgsCharcoal)
                     // Live search with 400 ms debounce
-                    .onChange(of: query) { _ in
+                    .tgsOnChange(of: query) {
                         debounceTask?.cancel()
                         debounceTask = Task {
                             try? await Task.sleep(for: .milliseconds(400))

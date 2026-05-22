@@ -1,0 +1,38 @@
+[
+  {
+    "id": "f499c635-b7d0-5601-8666-55a7851ce839",
+    "title": "Halal Food Festival",
+    "starts_at": "2026-05-30 10:00:00+00",
+    "ends_at": "2026-05-30 20:00:00+00",
+    "kanton": "AG",
+    "image_url": "https://lh3.googleusercontent.com/d/1JTae1agSf6nDiABHNvZnbPQAjXL0-8P2",
+    "description": "Festival / Fuar"
+  },
+  {
+    "id": "97694888-7900-5106-87c5-e589b33a0f5a",
+    "title": "Halal Food Festival",
+    "starts_at": "2026-05-31 10:00:00+00",
+    "ends_at": "2026-05-31 20:00:00+00",
+    "kanton": "AG",
+    "image_url": "https://lh3.googleusercontent.com/d/1skVPu3CcCtxnyXvzFlZhglkcZqd1K6vg",
+    "description": "Festival / Fuar"
+  },
+  {
+    "id": "d08cb66a-3957-5e32-aca4-3d1719ca72ee",
+    "title": "Türk Kültür Festivali",
+    "starts_at": "2026-06-06 10:00:00+00",
+    "ends_at": "2026-06-06 20:00:00+00",
+    "kanton": "AG",
+    "image_url": "https://lh3.googleusercontent.com/d/1IG8j3xipkWgsHU6pqOWzvAST7S13MtdX",
+    "description": "Festival / Fuar"
+  },
+  {
+    "id": "bf78dd49-ede9-5109-b82f-c21e60490019",
+    "title": "Türk Kültür Festivali",
+    "starts_at": "2026-06-07 10:00:00+00",
+    "ends_at": "2026-06-07 20:00:00+00",
+    "kanton": "AG",
+    "image_url": "https://lh3.googleusercontent.com/d/1IG8j3xipkWgsHU6pqOWzvAST7S13MtdX",
+    "description": "Festival / Fuar"
+  }
+]

@@ -47,7 +47,7 @@ def _validate_directories(codes: list[str]) -> list[str]:
     bad = [c for c in codes if c not in DIRECTORY_CODES]
     if bad:
         raise HTTPException(
-            status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail={"unknown_directories": bad, "allowed": sorted(DIRECTORY_CODES)},
         )
     return list(dict.fromkeys(codes))  # dedupe, preserve order
@@ -86,7 +86,7 @@ async def list_listings(
     if directory:
         if directory not in DIRECTORY_CODES:
             raise HTTPException(
-                status.HTTP_422_UNPROCESSABLE_ENTITY, detail="unknown_directory"
+                status.HTTP_422_UNPROCESSABLE_CONTENT, detail="unknown_directory"
             )
         stmt = stmt.where(Listing.directories.any(directory))
 

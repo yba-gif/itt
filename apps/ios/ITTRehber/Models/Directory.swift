@@ -83,4 +83,29 @@ enum Directory: String, CaseIterable, Identifiable, Codable {
 
     @available(*, deprecated, renamed: "isActive")
     var isPhase1Active: Bool { isActive }
+
+    /// Noun used in the list-view section header: "N uzman bulundu", "N okul bulundu", etc.
+    var resultLabel: String {
+        switch self {
+        case .saglik:       return "uzman"
+        case .hukuk:        return "avukat"
+        case .isletme:      return "işletme"
+        case .finans:       return "danışman"
+        case .tercume:      return "tercüman"
+        case .meslek:       return "meslek"
+        case .okullar:      return "okul"
+        case .camiler:      return "cami"
+        case .mezunlar:     return "mezun"
+        case .destek_dersi: return "öğretmen"
+        }
+    }
+
+    /// True for directories whose initial dataset is small — tile shows a "Yeni" badge
+    /// to set expectations rather than surprising users with a sparse list.
+    var isNew: Bool {
+        switch self {
+        case .meslek, .destek_dersi, .mezunlar: return true
+        default: return false
+        }
+    }
 }

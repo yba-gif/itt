@@ -1,0 +1,886 @@
+[
+  {
+    "name": "Belinda Nazan Walpoth",
+    "directory": "saglik",
+    "category": "Kardiyoloji",
+    "kantons": [
+      "BE"
+    ],
+    "email": "nazan.walpoth@hin.ch",
+    "phone": "+41313111144",
+    "address": "Münstergasse 36, 3011 Bern",
+    "website": "https://www.altstadtkardio.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1aMm5sskDPcQ7yDu5uf1EjbR25DGRFrNI",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "6f52babd-243f-51b5-8a49-dbea8d5da85f"
+  },
+  {
+    "name": "Bülent Konuk",
+    "directory": "saglik",
+    "category": "Cerrah, Ortopedi",
+    "kantons": [
+      "NE"
+    ],
+    "email": null,
+    "phone": "+4132 713 35 04",
+    "address": "Rue de la Maladière 45, 2000 Neuchâtel",
+    "website": "https://fr.comparis.ch/gesundheit/arzt/kanton-neuenburg/neuchatel/konuk-buelent-7601000682178",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1w3sjRnjUoxDumhrIFtNniYGpfcBFhGoS",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "3665fdbf-4ca8-5e55-bcb7-dc876733a3b2"
+  },
+  {
+    "name": "Çağdaş Kaya",
+    "directory": "saglik",
+    "category": "Göz",
+    "kantons": [
+      "SO"
+    ],
+    "email": "augenzentrum.thalgaeu@hin.ch",
+    "phone": "+41623880300",
+    "address": "Augenzentrum Thal-Gäu GmbH, Leuenstrasse 2, 4702 Oensingen",
+    "website": "https://www.augenzentrum-thalgäu.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/13LWuQfN_Yie9dtPNmy0JYaX4cBbz1KKS",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "4f044e33-4475-563e-afe7-5b1f5dc7afd4"
+  },
+  {
+    "name": "Çiğdem Kaya",
+    "directory": "saglik",
+    "category": "Estetik / Güzellik / Kişisel Bakım",
+    "kantons": [
+      "LU"
+    ],
+    "email": "info@unickataesthetics.ch",
+    "phone": "+41 79 900 56 56",
+    "address": "Zürichstrasse 16, 6004 Luzern",
+    "website": "https://unickataesthetics.ch/gesundheitspraxis-drkaya/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1VOud-mflA9rHkgR_hJru56wTziw-nBx7",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "b06da8df-bb08-5e00-be5b-0b31d1e19028"
+  },
+  {
+    "name": "Dr. med. Gazi Keskin",
+    "directory": "saglik",
+    "category": "Kardiyoloji",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "greifenseemed@hin.ch",
+    "phone": "044 940 39 26",
+    "address": "Tumigerstrasse 71, 8606 Greifensee",
+    "website": "https://www.greifenseemed.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1tJA9Q5NnQFXTfrRGbitLGXKpjYI_SV-O",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "738e86b6-8036-5a18-98c8-6c4eef374a50"
+  },
+  {
+    "name": "Edib Ademi",
+    "directory": "saglik",
+    "category": "Psikolojik Destek / Psikiyatri",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "ebib.ademi@hin.ch",
+    "phone": "+41448621212",
+    "address": "Bahnhofstrasse 9, 8180 Bülach",
+    "website": "https://praxisademi.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1KCWBtgXMPEL7VYaiDcGyIvQij-Wqkldg",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "bdb4e30e-fe94-5136-8649-752432350102"
+  },
+  {
+    "name": "Esat Mahmut Özşahin (Prof.)",
+    "directory": "saglik",
+    "category": "Onkoloji",
+    "kantons": [
+      "VD"
+    ],
+    "email": "radiotherapie@hopitalrivierachablais.ch",
+    "phone": "+41587732730",
+    "address": "Hopital Riviera Chablais, Route du Vieux-Séquoia 20, 1847 Rennaz",
+    "website": "https://www.hopitalrivierachablais.ch/jcms/hrc_488359/fr/prof-esat-mahmut-ozsahin",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1KFjftDEhh2DDtyYetHHOB8i5lk2ApeuB",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "2b9daf39-d2b6-5f35-bd36-d6a94ae46325"
+  },
+  {
+    "name": "Fırat Elmas",
+    "directory": "saglik",
+    "category": "Cerrah, Estetik / Güzellik / Kişisel Bakım",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "gartenmatt@hin.ch",
+    "phone": "+41 44 861 15 50",
+    "address": "Praxisgemeinschaft Gartenmatt, Gartenmatt 3, 8180 Bülach",
+    "website": "https://drelmas.ch/drelmas/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1h6ZPDux90HrCbI0JfXE9k5ycLy3X1USI",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "81eb3c25-37cb-5409-ad11-e98f32ddc808"
+  },
+  {
+    "name": "Gönül Korkmaz Kaya",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "SO"
+    ],
+    "email": "praxisvita@hin.ch",
+    "phone": "032 621 44 33",
+    "address": "Wildbachstrasse 8, 4513 Langendorf",
+    "website": "https://www.familienpraxisvita.ch/home/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/17SurgL-Q6X6vX84hPuHeW7OMmlIgKXb8",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "390edc96-16bd-51df-aa8e-bb8652feab46"
+  },
+  {
+    "name": "Gülhan Calik Yarici",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "BL"
+    ],
+    "email": "info@praxiscalik.ch",
+    "phone": "+41614611919",
+    "address": "Hauptstrasse 54, 4132 Muttenz",
+    "website": "https://www.praxiscalik.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/159iKFEf-4N4lS5thd_2u9EDdickqdzjh",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "d4134e3d-a687-5a58-b339-2088b0e0e9d5"
+  },
+  {
+    "name": "Gülseven Gül",
+    "directory": "saglik",
+    "category": "Kadın Hastalıkları / Doğum",
+    "kantons": [
+      "ZG"
+    ],
+    "email": "frauenklinik@zgks.ch",
+    "phone": "+41 41 399 32 10",
+    "address": "Zuger Kantonsspital AG, Landhausstrasse 11,6340 Baar",
+    "website": "https://www.zgks.ch/personen/details/guel",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1zfoPb9FVyhpzYwlO9TAGkjr_l-pwh6ru",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "77571786-661e-5210-8685-8ec9715e5ff8"
+  },
+  {
+    "name": "İhsan İnan",
+    "directory": "saglik",
+    "category": "Cerrah",
+    "kantons": [
+      "GE"
+    ],
+    "email": "ihsan.inan@hin.ch",
+    "phone": "+41 22 789 21 01",
+    "address": "Chemin Beau-Soleil 12, 1206 Genève",
+    "website": "https://www.swissmedical.net/fr/annuaire-medecins/inan-md-facs-ihsan",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/16lPia__QJOo1newGOKy807WeMCeOR0zm",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "f41a97de-600c-5be0-bbff-0d98feb4f901"
+  },
+  {
+    "name": "İkbale Siercks",
+    "directory": "saglik",
+    "category": "Kadın Hastalıkları / Doğum",
+    "kantons": [
+      "SG"
+    ],
+    "email": "ikbale.siercks@h-och.ch",
+    "phone": "+4179 810 56 97",
+    "address": "Kantonsspital St.Gallen, Rorschacherstrasse 95, 9007 St. Gallen",
+    "website": "https://forschung.kssg.ch/de/personen/152-ikbale-siercks",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/17nDLqN3qGme6AE5dx3jfhuIQ8THUMonk",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "2fe204e5-1e75-532a-8daa-9458aa0d39f5"
+  },
+  {
+    "name": "Kadir Oktay Kocagöncü",
+    "directory": "saglik",
+    "category": "Psikolojik Destek / Psikiyatri",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": "+41613613660",
+    "address": "Aeschenvorstadt 68, 4051 Basel",
+    "website": "http://www.minarzt.ch/?page_id=194",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1CiqSxN5v3P-1vp39DpuPbKE00Qg9TAUV",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "dac2ec15-017e-5ece-8bcf-fc372917a851"
+  },
+  {
+    "name": "Kemal Budak",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "TG"
+    ],
+    "email": "praxis-egelsee@hin.ch",
+    "phone": "+41715522111",
+    "address": "Praxis Egelsee, Hofstattstrasse 10, 8280 Kreuzlingen",
+    "website": "https://www.praxis-egelsee.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1V_Ss8iWQY6WjMvC2jmdd9HAZNC7tmos3",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "13fc5333-72b2-5ee9-b6c0-509170cb7b14"
+  },
+  {
+    "name": "Mehtap Tatan de Froment",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "BE"
+    ],
+    "email": "praxis.zaehringer@hin.ch",
+    "phone": "+41313011665",
+    "address": "Zähringerstrasse 45, 3012 Bern",
+    "website": "https://praxis-zaehringer-ahornweg.ch/standort-zaehringer/",
+    "description": null,
+    "image_url": "https://www.doktor.ch/pictures/118755/portrait/118755.png",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "bbc31372-1319-54f5-8a61-eb9e030fdd11"
+  },
+  {
+    "name": "Murat Alan",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": "044 740 36 62",
+    "address": "Steinmürlistrasse 21, 8953 Dietikon",
+    "website": "https://www.comparis.ch/gesundheit/arzt/kanton-zuerich/dietikon/alan-murat-7601000883964",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/19p4TqAHBfFKrmDBIX-3DslV37uLtOZM5",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "46a04e2a-a2c7-5c68-8aa1-d023f087db61"
+  },
+  {
+    "name": "Orhan Özsoy",
+    "directory": "saglik",
+    "category": "Onkoloji",
+    "kantons": [
+      "VS"
+    ],
+    "email": null,
+    "phone": "+41276034000",
+    "address": "Hôpital du Valais CHVR - Hôpital de Sion avenue Grand-Champsec 80, 1950 Sion",
+    "website": "https://www.valaishospital.ch/health-professionals/directory/people/orhan-ozsoy",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1sixJLWbOigvvfIgFKMpxixVLRj5r0lwT",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "ec828ef7-8b21-55d0-8f7e-6ffd02bbaa64"
+  },
+  {
+    "name": "Sevim Şahinbaş",
+    "directory": "saglik",
+    "category": "Anestezi",
+    "kantons": [
+      "TI"
+    ],
+    "email": null,
+    "phone": "+41 91 960 87 17",
+    "address": "Clinica Moncucco, Via Soldino 5, 6900 Lugano",
+    "website": "https://www.moncucco.ch/sevim_sahinbas.html",
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "46c00123-fe7b-5160-966f-e5fa1e7427bd"
+  },
+  {
+    "name": "Teslim Fidanoğlu",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "BE"
+    ],
+    "email": "dr.fidanoglu@hin.ch",
+    "phone": "+41313810705",
+    "address": "Aarbergergasse 29, 3011 Bern",
+    "website": "https://www.doktor-fidanoglu.ch/",
+    "description": null,
+    "image_url": "https://d2f0ora2gkri0g.cloudfront.net/8c/\n33/8c3315a3-9ef2-45dd-b624-2a957f7\n5bf3d.jpg",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "2d705c3b-758e-512a-80fa-01bf74871b7c"
+  },
+  {
+    "name": "Yakup Yakupoğlu",
+    "directory": "saglik",
+    "category": "Kardiyoloji",
+    "kantons": [
+      "AG"
+    ],
+    "email": "yakup.yakupoglu@ksa.ch",
+    "phone": "+41628384481",
+    "address": "KSA Kantonsspital Aarau, Tellstrasse 25, 5001 Aarau",
+    "website": "https://www.ksa.ch/de/gruppe/team/yakup-yakupoglu-3081",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1G2a0jjlPTgoSkscLn5Yxk2Gy5ukWdxzd",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "ac8ebe04-2968-58cb-b7a0-6398e0e1d7fd"
+  },
+  {
+    "name": "Zöhre Akdoğan",
+    "directory": "saglik",
+    "category": "Güzellik / Kişisel Bakım",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@a-esthetik.ch",
+    "phone": "+41445452999",
+    "address": "Nüschelerstrasse 35, 8001 Zürich",
+    "website": "https://a-esthetik.ch",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1UxahIhHe6KKDmVlyLiPjnWo5poHEuYyV",
+    "contact_person": null,
+    "_source": "SS1_sağlık",
+    "id": "a037ca32-360d-5e3c-a248-5029740bae64"
+  },
+  {
+    "name": "Cennet Sönmez",
+    "directory": "saglik",
+    "category": "Sosyal Danışmanlık",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@cennet-consulting.ch",
+    "phone": "+41 79 273 20 20",
+    "address": "Plaza Lerzenstrasse 10, 8953 Dietikon",
+    "website": "https://cennet-consulting.ch",
+    "description": null,
+    "image_url": "https://cennet-consulting.ch/assets/images/logo.png",
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "25082c8d-c099-595f-b4d6-0520cce50e38"
+  },
+  {
+    "name": "Mehmet Demir",
+    "directory": "saglik",
+    "category": "Diş",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "1b103794-2cd0-5ca8-9c35-5ae2abe0ef65"
+  },
+  {
+    "name": "Fatma Kaya",
+    "directory": "saglik",
+    "category": "Göz",
+    "kantons": [
+      "AI"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "1a2a7fc1-8700-537f-a9de-992f6b8f68fa"
+  },
+  {
+    "name": "Ali Özdemir",
+    "directory": "saglik",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "AR"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "7685c7dc-ca8c-54cd-a05e-8f5282d6e15c"
+  },
+  {
+    "name": "Zeynep Güven",
+    "directory": "saglik",
+    "category": "Diğer",
+    "kantons": [
+      "BE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "8da6247b-ed08-54f4-8286-3eb40f9243a8"
+  },
+  {
+    "name": "Hasan Çetin",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "BL"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "87126142-96df-5045-ba2b-6b098162686a"
+  },
+  {
+    "name": "Emine Şahin",
+    "directory": "saglik",
+    "category": "Diş",
+    "kantons": [
+      "BS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "ba6a0e10-1f30-5d45-9574-89261c2455f9"
+  },
+  {
+    "name": "Kemal Tuncer",
+    "directory": "saglik",
+    "category": "Göz",
+    "kantons": [
+      "FR"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "c47ac3ce-a972-5fd5-9f9c-fbf64acafd1f"
+  },
+  {
+    "name": "Ayşe Akın",
+    "directory": "saglik",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "GE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "f4553fcc-8902-522e-b17c-744eaaa1dafb"
+  },
+  {
+    "name": "Mehmet Güney",
+    "directory": "saglik",
+    "category": "Diğer",
+    "kantons": [
+      "GL"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "201aaec1-cfaa-5467-b1df-9a3086106d1e"
+  },
+  {
+    "name": "Fatma Demir",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "GR"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "66083e36-9cf0-5118-86c5-2197e27b53b0"
+  },
+  {
+    "name": "Ali Kaya",
+    "directory": "saglik",
+    "category": "Diş",
+    "kantons": [
+      "JU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "bd88b59a-49b7-5538-a255-c06f16d3641f"
+  },
+  {
+    "name": "Zeynep Özdemir",
+    "directory": "saglik",
+    "category": "Göz",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "c05e7927-01fe-5580-b76c-7fbf23da2da2"
+  },
+  {
+    "name": "Hasan Şahin",
+    "directory": "saglik",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "NE"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "580cd3d4-03c4-5607-8ef8-7261c850f42a"
+  },
+  {
+    "name": "Emine Tuncer",
+    "directory": "saglik",
+    "category": "Diğer",
+    "kantons": [
+      "NW"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "1870cef0-fd0e-5360-abeb-1579ef7a6b98"
+  },
+  {
+    "name": "Kemal Güven",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "OW"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "cb30cf9e-42d8-5fdc-a065-4c6d6460ed20"
+  },
+  {
+    "name": "Ayşe Akın",
+    "directory": "saglik",
+    "category": "Diş",
+    "kantons": [
+      "SG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "747d1cd1-843b-5606-a8f2-8b58402020ce"
+  },
+  {
+    "name": "Mehmet Demir",
+    "directory": "saglik",
+    "category": "Göz",
+    "kantons": [
+      "SH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "878c1ea7-82ce-58c8-aba0-d7d60fd1aea2"
+  },
+  {
+    "name": "Fatma Kaya",
+    "directory": "saglik",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "SO"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "634dff5b-978f-539f-9917-10d3d82609b8"
+  },
+  {
+    "name": "Ali Özdemir",
+    "directory": "saglik",
+    "category": "Diğer",
+    "kantons": [
+      "SZ"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "c99a6103-30f4-586b-898d-0966040175b3"
+  },
+  {
+    "name": "Zeynep Güven",
+    "directory": "saglik",
+    "category": "Genel (Hausarzt)",
+    "kantons": [
+      "TG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "c0a977d4-c866-5748-978f-60f56e5d1ca0"
+  },
+  {
+    "name": "Hasan Çetin",
+    "directory": "saglik",
+    "category": "Diş",
+    "kantons": [
+      "TI"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "26bcee10-29b0-510d-92d5-adb31aad5891"
+  },
+  {
+    "name": "Emine Şahin",
+    "directory": "saglik",
+    "category": "Göz",
+    "kantons": [
+      "UR"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "846b3e0d-7e72-5530-a623-6e47da74cebb"
+  },
+  {
+    "name": "Kemal Tuncer",
+    "directory": "saglik",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "VD"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "58c3d82e-66f1-5e60-b756-e72df5a1dee7"
+  },
+  {
+    "name": "Ayşe Akın",
+    "directory": "saglik",
+    "category": "Diğer",
+    "kantons": [
+      "VS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "d1674a4d-833a-590e-9961-ce5c8e0ccf13"
+  },
+  {
+    "name": "Mehmet Güney",
+    "directory": "saglik",
+    "category": "Göz",
+    "kantons": [
+      "ZG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "06bfd613-a291-54b3-bdba-0548fe1e1bd7"
+  },
+  {
+    "name": "Fatma Demir",
+    "directory": "saglik",
+    "category": "Diş",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "0150ca98-9007-56ef-be17-58fa28369ba4"
+  },
+  {
+    "name": "Ali Kaya",
+    "directory": "saglik",
+    "category": "Göz",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "9611dfa7-cf3f-546e-828f-82430c611c05"
+  },
+  {
+    "name": "Zeynep Özdemir",
+    "directory": "saglik",
+    "category": "Psikolojik Destek / Psikyatri",
+    "kantons": [
+      "VD"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "5d7db533-65ca-5775-af39-ca9bb3bd5d3e"
+  },
+  {
+    "name": "Hasan Şahin",
+    "directory": "saglik",
+    "category": "Diğer",
+    "kantons": [
+      "LU"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_sağlık",
+    "id": "6fc23bda-3a7d-5df2-83e8-60d03c011c65"
+  }
+]

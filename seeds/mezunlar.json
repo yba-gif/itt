@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Fatih Karaoğlu",
+    "directory": "mezunlar",
+    "category": "2003",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": "https://www.linkedin.com/in/fatihkaraoglu",
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS1_mezunlar",
+    "id": "65c2aa79-a791-5fef-860b-380ec73019be"
+  },
+  {
+    "name": "Fuat Köçer",
+    "directory": "mezunlar",
+    "category": "-",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": "https://www.linkedin.com/in/fuat-k%C3%B6%C3%A7er-24b986329",
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS1_mezunlar",
+    "id": "7b9448a4-3896-51f3-8a7a-c62491a6c741"
+  },
+  {
+    "name": "Naki Akçar (Prof. Dr.)",
+    "directory": "mezunlar",
+    "category": "2012",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": "https://www.linkedin.com/in/naki-ak%C3%A7ar-80889b12",
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS1_mezunlar",
+    "id": "234b921d-8173-59da-8a61-fe310aa7b9a4"
+  },
+  {
+    "name": "Yakup Yakupoğlu",
+    "directory": "mezunlar",
+    "category": "2007",
+    "kantons": [],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": "https://www.linkedin.com/in/yakup-yakupoglu-640717254",
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS1_mezunlar",
+    "id": "e074d2a3-3df8-5cb7-8243-4d064c960051"
+  }
+]

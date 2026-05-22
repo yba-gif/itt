@@ -52,8 +52,43 @@ async def seed_content_pages(session) -> None:
          "Bern Büyükelçiliği ve Zürih Başkonsolosluğu bilgileri Faz 2'de eklenecek."),
         ("privacy", "Gizlilik Politikası", "Gizlilik politikası taslağı — yayın öncesi güncellenecek."),
         ("terms", "Kullanım Koşulları", "Kullanım koşulları taslağı — yayın öncesi güncellenecek."),
-        ("about", "Künye / Hakkında",
-         "ITT-Rehber, İsviçre'deki Türk topluluğu için Roar (Yusuf Berkan Altun) tarafından işletilmektedir."),
+        ("about", "Hakkımızda",
+         "## İsviçre Türk Toplumu\n\n"
+         "İsviçre Türk Toplumu (İTT, Almanca: Türkische Gemeinschaften Schweiz, TGS), "
+         "İsviçre'deki çoğu Türk Dernek ve Federasyonunun çatı kuruluşudur. Bağımsız bir "
+         "STK (Sivil Toplum Kuruluşu) olarak kurulmuştur. Faaliyetleri İsviçre Medeni "
+         "Kanununa (ZGB Madde 60 ff) dayanmaktadır.\n\n"
+         "## İsviçre'deki Türklerin Durumu\n\n"
+         "Bugün İsviçre'de yaklaşık 130.000 Türk kökenli insan yaşıyor ve bunların "
+         "40.000'den fazlası İsviçre vatandaşıdır. Türkler 1960'ların başından bu yana "
+         "eğitim veya iş için İsviçre'ye göç etmişlerdir. Birinci nesil artık emeklilik "
+         "yaşındadır. Bunlardan temelli dönüş yapanların yanı sıra İsviçre'de yaşamayı "
+         "tercih edenler veya her iki ülkede de yaşamayı tercih edenler vardır.\n\n"
+         "İTT'nin amacı, öncelikle ikinci ve üçüncü kuşağın endişeleri ve sorunlarıyla "
+         "ilgilenmek ve çoğunluğu İsviçre'de kalacağı için onları İsviçre toplumuyla "
+         "bütünleşmelerinde desteklemektir.\n\n"
+         "Entegrasyonu kolaylaştırmak için İsviçreli kuruluşlar ve yetkililer, "
+         "İsviçre'de uyum içerisinde bir arada yaşama için ortak çözümler bulmak amacıyla "
+         "farklı etnik grupların endişelerini, ihtiyaçlarını ve sorunlarını daha iyi "
+         "anlamak istiyor. İTT, Türk toplumunun çeşitli sorunları ve entegrasyonunun nasıl "
+         "ele alınacağını iyi bildiği için ilgili İsviçre kurumlarının bir ortağı olarak "
+         "kendisini görmektedir.\n\n"
+         "## İTT'nin Hedefleri\n\n"
+         "İTT'nin amacı, İsviçre'deki Türklerin sorunlarını ve ihtiyaçlarını tespit etmek "
+         "ve onlarla ve İsviçre kuruluşlarıyla birlikte çözüm konseptleri geliştirmek, "
+         "ikinci ve üçüncü nesil eğitimin iyileştirilmesine ve eğitim seviyesinin "
+         "yükseltilmesine katkıda bulunmaktır.\n\n"
+         "Her iki toplum arasında güçlü işbirlikleri oluşturmak için Türk toplumu ile "
+         "İsviçre toplumu arasındaki iletişim ve kültürel alışveriş daha da "
+         "geliştirilmelidir. Türk vatandaşlarının İsviçre toplumuna entegrasyonu, bununla "
+         "birlikte her iki toplumun ortak kurallara (haklar ve sorumluluklar) ve karşılıklı "
+         "saygı çerçevesinde uyumlu bir şekilde bir arada yaşaması da İsviçre'deki Türk "
+         "toplumunun hedeflerinden biridir.\n\n"
+         "İTT'nin bir diğer amacı da eğitim, yetiştirme, uyum ve kültür gibi genel "
+         "konularda Türkleri İsviçre ve Türk makamları ve kuruluşları nezdinde temsil "
+         "etmektir.\n\n"
+         "Bu hedeflere ulaşabilmek için İTT bünyesinde çeşitli çalışma komisyonları "
+         "oluşturulmuştur."),
     ]
     existing = set((await session.execute(select(ContentPage.slug))).scalars().all())
     for slug, title, body in pages:

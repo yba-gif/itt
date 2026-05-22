@@ -6,6 +6,10 @@ struct DirectoryListView: View {
     @EnvironmentObject var session: SessionStore
     @EnvironmentObject var cache: OfflineCache
 
+    /// Set during onboarding (Kanton.code or "" for all). Used as initial filter
+    /// when entering a directory view for the first time in a session.
+    @AppStorage("preferredKanton") private var preferredKanton = ""
+
     @State private var listings: [Listing] = []
     @State private var totalCount: Int = 0
     @State private var query: String = ""
@@ -14,6 +18,8 @@ struct DirectoryListView: View {
     @State private var error: APIError?
     @State private var isOffline: Bool = false
     @State private var showSubmit: Bool = false
+    @State private var didInitialKantonSetup = false
+    @Namespace private var rowNS
 
     var body: some View {
         VStack(spacing: 0) {
@@ -54,6 +60,7 @@ struct DirectoryListView: View {
         .background(Color.tgsCream)
         .navigationTitle(directory.titleTR)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -87,14 +94,18 @@ struct DirectoryListView: View {
         List {
             Section {
                 ForEach(listings) { listing in
-                    NavigationLink(destination: DirectoryDetailView(listing: listing)) {
+                    NavigationLink(
+                        destination: DirectoryDetailView(listing: listing)
+                            .zoomNavTransition(sourceID: listing.id, in: rowNS)
+                    ) {
                         ListingRow(listing: listing)
+                            .zoomSource(id: listing.id, in: rowNS)
                     }
                     .listRowBackground(Color.white)
                     .listRowSeparatorTint(Color.tgsBorder)
                 }
             } header: {
-                Text("\(totalCount) uzman bulundu")
+                Text("\(totalCount) \(directory.resultLabel) bulundu")
                     .font(TGSFont.caption)
                     .foregroundStyle(Color.tgsMuted)
                     .textCase(nil)
@@ -108,6 +119,14 @@ struct DirectoryListView: View {
     }
 
     private func initialLoad() async {
+        // First entry to this view in the session: seed the kanton filter with
+        // the user's onboarding choice (if any). User can clear it via FilterBar.
+        if !didInitialKantonSetup {
+            didInitialKantonSetup = true
+            if selectedKanton.isEmpty && !preferredKanton.isEmpty {
+                selectedKanton = preferredKanton
+            }
+        }
         let cached = cache.cachedListings(for: directory)
         if !cached.isEmpty && listings.isEmpty {
             listings = cached
@@ -143,6 +162,7 @@ struct DirectoryListView: View {
 
 struct ListingRow: View {
     let listing: Listing
+    @State private var appeared = false
 
     private var initials: String {
         listing.name
@@ -153,12 +173,21 @@ struct ListingRow: View {
             .uppercased()
     }
 
+    /// Primary directory for color tinting the image fallback.
+    /// Falls back to .isletme color if no recognized directory present.
+    private var primaryDirectory: Directory {
+        for code in listing.directories {
+            if let d = Directory(rawValue: code) { return d }
+        }
+        return .isletme
+    }
+
     var body: some View {
         HStack(spacing: 14) {
             // Logo / avatar
             ZStack {
                 if let urlString = listing.imageURL, let url = URL(string: urlString) {
-                    AsyncImage(url: url) { phase in
+                    CachedAsyncImage(url: url) { phase in
                         switch phase {
                         case .success(let img):
                             img.resizable().scaledToFill()
@@ -206,16 +235,30 @@ struct ListingRow: View {
             Spacer(minLength: 0)
         }
         .padding(.vertical, 8)
+        .opacity(appeared ? 1 : 0)
+        .offset(x: appeared ? 0 : 20)
+        .animation(.spring(response: 0.38, dampingFraction: 0.80), value: appeared)
+        .onAppear { appeared = true }
         // P1-4: synthesise a single VoiceOver label from all visible text
         .accessibilityElement(children: .combine)
     }
 
+    /// Color-tinted image fallback when listing has no `image_url`.
+    /// Tints the background with the primary directory's color (12% opacity)
+    /// and renders initials in the directory color for brand consistency.
+    /// Falls back to the SF Symbol icon if the name has no extractable initials.
     private var initialsPlaceholder: some View {
         ZStack {
-            Color.tgsSurface
-            Text(initials.isEmpty ? "?" : initials)
-                .font(.system(size: 18, weight: .bold))
-                .foregroundStyle(Color.tgsMuted)
+            primaryDirectory.color.opacity(0.12)
+            if initials.isEmpty {
+                Image(systemName: primaryDirectory.systemImage)
+                    .font(.system(size: 22, weight: .semibold))
+                    .foregroundStyle(primaryDirectory.color)
+            } else {
+                Text(initials)
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .foregroundStyle(primaryDirectory.color)
+            }
         }
     }
 }

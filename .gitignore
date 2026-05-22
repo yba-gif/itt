@@ -3,11 +3,14 @@
 .AppleDouble
 .LSOverride
 
-# Env
+# Env — never commit real secrets. Examples (.env*.example) are fine.
 .env
 .env.local
 .env.*.local
+.env.prod
+infra/hetzner/.env.prod
 !.env.example
+!.env.prod.example
 
 # Python
 __pycache__/

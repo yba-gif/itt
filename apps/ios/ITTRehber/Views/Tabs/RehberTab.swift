@@ -1,139 +1,305 @@
 import SwiftUI
 
 struct RehberTab: View {
-    // P1-2: first-run welcome banner
-    @AppStorage("hasSeenWelcome") private var hasSeenWelcome = false
+    @EnvironmentObject var nav: Nav
+    @State private var showAI = false
+    @State private var showSearch = false
+    @Namespace private var tileNS
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    heroSection
-                        .padding(.horizontal, TGSSpacing.xl)
-                        .padding(.top, TGSSpacing.xl)
-                        .padding(.bottom, TGSSpacing.xxl)
-
-                    // P1-2: welcome banner — dismissible, shown once on first launch
-                    if !hasSeenWelcome {
-                        WelcomeBanner { hasSeenWelcome = true }
-                            .padding(.horizontal, TGSSpacing.lg)
-                            .padding(.bottom, TGSSpacing.lg)
+        NavigationStack(path: $nav.rehberPath) {
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 0) {
+                        // Invisible anchor at the very top for scroll-to-top
+                        Color.clear.frame(height: 0).id("rehber-top")
+                        heroSection
+                        categoriesSection
+                            .padding(.bottom, 32)
                     }
-
-                    DirectoryGridView()
-                        .padding(.horizontal, TGSSpacing.lg)
-                        .padding(.bottom, 32)
+                }
+                .background(Color.tgsCream)
+                // Pop to root OR scroll to top on tab re-tap
+                .tgsOnChange(of: nav.rehberPopToken) {
+                    if nav.rehberPath.isEmpty {
+                        // Already at root — scroll to top
+                        withAnimation(.spring(response: 0.40, dampingFraction: 0.82)) {
+                            proxy.scrollTo("rehber-top", anchor: .top)
+                        }
+                    } else {
+                        // On a subpage — pop to root
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.82)) {
+                            nav.rehberPath = []
+                        }
+                    }
                 }
             }
-            .background(Color.tgsCream)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("")
+            .toolbarBackground(.white, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .toolbar {
+                // Centered, no Liquid Glass capsule (unlike leading/trailing placements)
+                ToolbarItem(placement: .principal) { navLogo }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSearch = true
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundStyle(Color.tgsRed)
+                    }
+                    .accessibilityLabel("Ara")
+                }
+            }
             .navigationDestination(for: Directory.self) { directory in
                 DirectoryListView(directory: directory)
+                    .zoomNavTransition(sourceID: directory, in: tileNS)
+            }
+            .fullScreenCover(isPresented: $showAI) {
+                ITTAIView()
+            }
+            .sheet(isPresented: $showSearch) {
+                AraTab()
             }
         }
     }
+
+    // MARK: – Nav logo (combined brand image)
+
+    private var navLogo: some View {
+        Image("ITTHeaderLogo")
+            .resizable()
+            .scaledToFit()
+            .frame(height: 22)
+            .accessibilityLabel("İsviçre Türk Toplumu — TGS · ATS")
+    }
+
+    // MARK: – Hero
 
     private var heroSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            TGSEyebrow(icon: "globe.europe.africa.fill", label: "İSVİÇRE'DE TÜRK TOPLULUĞU")
-            Text("TGS-ITT Rehber")
-                .font(TGSFont.display)
-                .foregroundStyle(Color.tgsCharcoal)
-            Text("Uzman, hizmet ve etkinlik rehberi")
-                .font(TGSFont.subheadline)
-                .foregroundStyle(Color.tgsMuted)
+        ZStack(alignment: .bottom) {
+            LinearGradient(
+                colors: [Color.tgsRed, Color.tgsHeroGradientEnd],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .overlay(GrainOverlay())
+
+            VStack(spacing: TGSSpacing.md) {
+                heroCard
+                aiEntryButton
+            }
+            .padding(.horizontal, TGSSpacing.xl)
+            .padding(.top, 28)
+            .padding(.bottom, 50)
         }
+        .clipShape(WaveClipShape(waveDepth: 30))
     }
-}
 
-// MARK: - Welcome Banner (P1-2)
+    // MARK: – Glass info card (always visible — no dismiss)
 
-struct WelcomeBanner: View {
-    let onDismiss: () -> Void
+    private var heroCard: some View {
+        VStack(alignment: .leading, spacing: 14) {
 
-    var body: some View {
-        HStack(spacing: 14) {
-            ZStack {
-                Circle()
-                    .fill(Color.tgsRed.opacity(0.10))
-                    .frame(width: 44, height: 44)
-                Image(systemName: "hand.wave.fill")
-                    .font(.system(size: 20))
-                    .foregroundStyle(Color.tgsRed)
+            // Top row: greeting + flag
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("İsviçre Türk Rehberi")
+                        .font(.system(size: 22, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                    Text(todayString)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(.white.opacity(0.60))
+                }
+                Spacer()
+                Text("🇨🇭")
+                    .font(.system(size: 32))
             }
-            VStack(alignment: .leading, spacing: 3) {
-                Text("Hoş geldiniz!")
-                    .font(TGSFont.caption)
-                    .foregroundStyle(Color.tgsCharcoal)
-                Text("Bir kategori seçerek İsviçre'deki Türk uzman ve hizmetlere ulaşın.")
-                    .font(TGSFont.micro)
-                    .foregroundStyle(Color.tgsMuted)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            Spacer(minLength: 0)
+
+            // Divider
+            Rectangle()
+                .fill(.white.opacity(0.18))
+                .frame(height: 1)
+
+            // Search pill — tappable placeholder leading to AI
             Button {
-                withAnimation(.easeOut(duration: 0.2)) { onDismiss() }
+                showAI = true
             } label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(Color.tgsMuted)
-                    .frame(width: 28, height: 28)
-                    .background(Circle().fill(Color.tgsSurface))
+                HStack(spacing: TGSSpacing.sm) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(.white.opacity(0.55))
+                    Text("Uzman, hizmet, etkinlik ara…")
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundStyle(.white.opacity(0.50))
+                    Spacer()
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(.white.opacity(0.55))
+                }
+                .padding(.horizontal, TGSSpacing.md)
+                .padding(.vertical, 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .fill(.white.opacity(0.13))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .stroke(.white.opacity(0.22), lineWidth: 1)
+                )
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Hoş geldiniz mesajını kapat")
         }
-        .padding(TGSSpacing.md)
+        .padding(TGSSpacing.lg)
         .background(
-            RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
-                .fill(Color.white)
-                .overlay(
-                    RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
-                        .stroke(Color.tgsBorder, lineWidth: 1)
-                )
+            .ultraThinMaterial,
+            in: RoundedRectangle(cornerRadius: TGSRadius.card, style: .continuous)
         )
-        .transition(.opacity.combined(with: .move(edge: .top)))
+        .overlay(
+            RoundedRectangle(cornerRadius: TGSRadius.card, style: .continuous)
+                .stroke(.white.opacity(0.28), lineWidth: 1)
+        )
+    }
+
+    // MARK: – AI Entry Button
+
+    private var aiEntryButton: some View {
+        Button {
+            showAI = true
+        } label: {
+            HStack(spacing: TGSSpacing.md) {
+                ZStack {
+                    Circle()
+                        .fill(.white.opacity(0.15))
+                        .frame(width: 36, height: 36)
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(.white)
+                }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("İTT AI'ya sor")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(.white)
+                    Text("İsviçre'deki sorularınız için")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.white.opacity(0.6))
+                }
+
+                Spacer(minLength: 0)
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.45))
+            }
+            .padding(TGSSpacing.md)
+            .background(
+                .ultraThinMaterial,
+                in: RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: TGSRadius.inner, style: .continuous)
+                    .stroke(.white.opacity(0.25), lineWidth: 1)
+            )
+        }
+        .buttonStyle(TGSSpringButtonStyle())
+        .accessibilityLabel("İTT AI — Yapay zeka asistanını aç")
+    }
+
+    // MARK: – Categories section
+
+    private var categoriesSection: some View {
+        VStack(alignment: .leading, spacing: TGSSpacing.lg) {
+            // Section header
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("KATEGORİLER")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(Color.tgsMuted)
+                        .tracking(1.2)
+                    Text("Uzman ve hizmetlere göz atın")
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundStyle(Color.tgsCharcoal)
+                }
+                Spacer()
+            }
+            .padding(.horizontal, TGSSpacing.lg)
+
+            DirectoryGridView(namespace: tileNS)
+                .padding(.horizontal, TGSSpacing.lg)
+        }
+        .padding(.top, TGSSpacing.xl)
+    }
+
+    // MARK: – Helpers
+
+    private var todayString: String {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "tr_TR")
+        f.dateFormat = "d MMMM yyyy, EEEE"
+        return f.string(from: Date())
     }
 }
 
 // MARK: - Directory Grid
 
 struct DirectoryGridView: View {
+    var namespace: Namespace.ID
     private let columns = [GridItem(.flexible(), spacing: TGSSpacing.md),
                            GridItem(.flexible(), spacing: TGSSpacing.md)]
+    @State private var appeared = false
 
     var body: some View {
         LazyVGrid(columns: columns, spacing: TGSSpacing.md) {
-            ForEach(Directory.allCases) { directory in
+            ForEach(Array(Directory.allCases.enumerated()), id: \.element) { idx, directory in
                 NavigationLink(value: directory) {
                     DirectoryTile(directory: directory)
                 }
-                .buttonStyle(.plain)
-                // P1-4 a11y: label and hint for VoiceOver
+                // Zoom transition source (iOS 18+); no-op on earlier
+                .zoomSource(id: directory, in: namespace)
+                .buttonStyle(TGSSpringButtonStyle())
                 .accessibilityLabel(directory.titleTR)
                 .accessibilityHint(directory.cta)
+                .opacity(appeared ? 1 : 0)
+                .offset(y: appeared ? 0 : 22)
+                .animation(
+                    .spring(response: 0.44, dampingFraction: 0.74)
+                        .delay(Double(idx) * 0.055),
+                    value: appeared
+                )
             }
         }
+        .onAppear { appeared = true }
     }
 }
 
-/// P1-3: editorial white card tile — category-specific CTA.
-/// Mirrors website's Programs.tsx card pattern.
+// MARK: - Directory Tile  (uses directory.color for accent)
+
 struct DirectoryTile: View {
     let directory: Directory
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Icon badge
-            ZStack {
-                Circle()
-                    .fill(Color.tgsRed.opacity(0.10))
-                    .frame(width: 46, height: 46)
+
+            // Icon with per-category color
+            ZStack(alignment: .bottomTrailing) {
+                RoundedRectangle(cornerRadius: 13, style: .continuous)
+                    .fill(directory.color.opacity(0.12))
+                    .frame(width: 50, height: 50)
                 Image(systemName: directory.systemImage)
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundStyle(Color.tgsRed)
+                    .font(.system(size: 22, weight: .semibold))
+                    .foregroundStyle(directory.color)
+                    .frame(width: 50, height: 50)
+
+                if directory.isNew {
+                    Text("Yeni")
+                        .font(.system(size: 8, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 2)
+                        .background(Capsule().fill(directory.color))
+                        .offset(x: 6, y: 4)
+                }
             }
 
             Spacer(minLength: TGSSpacing.md)
@@ -145,22 +311,29 @@ struct DirectoryTile: View {
                 .minimumScaleFactor(0.85)
                 .fixedSize(horizontal: false, vertical: true)
 
-            Spacer(minLength: TGSSpacing.md)
+            Spacer(minLength: TGSSpacing.sm)
 
-            // P1-3: per-category CTA instead of generic "İncele →"
             HStack(spacing: 3) {
                 Text(directory.cta)
                     .font(TGSFont.micro)
                 Image(systemName: "arrow.right")
                     .font(.system(size: 10, weight: .bold))
             }
-            .foregroundStyle(Color.tgsRed)
+            .foregroundStyle(directory.color)
         }
         .frame(maxWidth: .infinity, minHeight: 148, alignment: .topLeading)
         .padding(TGSSpacing.lg)
-        .tgsCard()
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: TGSRadius.card, style: .continuous))
+        .shadow(color: .black.opacity(0.055), radius: 8, x: 0, y: 2)
+        .overlay(
+            RoundedRectangle(cornerRadius: TGSRadius.card, style: .continuous)
+                .stroke(Color.tgsBorder.opacity(0.6), lineWidth: 0.5)
+        )
     }
 }
+
+// MARK: - Coming Soon
 
 struct ComingSoonView: View {
     let directory: Directory
@@ -168,12 +341,12 @@ struct ComingSoonView: View {
     var body: some View {
         VStack(spacing: TGSSpacing.xl) {
             ZStack {
-                Circle()
-                    .fill(Color.tgsRed.opacity(0.10))
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(directory.color.opacity(0.10))
                     .frame(width: 90, height: 90)
                 Image(systemName: directory.systemImage)
                     .font(.system(size: 40))
-                    .foregroundStyle(Color.tgsRed)
+                    .foregroundStyle(directory.color)
             }
             VStack(spacing: TGSSpacing.sm) {
                 Text(directory.titleTR)

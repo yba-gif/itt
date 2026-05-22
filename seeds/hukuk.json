@@ -1,0 +1,206 @@
+[
+  {
+    "name": ".İsviçre Türk Toplumu İTT",
+    "directory": "hukuk",
+    "category": "Genel",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "info@tgs-itt.ch",
+    "phone": "0792091075",
+    "address": null,
+    "website": "http://www.tgs-itt.ch",
+    "description": null,
+    "image_url": "https://tgs-itt.ch/wp-content/uploads/2022/01/cropped-oynanmis.png",
+    "contact_person": null,
+    "_source": "SS1_hukuk",
+    "id": "2d8317e8-9db8-5945-b5e9-d9cafa4079c0"
+  },
+  {
+    "name": "Berin Kısıkyol",
+    "directory": "hukuk",
+    "category": "Genel",
+    "kantons": [
+      "AG"
+    ],
+    "email": "berin.kisikyol@ritterkoller.ch",
+    "phone": "+41618554040",
+    "address": null,
+    "website": "https://www.ritterkoller.ch/de/anwaelte/team/berin-kisikyol.php",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1QLVtskwpjqKyDjXCFrl5cOzH1zmD6RkN",
+    "contact_person": null,
+    "_source": "SS1_hukuk",
+    "id": "95fcc480-9bd9-537d-acc9-47998c383151"
+  },
+  {
+    "name": "Beyza Okutan",
+    "directory": "hukuk",
+    "category": "Genel",
+    "kantons": [
+      "AG"
+    ],
+    "email": "beyza.okutan00@hotmail.com",
+    "phone": "0786683399",
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS1_hukuk",
+    "id": "4a608c91-0487-5eff-9ca5-9ab3e25cc48b"
+  },
+  {
+    "name": "Gamze Arslan Tonus",
+    "directory": "hukuk",
+    "category": "Aile, Diğer, Genel, Kira, İşyeri",
+    "kantons": [
+      "AG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": "https://advocenter.ch/juristische-mitarbeiterin-gamze-tonus/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1s12031Iqk9DXKJ2b7rTNiAT8K_FUAz4g",
+    "contact_person": null,
+    "_source": "SS1_hukuk",
+    "id": "e431d6ed-48e8-55ee-9c1e-eab28b5f8ded"
+  },
+  {
+    "name": "Miran Sarı",
+    "directory": "hukuk",
+    "category": "Aile, Diğer, Genel, Kira, Okul, İşyeri",
+    "kantons": [
+      "BE"
+    ],
+    "email": "miran.sari@advokatur-sari.ch",
+    "phone": "079 840 62 82",
+    "address": null,
+    "website": "https://advokatur-sari.ch/",
+    "description": null,
+    "image_url": "https://lh3.googleusercontent.com/d/1TICCJl_mkOdxsc3e16UVFClGfgppN4E0",
+    "contact_person": null,
+    "_source": "SS1_hukuk",
+    "id": "e1faba5d-dad5-5e11-becf-0e6dec54f237"
+  },
+  {
+    "name": "Mustafa Bayrak",
+    "directory": "hukuk",
+    "category": "Aile, Kira, İşyeri",
+    "kantons": [
+      "ZH"
+    ],
+    "email": "office@legalpartners.ch",
+    "phone": "0443829125",
+    "address": null,
+    "website": "https://legalpartners.ch/",
+    "description": null,
+    "image_url": "https://legalpartners.ch/wp-content/uploads/2023/03/mustafa-bayrak-anwalt-legal-partner-zuerich-01-3.jpg",
+    "contact_person": null,
+    "_source": "SS1_hukuk",
+    "id": "ef44693b-39cf-569f-8174-655cb2ce2941"
+  },
+  {
+    "name": "Zeynep Çetin",
+    "directory": "hukuk",
+    "category": "Genel",
+    "kantons": [
+      "ZG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_hukuk",
+    "id": "c1428cbb-61c0-598a-ac76-df61d003f343"
+  },
+  {
+    "name": "Ali Öztürk",
+    "directory": "hukuk",
+    "category": "Aile",
+    "kantons": [
+      "ZH"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_hukuk",
+    "id": "0745e64c-15d3-530b-b138-22dbd7c01e8c"
+  },
+  {
+    "name": "Fatma Can",
+    "directory": "hukuk",
+    "category": "İşyeri",
+    "kantons": [
+      "UR"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_hukuk",
+    "id": "b482b410-6b9e-5827-882c-0eb5b5b36638"
+  },
+  {
+    "name": "Mehmet Kaya",
+    "directory": "hukuk",
+    "category": "Kira",
+    "kantons": [
+      "VD"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_hukuk",
+    "id": "99abc080-3677-5695-837d-9cb65d0ced30"
+  },
+  {
+    "name": "Ayşe Demir",
+    "directory": "hukuk",
+    "category": "Okul",
+    "kantons": [
+      "VS"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_hukuk",
+    "id": "60857eca-f905-5337-a9bf-e342953c943f"
+  },
+  {
+    "name": "Hasan Çetin",
+    "directory": "hukuk",
+    "category": "Genel",
+    "kantons": [
+      "ZG"
+    ],
+    "email": null,
+    "phone": null,
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_hukuk",
+    "id": "294d1609-b864-5915-b2a0-914deedfe1dc"
+  }
+]

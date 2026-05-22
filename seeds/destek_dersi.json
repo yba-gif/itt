@@ -1,0 +1,37 @@
+[
+  {
+    "name": "İsviçre Türk Toplumu İTT",
+    "directory": "destek_dersi",
+    "category": "Almanca, Fransızca, Matematik",
+    "kantons": [
+      "BE",
+      "ZH"
+    ],
+    "email": "info@tgs-itt.ch",
+    "phone": "0792091075",
+    "address": null,
+    "website": null,
+    "description": "www.tgs-itt.ch",
+    "image_url": "https://tgs-itt.ch/wp-content/uploads/2022/01/cropped-oynanmis.png",
+    "contact_person": null,
+    "_source": "SS1_DestekDers",
+    "id": "2ea30be6-3cfb-563b-a0a3-8b7530fc200c"
+  },
+  {
+    "name": "Fatih Karaoğlu",
+    "directory": "destek_dersi",
+    "category": "Fransızca",
+    "kantons": [
+      "BE"
+    ],
+    "email": "fatihk.54@gmail.com",
+    "phone": "0763299594",
+    "address": null,
+    "website": null,
+    "description": null,
+    "image_url": null,
+    "contact_person": null,
+    "_source": "SS2_DestekDers",
+    "id": "c82a6f97-6f05-59cc-a630-f1b1d02ccf4b"
+  }
+]

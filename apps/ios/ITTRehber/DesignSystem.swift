@@ -29,6 +29,18 @@ extension Color {
     /// Success background — #EDFAF3
     static let tgsSuccessBg = Color(tgsHex: 0xEDFAF3)
 
+    // MARK: Hero / AI surface tokens
+    /// Hero gradient endpoint — deep crimson #6B1020
+    static let tgsHeroGradientEnd = Color(tgsHex: 0x6B1020)
+    /// İTT AI full-screen background — very dark blue-black #0D1017
+    static let tgsAIDark          = Color(tgsHex: 0x0D1017)
+    /// İTT AI assistant message surface — dark blue-grey #1E2433
+    static let tgsAISurface       = Color(tgsHex: 0x1E2433)
+    /// İTT AI input field background — dark navy #1C2030
+    static let tgsAIInput         = Color(tgsHex: 0x1C2030)
+    /// İTT AI suggestion chip background — very dark blue #1A1E2A
+    static let tgsAIChip          = Color(tgsHex: 0x1A1E2A)
+
     init(tgsHex hex: UInt32) {
         self.init(
             red:   Double((hex >> 16) & 0xFF) / 255,
@@ -58,6 +70,10 @@ enum TGSFont {
     static let caption: Font = .system(size: 12, weight: .medium, design: .default)
     /// 11pt semibold — micro labels, pills
     static let micro: Font = .system(size: 11, weight: .semibold, design: .default)
+    /// 15pt semibold monospaced — data numbers (counts, stats)
+    static let mono: Font = .system(size: 15, weight: .semibold, design: .monospaced)
+    /// 22pt bold monospaced — large data figures
+    static let monoLarge: Font = .system(size: 22, weight: .bold, design: .monospaced)
 }
 
 // MARK: - Radius & Spacing Tokens (P1-7)
@@ -145,6 +161,28 @@ extension View {
             self.symbolEffect(.bounce, value: value)
         } else {
             self
+        }
+    }
+
+    /// Deprecation-free `onChange(of:)` replacement for iOS 16+.
+    /// Uses the two-parameter `{ old, new in }` form on iOS 17 and the
+    /// single-parameter `perform:` form on iOS 16 — no warnings either way.
+    func tgsOnChange<V: Equatable>(of value: V, perform action: @escaping () -> Void) -> some View {
+        modifier(_OnChangeCompat(value: value, action: action))
+    }
+}
+
+// MARK: - onChange Compatibility Shim (iOS 16 / 17)
+
+private struct _OnChangeCompat<V: Equatable>: ViewModifier {
+    let value: V
+    let action: () -> Void
+
+    func body(content: Content) -> some View {
+        if #available(iOS 17.0, *) {
+            content.onChange(of: value) { _, _ in action() }
+        } else {
+            content.onChange(of: value, perform: { _ in action() })
         }
     }
 }
@@ -355,5 +393,185 @@ struct ErrorStateView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.tgsCream)
         .accessibilityElement(children: .contain)
+    }
+}
+
+// MARK: - Spring Interaction (Sprint 6)
+
+/// Bodrum-inspired spring press — 85% scale, fast damping.
+struct TGSSpringButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.87 : 1.0)
+            .animation(
+                .spring(response: 0.22, dampingFraction: 0.55),
+                value: configuration.isPressed
+            )
+    }
+}
+
+// MARK: - Hero Shapes (Sprint 6)
+
+/// Wave clip shape — clips the bottom of a hero section with a downward curve,
+/// matching the Bodrum-style SVG wave divider pattern.
+struct WaveClipShape: Shape {
+    var waveDepth: CGFloat = 28
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: .zero)
+        path.addLine(to: CGPoint(x: rect.width, y: 0))
+        path.addLine(to: CGPoint(x: rect.width, y: rect.height - waveDepth))
+        path.addQuadCurve(
+            to: CGPoint(x: 0, y: rect.height - waveDepth),
+            control: CGPoint(x: rect.width / 2, y: rect.height + waveDepth * 0.7)
+        )
+        path.closeSubpath()
+        return path
+    }
+}
+
+/// Grain texture overlay — subtle 3% opacity SVG-noise equivalent rendered once.
+struct GrainOverlay: View {
+    // Pre-generated dot positions so Canvas doesn't recompute on every frame.
+    private let dots: [(CGFloat, CGFloat)] = {
+        var rng = SystemRandomNumberGenerator()
+        return (0..<900).map { _ in
+            (CGFloat.random(in: 0...1, using: &rng),
+             CGFloat.random(in: 0...1, using: &rng))
+        }
+    }()
+
+    var body: some View {
+        Canvas { ctx, size in
+            for (nx, ny) in dots {
+                let rect = CGRect(x: nx * size.width, y: ny * size.height, width: 1.2, height: 1.2)
+                ctx.fill(Path(ellipseIn: rect), with: .color(.white.opacity(0.07)))
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+}
+
+// MARK: - Floating Tab Bar (Sprint 6)
+
+/// Bodrum-inspired floating pill tab bar — frosted glass, icon-only,
+/// spring-animated selection using matchedGeometryEffect.
+struct FloatingTabBar: View {
+    @Binding var selected: AppTab
+    /// Called when the user taps a tab that is already selected (e.g. pop to root).
+    var onReselect: (AppTab) -> Void = { _ in }
+    @Namespace private var tabNS
+
+    /// İTT AI uses a dark `tgsAIDark` background. `.ultraThinMaterial` blurs
+    /// to near-black behind the floating pill there, so the default
+    /// `tgsMuted` (0x626C7A) unselected-icon color becomes invisible.
+    /// We flip to a high-contrast variant whenever the AI tab is active.
+    private var isOnDarkBackground: Bool { selected == .ittai }
+
+    private var unselectedIconColor: Color {
+        isOnDarkBackground ? Color.white.opacity(0.65) : Color.tgsMuted
+    }
+
+    private var borderColor: Color {
+        isOnDarkBackground
+            ? Color.white.opacity(0.18)
+            : Color.tgsBorder.opacity(0.45)
+    }
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(AppTab.allCases, id: \.self) { tab in
+                Button {
+                    withAnimation(.spring(response: 0.32, dampingFraction: 0.68)) {
+                        if selected == tab {
+                            onReselect(tab)
+                        } else {
+                            selected = tab
+                        }
+                    }
+                } label: {
+                    ZStack {
+                        if selected == tab {
+                            Circle()
+                                .fill(Color.tgsRed.opacity(0.12))
+                                .matchedGeometryEffect(id: "navPill", in: tabNS)
+                                .frame(width: 44, height: 44)
+                        }
+                        Image(systemName: tab.icon)
+                            .font(.system(
+                                size: 20,
+                                weight: selected == tab ? .semibold : .regular
+                            ))
+                            .foregroundStyle(
+                                selected == tab ? Color.tgsRed : unselectedIconColor
+                            )
+                    }
+                    .frame(width: 52, height: 44)
+                }
+                .buttonStyle(TGSSpringButtonStyle())
+                .accessibilityLabel(tab.label)
+                .accessibilityAddTraits(selected == tab ? .isSelected : [])
+            }
+        }
+        .padding(.horizontal, TGSSpacing.sm)
+        .padding(.vertical, TGSSpacing.sm - 2)
+        .background(.ultraThinMaterial)
+        .clipShape(Capsule())
+        .overlay(Capsule().stroke(borderColor, lineWidth: 1))
+        .shadow(color: Color.tgsCharcoal.opacity(0.14), radius: 24, x: 0, y: 8)
+        .animation(.easeInOut(duration: 0.2), value: isOnDarkBackground)
+    }
+}
+
+/// Tab identifiers for the custom floating tab bar.
+enum AppTab: Int, CaseIterable, Hashable {
+    case rehber, ittai, etkinlikler, bilgi, profil
+
+    var icon: String {
+        switch self {
+        case .rehber:      return "square.grid.2x2.fill"
+        case .ittai:       return "sparkles"
+        case .etkinlikler: return "calendar"
+        case .bilgi:       return "info.circle.fill"
+        case .profil:      return "person.crop.circle.fill"
+        }
+    }
+
+    var label: String {
+        switch self {
+        case .rehber:      return "Rehber"
+        case .ittai:       return "İTT AI"
+        case .etkinlikler: return "Etkinlikler"
+        case .bilgi:       return "Bilgi"
+        case .profil:      return "Profil"
+        }
+    }
+}
+
+// MARK: - Navigation Zoom Transition Helpers
+
+extension View {
+    /// Marks this view as the source of a navigation zoom transition.
+    /// Falls back to the default push animation on iOS 16/17.
+    @ViewBuilder
+    func zoomSource<ID: Hashable>(id: ID, in namespace: Namespace.ID) -> some View {
+        if #available(iOS 18, *) {
+            self.matchedTransitionSource(id: id, in: namespace)
+        } else {
+            self
+        }
+    }
+
+    /// Applies a zoom reveal to a view being pushed onto the NavigationStack.
+    /// Falls back to the default push animation on iOS 16/17.
+    @ViewBuilder
+    func zoomNavTransition<ID: Hashable>(sourceID: ID, in namespace: Namespace.ID) -> some View {
+        if #available(iOS 18, *) {
+            self.navigationTransition(.zoom(sourceID: sourceID, in: namespace))
+        } else {
+            self
+        }
     }
 }

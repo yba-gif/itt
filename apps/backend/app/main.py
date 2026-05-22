@@ -8,7 +8,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.routes import (
+    admin_users,
+    ai,
     auth,
+    consulates,
     content,
     events,
     health,
@@ -19,6 +22,7 @@ from app.routes import (
     push,
     reference,
     search,
+    socials,
     uploads,
 )
 
@@ -44,6 +48,7 @@ app.add_middleware(
 )
 
 app.include_router(health.router)
+app.include_router(ai.router)
 app.include_router(auth.router)
 app.include_router(reference.router)
 app.include_router(listings.router)
@@ -58,6 +63,11 @@ app.include_router(invoices.admin_router)
 app.include_router(push.router)
 app.include_router(push.admin_router)
 app.include_router(moderation.router)
+app.include_router(admin_users.router)
+app.include_router(consulates.router)
+app.include_router(consulates.admin_router)
+app.include_router(socials.router)
+app.include_router(socials.admin_router)
 
 
 @app.get("/")

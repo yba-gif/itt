@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { api, REJECTION_REASONS, type Listing } from "../api/client";
@@ -8,19 +8,27 @@ export default function ListingDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const qc = useQueryClient();
-  const [listing, setListing] = useState<Listing | null>(null);
   const [reasonCode, setReasonCode] = useState<string>(REJECTION_REASONS[0].code);
   const [notes, setNotes] = useState<string>("");
   const [showReject, setShowReject] = useState(false);
 
-  // Pull from cache (Queue prefetched it). Fallback: refetch the queue.
-  useEffect(() => {
-    const cached = qc.getQueryData<Listing[]>(["queue", "pending"])
-      ?? qc.getQueryData<Listing[]>(["queue", "active"])
-      ?? qc.getQueryData<Listing[]>(["queue", "suspended"]);
-    const hit = cached?.find((l) => l.id === id);
-    if (hit) setListing(hit);
-  }, [id, qc]);
+  // Try the queue caches first (instant), fall back to a direct fetch
+  // so direct-URL navigation and page-refresh both work.
+  const cachedListing = (() => {
+    for (const s of ["pending", "active", "rejected", "suspended"] as Listing["status"][]) {
+      const hit = qc.getQueryData<Listing[]>(["queue", s])?.find((l) => l.id === id);
+      if (hit) return hit;
+    }
+    return undefined;
+  })();
+
+  const { data: fetchedListing, isLoading, error } = useQuery({
+    queryKey: ["listing", id],
+    queryFn: () => api.getListing(id!),
+    enabled: !cachedListing && !!id,
+  });
+
+  const listing = cachedListing ?? fetchedListing ?? null;
 
   const approveMut = useMutation({
     mutationFn: () => api.approve(id!),
@@ -38,13 +46,9 @@ export default function ListingDetail() {
     },
   });
 
-  if (!listing) {
-    return (
-      <div className="text-slate-500">
-        Yükleniyor… (eğer kuyruğa geri dönerseniz tekrar deneyin)
-      </div>
-    );
-  }
+  if (isLoading) return <div className="text-slate-500">Yükleniyor…</div>;
+  if (error) return <div className="text-red-600">Hata: {String(error)}</div>;
+  if (!listing) return <div className="text-slate-500">Kayıt bulunamadı.</div>;
 
   return (
     <div>

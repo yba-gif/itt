@@ -4,6 +4,7 @@ import EventKit
 /// PRD §5.3: shows only events with starts_at >= now by default. Past events
 /// surface in a "Geçmiş Etkinlikler" sub-tab.
 struct EtkinliklerTab: View {
+    @EnvironmentObject var nav: Nav
     @State private var mode: Mode = .upcoming
     @State private var selectedKanton: String = ""
     @State private var events: [Event] = []
@@ -14,7 +15,9 @@ struct EtkinliklerTab: View {
     enum Mode: Hashable { case upcoming, past }
 
     var body: some View {
-        NavigationStack {
+        // Binding the path lets the floating-tab-bar re-tap clear pushed
+        // sub-screens (event detail) back to the listing.
+        NavigationStack(path: $nav.etkinliklerPath) {
             VStack(spacing: 0) {
                 Picker("Mod", selection: $mode) {
                     Text("Yaklaşan").tag(Mode.upcoming)
@@ -55,6 +58,7 @@ struct EtkinliklerTab: View {
             }
             .background(Color.tgsCream)
             .navigationTitle("Etkinlikler")
+            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -70,8 +74,16 @@ struct EtkinliklerTab: View {
                 }
             }
             .task { await load() }
-            .onChange(of: mode, perform: { _ in Task { await load() } })
-            .onChange(of: selectedKanton, perform: { _ in Task { await load() } })
+            .tgsOnChange(of: mode) { Task { await load() } }
+            .tgsOnChange(of: selectedKanton) { Task { await load() } }
+            // Re-tap on the Etkinlikler tab → pop event detail back to list.
+            .tgsOnChange(of: nav.etkinliklerPopToken) {
+                if !nav.etkinliklerPath.isEmpty {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.82)) {
+                        nav.etkinliklerPath = NavigationPath()
+                    }
+                }
+            }
             // P2-5: alert only fires when list has content (inline handles empty case)
             .alert("Hata", isPresented: .constant(error != nil && !events.isEmpty)) {
                 Button("Tekrar Dene") { error = nil; Task { await load() } }
@@ -288,13 +300,24 @@ struct EventDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 if let urlString = event.imageURL, let url = URL(string: urlString) {
-                    AsyncImage(url: url) { phase in
-                        switch phase {
-                        case .empty: Color.tgsSurface
-                        case .success(let img): img.resizable().scaledToFill()
-                        case .failure: Color.tgsSurface
-                        @unknown default: Color.tgsSurface
+                    // GeometryReader bounds the image to actual parent width so
+                    // .scaledToFill() can't push the whole detail page off-screen
+                    // (same fix pattern as DirectoryDetailView hero — wide banner
+                    // images would otherwise force horizontal overflow).
+                    GeometryReader { proxy in
+                        CachedAsyncImage(url: url) { phase in
+                            switch phase {
+                            case .empty: Color.tgsSurface
+                            case .success(let img):
+                                img.resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: proxy.size.width, height: proxy.size.height)
+                                    .clipped()
+                            case .failure: Color.tgsSurface
+                            @unknown default: Color.tgsSurface
+                            }
                         }
+                        .frame(width: proxy.size.width, height: proxy.size.height)
                     }
                     .frame(height: 180)
                     .frame(maxWidth: .infinity)
@@ -304,26 +327,42 @@ struct EventDetailView: View {
                 Text(event.title)
                     .font(.title2.bold())
                     .foregroundStyle(Color.tgsCharcoal)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 Text(formatted(event.startsAt))
                     .font(.subheadline)
                     .foregroundStyle(Color.tgsMuted)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if let venue = event.venue {
-                    Label(venue, systemImage: "mappin.and.ellipse")
-                        .font(.subheadline)
-                        .foregroundStyle(Color.tgsCharcoal)
+                    Button {
+                        openInMaps(query: [venue, event.address].compactMap { $0 }.joined(separator: ", "))
+                    } label: {
+                        Label(venue, systemImage: "mappin.and.ellipse")
+                            .font(.subheadline)
+                            .foregroundStyle(Color.tgsCharcoal)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityHint("Haritada aç")
                 }
                 if let address = event.address {
-                    Label(address, systemImage: "map")
-                        .font(.subheadline)
-                        .foregroundStyle(Color.tgsCharcoal)
+                    Button {
+                        openInMaps(query: address)
+                    } label: {
+                        Label(address, systemImage: "map")
+                            .font(.subheadline)
+                            .foregroundStyle(Color.tgsCharcoal)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityHint("Haritada aç")
                 }
 
                 Button {
                     Task { await scheduleReminder() }
                 } label: {
-                    Label("Hatırlatma kur (24 saat önce)", systemImage: "bell")
+                    Label("Hatırlatma kur", systemImage: "bell")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
@@ -352,13 +391,51 @@ struct EventDetailView: View {
             .padding(TGSSpacing.lg)
         }
         .background(Color.tgsCream)
+        // Floating tab bar clearance — NavigationStack push doesn't inherit
+        // the parent tab's safeAreaInset.
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 80)
+        }
         .navigationTitle("Etkinlik")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ShareLink(item: shareText, subject: Text(event.title)) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .accessibilityLabel("Etkinliği paylaş")
+            }
+        }
         .task {
             // PRD §5.9: contextual push permission ask — first time the user
             // views an event detail. Idempotent on subsequent visits.
             await push.requestAuthorizationIfNeeded()
         }
+    }
+
+    /// Multi-line shareable summary. Recipients see the title in the subject
+    /// (in apps that show subjects, like Mail/Slack), and the formatted
+    /// title + date + venue + description + canonical URL in the body.
+    private var shareText: String {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "tr_CH")
+        f.dateStyle = .full
+        f.timeStyle = .short
+        var lines: [String] = ["📅 \(event.title)"]
+        lines.append(f.string(from: event.startsAt))
+        if let venue = event.venue, !venue.isEmpty {
+            lines.append("📍 \(venue)")
+        }
+        if let address = event.address, !address.isEmpty {
+            lines.append(address)
+        }
+        if let description = event.description, !description.isEmpty {
+            lines.append("")
+            lines.append(description)
+        }
+        lines.append("")
+        lines.append("https://tgs-itt.ch/event/\(event.id.uuidString)")
+        return lines.joined(separator: "\n")
     }
 
     private func formatted(_ d: Date) -> String {
@@ -367,6 +444,18 @@ struct EventDetailView: View {
         f.dateStyle = .full
         f.timeStyle = .short
         return f.string(from: d)
+    }
+
+    /// Open the event venue/address in Apple Maps. Mirrors the pattern used
+    /// in DirectoryDetailView.openInMaps() — geocode first for a precise pin,
+    /// fall back to a query URL if geocoding fails.
+    private func openInMaps(query: String) {
+        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        if let encoded = trimmed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           let url = URL(string: "https://maps.apple.com/?q=\(encoded)") {
+            UIApplication.shared.open(url)
+        }
     }
 
     private func scheduleReminder() async {

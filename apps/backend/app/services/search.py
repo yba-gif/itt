@@ -41,19 +41,25 @@ def apply_fts(stmt: Select, q: str) -> Select:
     ilike_pred = or_(
         Listing.name.ilike(f"%{cleaned}%"),
         Listing.category.ilike(f"%{cleaned}%"),
+        Listing.sub_category.ilike(f"%{cleaned}%"),
         Listing.address.ilike(f"%{cleaned}%"),
         Listing.description.ilike(f"%{cleaned}%"),
+        # `directories` is an ARRAY(String) — use any_ for membership test
+        Listing.directories.any(cleaned.lower()),
     )
     return stmt.where(or_(fts_pred, ilike_pred))
 
 
 # A literal version for raw SQL contexts (e.g., the migration trigger DDL).
+# Must stay in sync with the trigger function defined in Alembic 0005.
 LISTING_TSV_EXPR = text(
     "to_tsvector('simple', unaccent("
     "coalesce(NEW.name,'') || ' ' || "
     "coalesce(NEW.category,'') || ' ' || "
     "coalesce(NEW.sub_category,'') || ' ' || "
     "coalesce(NEW.description,'') || ' ' || "
-    "coalesce(array_to_string(NEW.kantons, ' '), '')"
+    "coalesce(NEW.address,'') || ' ' || "
+    "coalesce(array_to_string(NEW.kantons, ' '), '') || ' ' || "
+    "coalesce(array_to_string(NEW.directories, ' '), '')"
     "))"
 )
