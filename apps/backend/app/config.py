@@ -50,8 +50,10 @@ class Settings(BaseSettings):
     apns_topic: str = "ch.itt-rehber.app"
     apns_use_sandbox: bool = True
 
-    # Gemini AI proxy — keep key server-side, never in the iOS bundle.
+    # AI proxy keys — keep server-side, never in the iOS bundle.
+    # GEMINI_API_KEY kept for compat in case we revert; OPENAI_API_KEY is current.
     gemini_api_key: str = ""
+    openai_api_key: str = ""
 
     @property
     def cors_origin_list(self) -> list[str]:
