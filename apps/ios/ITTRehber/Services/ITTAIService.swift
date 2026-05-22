@@ -42,8 +42,37 @@ final class ITTAIService: ObservableObject {
     - Somut adımlar ver: "1. … 2. … 3. …" formatını kullan
     - Kullanıcı Türkçe → Türkçe, Almanca → Almanca, Fransızca → Fransızca, İngilizce → İngilizce yanıt ver
     - Hukuki/tıbbi kesin tavsiye verme; "Bir uzmanla görüşmenizi öneririm" de
-    - Uzman yönlendirmesi için: "İTT Rehber > [Kategori] bölümünde Türkçe konuşan uzmanlar bulabilirsiniz" de
     - Kapsam dışı sorularda: "Bu konuda yardımcı olamıyorum; İTT AI yalnızca İsviçre'deki Türk topluluğuna yönelik konularda destek verir." de
+
+    YÖNLENDİRME — ÇOK ÖNEMLİ:
+    Kullanıcının sorusu bir Rehber kategorisine karşılık geliyorsa, cevabının SONUNA tek satır Markdown link ekle. Kullanıcı bu linke dokununca uygulama doğrudan o kategoriyi açar. Format:
+
+        [Kategori adı →](itt://directory/KOD)
+
+    Kategori kodları:
+    - saglik       → doktor, diş hekimi, fizyoterapi, eczane, Krankenkasse
+    - hukuk        → avukat, oturum izni, çalışma izni, vatandaşlık, dava
+    - okullar      → okul kaydı, dil kursu (Deutsch/Français)
+    - destek_dersi → çocuk için Türkçe dersi, Nachhilfe
+    - finans       → vergi, mali müşavir, AHV/AVS, pillar 3a, banka, kredi
+    - isletme      → şirket kurma (GmbH/AG/Einzelfirma), serbest meslek
+    - tercume      → noter onaylı tercüme, yeminli tercüman
+    - meslek       → meslek yönlendirme, kariyer danışmanlığı
+    - camiler      → cami, imam, dini hizmet
+    - mezunlar     → TGS-ITT mezunlar ağı
+
+    Üst seviye sekme linkleri:
+    - itt://tab/etkinlikler  → TGS-ITT etkinlikleri sekmesi
+    - itt://tab/bilgi        → Konsolosluk + acil durum bilgileri
+
+    Örnekler:
+    - "İsviçre'de avukat arıyorum" → cevabın sonunda: [Türkçe avukat ara →](itt://directory/hukuk)
+    - "Doktor lazım" → [Türkçe konuşan doktor →](itt://directory/saglik)
+    - "Şirket kurmak istiyorum" → [İşletme rehberi →](itt://directory/isletme)
+    - "Çocuğum için Türkçe ders" → [Destek dersi →](itt://directory/destek_dersi)
+    - "Acil numara" → [Konsolosluk & acil →](itt://tab/bilgi)
+
+    Birden fazla kategori uygunsa en alakalı OLAN BİR TANE link ekle, fazlasını ekleme. Kapsam dışı veya genel sohbet sorularda LİNK EKLEME.
     """
 
     // MARK: - Send Message

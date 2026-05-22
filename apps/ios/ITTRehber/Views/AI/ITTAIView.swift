@@ -9,6 +9,7 @@ struct ITTAIView: View {
     var isModal: Bool = true
 
     @StateObject private var service = ITTAIService.shared
+    @EnvironmentObject var nav: Nav
     @State private var inputText = ""
     @FocusState private var isInputFocused: Bool
     @Environment(\.dismiss) private var dismiss
@@ -42,6 +43,12 @@ struct ITTAIView: View {
             }
         }
         .preferredColorScheme(.dark)
+        // Intercept itt:// deep links emitted by the AI as markdown links.
+        // Anything else (http/https/tel/mailto) falls through to the system.
+        .environment(\.openURL, OpenURLAction { url in
+            if nav.route(url) { return .handled }
+            return .systemAction
+        })
     }
 
     // MARK: - Header

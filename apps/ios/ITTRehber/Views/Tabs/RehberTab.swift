@@ -1,15 +1,13 @@
 import SwiftUI
 
 struct RehberTab: View {
-    /// Incremented by parent when the user re-taps the Rehber tab — pops to root.
-    @Binding var popToRoot: Int
-    @State private var navPath: [Directory] = []
+    @EnvironmentObject var nav: Nav
     @State private var showAI = false
     @State private var showSearch = false
     @Namespace private var tileNS
 
     var body: some View {
-        NavigationStack(path: $navPath) {
+        NavigationStack(path: $nav.rehberPath) {
             ScrollViewReader { proxy in
                 ScrollView {
                     VStack(spacing: 0) {
@@ -22,8 +20,8 @@ struct RehberTab: View {
                 }
                 .background(Color.tgsCream)
                 // Pop to root OR scroll to top on tab re-tap
-                .tgsOnChange(of: popToRoot) {
-                    if navPath.isEmpty {
+                .tgsOnChange(of: nav.rehberPopToken) {
+                    if nav.rehberPath.isEmpty {
                         // Already at root — scroll to top
                         withAnimation(.spring(response: 0.40, dampingFraction: 0.82)) {
                             proxy.scrollTo("rehber-top", anchor: .top)
@@ -31,7 +29,7 @@ struct RehberTab: View {
                     } else {
                         // On a subpage — pop to root
                         withAnimation(.spring(response: 0.35, dampingFraction: 0.82)) {
-                            navPath = []
+                            nav.rehberPath = []
                         }
                     }
                 }

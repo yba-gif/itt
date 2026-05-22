@@ -6,6 +6,8 @@ struct ITTRehberApp: App {
     @StateObject private var session = SessionStore()
     @StateObject private var cache = OfflineCache.shared
     @StateObject private var push = PushManager.shared
+    /// Shared navigation state — lets ITT AI redirect to Rehber directories.
+    @StateObject private var nav = Nav()
 
     /// Persists across launches. False until OnboardingView's `finish()` runs.
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
@@ -22,6 +24,7 @@ struct ITTRehberApp: App {
                 .environmentObject(session)
                 .environmentObject(cache)
                 .environmentObject(push)
+                .environmentObject(nav)
                 .preferredColorScheme(.light) // TGS design is light-only
                 .tint(Color.tgsRed) // TGS brand red #B82030
                 // First launch: cover everything with the onboarding flow
@@ -37,30 +40,28 @@ struct ITTRehberApp: App {
 
 // Sprint 6: custom floating tab bar replaces system TabView
 struct RootTabView: View {
-    @State private var selectedTab: AppTab = .rehber
-    /// Incremented each time the user re-taps the Rehber tab — signals pop-to-root.
-    @State private var rehberPopToken = 0
+    @EnvironmentObject var nav: Nav
 
     var body: some View {
         ZStack(alignment: .bottom) {
             // All tab views pre-loaded; only active one accepts hit-testing.
             // This preserves per-tab NavigationStack state when switching tabs.
             Group {
-                RehberTab(popToRoot: $rehberPopToken)
-                    .opacity(selectedTab == .rehber ? 1 : 0)
-                    .allowsHitTesting(selectedTab == .rehber)
+                RehberTab()
+                    .opacity(nav.selectedTab == .rehber ? 1 : 0)
+                    .allowsHitTesting(nav.selectedTab == .rehber)
                 ITTAIView(isModal: false)
-                    .opacity(selectedTab == .ittai ? 1 : 0)
-                    .allowsHitTesting(selectedTab == .ittai)
+                    .opacity(nav.selectedTab == .ittai ? 1 : 0)
+                    .allowsHitTesting(nav.selectedTab == .ittai)
                 EtkinliklerTab()
-                    .opacity(selectedTab == .etkinlikler ? 1 : 0)
-                    .allowsHitTesting(selectedTab == .etkinlikler)
+                    .opacity(nav.selectedTab == .etkinlikler ? 1 : 0)
+                    .allowsHitTesting(nav.selectedTab == .etkinlikler)
                 BilgiTab()
-                    .opacity(selectedTab == .bilgi ? 1 : 0)
-                    .allowsHitTesting(selectedTab == .bilgi)
+                    .opacity(nav.selectedTab == .bilgi ? 1 : 0)
+                    .allowsHitTesting(nav.selectedTab == .bilgi)
                 ProfilTab()
-                    .opacity(selectedTab == .profil ? 1 : 0)
-                    .allowsHitTesting(selectedTab == .profil)
+                    .opacity(nav.selectedTab == .profil ? 1 : 0)
+                    .allowsHitTesting(nav.selectedTab == .profil)
             }
             // Reserve space so scroll content clears the floating bar.
             // Bar height ~56pt + padding-bottom 20pt = 76pt visible; add ~30pt
@@ -70,9 +71,9 @@ struct RootTabView: View {
             }
 
             // Floating pill — sits above safe area
-            FloatingTabBar(selected: $selectedTab, onReselect: { tab in
+            FloatingTabBar(selected: $nav.selectedTab, onReselect: { tab in
                 // Tapping the already-active tab pops its NavigationStack to root
-                if tab == .rehber { rehberPopToken += 1 }
+                if tab == .rehber { nav.signalRehberReselect() }
             })
             .padding(.bottom, 20)
             .padding(.horizontal, 32)
