@@ -209,6 +209,15 @@ struct Consulate: Identifiable {
     /// Detail/footnote on hours (e.g. randevu requirement).
     let hoursDetail: String?
 
+    /// Current consul / ambassador. Optional so the card hides when not set.
+    /// Update by editing `Consulate.all` below — single source of truth.
+    let consulName: String?
+    /// Their role, always shown ("T.C. … Büyükelçisi" / "… Başkonsolosu").
+    let consulTitle: String
+    /// Remote photo URL (https://…). Use the official MFA / consulate
+    /// website photo. Nil → renders initials placeholder.
+    let consulPhotoURL: String?
+
     /// All Turkish consulates serving Switzerland. Verify before launch —
     /// emails follow standard MFA patterns (embassy.*/consulate.*) but should
     /// be confirmed against the official mfa.gov.tr pages.
@@ -222,7 +231,12 @@ struct Consulate: Identifiable {
             email: "embassy.berne@mfa.gov.tr",
             website: "https://bern.be.mfa.gov.tr",
             hoursSummary: "Pzt - Cuma 09:00 - 13:00",
-            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur. Randevu için web sitesini ziyaret edin."
+            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur. Randevu için web sitesini ziyaret edin.",
+            // ⚠️ Replace with the current ambassador's name + photo URL.
+            // Source: bern.be.mfa.gov.tr/Mission/MissionChief
+            consulName: nil,
+            consulTitle: "T.C. Bern Büyükelçisi",
+            consulPhotoURL: nil
         ),
         Consulate(
             city: "Zürich",
@@ -233,7 +247,12 @@ struct Consulate: Identifiable {
             email: "konsolosluk.zurih@mfa.gov.tr",
             website: "https://zurih.bk.mfa.gov.tr",
             hoursSummary: "Pzt - Cuma 09:00 - 13:00",
-            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur."
+            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur.",
+            // ⚠️ Replace with the current consul general's name + photo URL.
+            // Source: zurih.bk.mfa.gov.tr/Mission/MissionChief
+            consulName: nil,
+            consulTitle: "T.C. Zürih Başkonsolosu",
+            consulPhotoURL: nil
         ),
         Consulate(
             city: "Cenevre",
@@ -244,7 +263,12 @@ struct Consulate: Identifiable {
             email: "konsolosluk.cenevre@mfa.gov.tr",
             website: "https://cenevre.bk.mfa.gov.tr",
             hoursSummary: "Pzt - Cuma 09:00 - 13:00",
-            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur."
+            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur.",
+            // ⚠️ Replace with the current consul general's name + photo URL.
+            // Source: cenevre.bk.mfa.gov.tr/Mission/MissionChief
+            consulName: nil,
+            consulTitle: "T.C. Cenevre Başkonsolosu",
+            consulPhotoURL: nil
         ),
         Consulate(
             city: "Basel",
@@ -255,7 +279,11 @@ struct Consulate: Identifiable {
             email: nil,
             website: "https://bern.be.mfa.gov.tr",
             hoursSummary: "Randevu ile",
-            hoursDetail: "Fahri konsolosluk. Lütfen önceden randevu alınız. Resmi konsolosluk işlemleri için Bern Büyükelçiliği'ne yönlendirilirsiniz."
+            hoursDetail: "Fahri konsolosluk. Lütfen önceden randevu alınız. Resmi konsolosluk işlemleri için Bern Büyükelçiliği'ne yönlendirilirsiniz.",
+            // ⚠️ Replace with the current honorary consul's name + photo.
+            consulName: nil,
+            consulTitle: "T.C. Basel Fahri Konsolosu",
+            consulPhotoURL: nil
         ),
     ]
 }
@@ -310,6 +338,8 @@ struct ConsulateDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 header
+
+                consulCard
 
                 // Tappable rows — call, mail, web, maps
                 VStack(spacing: 0) {
@@ -433,6 +463,75 @@ struct ConsulateDetailView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 0)
+        }
+    }
+
+    // MARK: – Consul / Ambassador card
+
+    private var consulCard: some View {
+        HStack(spacing: 14) {
+            consulAvatar
+
+            VStack(alignment: .leading, spacing: 4) {
+                if let name = consulate.consulName, !name.isEmpty {
+                    Text(name)
+                        .font(.system(size: 17, weight: .bold, design: .rounded))
+                        .foregroundStyle(Color.tgsCharcoal)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Text(consulate.consulTitle)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundStyle(Color.tgsMuted)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                // Show a subtle hint when name isn't filled in yet so the
+                // card still reads as "this is the consul" rather than empty.
+                if consulate.consulName == nil {
+                    Text("(yakında güncellenecek)")
+                        .font(.caption2)
+                        .foregroundStyle(Color.tgsBorder)
+                }
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(Color.tgsBorder.opacity(0.7), lineWidth: 0.5)
+        )
+    }
+
+    private var consulAvatar: some View {
+        Group {
+            if let urlStr = consulate.consulPhotoURL,
+               let url = URL(string: urlStr) {
+                CachedAsyncImage(url: url) { phase in
+                    switch phase {
+                    case .success(let img):
+                        img.resizable().scaledToFill()
+                    default:
+                        avatarPlaceholder
+                    }
+                }
+            } else {
+                avatarPlaceholder
+            }
+        }
+        .frame(width: 64, height: 64)
+        .clipShape(Circle())
+        .overlay(Circle().stroke(Color.tgsRed.opacity(0.18), lineWidth: 1.5))
+    }
+
+    private var avatarPlaceholder: some View {
+        ZStack {
+            Color.tgsRed.opacity(0.08)
+            Image(systemName: "person.fill")
+                .font(.system(size: 26, weight: .semibold))
+                .foregroundStyle(Color.tgsRed.opacity(0.55))
         }
     }
 }
