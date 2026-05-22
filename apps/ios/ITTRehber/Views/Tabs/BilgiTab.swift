@@ -30,30 +30,13 @@ struct BilgiTab: View {
                 }
 
                 Section {
-                    ConsulateTileRow(
-                        city: "Bern",
-                        title: "Türkiye Büyükelçiliği",
-                        address: "Villastrasse 32, 3006 Bern",
-                        phone: "+41313592200"
-                    )
-                    ConsulateTileRow(
-                        city: "Zürich",
-                        title: "Başkonsolosluk",
-                        address: "Basteiplatz 2, 8001 Zürich",
-                        phone: "+41442016400"
-                    )
-                    ConsulateTileRow(
-                        city: "Cenevre",
-                        title: "Başkonsolosluk",
-                        address: "Avenue Soret 4, 1203 Genève",
-                        phone: "+41227321600"
-                    )
-                    ConsulateTileRow(
-                        city: "Basel",
-                        title: "Konsolosluk",
-                        address: "Wallstrasse 11, 4051 Basel",
-                        phone: "+41613122061"
-                    )
+                    ForEach(Consulate.all) { c in
+                        NavigationLink {
+                            ConsulateDetailView(consulate: c)
+                        } label: {
+                            ConsulateTileRow(consulate: c)
+                        }
+                    }
                 } header: {
                     Label("Konsolosluk Bilgileri", systemImage: "building.columns.fill")
                         .foregroundStyle(Color.tgsRed)
@@ -198,11 +181,81 @@ struct ContentPageView: View {
 
 // MARK: - Consulate Row
 
-struct ConsulateTileRow: View {
+// MARK: - Consulate model + data
+
+struct Consulate: Identifiable {
+    var id: String { city }
     let city: String
     let title: String
     let address: String
+    /// E.164 format, used for `tel://` URLs (no spaces, no dashes).
     let phone: String
+    /// Human-friendly format shown in UI.
+    let phoneDisplay: String
+    /// Optional — honorary consulates without published email are nil.
+    let email: String?
+    /// Public website (https://).
+    let website: String
+    /// Short hours summary (e.g. "Pzt - Cuma 09:00 - 13:00").
+    let hoursSummary: String
+    /// Detail/footnote on hours (e.g. randevu requirement).
+    let hoursDetail: String?
+
+    /// All Turkish consulates serving Switzerland. Verify before launch —
+    /// emails follow standard MFA patterns (embassy.*/consulate.*) but should
+    /// be confirmed against the official mfa.gov.tr pages.
+    static let all: [Consulate] = [
+        Consulate(
+            city: "Bern",
+            title: "Türkiye Büyükelçiliği",
+            address: "Villastrasse 32, 3006 Bern",
+            phone: "+41313592200",
+            phoneDisplay: "+41 31 359 22 00",
+            email: "embassy.berne@mfa.gov.tr",
+            website: "https://bern.be.mfa.gov.tr",
+            hoursSummary: "Pzt - Cuma 09:00 - 13:00",
+            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur. Randevu için web sitesini ziyaret edin."
+        ),
+        Consulate(
+            city: "Zürich",
+            title: "Türkiye Cumhuriyeti Başkonsolosluğu",
+            address: "Basteiplatz 2, 8001 Zürich",
+            phone: "+41442016400",
+            phoneDisplay: "+41 44 201 64 00",
+            email: "konsolosluk.zurih@mfa.gov.tr",
+            website: "https://zurih.bk.mfa.gov.tr",
+            hoursSummary: "Pzt - Cuma 09:00 - 13:00",
+            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur."
+        ),
+        Consulate(
+            city: "Cenevre",
+            title: "Türkiye Cumhuriyeti Başkonsolosluğu",
+            address: "Avenue Soret 4, 1203 Genève",
+            phone: "+41227321600",
+            phoneDisplay: "+41 22 732 16 00",
+            email: "konsolosluk.cenevre@mfa.gov.tr",
+            website: "https://cenevre.bk.mfa.gov.tr",
+            hoursSummary: "Pzt - Cuma 09:00 - 13:00",
+            hoursDetail: "Konsolosluk işlemleri için randevu zorunludur."
+        ),
+        Consulate(
+            city: "Basel",
+            title: "Fahri Konsolosluk",
+            address: "Wallstrasse 11, 4051 Basel",
+            phone: "+41613122061",
+            phoneDisplay: "+41 61 312 20 61",
+            email: nil,
+            website: "https://bern.be.mfa.gov.tr",
+            hoursSummary: "Randevu ile",
+            hoursDetail: "Fahri konsolosluk. Lütfen önceden randevu alınız. Resmi konsolosluk işlemleri için Bern Büyükelçiliği'ne yönlendirilirsiniz."
+        ),
+    ]
+}
+
+// MARK: - Consulate row (in Bilgi tab list)
+
+struct ConsulateTileRow: View {
+    let consulate: Consulate
 
     var body: some View {
         HStack(spacing: 12) {
@@ -217,36 +270,213 @@ struct ConsulateTileRow: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 4) {
-                    Text(city)
+                    Text(consulate.city)
                         .font(.system(size: 14, weight: .bold))
                         .foregroundStyle(Color.tgsCharcoal)
                     Text("·")
                         .foregroundStyle(Color.tgsMuted)
-                    Text(title)
+                    Text(consulate.title)
                         .font(.system(size: 13, weight: .regular))
                         .foregroundStyle(Color.tgsMuted)
+                        .lineLimit(1)
                 }
-                Text(address)
+                Text(consulate.address)
                     .font(.caption)
                     .foregroundStyle(Color.tgsMuted)
+                    .lineLimit(1)
             }
 
-            Spacer()
-
-            Button {
-                if let url = URL(string: "tel://\(phone)") {
-                    UIApplication.shared.open(url)
-                }
-            } label: {
-                Image(systemName: "phone.fill")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(Color.tgsRed)
-                    .frame(width: 36, height: 36)
-                    .background(Capsule().fill(Color.tgsRed.opacity(0.10)))
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("\(city) konsolosluğunu ara")
+            Spacer(minLength: 0)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(consulate.city) \(consulate.title) detayları")
+    }
+}
+
+// MARK: - Consulate detail page
+
+struct ConsulateDetailView: View {
+    let consulate: Consulate
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 18) {
+                header
+
+                // Tappable rows — call, mail, web, maps
+                VStack(spacing: 0) {
+                    ConsulateInfoRow(
+                        icon: "phone.fill",
+                        label: "Telefon",
+                        value: consulate.phoneDisplay,
+                        accent: Color.tgsRed,
+                        isLast: false
+                    ) {
+                        if let url = URL(string: "tel://\(consulate.phone)") {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    if let email = consulate.email {
+                        ConsulateInfoRow(
+                            icon: "envelope.fill",
+                            label: "E-posta",
+                            value: email,
+                            accent: Color.tgsRed,
+                            isLast: false
+                        ) {
+                            if let url = URL(string: "mailto:\(email)") {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                    }
+                    ConsulateInfoRow(
+                        icon: "globe",
+                        label: "Web Sitesi",
+                        value: consulate.website.replacingOccurrences(of: "https://", with: ""),
+                        accent: Color.tgsRed,
+                        isLast: false
+                    ) {
+                        if let url = URL(string: consulate.website) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    ConsulateInfoRow(
+                        icon: "mappin.and.ellipse",
+                        label: "Adres",
+                        value: consulate.address,
+                        accent: Color.tgsRed,
+                        isLast: true
+                    ) {
+                        let q = consulate.address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? consulate.address
+                        if let url = URL(string: "https://maps.apple.com/?q=\(q)") {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                }
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .stroke(Color.tgsBorder.opacity(0.7), lineWidth: 0.5)
+                )
+
+                // Hours card
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "clock.fill")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(Color.tgsRed)
+                        Text("Çalışma Saatleri")
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundStyle(Color.tgsMuted)
+                            .textCase(.uppercase)
+                            .tracking(0.4)
+                    }
+                    Text(consulate.hoursSummary)
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundStyle(Color.tgsCharcoal)
+                    if let detail = consulate.hoursDetail {
+                        Text(detail)
+                            .font(.caption)
+                            .foregroundStyle(Color.tgsMuted)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.tgsCream.opacity(0.7))
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .stroke(Color.tgsBorder.opacity(0.6), lineWidth: 0.5)
+                )
+
+                Spacer(minLength: 0)
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 12)
+            .padding(.bottom, 24)
+        }
+        .background(Color.tgsCream)
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 80)
+        }
+        .navigationTitle(consulate.city)
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private var header: some View {
+        HStack(spacing: 14) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.tgsRed.opacity(0.10))
+                    .frame(width: 64, height: 64)
+                Image(systemName: "building.columns.fill")
+                    .font(.system(size: 28, weight: .semibold))
+                    .foregroundStyle(Color.tgsRed)
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                Text(consulate.city)
+                    .font(.system(size: 26, weight: .black, design: .rounded))
+                    .foregroundStyle(Color.tgsCharcoal)
+                Text(consulate.title)
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Color.tgsMuted)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+        }
+    }
+}
+
+// MARK: - Reusable tappable row for the consulate detail page
+
+private struct ConsulateInfoRow: View {
+    let icon: String
+    let label: String
+    let value: String
+    let accent: Color
+    let isLast: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 0) {
+                HStack(spacing: 12) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .fill(accent.opacity(0.10))
+                            .frame(width: 34, height: 34)
+                        Image(systemName: icon)
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(accent)
+                    }
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(label)
+                            .font(.caption)
+                            .foregroundStyle(Color.tgsMuted)
+                        Text(value)
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundStyle(Color.tgsCharcoal)
+                            .lineLimit(2)
+                    }
+                    Spacer(minLength: 0)
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(Color.tgsBorder)
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 12)
+
+                if !isLast {
+                    Divider()
+                        .padding(.leading, 60)
+                }
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(label): \(value)")
     }
 }
 
