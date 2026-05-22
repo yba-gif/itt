@@ -181,7 +181,59 @@ export const api = {
     params.set("page_size", String(opts.pageSize ?? 50));
     return request<AIQuestionsPage>(`/admin/ai-questions?${params.toString()}`);
   },
+
+  // ---- Consulates (Phase C admin) ----
+
+  consulates: () => request<ConsulateRow[]>("/consulates"),
+  createConsulate: (payload: ConsulateInput) =>
+    request<ConsulateRow>("/admin/consulates", { method: "POST", body: JSON.stringify(payload) }),
+  updateConsulate: (id: string, payload: ConsulateInput) =>
+    request<ConsulateRow>(`/admin/consulates/${id}`, { method: "PUT", body: JSON.stringify(payload) }),
+  deleteConsulate: (id: string) =>
+    request<void>(`/admin/consulates/${id}`, { method: "DELETE" }),
+
+  // ---- Socials (Phase C admin) ----
+
+  socials: () => request<SocialRow[]>("/socials"),
+  createSocial: (payload: SocialInput) =>
+    request<SocialRow>("/admin/socials", { method: "POST", body: JSON.stringify(payload) }),
+  updateSocial: (id: string, payload: SocialInput) =>
+    request<SocialRow>(`/admin/socials/${id}`, { method: "PUT", body: JSON.stringify(payload) }),
+  deleteSocial: (id: string) =>
+    request<void>(`/admin/socials/${id}`, { method: "DELETE" }),
 };
+
+export type ConsulateRow = {
+  id: string;
+  city: string;
+  title: string;
+  address: string;
+  phone: string;
+  phone_display: string;
+  email: string | null;
+  website: string;
+  hours_summary: string;
+  hours_detail: string | null;
+  consul_name: string | null;
+  consul_title: string;
+  consul_photo_url: string | null;
+  sort_order: number;
+  updated_at: string;
+};
+
+export type ConsulateInput = Omit<ConsulateRow, "id" | "updated_at">;
+
+export type SocialRow = {
+  id: string;
+  label: string;
+  system_icon: string;
+  url: string;
+  tint_hex: string;
+  sort_order: number;
+  updated_at: string;
+};
+
+export type SocialInput = Omit<SocialRow, "id" | "updated_at">;
 
 export type UserRow = {
   id: string;

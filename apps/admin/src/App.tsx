@@ -10,6 +10,8 @@ import Payments from "./pages/Payments";
 import PushComposer from "./pages/PushComposer";
 import Users from "./pages/Users";
 import AIQuestions from "./pages/AIQuestions";
+import Consulates from "./pages/Consulates";
+import Socials from "./pages/Socials";
 import { clearToken, getToken } from "./api/client";
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -27,6 +29,8 @@ function Shell({ children }: { children: React.ReactNode }) {
             <NavLink to="/payments" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>Ödemeler</NavLink>
             <NavLink to="/push" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>Bildirim</NavLink>
             <NavLink to="/content" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>İçerik</NavLink>
+            <NavLink to="/consulates" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>Konsolosluk</NavLink>
+            <NavLink to="/socials" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>Sosyal</NavLink>
             <NavLink to="/users" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>Kullanıcılar</NavLink>
             <NavLink to="/ai-questions" className={({ isActive }) => `${navItem} ${isActive ? activeItem : ""}`}>İTT AI</NavLink>
           </nav>
@@ -61,6 +65,8 @@ export default function App() {
       <Route path="/payments" element={<RequireAuth><Payments /></RequireAuth>} />
       <Route path="/push" element={<RequireAuth><PushComposer /></RequireAuth>} />
       <Route path="/content" element={<RequireAuth><ContentEditor /></RequireAuth>} />
+      <Route path="/consulates" element={<RequireAuth><Consulates /></RequireAuth>} />
+      <Route path="/socials" element={<RequireAuth><Socials /></RequireAuth>} />
       <Route path="/users" element={<RequireAuth><Users /></RequireAuth>} />
       <Route path="/ai-questions" element={<RequireAuth><AIQuestions /></RequireAuth>} />
       <Route path="*" element={<Navigate to="/queue" replace />} />
