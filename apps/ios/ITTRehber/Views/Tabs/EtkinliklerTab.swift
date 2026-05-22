@@ -289,7 +289,7 @@ struct EventDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 if let urlString = event.imageURL, let url = URL(string: urlString) {
-                    AsyncImage(url: url) { phase in
+                    CachedAsyncImage(url: url) { phase in
                         switch phase {
                         case .empty: Color.tgsSurface
                         case .success(let img): img.resizable().scaledToFill()

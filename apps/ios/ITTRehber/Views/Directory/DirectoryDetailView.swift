@@ -141,7 +141,7 @@ struct DirectoryDetailView: View {
             // never renders larger than the parent's actual size — fixes wide
             // logos (e.g. Cennet Consulting banner) overflowing the screen.
             GeometryReader { proxy in
-                AsyncImage(url: url) { phase in
+                CachedAsyncImage(url: url) { phase in
                     switch phase {
                     case .success(let img):
                         img.resizable()

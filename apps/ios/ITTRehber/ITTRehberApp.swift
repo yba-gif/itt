@@ -10,6 +10,12 @@ struct ITTRehberApp: App {
     /// Persists across launches. False until OnboardingView's `finish()` runs.
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
+    init() {
+        // Larger URLCache so listing/event thumbnails persist across launches
+        // and scrolling back never re-fetches. Pairs with CachedAsyncImage.
+        URLCacheBoost.install()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootTabView()

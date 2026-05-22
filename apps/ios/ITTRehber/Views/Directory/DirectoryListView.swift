@@ -187,7 +187,7 @@ struct ListingRow: View {
             // Logo / avatar
             ZStack {
                 if let urlString = listing.imageURL, let url = URL(string: urlString) {
-                    AsyncImage(url: url) { phase in
+                    CachedAsyncImage(url: url) { phase in
                         switch phase {
                         case .success(let img):
                             img.resizable().scaledToFill()
