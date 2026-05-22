@@ -21,17 +21,21 @@ Usage:
 from __future__ import annotations
 
 import json
+import logging
+from uuid import UUID
 
 import httpx
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
+from sqlalchemy import update as sql_update
 
 from app.config import settings
 from app.db import SessionLocal
 from app.models.ai_question import AIQuestion
 
 router = APIRouter(prefix="/ai", tags=["ai"])
+_log = logging.getLogger(__name__)
 
 _OPENAI_MODEL = "gpt-4o-mini"
 _OPENAI_URL = "https://api.openai.com/v1/chat/completions"
@@ -90,23 +94,44 @@ def _openai_to_gemini_sse(text_chunk: str) -> bytes:
     return f"data: {json.dumps(payload, ensure_ascii=False)}\n\n".encode("utf-8")
 
 
-async def _log_question(question: str, response_chars: int) -> None:
-    """Append one row to ai_questions. Best-effort — log a warning on failure
-    but never let logging break the user-facing AI stream."""
+async def _insert_question(question: str) -> UUID | None:
+    """Insert one row for this question BEFORE the stream starts so we still
+    have a record if the client disconnects mid-stream (in which case the
+    streaming generator's post-stream cleanup never runs). Returns the row id
+    so we can update response_chars once the stream completes."""
     if not question:
+        return None
+    try:
+        async with SessionLocal() as session:
+            row = AIQuestion(
+                question=question[:4000],  # keep table tidy
+                response_chars=0,
+            )
+            session.add(row)
+            await session.commit()
+            return row.id
+    except Exception as exc:  # noqa: BLE001 — logging shouldn't break the proxy
+        _log.warning("ai_questions insert failed: %s", exc)
+        return None
+
+
+async def _update_response_chars(row_id: UUID | None, response_chars: int) -> None:
+    """Update the existing row with the final response_chars count.
+    Best-effort — runs only on natural stream completion. If the client
+    disconnected, the row stays at response_chars=0 (which the admin UI
+    highlights as "Hata" — exactly the signal we want)."""
+    if row_id is None or response_chars <= 0:
         return
     try:
         async with SessionLocal() as session:
-            session.add(
-                AIQuestion(
-                    question=question[:4000],  # keep table tidy
-                    response_chars=response_chars,
-                )
+            await session.execute(
+                sql_update(AIQuestion)
+                .where(AIQuestion.id == row_id)
+                .values(response_chars=response_chars)
             )
             await session.commit()
-    except Exception as exc:  # noqa: BLE001 — logging shouldn't break the proxy
-        import logging
-        logging.getLogger(__name__).warning("ai_questions log failed: %s", exc)
+    except Exception as exc:  # noqa: BLE001
+        _log.warning("ai_questions update failed: %s", exc)
 
 
 # --- Route ---------------------------------------------------------------
@@ -132,6 +157,12 @@ async def ai_chat(body: ChatRequest) -> StreamingResponse:
         (m["content"] for m in reversed(messages) if m["role"] == "user"),
         "",
     )
+
+    # Log the question NOW, before streaming. If the client disconnects
+    # mid-stream, the generator's post-stream cleanup never runs (Starlette
+    # raises GeneratorExit at the yield), so we'd otherwise lose the row.
+    # See: _insert_question docstring.
+    question_row_id = await _insert_question(user_question)
 
     # Map generationConfig → OpenAI sampling args (best-effort)
     gen = body.generationConfig or {}
@@ -162,7 +193,8 @@ async def ai_chat(body: ChatRequest) -> StreamingResponse:
                     except Exception:
                         msg = error_body.decode(errors="replace")[:200]
                     yield _openai_to_gemini_sse(f"⚠️ AI error: {msg}")
-                    await _log_question(user_question, 0)
+                    # Row already inserted with response_chars=0 — nothing
+                    # to update on the error path.
                     return
 
                 async for line in resp.aiter_lines():
@@ -189,8 +221,10 @@ async def ai_chat(body: ChatRequest) -> StreamingResponse:
                     response_chars += len(text_piece)
                     yield _openai_to_gemini_sse(text_piece)
 
-            # Log only after the stream completes — keeps the AI table free
-            # of half-finished noise.
-            await _log_question(user_question, response_chars)
+            # Stream completed naturally — update the row with the actual
+            # response_chars count. (If we never get here because the client
+            # disconnected, the row simply stays at response_chars=0, which
+            # the admin UI flags as "Hata".)
+            await _update_response_chars(question_row_id, response_chars)
 
     return StreamingResponse(_stream(), media_type="text/event-stream")
