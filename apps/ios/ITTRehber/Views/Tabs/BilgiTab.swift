@@ -44,7 +44,28 @@ struct BilgiTab: View {
                         .textCase(nil)
                 }
 
+                // Socials — moved above Rehber so platforms are seen first
+                Section {
+                    SocialsRow()
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 12, trailing: 0))
+                        .listRowSeparator(.hidden)
+                } header: {
+                    Label("Bizi Takip Edin", systemImage: "heart.text.square.fill")
+                        .foregroundStyle(Color.tgsRed)
+                        .font(.footnote.weight(.semibold))
+                        .textCase(nil)
+                }
+
                 Section("Rehber") {
+                    // Bağış — dedicated donation page (not a content page)
+                    NavigationLink {
+                        DonationView()
+                    } label: {
+                        Label("Bağış / Destekleyin", systemImage: "heart.fill")
+                            .foregroundStyle(Color.tgsCharcoal)
+                    }
+
                     if loading && pages.isEmpty {
                         HStack {
                             ProgressView()
@@ -58,19 +79,6 @@ struct BilgiTab: View {
                             }
                         }
                     }
-                }
-
-                // Socials section — full-bleed row of platform chips
-                Section {
-                    SocialsRow()
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 40, trailing: 0))
-                        .listRowSeparator(.hidden)
-                } header: {
-                    Label("Bizi Takip Edin", systemImage: "heart.text.square.fill")
-                        .foregroundStyle(Color.tgsRed)
-                        .font(.footnote.weight(.semibold))
-                        .textCase(nil)
                 }
             }
             .listStyle(.insetGrouped)
@@ -731,5 +739,256 @@ struct MarkdownView: View {
                 return MarkdownBlock(kind: .paragraph, text: trimmed)
             }
         }
+    }
+}
+
+// MARK: - Donation page
+//
+// Surfaced from Bilgi → Rehber → "Bağış / Destekleyin". Static content for
+// now — bank details live here so they don't require a backend deploy to
+// edit; rotate the IBAN, TWINT, etc. by changing the constants below.
+
+struct DonationView: View {
+    // ⚠️ Replace with TGS-ITT's actual bank/TWINT details before launch.
+    // Kept as constants so they're trivial to update in one place.
+    private let bankName = "PostFinance"
+    private let accountHolder = "TGS-ITT — İsviçre Türk Toplumu"
+    private let iban = "CH00 0000 0000 0000 0000 0"
+    private let bic = "POFICHBEXXX"
+    private let twintPhone = "+41 44 593 24 24"
+    private let contactEmail = "info@tgs-itt.ch"
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 18) {
+                hero
+                whyCard
+                bankCard
+                twintCard
+                contactRow
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 12)
+            .padding(.bottom, 24)
+        }
+        .background(Color.tgsCream)
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 80)
+        }
+        .navigationTitle("Bağış")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    // MARK: – Hero
+
+    private var hero: some View {
+        VStack(spacing: 14) {
+            ZStack {
+                Circle()
+                    .fill(Color.tgsRed.opacity(0.12))
+                    .frame(width: 84, height: 84)
+                Image(systemName: "heart.fill")
+                    .font(.system(size: 36, weight: .semibold))
+                    .foregroundStyle(Color.tgsRed)
+            }
+            Text("TGS-ITT'yi Destekleyin")
+                .font(.system(size: 24, weight: .black, design: .rounded))
+                .foregroundStyle(Color.tgsCharcoal)
+                .multilineTextAlignment(.center)
+            Text("Bağışlarınız İsviçre'deki Türk toplumuna sunduğumuz ücretsiz hizmetleri sürdürmemize yardımcı olur.")
+                .font(.system(size: 14))
+                .foregroundStyle(Color.tgsMuted)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 8)
+        }
+        .padding(.top, 8)
+    }
+
+    // MARK: – Why-donate card
+
+    private var whyCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionLabel("Bağışlar nereye gidiyor?")
+            VStack(alignment: .leading, spacing: 10) {
+                whyRow(icon: "graduationcap.fill", text: "Öğrenci bursları ve eğitim destek programları")
+                whyRow(icon: "phone.bubble.fill", text: "Sosyal Yardım Hattı'nın işletim giderleri")
+                whyRow(icon: "calendar", text: "TGS-ITT etkinlikleri ve topluluk buluşmaları")
+                whyRow(icon: "iphone", text: "İTT Rehber uygulamasının bakımı ve geliştirilmesi")
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(Color.tgsBorder.opacity(0.7), lineWidth: 0.5)
+        )
+    }
+
+    private func whyRow(icon: String, text: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: icon)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(Color.tgsRed)
+                .frame(width: 22, alignment: .center)
+            Text(text)
+                .font(.system(size: 14))
+                .foregroundStyle(Color.tgsCharcoal)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 0)
+        }
+    }
+
+    // MARK: – Bank transfer card
+
+    private var bankCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionLabel("Banka Havalesi")
+            VStack(spacing: 0) {
+                copyRow(label: "Banka", value: bankName, isLast: false)
+                copyRow(label: "Hesap sahibi", value: accountHolder, isLast: false)
+                copyRow(label: "IBAN", value: iban, isLast: false, mono: true)
+                copyRow(label: "BIC / SWIFT", value: bic, isLast: true, mono: true)
+            }
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color.tgsBorder.opacity(0.7), lineWidth: 0.5)
+            )
+            Text("IBAN veya BIC'e dokunarak panoya kopyalayabilirsiniz.")
+                .font(.caption)
+                .foregroundStyle(Color.tgsMuted)
+                .padding(.horizontal, 4)
+        }
+    }
+
+    @State private var copiedField: String? = nil
+
+    private func copyRow(label: String, value: String, isLast: Bool, mono: Bool = false) -> some View {
+        Button {
+            UIPasteboard.general.string = value
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
+                copiedField = label
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                withAnimation { copiedField = nil }
+            }
+        } label: {
+            VStack(spacing: 0) {
+                HStack(spacing: 10) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(label)
+                            .font(.caption)
+                            .foregroundStyle(Color.tgsMuted)
+                        Text(value)
+                            .font(mono ? .system(size: 14, weight: .semibold, design: .monospaced) : .system(size: 14, weight: .medium))
+                            .foregroundStyle(Color.tgsCharcoal)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
+                    }
+                    Spacer(minLength: 0)
+                    if copiedField == label {
+                        Label("Kopyalandı", systemImage: "checkmark.circle.fill")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(Color.tgsSuccess)
+                            .transition(.opacity.combined(with: .scale(scale: 0.85)))
+                    } else {
+                        Image(systemName: "doc.on.doc")
+                            .font(.system(size: 13))
+                            .foregroundStyle(Color.tgsRed)
+                    }
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 12)
+                if !isLast {
+                    Divider().padding(.leading, 14)
+                }
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(label): \(value). Dokunarak kopyala.")
+    }
+
+    // MARK: – TWINT
+
+    private var twintCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionLabel("TWINT")
+            HStack(spacing: 12) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(Color(red: 0.02, green: 0.20, blue: 0.50))
+                        .frame(width: 44, height: 44)
+                    Text("TWINT")
+                        .font(.system(size: 9, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                }
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(twintPhone)
+                        .font(.system(size: 15, weight: .semibold, design: .monospaced))
+                        .foregroundStyle(Color.tgsCharcoal)
+                    Text("TWINT uygulamasında bu numarayı kullanarak bağış yapabilirsiniz")
+                        .font(.caption)
+                        .foregroundStyle(Color.tgsMuted)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: 0)
+            }
+            .padding(14)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color.tgsBorder.opacity(0.7), lineWidth: 0.5)
+            )
+        }
+    }
+
+    // MARK: – Contact
+
+    private var contactRow: some View {
+        Button {
+            if let url = URL(string: "mailto:\(contactEmail)?subject=Bağış%20hakkında") {
+                UIApplication.shared.open(url)
+            }
+        } label: {
+            HStack(spacing: 10) {
+                Image(systemName: "envelope.fill")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(.white)
+                Text("Sorularınız için: \(contactEmail)")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(.white.opacity(0.7))
+            }
+            .padding(14)
+            .background(
+                LinearGradient(
+                    colors: [Color.tgsRed, Color.tgsHeroGradientEnd],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .shadow(color: Color.tgsRed.opacity(0.25), radius: 6, x: 0, y: 3)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func sectionLabel(_ s: String) -> some View {
+        Text(s)
+            .font(.system(size: 13, weight: .bold))
+            .foregroundStyle(Color.tgsMuted)
+            .textCase(.uppercase)
+            .tracking(0.4)
+            .padding(.leading, 4)
     }
 }
