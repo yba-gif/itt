@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct BilgiTab: View {
+    @EnvironmentObject var nav: Nav
     @State private var pages: [ContentPage] = []
     @State private var loading = false
     // Consulates + socials are now DB-backed but ship with offline-safe
@@ -9,7 +10,9 @@ struct BilgiTab: View {
     @State private var socials: [Social] = Social.fallback
 
     var body: some View {
-        NavigationStack {
+        // Binding the path lets the floating-tab-bar re-tap clear pushed
+        // sub-screens (consulate detail, donation page, content pages).
+        NavigationStack(path: $nav.bilgiPath) {
             List {
                 // Featured hotline card — full-bleed, prominent, sits at the top
                 Section {
@@ -92,6 +95,15 @@ struct BilgiTab: View {
             .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             .refreshable { await load() }
             .task { await load() }
+            // Re-tap on the Bilgi tab → pop any pushed sub-screen
+            // (consulate detail, donation, content page) back to the list.
+            .tgsOnChange(of: nav.bilgiPopToken) {
+                if !nav.bilgiPath.isEmpty {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.82)) {
+                        nav.bilgiPath = NavigationPath()
+                    }
+                }
+            }
         }
     }
 

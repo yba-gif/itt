@@ -2,9 +2,13 @@ import SwiftUI
 
 struct ProfilTab: View {
     @EnvironmentObject var session: SessionStore
+    @EnvironmentObject var nav: Nav
 
     var body: some View {
-        NavigationStack {
+        // Binding the path lets the floating-tab-bar re-tap clear pushed
+        // sub-screens (Favorilerim, İlanlarım, claimable listings, etc.)
+        // back to the profile root.
+        NavigationStack(path: $nav.profilPath) {
             Group {
                 if session.isAuthenticated {
                     ProfileLoggedInView()
@@ -13,6 +17,13 @@ struct ProfilTab: View {
                 }
             }
             .navigationTitle("Profil")
+            .tgsOnChange(of: nav.profilPopToken) {
+                if !nav.profilPath.isEmpty {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.82)) {
+                        nav.profilPath = NavigationPath()
+                    }
+                }
+            }
         }
     }
 }

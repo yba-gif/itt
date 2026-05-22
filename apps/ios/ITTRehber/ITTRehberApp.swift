@@ -72,8 +72,9 @@ struct RootTabView: View {
 
             // Floating pill — sits above safe area
             FloatingTabBar(selected: $nav.selectedTab, onReselect: { tab in
-                // Tapping the already-active tab pops its NavigationStack to root
-                if tab == .rehber { nav.signalRehberReselect() }
+                // Tapping the already-active tab pops its NavigationStack to
+                // root (or scrolls to top, depending on the tab's behaviour).
+                nav.signalReselect(tab)
             })
             .padding(.bottom, 20)
             .padding(.horizontal, 32)

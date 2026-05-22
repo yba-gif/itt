@@ -17,12 +17,25 @@ final class Nav: ObservableObject {
     /// Which tab the FloatingTabBar shows. Two-way bound so user taps still work.
     @Published var selectedTab: AppTab = .rehber
 
-    /// NavigationStack path for the Rehber tab.
+    /// NavigationStack path for the Rehber tab. Typed (`[Directory]`) because
+    /// the AI deep-link router needs to push a typed value onto it.
     @Published var rehberPath: [Directory] = []
 
-    /// Bumped each time the user re-taps the Rehber tab in the floating bar
-    /// (so the existing scroll-to-top / pop-to-root flow keeps working).
+    /// NavigationStack paths for the remaining nav-bearing tabs. Type-erased
+    /// (`NavigationPath`) so they cover both value-based and view-based
+    /// NavigationLink pushes — setting the path to `NavigationPath()` pops
+    /// every pushed view, regardless of how it was pushed.
+    @Published var bilgiPath = NavigationPath()
+    @Published var etkinliklerPath = NavigationPath()
+    @Published var profilPath = NavigationPath()
+
+    /// Bumped each time the user re-taps a tab in the floating bar.
+    /// Each tab's view observes its own token to pop-to-root (or, for tabs
+    /// with a ScrollView root, scroll-to-top).
     @Published var rehberPopToken: Int = 0
+    @Published var bilgiPopToken: Int = 0
+    @Published var etkinliklerPopToken: Int = 0
+    @Published var profilPopToken: Int = 0
 
     // MARK: - High-level intents
 
@@ -38,11 +51,21 @@ final class Nav: ObservableObject {
         selectedTab = tab
     }
 
-    /// Tab-bar re-tap behaviour: if user is on Rehber root, scroll to top;
-    /// otherwise pop to root. Driven by the existing rehberPopToken signal.
-    func signalRehberReselect() {
-        rehberPopToken += 1
+    /// User re-tapped the currently-active tab in the floating bar.
+    /// Bumps the right pop-token; each tab's view decides what to do
+    /// (pop a nested screen, scroll to top, or no-op for flat tabs).
+    func signalReselect(_ tab: AppTab) {
+        switch tab {
+        case .rehber:       rehberPopToken += 1
+        case .ittai:        break  // flat conversation view, nothing to pop
+        case .etkinlikler:  etkinliklerPopToken += 1
+        case .bilgi:        bilgiPopToken += 1
+        case .profil:       profilPopToken += 1
+        }
     }
+
+    /// Legacy single-tab alias kept for source-compat with older callers.
+    func signalRehberReselect() { signalReselect(.rehber) }
 
     // MARK: - URL routing
     //

@@ -4,6 +4,7 @@ import EventKit
 /// PRD §5.3: shows only events with starts_at >= now by default. Past events
 /// surface in a "Geçmiş Etkinlikler" sub-tab.
 struct EtkinliklerTab: View {
+    @EnvironmentObject var nav: Nav
     @State private var mode: Mode = .upcoming
     @State private var selectedKanton: String = ""
     @State private var events: [Event] = []
@@ -14,7 +15,9 @@ struct EtkinliklerTab: View {
     enum Mode: Hashable { case upcoming, past }
 
     var body: some View {
-        NavigationStack {
+        // Binding the path lets the floating-tab-bar re-tap clear pushed
+        // sub-screens (event detail) back to the listing.
+        NavigationStack(path: $nav.etkinliklerPath) {
             VStack(spacing: 0) {
                 Picker("Mod", selection: $mode) {
                     Text("Yaklaşan").tag(Mode.upcoming)
@@ -73,6 +76,14 @@ struct EtkinliklerTab: View {
             .task { await load() }
             .tgsOnChange(of: mode) { Task { await load() } }
             .tgsOnChange(of: selectedKanton) { Task { await load() } }
+            // Re-tap on the Etkinlikler tab → pop event detail back to list.
+            .tgsOnChange(of: nav.etkinliklerPopToken) {
+                if !nav.etkinliklerPath.isEmpty {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.82)) {
+                        nav.etkinliklerPath = NavigationPath()
+                    }
+                }
+            }
             // P2-5: alert only fires when list has content (inline handles empty case)
             .alert("Hata", isPresented: .constant(error != nil && !events.isEmpty)) {
                 Button("Tekrar Dene") { error = nil; Task { await load() } }
