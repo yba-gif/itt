@@ -464,6 +464,22 @@ struct FloatingTabBar: View {
     var onReselect: (AppTab) -> Void = { _ in }
     @Namespace private var tabNS
 
+    /// İTT AI uses a dark `tgsAIDark` background. `.ultraThinMaterial` blurs
+    /// to near-black behind the floating pill there, so the default
+    /// `tgsMuted` (0x626C7A) unselected-icon color becomes invisible.
+    /// We flip to a high-contrast variant whenever the AI tab is active.
+    private var isOnDarkBackground: Bool { selected == .ittai }
+
+    private var unselectedIconColor: Color {
+        isOnDarkBackground ? Color.white.opacity(0.65) : Color.tgsMuted
+    }
+
+    private var borderColor: Color {
+        isOnDarkBackground
+            ? Color.white.opacity(0.18)
+            : Color.tgsBorder.opacity(0.45)
+    }
+
     var body: some View {
         HStack(spacing: 4) {
             ForEach(AppTab.allCases, id: \.self) { tab in
@@ -488,7 +504,9 @@ struct FloatingTabBar: View {
                                 size: 20,
                                 weight: selected == tab ? .semibold : .regular
                             ))
-                            .foregroundStyle(selected == tab ? Color.tgsRed : Color.tgsMuted)
+                            .foregroundStyle(
+                                selected == tab ? Color.tgsRed : unselectedIconColor
+                            )
                     }
                     .frame(width: 52, height: 44)
                 }
@@ -501,8 +519,9 @@ struct FloatingTabBar: View {
         .padding(.vertical, TGSSpacing.sm - 2)
         .background(.ultraThinMaterial)
         .clipShape(Capsule())
-        .overlay(Capsule().stroke(Color.tgsBorder.opacity(0.45), lineWidth: 1))
+        .overlay(Capsule().stroke(borderColor, lineWidth: 1))
         .shadow(color: Color.tgsCharcoal.opacity(0.14), radius: 24, x: 0, y: 8)
+        .animation(.easeInOut(duration: 0.2), value: isOnDarkBackground)
     }
 }
 

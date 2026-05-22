@@ -30,12 +30,18 @@ targets:
         # profile — until that's wired, registerForRemoteNotifications()
         # fails silently and the device-token register is a no-op.
         aps-environment: production
+        # Sign in With Apple — required by the AuthService SIWA path.
+        # xcodegen regenerates this file every run and silently strips
+        # any entry not declared here, so keep it in project.yml as the
+        # source of truth.
+        com.apple.developer.applesignin:
+          - Default
     info:
       path: ITTRehber/Info.plist
       properties:
         CFBundleDisplayName: "TGS-ITT Rehber"
         CFBundleShortVersionString: "0.1.0"
-        CFBundleVersion: "47"
+        CFBundleVersion: "48"
         CFBundleLocalizations: [tr]
         CFBundleDevelopmentRegion: tr
         CFBundleIconName: "AppIcon"

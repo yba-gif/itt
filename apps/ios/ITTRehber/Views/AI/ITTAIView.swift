@@ -247,8 +247,14 @@ struct ITTAIView: View {
                 .foregroundStyle(.white.opacity(0.08))
 
             HStack(alignment: .bottom, spacing: 10) {
-                // Text input
-                TextField("Bir şey sorun…", text: $inputText, axis: .vertical)
+                // Text input.
+                // Placeholder is rendered as a manual overlay because SwiftUI's
+                // built-in TextField placeholder color uses the system's
+                // `placeholderText` UIColor — on a light system theme this
+                // renders as dark gray, which disappears on `tgsAIInput`. The
+                // view's `.preferredColorScheme(.dark)` doesn't reliably
+                // propagate to the underlying UITextField placeholder.
+                TextField("", text: $inputText, axis: .vertical)
                     .font(.system(size: 15))
                     .foregroundStyle(.white)
                     .tint(Color.tgsRed)
@@ -264,6 +270,16 @@ struct ITTAIView: View {
                                     .stroke(.white.opacity(0.1), lineWidth: 1)
                             )
                     )
+                    .overlay(alignment: .topLeading) {
+                        if inputText.isEmpty {
+                            Text("Bir şey sorun…")
+                                .font(.system(size: 15))
+                                .foregroundStyle(.white.opacity(0.42))
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 10)
+                                .allowsHitTesting(false)
+                        }
+                    }
 
                 // Send button
                 Button { sendMessage() } label: {
