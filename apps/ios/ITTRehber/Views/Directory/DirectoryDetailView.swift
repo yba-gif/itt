@@ -81,10 +81,12 @@ struct DirectoryDetailView: View {
 
     private var heroSection: some View {
         ZStack(alignment: .bottomLeading) {
-            // Image or colour gradient fallback
+            // Image or colour gradient fallback. .scaledToFill() can render
+            // wider than the parent if the parent doesn't have an explicit
+            // width — that's what was pushing the whole detail page past the
+            // screen edge. Constraining maxWidth + clipping locally fixes it.
             heroBackground
-                .frame(height: 310)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: 310)
                 .clipped()
 
             // Gradient for text legibility
@@ -109,6 +111,9 @@ struct DirectoryDetailView: View {
                     .font(.system(size: 24, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
                     .shadow(color: .black.opacity(0.25), radius: 4, x: 0, y: 2)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if !listing.kantons.isEmpty {
                     HStack(spacing: 4) {
@@ -123,19 +128,31 @@ struct DirectoryDetailView: View {
             .padding(.horizontal, 20)
             .padding(.bottom, 44) // extra breathing room for card overlap
         }
-        .frame(height: 310)
+        // Constrain the whole hero to parent width — prevents a wide source
+        // image from forcing the entire detail screen past the screen edge.
+        .frame(maxWidth: .infinity, maxHeight: 310)
+        .clipped()
     }
 
     @ViewBuilder
     private var heroBackground: some View {
         if let urlStr = listing.imageURL, let url = URL(string: urlStr) {
-            AsyncImage(url: url) { phase in
-                switch phase {
-                case .success(let img):
-                    img.resizable().scaledToFill()
-                default:
-                    colorFallback
+            // GeometryReader gives us the available width so .scaledToFill()
+            // never renders larger than the parent's actual size — fixes wide
+            // logos (e.g. Cennet Consulting banner) overflowing the screen.
+            GeometryReader { proxy in
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .success(let img):
+                        img.resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: proxy.size.width, height: proxy.size.height)
+                            .clipped()
+                    default:
+                        colorFallback
+                    }
                 }
+                .frame(width: proxy.size.width, height: proxy.size.height)
             }
         } else {
             colorFallback
