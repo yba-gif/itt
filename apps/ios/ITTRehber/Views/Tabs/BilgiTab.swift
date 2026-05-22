@@ -243,14 +243,12 @@ struct Consulate: Identifiable {
             phone: "+41442016400",
             phoneDisplay: "+41 44 201 64 00",
             email: "konsolosluk.zurih@mfa.gov.tr",
-            website: "https://zurih.bk.mfa.gov.tr",
+            website: "https://zurih-bk.mfa.gov.tr",
             hoursSummary: "Pzt - Cuma 09:00 - 13:00",
             hoursDetail: "Konsolosluk işlemleri için randevu zorunludur.",
-            // ⚠️ Replace with the current consul general's name + photo URL.
-            // Source: zurih.bk.mfa.gov.tr/Mission/MissionChief
-            consulName: nil,
+            consulName: "Fazlı Çorman",
             consulTitle: "T.C. Zürih Başkonsolosu",
-            consulPhotoURL: nil
+            consulPhotoURL: "https://zurih-bk.mfa.gov.tr/Content/assets/consulate/images/localCache//60/841b03b0-dcaf-48a4-b221-469bddb709be.png"
         ),
         Consulate(
             city: "Cenevre",
