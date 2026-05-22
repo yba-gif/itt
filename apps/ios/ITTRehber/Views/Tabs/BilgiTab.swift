@@ -229,14 +229,12 @@ struct Consulate: Identifiable {
             phone: "+41313592200",
             phoneDisplay: "+41 31 359 22 00",
             email: "embassy.berne@mfa.gov.tr",
-            website: "https://bern.be.mfa.gov.tr",
+            website: "https://bern-be.mfa.gov.tr",
             hoursSummary: "Pzt - Cuma 09:00 - 13:00",
             hoursDetail: "Konsolosluk işlemleri için randevu zorunludur. Randevu için web sitesini ziyaret edin.",
-            // ⚠️ Replace with the current ambassador's name + photo URL.
-            // Source: bern.be.mfa.gov.tr/Mission/MissionChief
-            consulName: nil,
+            consulName: "Şebnem İncesu",
             consulTitle: "T.C. Bern Büyükelçisi",
-            consulPhotoURL: nil
+            consulPhotoURL: "https://bern-be.mfa.gov.tr/Content/assets/consulate/images/localCache//60/866246c9-a693-427a-aab8-02ad0e68de29.png"
         ),
         Consulate(
             city: "Zürich",

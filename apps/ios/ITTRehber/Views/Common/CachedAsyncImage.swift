@@ -41,8 +41,14 @@ struct CachedAsyncImage<Content: View>: View {
             return
         }
 
+        // Build the request with a browser-like User-Agent. Some servers
+        // (e.g. mfa.gov.tr) return 403 to URLSession's default UA but 200
+        // to a Safari-like UA. Setting it once here is the safe default —
+        // anything that doesn't care will ignore it.
+        var request = URLRequest(url: url)
+        request.setValue(safariUserAgent, forHTTPHeaderField: "User-Agent")
+
         // 2. URLCache (disk) hit — also instant but needs a UIImage decode.
-        let request = URLRequest(url: url)
         if let cachedResp = URLCache.shared.cachedResponse(for: request),
            let img = UIImage(data: cachedResp.data) {
             ImageCache.shared.set(img, for: url)
@@ -70,6 +76,12 @@ struct CachedAsyncImage<Content: View>: View {
         phase = newPhase
     }
 }
+
+/// Safari-ish User-Agent. Required for some image servers (e.g.
+/// bern-be.mfa.gov.tr) that 403 anything else. File-private constant
+/// because CachedAsyncImage is a generic type and Swift disallows
+/// stored statics on generics.
+private let safariUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
 
 // MARK: - ImageCache
 //
