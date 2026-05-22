@@ -11,6 +11,7 @@ from app.routes import (
     admin_users,
     ai,
     auth,
+    consulates,
     content,
     events,
     health,
@@ -21,6 +22,7 @@ from app.routes import (
     push,
     reference,
     search,
+    socials,
     uploads,
 )
 
@@ -62,6 +64,10 @@ app.include_router(push.router)
 app.include_router(push.admin_router)
 app.include_router(moderation.router)
 app.include_router(admin_users.router)
+app.include_router(consulates.router)
+app.include_router(consulates.admin_router)
+app.include_router(socials.router)
+app.include_router(socials.admin_router)
 
 
 @app.get("/")
