@@ -27,7 +27,7 @@ final class ITTAIService: ObservableObject {
     - Meslek & Kariyer — Rehber > Meslek
     - Camiler & Dini Hizmetler — Rehber > Camiler
     - TGS-ITT Mezunlar Ağı — Rehber > Mezunlar
-    - Konsolosluklar: Bern Büyükelçiliği (+41 31 359 22 00), Zürich Başkonsolosluğu (+41 44 201 64 00), Cenevre Başkonsolosluğu (+41 22 732 16 00), Basel Konsolosluğu (+41 61 312 20 61)
+    - Konsolosluklar: Bern Büyükelçiliği (+41 31 359 22 00), Zürich Başkonsolosluğu (+41 44 201 64 00), Cenevre Başkonsolosluğu (+41 22 732 16 00)
     - TGS-ITT etkinlikleri, haberler, topluluk bilgileri
     - İsviçre'de günlük yaşam: ulaşım, SBB, konut, ikametgâh tescili, belediye işlemleri
 
