@@ -155,6 +155,63 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ title, body, category, kanton: kanton || null }),
     }),
+
+  // ---- Users (Phase A admin endpoints) ----
+
+  users: (opts: { page?: number; pageSize?: number; q?: string; adminsOnly?: boolean } = {}) => {
+    const params = new URLSearchParams();
+    params.set("page", String(opts.page ?? 1));
+    params.set("page_size", String(opts.pageSize ?? 50));
+    if (opts.q) params.set("q", opts.q);
+    if (opts.adminsOnly) params.set("admins_only", "true");
+    return request<UsersPage>(`/admin/users?${params.toString()}`);
+  },
+
+  setUserAdmin: (id: string, is_admin: boolean) =>
+    request<UserRow>(`/admin/users/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ is_admin }),
+    }),
+
+  // ---- AI question log ----
+
+  aiQuestions: (opts: { page?: number; pageSize?: number } = {}) => {
+    const params = new URLSearchParams();
+    params.set("page", String(opts.page ?? 1));
+    params.set("page_size", String(opts.pageSize ?? 50));
+    return request<AIQuestionsPage>(`/admin/ai-questions?${params.toString()}`);
+  },
+};
+
+export type UserRow = {
+  id: string;
+  email: string;
+  display_name: string | null;
+  is_admin: boolean;
+  created_at: string;
+};
+
+export type UsersPage = {
+  items: UserRow[];
+  total: number;
+  page: number;
+  page_size: number;
+};
+
+export type AIQuestionRow = {
+  id: string;
+  user_id: string | null;
+  question: string;
+  response_chars: number;
+  lang: string | null;
+  created_at: string;
+};
+
+export type AIQuestionsPage = {
+  items: AIQuestionRow[];
+  total: number;
+  page: number;
+  page_size: number;
 };
 
 export type Invoice = {
